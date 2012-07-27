@@ -1,0 +1,8 @@
+/* IE LTE 6 Fixes for ZXCSS Layout 0.6 beta by Dave Smith http://www.dave-smith.info/zxcss-layout/ */
+.w480 {width:480px;}
+.w768 {width:768px;}
+.w960 {width:960px;}
+.w980 {width:980px;}
+.w1140 {width:1140px;}
+.w1380 {width:1380px;}
+.col {word-wrap:break-word;overflow:hidden;display:inline;}

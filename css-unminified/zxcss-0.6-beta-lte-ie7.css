@@ -1,0 +1,4 @@
+/* IE LTE 7 Fixes for ZXCSS Layout 0.6 beta by Dave Smith http://www.dave-smith.info/zxcss-layout/ */
+.row, .centered-col, .inn {display:inline-block;}
+.row, .centered-col, .inn {display:block;}
+.col {margin-right:-1px;}
