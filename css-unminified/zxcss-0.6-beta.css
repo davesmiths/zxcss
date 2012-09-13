@@ -9,14 +9,15 @@
 .row:after,
 .centered-col:after {clear:both;}
 .centered-col {margin:0 auto;}
-    
-/* Column */
-.w480 {max-width:480px;}
-.w768 {max-width:768px;}
-.w960 {max-width:960px;}
-.w980 {max-width:980px;}
-.w1140 {max-width:1140px;}
-.w1380 {max-width:1380px;}
+
+/* Prototyping Classes */
+.w480max {max-width:480px;}
+.w768max {max-width:768px;}
+.w960max {max-width:960px;}
+.w980max {max-width:980px;}
+.w1140max {max-width:1140px;}
+.w1380max {max-width:1380px;}
+
 .w1o1, .w2o2, .w3o3, .w4o4, .w5o5, .w6o6, .w7o7, .w8o8, .w9o9, .w10o10, .w11o11, .w12o12 {width:100%;}
 .w1o2, .w2o4, .w3o6, .w4o8, .w5o10, .w6o12 {width:50%;}
 .w1o3, .w2o6, .w3o9, .w4o12 {width:33.3333%;}
