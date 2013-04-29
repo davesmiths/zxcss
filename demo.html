@@ -5,33 +5,32 @@
 <title>ZXCSS</title>
 
 <!-- ZXCSS -->
-<!--[if lte IE 7]><link href="css/zxcss-0.5-beta-lte-ie7.min.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
-<!--[if lte IE 6]><link href="css/zxcss-0.5-beta-lte-ie6.min.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
-<link href="css/zxcss-0.5-beta.min.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if lte IE 7]><link href="zxcss-0.6-lte-ie7.src.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
+<!--[if lte IE 6]><link href="zxcss-0.6-lte-ie6.src.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
+<link href="zxcss-0.6.src.css" rel="stylesheet" type="text/css" media="all" />
 
 <style type="text/css">
 
 /* Page Styles */
-body {margin:0 18px 64px 18px;padding:0;}
+body {margin:0 20px 80px 20px;padding:0;}
 a:focus {background:#FF0;color:#000;}
 
 
 /* Out-of-the-box Styles */
-.row-1 .row {margin-right:-18px;}
-.row-1 .row .inn {margin-right:18px;background:#ddd;padding:1px 18px;}
-
+.row-1 .row {margin-right:-20px;}
+.row-1 .row .inn {margin-right:20px;background:#ddd;padding:1px 20px;}
 
 /* Custom Classes Styles */
-.row-2 .row {margin-right:-18px;}
-.row-2 .row .inn {margin-right:18px;background:#ddd;padding:1px 18px;}
+.row-2 .row {margin-right:-20px;}
+.row-2 .row .inn {margin-right:20px;background:#ddd;padding:1px 20px;}
 .row-2 .col-page {width:auto!important;max-width:980px;width:980px;margin:0 auto;float:none;}
 .row-2 .col-page:before,
 .row-2 .col-page:after {content:"\0020";display:block;height:0;overflow:hidden;}
 .row-2 .col-page:after {clear:both;}
 
 /* Bog Standard 1 */
-.row-2 .row-3 .row {margin-right:-18px;}
-.row-2 .row-3 .row .inn {margin-right:18px;}
+.row-2 .row-3 .row {margin-right:-20px;}
+.row-2 .row-3 .row .inn {margin-right:20px;}
 .row-2 .row-3 .col-1 {width:50%;}
 .row-2 .row-3 .col-2,
 .row-2 .row-3 .col-3 {width:25%;}
@@ -41,7 +40,7 @@ a:focus {background:#FF0;color:#000;}
 .row-2 .row-4 .col-1 {width:50%;}
 .row-2 .row-4 .col-2 {width:25%;}
 .row-2 .row-4 .col-3 {width:25%;}
-.row-2 .row-4 .inn {margin-right:18px;}
+.row-2 .row-4 .inn {margin-right:20px;}
 .row-2 .row-4 .col-3 .inn {margin-right:0;}
 
 /* Any Order Columns */
@@ -56,15 +55,14 @@ a:focus {background:#FF0;color:#000;}
 
 <body>
 
-<h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a> 0.5 Bouncy Castle Page</h1>
-<p>Bounce away, but remember to take shoes off before getting on.</p>
-      
-<h2>Out-of-the-box Classes</h2>
+<h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a> 0.6 Demo</h1>
+<p>This page is a basic demo of ZXCSS, no design just plain base styles</p>
+<h2>Base Styles</h2>
 
 <div class="row row-1">
-  <div class="col w980 center">
+  <div class="col w1180max centered-col">
     <div class="inn">
-    <p>Centered 980px max-width page. All columns set 18px gutters, 18px padding and a grey background.</p>
+    <p>Centered 980px max-width page. All columns set 20px gutters, 20px padding and a grey background.</p>
 
       <h3>Bog Standard</h3>
       <div class="row">
@@ -145,10 +143,10 @@ a:focus {background:#FF0;color:#000;}
 <div class="row row-2">
 	<div class="col col-page">
     	<div class="inn">
-    <p>Centered 980px max-width page. All columns set 18px gutters, 18px padding and a grey background.</p>
+    <p>Centered 980px max-width page. All columns set 20px gutters, 20px padding and a grey background.</p>
    
       <h3>Bog Standard</h3>
-      <p>Gutters set with: <code>.row {margin-right:-18px;} .inn {margin-right:18px;}</code></p>
+      <p>Gutters set with: <code>.row {margin-right:-20px;} .inn {margin-right:20px;}</code></p>
       <div class="row row-3">
         <div class="col col-1">
           <div class="inn">
@@ -168,7 +166,7 @@ a:focus {background:#FF0;color:#000;}
       </div>
       
       <h3>Bog Standard 2</h3>
-      <p>Gutters set with: <code>.row {margin-right:0;} .inn {margin-right:18px;} .col-3 .inn {margin-right:0;}</code></p>
+      <p>Gutters set with: <code>.row {margin-right:0;} .inn {margin-right:20px;} .col-3 .inn {margin-right:0;}</code></p>
       <div class="row row-4">
         <div class="col col-1">
           <div class="inn">
