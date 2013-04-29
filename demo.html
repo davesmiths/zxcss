@@ -12,25 +12,25 @@
 <style type="text/css">
 
 /* Page Styles */
-body {margin:0 20px 80px 20px;padding:0;}
+body {margin:0 20px 80px 20px;padding:0;line-height:20px;}
 a:focus {background:#FF0;color:#000;}
 
 
 /* Out-of-the-box Styles */
-.row-1 .row {margin-right:-20px;}
-.row-1 .row .inn {margin-right:20px;background:#ddd;padding:1px 20px;}
+.row-1 .row {margin-left:-20px;}
+.row-1 .row .inn {margin-left:20px;background:#ddd;padding:1px 20px;}
 
 /* Custom Classes Styles */
-.row-2 .row {margin-right:-20px;}
-.row-2 .row .inn {margin-right:20px;background:#ddd;padding:1px 20px;}
+.row-2 .row {margin-left:-20px;}
+.row-2 .row .inn {margin-left:20px;background:#ddd;padding:1px 20px;}
 .row-2 .col-page {width:auto!important;max-width:980px;width:980px;margin:0 auto;float:none;}
 .row-2 .col-page:before,
 .row-2 .col-page:after {content:"\0020";display:block;height:0;overflow:hidden;}
 .row-2 .col-page:after {clear:both;}
 
 /* Bog Standard 1 */
-.row-2 .row-3 .row {margin-right:-20px;}
-.row-2 .row-3 .row .inn {margin-right:20px;}
+.row-2 .row-3 .row {margin-left:-20px;}
+.row-2 .row-3 .row .inn {margin-left:20px;}
 .row-2 .row-3 .col-1 {width:50%;}
 .row-2 .row-3 .col-2,
 .row-2 .row-3 .col-3 {width:25%;}
@@ -40,7 +40,7 @@ a:focus {background:#FF0;color:#000;}
 .row-2 .row-4 .col-1 {width:50%;}
 .row-2 .row-4 .col-2 {width:25%;}
 .row-2 .row-4 .col-3 {width:25%;}
-.row-2 .row-4 .inn {margin-right:20px;}
+.row-2 .row-4 .inn {margin-left:20px;}
 .row-2 .row-4 .col-3 .inn {margin-right:0;}
 
 /* Any Order Columns */
@@ -55,11 +55,96 @@ a:focus {background:#FF0;color:#000;}
 
 <body>
 
-<h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a> 0.6 Demo</h1>
-<p>This page is a basic demo of ZXCSS, no design just plain base styles</p>
+<h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a> Demo</h1>
+<p>A demo of plain base styles</p>
 <h2>Base Styles</h2>
+<p>The base styles are the primer or undercoat for the layout. Column widths remain auto so the layout doesn't take shape yet but everything is now ready.</p>
+      <div class="row">
+        <div class="col">
+          <div class="inn">
+            <p><a href="#">Div 1</a>. The year 1866 was signalised by a remarkable incident, a mysterious and puzzling phenomenon, which doubtless no one has yet forgotten. Not to mention rumours which agitated the maritime population and excited the public mind, even in the interior of continents, seafaring men were particularly excited. Merchants, common sailors, captains of vessels, skippers, both of Europe and America, naval officers of all countries, and the Governments of several States on the two continents, were deeply interested in the matter.</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="inn">
+            <p><a href="#">Div 2</a>. For some time past vessels had been met by "an enormous thing," a long object, spindle-shaped, occasionally phosphorescent, and infinitely larger and more rapid in its movements than a whale. </p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="inn">
+            <p><a href="#">Div 3</a>. The facts relating to this apparition (entered in various log-books) agreed in most respects as to the shape of the object or creature in question, the untiring rapidity of its movements, its surprising power of locomotion, and the peculiar life with which it seemed endowed.</p>
+          </div>
+        </div>
+      </div>
+<h2>Layout and Customisation</h2>
+<p>All column widths and other styling should now be done by adding custom classes to the rows and columns, and styling the inn. However, I've added some handy pre-made quick classes for a quick start. The layout will take shape by adding widths to the columns. </p>
+<h2>Quick Classes: Width</h2>
+<p>I added classes to set column widths for prototyping and when web authors cannot gain access to the CSS.<br />
+For example, w1o3 is equivalent to width:33.3333%, w2o5 = 40% etc.</p>
+      <div class="row">
+        <div class="col w1o2">
+          <div class="inn">
+            <p><a href="#">Div 1</a>. The year 1866 was signalised by a remarkable incident, a mysterious and puzzling phenomenon, which doubtless no one has yet forgotten. Not to mention rumours which agitated the maritime population and excited the public mind, even in the interior of continents, seafaring men were particularly excited. Merchants, common sailors, captains of vessels, skippers, both of Europe and America, naval officers of all countries, and the Governments of several States on the two continents, were deeply interested in the matter.</p>
+          </div>
+        </div>
+        <div class="col w1o4">
+          <div class="inn">
+            <p><a href="#">Div 2</a>. For some time past vessels had been met by "an enormous thing," a long object, spindle-shaped, occasionally phosphorescent, and infinitely larger and more rapid in its movements than a whale. </p>
+          </div>
+        </div>
+        <div class="col w1o4">
+          <div class="inn">
+            <p><a href="#">Div 3</a>. The facts relating to this apparition (entered in various log-books) agreed in most respects as to the shape of the object or creature in question, the untiring rapidity of its movements, its surprising power of locomotion, and the peculiar life with which it seemed endowed.</p>
+          </div>
+        </div>
+      </div>
+	  
+<h2>Quick Classes: Placement</h2>
+<p>I added placement or position classes in order to provide control over the position of columns independent of source order.</p>
+      <div class="row">
+        <div class="col w2o4 p2o4">
+          <div class="inn">
+            <p><a href="#">Div 1</a>. <strong>Content</strong>: The year 1866 was signalised by a remarkable incident, a mysterious and puzzling phenomenon, which doubtless no one has yet forgotten. Not to mention rumours which agitated the maritime population.</p>
+          </div>
+        </div>
+        <div class="col w1o4 p4o4">
+          <div class="inn">
+            <p><a href="#">Div 2</a>. <strong>Sidebar</strong>: For some time past vessels had been met by "an enormous thing," a long object, spindle-shaped, occasionally phosphorescent, and infinitely larger and more rapid in its movements than a whale. </p>
+          </div>
+        </div>
+        <div class="col w1o4 p1o4">
+          <div class="inn">
+            <p><a href="#">Div 3</a>. <strong>Menu</strong>: The facts relating to this apparition (entered in various log-books) agreed in most respects as to the shape of the object or creature in question, the untiring rapidity of its movements, its surprising power.</p>
+          </div>
+        </div>
+      </div>
+<p>The placement or position classes need applying to all columns in a row to be completely reliable.</p>
 
-<div class="row row-1">
+
+<h2>Quick Classes: Max Width and Centered</h2>
+<p>Again for prototyping or when a web author has no access to the CSS I added max width and centering classes to give some control over page width and centering.</p>
+<div class="row">
+  <div class="col w940max centered-col">
+      <div class="row">
+        <div class="col w2o4 p2o4">
+          <div class="inn">
+            <p><a href="#">Div 1</a>. <strong>Content</strong>: The year 1866 was signalised by a remarkable incident, a mysterious and puzzling phenomenon, which doubtless no one has yet forgotten. Not to mention rumours which agitated the maritime population.</p>
+          </div>
+        </div>
+        <div class="col w1o4 p4o4">
+          <div class="inn">
+            <p><a href="#">Div 2</a>. <strong>Sidebar</strong>: For some time past vessels had been met by "an enormous thing," a long object, spindle-shaped, occasionally phosphorescent, and infinitely larger and more rapid in its movements than a whale. </p>
+          </div>
+        </div>
+        <div class="col w1o4 p1o4">
+          <div class="inn">
+            <p><a href="#">Div 3</a>. <strong>Menu</strong>: The facts relating to this apparition (entered in various log-books) agreed in most respects as to the shape of the object or creature in question, the untiring rapidity of its movements, its surprising power.</p>
+          </div>
+        </div>
+      </div>
+	</div>
+</div>
+<p>The placement or position classes need applying to all columns in a row to be completely reliable.</p>
   <div class="col w1180max centered-col">
     <div class="inn">
     <p>Centered 980px max-width page. All columns set 20px gutters, 20px padding and a grey background.</p>
@@ -102,39 +187,6 @@ a:focus {background:#FF0;color:#000;}
         </div>
       </div>
 
-      <h3>Any Order Columns &ndash; Six Columns All Mixed Up for Show &ndash; Completely Impractical</h3>
-      <div class="row">
-        <div class="col w1o6 p4o6">
-          <div class="inn">
-            <p><a href="#">Div 1</a>. The year 1866 was signalised by a remarkable incident, a mysterious and puzzling phenomenon, which doubtless no one has yet forgotten. Not to mention rumours which agitated the maritime population.</p>
-          </div>
-        </div>
-        <div class="col w1o6 p3o6">
-          <div class="inn">
-            <p><a href="#">Div 2</a>. For some time past vessels had been met by "an enormous thing," a long object, spindle-shaped, occasionally phosphorescent, and infinitely larger and more rapid in its movements than a whale. </p>
-          </div>
-        </div>
-        <div class="col w1o6 p5o6">
-          <div class="inn">
-            <p><a href="#">Div 3</a>. The facts relating to this apparition (entered in various log-books) agreed in most respects as to the shape of the object or creature in question, the untiring rapidity of its movements, its surprising power.</p>
-          </div>
-        </div>
-        <div class="col w1o6 p6o6">
-          <div class="inn">
-            <p><a href="#">Div 4</a>. The year 1866 was signalised by a remarkable incident, a mysterious and puzzling phenomenon, which doubtless no one has yet forgotten. Not to mention rumours which agitated the maritime population.</p>
-          </div>
-        </div>
-        <div class="col w1o6 p1o6">
-          <div class="inn">
-            <p><a href="#">Div 5</a>. For some time past vessels had been met by "an enormous thing," a long object, spindle-shaped, occasionally phosphorescent, and infinitely larger and more rapid in its movements than a whale. </p>
-          </div>
-        </div>
-        <div class="col w1o6 p2o6">
-          <div class="inn">
-            <p><a href="#">Div 6</a>. The facts relating to this apparition (entered in various log-books) agreed in most respects as to the shape of the object or creature in question, the untiring rapidity of its movements, its surprising power.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -146,7 +198,7 @@ a:focus {background:#FF0;color:#000;}
     <p>Centered 980px max-width page. All columns set 20px gutters, 20px padding and a grey background.</p>
    
       <h3>Bog Standard</h3>
-      <p>Gutters set with: <code>.row {margin-right:-20px;} .inn {margin-right:20px;}</code></p>
+      <p>Gutters set with: <code>.row {margin-left:-20px;} .inn {margin-left:20px;}</code></p>
       <div class="row row-3">
         <div class="col col-1">
           <div class="inn">
@@ -166,7 +218,7 @@ a:focus {background:#FF0;color:#000;}
       </div>
       
       <h3>Bog Standard 2</h3>
-      <p>Gutters set with: <code>.row {margin-right:0;} .inn {margin-right:20px;} .col-3 .inn {margin-right:0;}</code></p>
+      <p>Gutters set with: <code>.row {} .inn {margin-left:20px;} .col-3 .inn {margin-right:0;}</code></p>
       <div class="row row-4">
         <div class="col col-1">
           <div class="inn">
