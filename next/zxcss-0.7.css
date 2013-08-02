@@ -1,0 +1,23 @@
+/* ZXCSS Layout 0.6 by Dave Smith http://www.dave-smith.info/zxcss-layout/ */
+
+/* Core */
+.col {float:left;}
+.row:after,
+.row:before,
+.centered-col:after,
+.centered-col:before {content:"";display:table;}
+.row:after,
+.centered-col:after {clear:both;}
+.centered-col {margin-right:auto;margin-left:auto;float:none;}
+
+/* Prototyping Classes */
+.w480max {max-width:480px;}
+.w768max {max-width:768px;}
+.w940max {max-width:940px;}
+.w960max {max-width:960px;}
+.w980max {max-width:980px;}
+.w1140max {max-width:1140px;}
+.w1180max {max-width:1180px;}
+.w1380max {max-width:1380px;}
+
+

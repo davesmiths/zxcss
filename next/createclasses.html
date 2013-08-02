@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>ZXCSS</title>
+
+<style type="text/css">
+input, textarea {display:block;}
+textarea {width:90%;}
+</style>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+(function(context){
+	
+	// Config
+	var getInput 
+	,	initialise
+	,	app = {els:{}}
+	;
+		
+	// Actions
+	getElements = function() {
+		app.els.numberOfColumnsInput = $('#input-numberofcolumns');
+		app.els.decimalPlaces = $('#input-decimalplaces');
+		app.els.output = $('.output');
+	};
+	getInput = function() {
+		app.numberOfColumns = app.els.numberOfColumnsInput.val();
+		app.decimalPlaces = app.els.decimalPlaces.val();
+	};
+	createCSS = function() {
+		
+		var i = 1
+		,	j
+		,	widths = {}
+		,	width
+		,	sortedWidths = []
+		,	sortedWidthsi
+		,	positions = {}
+		,	position
+		,	sortedPositions = []
+		,	sortedPositionsi
+		,	css = ''
+		;
+		
+		// Create an object where the properties are widths and the values are an array of objects with numerators and denominators
+		for (i; i < app.numberOfColumns; i++) {
+			j = 1;
+			for (j; j < app.numberOfColumns; j++) {
+				width = applyDecimalPlaces(100*i/j, app.decimalPlaces);
+				if (width <= 100) {
+					if (!widths[width]) {
+						widths[width] = [];
+					}
+					widths[width].push({numerator:i, denominator:j});
+				}
+			}
+		}
+		
+		// Sort the widths
+		for (width in widths) {
+			sortedWidths.push([width, widths[width]]);
+		}
+		sortedWidths.sort(function(a, b) {
+			return b[0] - a[0];
+		});
+		
+		
+		// Create the CSS
+		sortedWidthsLength = sortedWidths.length;
+		for (i = 0; i < sortedWidthsLength; i++) {
+			
+			if (i != 0) {
+				css += "\n";
+			}
+			sortedWidthsi = sortedWidths[i];
+			
+			for (j = 0; j < sortedWidthsi[1].length; j++) {
+				if (j > 0) {
+					css += ', ';
+				}
+				css += '.w'+sortedWidthsi[1][j].numerator+'o'+sortedWidthsi[1][j].denominator;
+			}
+		
+			css += ' {width:'+sortedWidthsi[0]+'%}';
+		}
+		
+		app.cssLines = sortedWidthsLength;
+		
+		app.css = css;
+		
+	};
+	
+	applyDecimalPlaces = function(num, decimalPlaces) {
+		var scaler = Math.pow(10, decimalPlaces);
+		return Math.floor(num * scaler)/scaler;
+	};
+	
+	outputCSS = function() {
+		app.els.output.val(app.css);
+		app.els.output[0].rows = app.cssLines;
+		console.log(app.cssLines);
+	};
+	
+	run = function() {
+		
+		getInput();
+		createCSS();
+		outputCSS();
+		
+	};
+	
+	inputChange = function() {
+		run();
+	};
+	
+	// Event logic
+	// On Dom Ready
+	$(function() {
+		getElements();
+		run();
+		// On change of number of columns input
+		app.els.numberOfColumnsInput.on('change', inputChange);
+		app.els.decimalPlaces.on('change', inputChange);
+	});
+
+
+}(this));
+	
+
+</script>
+
+</head>
+
+<body>
+
+<h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a></h1>
+<label for="input-numberofcolumns">Number of columns</label>
+<input name="input-numberofcolumns" id="input-numberofcolumns" type="number" value="4" />
+<label for="input-decimalplaces">Decimal places</label>
+<input name="input-decimalplaces" id="input-decimalplaces" type="number" value="4" />
+<textarea class="output" cols="60" rows="10"></textarea>
+
+</body>
+</html>
