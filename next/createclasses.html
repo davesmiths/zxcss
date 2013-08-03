@@ -13,188 +13,188 @@ textarea {width:90%;}
 <script type="text/javascript">
 
 (function(context){
-	
-	// Config
-	var getInput 
-	,	initialise
-	,	app = {els:{}}
-	;
-		
-	// Actions
-	getElements = function() {
-		app.els.numberOfColumnsInput = $('#input-numberofcolumns');
-		app.els.decimalPlaces = $('#input-decimalplaces');
-		app.els.output = $('.output');
-		app.els.outputLabelSpan = $('label[for=output] span');
-		app.els.minify = $('#input-minify');
-		app.els.widthClasses = $('#input-widthclasses');
-		app.els.positionClasses = $('#input-positionclasses');
-	};
-	getInput = function() {
-		app.numberOfColumns = app.els.numberOfColumnsInput.val();
-		app.decimalPlaces = app.els.decimalPlaces.val();
-		app.minify = app.els.minify[0].checked;
-		app.widthClasses = app.els.widthClasses[0].checked;
-		app.positionClasses = app.els.positionClasses[0].checked;
-	};
-	createCSS = function() {
-		
-		var i = 1
-		,	j
-		,	width
-		,	widths = {}
-		,	widthsi
-		,	position
-		,	positions = {}
-		,	positionsi
-		,	css = ''
-		;
-		
-		// Create an object where the properties are widths and the values are an array of objects with numerators and denominators
-		for (i; i < app.numberOfColumns; i++) {
-			j = 1;
-			for (j; j < app.numberOfColumns; j++) {
-				if (app.widthClasses) {
-					width = applyDecimalPlaces(100*i/j, app.decimalPlaces);
-					if (width <= 100) {
-						if (!widths[width]) {
-							widths[width] = [];
-						}
-						widths[width].push({numerator:i, denominator:j});
-					}
-				}
-				if (app.positionClasses) {
-					position = applyDecimalPlaces(100*(i-1)/j, app.decimalPlaces);
-					if (position < 100) {
-						if (!positions[position]) {
-							positions[position] = [];
-						}
-						positions[position].push({numerator:i, denominator:j});
-					}
-				}
-			}
-		}
-		
-		
-		
-		// Create the widths classes
-		if (app.widthClasses) {
-			notFirst = false;
-			for (i in widths) {
-				if (widths.hasOwnProperty(i)) {
-					if (notFirst) {
-						css += app.newline;
-					}
-					else {
-						notFirst = true;
-					}
-					widthsi = widths[i];
-					
-					for (j = 0; j < widthsi.length; j++) {
-						if (j > 0) {
-							css += ','+app.space;
-						}
-						css += '.w'+widthsi[j].numerator+'o'+widthsi[j].denominator;
-					}
-				
-					css += app.space+'{width:'+i+'%}';
-				}
-			}
-			css += app.newline;
-		}
-		
-		// Create the position classes
-		if (app.positionClasses) {
-			notFirst = false;
-			for (i in positions) {
-				if (positions.hasOwnProperty(i)) {
-					if (notFirst) {
-						css += app.newline;
-						}
-					else {
-						notFirst = true;
-					}
-					positionsi = positions[i];
-					for (j = 0; j < positionsi.length; j++) {
-						if (j > 0) {
-							css += ','+app.space;
-						}
-						css += '.p'+positionsi[j].numerator+'o'+positionsi[j].denominator;
-					}
-				
-					css += app.space+'{margin-left:'+i+'%}';
-				}
-			}
-			css += app.newline;
-			for (i = 1; i < app.numberOfColumns; i++) {
-				for (j = 1; j < app.numberOfColumns; j++) {
-					if ((i-1)/j < 1) {
-						if (j > 1) {
-							css += ','+app.space;
-						}
-						css += '.p'+i+'o'+j;
-					}
-				}
-			}
-			css += app.space+'{margin-right:-100%}';
-		}
-		
-		app.cssLength = css.length;
-		
-		app.cssLines = css.split("\n").length;
-		if (app.minify) {
-			app.cssLines = app.cssLength / 60;
-		}
-		
-		app.css = css;
-		
-	};
-	
-	applyDecimalPlaces = function(num, decimalPlaces) {
-		var scaler = Math.pow(10, decimalPlaces);
-		return Math.floor(num * scaler)/scaler;
-	};
-	
-	outputCSS = function() {
-		app.els.output.val(app.css);
-		app.els.output[0].rows = app.cssLines;
-		app.els.outputLabelSpan.html(' '+app.cssLength);
-	};
-	
-	run = function() {
-		
-		getInput();
-		app.space = ' ';
-		app.newline = "\n";
-		if (app.minify) {
-			app.space = '';
-			app.newline = '';
-		}
-		createCSS();
-		outputCSS();
-		
-	};
-	
-	inputChange = function() {
-		run();
-	};
-	
-	// Event logic
-	// On Dom Ready
-	$(function() {
-		getElements();
-		run();
-		// On change of number of columns input
-		app.els.numberOfColumnsInput.on('change', inputChange);
-		app.els.decimalPlaces.on('change', inputChange);
-		app.els.minify.on('change', inputChange);
-		app.els.widthClasses.on('change', inputChange);
-		app.els.positionClasses.on('change', inputChange);
-	});
+    
+    // Config
+    var getInput 
+    ,   initialise
+    ,   app = {els:{}}
+    ;
+        
+    // Actions
+    getElements = function() {
+        app.els.numberOfColumnsInput = $('#input-numberofcolumns');
+        app.els.decimalPlaces = $('#input-decimalplaces');
+        app.els.output = $('.output');
+        app.els.outputLabelSpan = $('label[for=output] span');
+        app.els.minify = $('#input-minify');
+        app.els.widthClasses = $('#input-widthclasses');
+        app.els.positionClasses = $('#input-positionclasses');
+    };
+    getInput = function() {
+        app.numberOfColumns = app.els.numberOfColumnsInput.val();
+        app.decimalPlaces = app.els.decimalPlaces.val();
+        app.minify = app.els.minify[0].checked;
+        app.widthClasses = app.els.widthClasses[0].checked;
+        app.positionClasses = app.els.positionClasses[0].checked;
+    };
+    createCSS = function() {
+        
+        var i = 1
+        ,   j
+        ,   width
+        ,   widths = {}
+        ,   widthsi
+        ,   position
+        ,   positions = {}
+        ,   positionsi
+        ,   css = ''
+        ;
+        
+        // Create an object where the properties are widths and the values are an array of objects with numerators and denominators
+        for (i; i < app.numberOfColumns; i++) {
+            j = 1;
+            for (j; j < app.numberOfColumns; j++) {
+                if (app.widthClasses) {
+                    width = applyDecimalPlaces(100*i/j, app.decimalPlaces);
+                    if (width <= 100) {
+                        if (!widths[width]) {
+                            widths[width] = [];
+                        }
+                        widths[width].push({numerator:i, denominator:j});
+                    }
+                }
+                if (app.positionClasses) {
+                    position = applyDecimalPlaces(100*(i-1)/j, app.decimalPlaces);
+                    if (position < 100) {
+                        if (!positions[position]) {
+                            positions[position] = [];
+                        }
+                        positions[position].push({numerator:i, denominator:j});
+                    }
+                }
+            }
+        }
+        
+        
+        
+        // Create the widths classes
+        if (app.widthClasses) {
+            notFirst = false;
+            for (i in widths) {
+                if (widths.hasOwnProperty(i)) {
+                    if (notFirst) {
+                        css += app.newline;
+                    }
+                    else {
+                        notFirst = true;
+                    }
+                    widthsi = widths[i];
+                    
+                    for (j = 0; j < widthsi.length; j++) {
+                        if (j > 0) {
+                            css += ','+app.space;
+                        }
+                        css += '.w'+widthsi[j].numerator+'o'+widthsi[j].denominator;
+                    }
+                
+                    css += app.space+'{width:'+i+'%}';
+                }
+            }
+            css += app.newline;
+        }
+        
+        // Create the position classes
+        if (app.positionClasses) {
+            notFirst = false;
+            for (i in positions) {
+                if (positions.hasOwnProperty(i)) {
+                    if (notFirst) {
+                        css += app.newline;
+                        }
+                    else {
+                        notFirst = true;
+                    }
+                    positionsi = positions[i];
+                    for (j = 0; j < positionsi.length; j++) {
+                        if (j > 0) {
+                            css += ','+app.space;
+                        }
+                        css += '.p'+positionsi[j].numerator+'o'+positionsi[j].denominator;
+                    }
+                
+                    css += app.space+'{margin-left:'+i+'%}';
+                }
+            }
+            css += app.newline;
+            for (i = 1; i < app.numberOfColumns; i++) {
+                for (j = 1; j < app.numberOfColumns; j++) {
+                    if ((i-1)/j < 1) {
+                        if (j > 1) {
+                            css += ','+app.space;
+                        }
+                        css += '.p'+i+'o'+j;
+                    }
+                }
+            }
+            css += app.space+'{margin-right:-100%}';
+        }
+        
+        app.cssLength = css.length;
+        
+        app.cssLines = css.split("\n").length;
+        if (app.minify) {
+            app.cssLines = app.cssLength / 60;
+        }
+        
+        app.css = css;
+        
+    };
+    
+    applyDecimalPlaces = function(num, decimalPlaces) {
+        var scaler = Math.pow(10, decimalPlaces);
+        return Math.floor(num * scaler)/scaler;
+    };
+    
+    outputCSS = function() {
+        app.els.output.val(app.css);
+        app.els.output[0].rows = app.cssLines;
+        app.els.outputLabelSpan.html(' '+app.cssLength);
+    };
+    
+    run = function() {
+        
+        getInput();
+        app.space = ' ';
+        app.newline = "\n";
+        if (app.minify) {
+            app.space = '';
+            app.newline = '';
+        }
+        createCSS();
+        outputCSS();
+        
+    };
+    
+    inputChange = function() {
+        run();
+    };
+    
+    // Event logic
+    // On Dom Ready
+    $(function() {
+        getElements();
+        run();
+        // On change of number of columns input
+        app.els.numberOfColumnsInput.on('change', inputChange);
+        app.els.decimalPlaces.on('change', inputChange);
+        app.els.minify.on('change', inputChange);
+        app.els.widthClasses.on('change', inputChange);
+        app.els.positionClasses.on('change', inputChange);
+    });
 
 
 }(this));
-	
+    
 
 </script>
 
