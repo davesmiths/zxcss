@@ -5,7 +5,7 @@
 <title>ZXCSS</title>
 
 <style type="text/css">
-input, textarea {display:block;}
+input[type=number], textarea {display:block;}
 textarea {width:90%;}
 </style>
 
@@ -25,23 +25,28 @@ textarea {width:90%;}
 		app.els.numberOfColumnsInput = $('#input-numberofcolumns');
 		app.els.decimalPlaces = $('#input-decimalplaces');
 		app.els.output = $('.output');
+		app.els.outputLabelSpan = $('label[for=output] span');
+		app.els.minify = $('#input-minify');
+		app.els.widthClasses = $('#input-widthclasses');
+		app.els.positionClasses = $('#input-positionclasses');
 	};
 	getInput = function() {
 		app.numberOfColumns = app.els.numberOfColumnsInput.val();
 		app.decimalPlaces = app.els.decimalPlaces.val();
+		app.minify = app.els.minify[0].checked;
+		app.widthClasses = app.els.widthClasses[0].checked;
+		app.positionClasses = app.els.positionClasses[0].checked;
 	};
 	createCSS = function() {
 		
 		var i = 1
 		,	j
-		,	widths = {}
 		,	width
-		,	sortedWidths = []
-		,	sortedWidthsi
-		,	positions = {}
+		,	widths = {}
+		,	widthsi
 		,	position
-		,	sortedPositions = []
-		,	sortedPositionsi
+		,	positions = {}
+		,	positionsi
 		,	css = ''
 		;
 		
@@ -49,45 +54,97 @@ textarea {width:90%;}
 		for (i; i < app.numberOfColumns; i++) {
 			j = 1;
 			for (j; j < app.numberOfColumns; j++) {
-				width = applyDecimalPlaces(100*i/j, app.decimalPlaces);
-				if (width <= 100) {
-					if (!widths[width]) {
-						widths[width] = [];
+				if (app.widthClasses) {
+					width = applyDecimalPlaces(100*i/j, app.decimalPlaces);
+					if (width <= 100) {
+						if (!widths[width]) {
+							widths[width] = [];
+						}
+						widths[width].push({numerator:i, denominator:j});
 					}
-					widths[width].push({numerator:i, denominator:j});
+				}
+				if (app.positionClasses) {
+					position = applyDecimalPlaces(100*(i-1)/j, app.decimalPlaces);
+					if (position < 100) {
+						if (!positions[position]) {
+							positions[position] = [];
+						}
+						positions[position].push({numerator:i, denominator:j});
+					}
 				}
 			}
 		}
 		
-		// Sort the widths
-		for (width in widths) {
-			sortedWidths.push([width, widths[width]]);
-		}
-		sortedWidths.sort(function(a, b) {
-			return b[0] - a[0];
-		});
 		
 		
-		// Create the CSS
-		sortedWidthsLength = sortedWidths.length;
-		for (i = 0; i < sortedWidthsLength; i++) {
-			
-			if (i != 0) {
-				css += "\n";
-			}
-			sortedWidthsi = sortedWidths[i];
-			
-			for (j = 0; j < sortedWidthsi[1].length; j++) {
-				if (j > 0) {
-					css += ', ';
+		// Create the widths classes
+		if (app.widthClasses) {
+			notFirst = false;
+			for (i in widths) {
+				if (widths.hasOwnProperty(i)) {
+					if (notFirst) {
+						css += app.newline;
+					}
+					else {
+						notFirst = true;
+					}
+					widthsi = widths[i];
+					
+					for (j = 0; j < widthsi.length; j++) {
+						if (j > 0) {
+							css += ','+app.space;
+						}
+						css += '.w'+widthsi[j].numerator+'o'+widthsi[j].denominator;
+					}
+				
+					css += app.space+'{width:'+i+'%}';
 				}
-				css += '.w'+sortedWidthsi[1][j].numerator+'o'+sortedWidthsi[1][j].denominator;
 			}
-		
-			css += ' {width:'+sortedWidthsi[0]+'%}';
+			css += app.newline;
 		}
 		
-		app.cssLines = sortedWidthsLength;
+		// Create the position classes
+		if (app.positionClasses) {
+			notFirst = false;
+			for (i in positions) {
+				if (positions.hasOwnProperty(i)) {
+					if (notFirst) {
+						css += app.newline;
+						}
+					else {
+						notFirst = true;
+					}
+					positionsi = positions[i];
+					for (j = 0; j < positionsi.length; j++) {
+						if (j > 0) {
+							css += ','+app.space;
+						}
+						css += '.p'+positionsi[j].numerator+'o'+positionsi[j].denominator;
+					}
+				
+					css += app.space+'{margin-left:'+i+'%}';
+				}
+			}
+			css += app.newline;
+			for (i = 1; i < app.numberOfColumns; i++) {
+				for (j = 1; j < app.numberOfColumns; j++) {
+					if ((i-1)/j < 1) {
+						if (j > 1) {
+							css += ','+app.space;
+						}
+						css += '.p'+i+'o'+j;
+					}
+				}
+			}
+			css += app.space+'{margin-right:-100%}';
+		}
+		
+		app.cssLength = css.length;
+		
+		app.cssLines = css.split("\n").length;
+		if (app.minify) {
+			app.cssLines = app.cssLength / 60;
+		}
 		
 		app.css = css;
 		
@@ -101,12 +158,18 @@ textarea {width:90%;}
 	outputCSS = function() {
 		app.els.output.val(app.css);
 		app.els.output[0].rows = app.cssLines;
-		console.log(app.cssLines);
+		app.els.outputLabelSpan.html(' '+app.cssLength);
 	};
 	
 	run = function() {
 		
 		getInput();
+		app.space = ' ';
+		app.newline = "\n";
+		if (app.minify) {
+			app.space = '';
+			app.newline = '';
+		}
 		createCSS();
 		outputCSS();
 		
@@ -124,6 +187,9 @@ textarea {width:90%;}
 		// On change of number of columns input
 		app.els.numberOfColumnsInput.on('change', inputChange);
 		app.els.decimalPlaces.on('change', inputChange);
+		app.els.minify.on('change', inputChange);
+		app.els.widthClasses.on('change', inputChange);
+		app.els.positionClasses.on('change', inputChange);
 	});
 
 
@@ -137,11 +203,24 @@ textarea {width:90%;}
 <body>
 
 <h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a></h1>
+
 <label for="input-numberofcolumns">Number of columns</label>
 <input name="input-numberofcolumns" id="input-numberofcolumns" type="number" value="4" />
+
 <label for="input-decimalplaces">Decimal places</label>
 <input name="input-decimalplaces" id="input-decimalplaces" type="number" value="4" />
-<textarea class="output" cols="60" rows="10"></textarea>
+
+<input name="input-minify" id="input-minify" type="checkbox" checked="checked" />
+<label for="input-minify">Minify</label>
+
+<input name="input-widthclasses" id="input-widthclasses" type="checkbox" checked="checked" />
+<label for="input-widthclasses">Width classes</label>
+
+<input name="input-positionclasses" id="input-positionclasses" type="checkbox" checked="checked" />
+<label for="input-positionclasses">Position classes</label>
+
+<br /><label for="output">Output<span></span></label>
+<textarea class="output" id="output" cols="60" rows="10"></textarea>
 
 </body>
 </html>
