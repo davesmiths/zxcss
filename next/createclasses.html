@@ -97,7 +97,7 @@ textarea {width:90%;}
                         css += '.w'+widthsi[j].numerator+'o'+widthsi[j].denominator;
                     }
                 
-                    css += app.space+'{width:'+i+'%}';
+                    css += app.space+'{width:'+i+'%'+app.semicolon+'}';
                 }
             }
             css += app.newline;
@@ -122,7 +122,7 @@ textarea {width:90%;}
                         css += '.p'+positionsi[j].numerator+'o'+positionsi[j].denominator;
                     }
                 
-                    css += app.space+'{margin-left:'+i+'%}';
+                    css += app.space+'{margin-left:'+i+'%'+app.semicolon+'}';
                 }
             }
             css += app.newline;
@@ -136,7 +136,7 @@ textarea {width:90%;}
                     }
                 }
             }
-            css += app.space+'{margin-right:-100%}';
+            css += app.space+'{margin-right:-100%'+app.semicolon+'}';
         }
         
         app.cssLength = css.length;
@@ -166,9 +166,11 @@ textarea {width:90%;}
         getInput();
         app.space = ' ';
         app.newline = "\n";
+        app.semicolon = ';';
         if (app.minify) {
             app.space = '';
             app.newline = '';
+            app.semicolon = '';
         }
         createCSS();
         outputCSS();
@@ -182,14 +184,17 @@ textarea {width:90%;}
     // Event logic
     // On Dom Ready
     $(function() {
+    
         getElements();
         run();
-        // On change of number of columns input
+        
+        // On change of various inputs
         app.els.numberOfColumnsInput.on('change', inputChange);
         app.els.decimalPlaces.on('change', inputChange);
         app.els.minify.on('change', inputChange);
         app.els.widthClasses.on('change', inputChange);
         app.els.positionClasses.on('change', inputChange);
+        
     });
 
 
@@ -203,24 +208,26 @@ textarea {width:90%;}
 <body>
 
 <h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a></h1>
-
+<p>
 <label for="input-numberofcolumns">Number of columns</label>
-<input name="input-numberofcolumns" id="input-numberofcolumns" type="number" value="4" />
+<input name="input-numberofcolumns" id="input-numberofcolumns" type="number" value="12" />
 
 <label for="input-decimalplaces">Decimal places</label>
 <input name="input-decimalplaces" id="input-decimalplaces" type="number" value="4" />
-
-<input name="input-minify" id="input-minify" type="checkbox" checked="checked" />
-<label for="input-minify">Minify</label>
-
+</p>
+<p>
 <input name="input-widthclasses" id="input-widthclasses" type="checkbox" checked="checked" />
 <label for="input-widthclasses">Width classes</label>
 
 <input name="input-positionclasses" id="input-positionclasses" type="checkbox" checked="checked" />
 <label for="input-positionclasses">Position classes</label>
 
-<br /><label for="output">Output<span></span></label>
+<input name="input-minify" id="input-minify" type="checkbox" checked="checked" />
+<label for="input-minify">Minify</label>
+</p>
+<p>
+<label for="output">Output<span></span></label>
 <textarea class="output" id="output" cols="60" rows="10"></textarea>
-
+</p>
 </body>
 </html>
