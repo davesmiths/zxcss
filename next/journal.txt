@@ -1,0 +1,20 @@
+_____________
+2013 August 6
+
+Interface thoughts:
+
+Breakpoint 0
+    At 0
+    Columns 4
+Breakpoint 1
+    At 768
+    Columns 16
+Add breakpoint
+
+Rapid on
+    Position classes on
+
+Advanced
+    Decimal places
+    
+Widths given at breakpoint 0 are just w1o3 etc. compared to breakpoint1 w1o3-b1

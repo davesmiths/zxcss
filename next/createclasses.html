@@ -9,12 +9,8 @@ input[type=number], input[type=text], textarea {display:block;}
 textarea {width:90%;}
 </style>
 
-<style>
-.col {float:left;width:100%;}
-.clear {clear:left;}
-.noclear {clear:none;}
-</style>
-<style class="classestest"></style>
+    <style class="csscoretest"></style>
+    <style class="cssresponsivetest"></style>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -24,31 +20,113 @@ textarea {width:90%;}
     // Config
     var getInput 
     ,   initialise
-    ,   app = {els:{}}
+    ,   db = {}
+    ,   elements = {inputs:{}, outputs:{}}
+    ,   inputs = {}
+    ,   outputs = {}
     ;
+    
+    
+    // Event logic
+    // On Dom Ready
+    $(function() {
+    
+        run();
         
+        // On change of various inputs
+        elements.inputs.decimalPlaces.on('change', inputChange);
+        elements.inputs.minify.on('change', inputChange);
+        elements.inputs.positionClasses.on('change', inputChange);
+        elements.inputs.at.on('change', inputChange);
+        elements.inputs.columns.on('change', inputChange);
+        elements.inputs.gutter.on('change', inputChange);
+        
+    });
+    
     // Actions
     getElements = function() {
-        app.els.numberOfColumnsInput = $('#input-numberofcolumns');
-        app.els.numberOfBreakPointsInput = $('#input-numberofbreakpoints');
-        app.els.decimalPlaces = $('#input-decimalplaces');
-        app.els.output = $('.output');
-        app.els.outputLabelSpan = $('label[for=output] span');
-        app.els.minify = $('#input-minify');
-        app.els.widthClasses = $('#input-widthclasses');
-        app.els.positionClasses = $('#input-positionclasses');
-        app.els.styleClassesTest = $('.classestest');
+        elements.inputs.decimalPlaces = $('#input-decimalplaces');
+        elements.inputs.minify = $('#input-minify');
+        elements.inputs.positionClasses = $('#input-positionclasses');
+        elements.inputs.at = $('.input-at');
+        elements.inputs.columns = $('.input-columns');
+        elements.inputs.gutter = $('.input-gutter');
+        
+        elements.outputs.cssCore = $('.output-csscore');
+        elements.outputs.cssCoreIElte6 = $('.output-csscoreielte6');
+        elements.outputs.cssCoreIElte7 = $('.output-csscoreielte7');
+        elements.outputs.cssResponsive = $('.output-cssresponsive');
+        elements.outputs.labelSpan = $('label[for=output] span');
+        elements.outputs.cssCoreTest = $('.csscoretest');
+        elements.outputs.cssResponsiveTest = $('.cssresponsivetest');
     };
-    getInput = function() {
-        app.numberOfColumns = app.els.numberOfColumnsInput.val();
-        app.numberOfBreakPoints = app.els.numberOfBreakPointsInput.val().split(',');
-        app.numberOfBreakPointsLength = app.numberOfBreakPoints.length;
-        app.decimalPlaces = app.els.decimalPlaces.val();
-        app.minify = app.els.minify[0].checked;
-        app.widthClasses = app.els.widthClasses[0].checked;
-        app.positionClasses = app.els.positionClasses[0].checked;
+    
+    getInputs = function() {
+        inputs.breakpoints = [];
+        $('.form-breakpoint').each(function(i) {
+            inputs.breakpoints[i] = {
+                at: $(this).find('.input-at').val(),
+                columns: $(this).find('.input-columns').val(),
+                gutter: $(this).find('.input-gutter').val()
+            }
+        });
+        inputs.decimalPlaces = elements.inputs.decimalPlaces.val();
+        inputs.minify = elements.inputs.minify[0].checked;
+        inputs.positionClasses = elements.inputs.positionClasses[0].checked;
     };
-    createCSS = function() {
+    
+    makeCSS = function() {
+        
+        makeCSSCore();
+        makeCSSIElte7();
+        makeCSSIElte6();
+        makeCSSResponsive();
+        
+    };
+     
+    putCSS = function() {
+    
+        elements.outputs.cssCore.val(trim(outputs.cssCore));
+        elements.outputs.cssCoreIElte7.val(trim(outputs.cssCoreIElte7));
+        elements.outputs.cssCoreIElte6.val(trim(outputs.cssCoreIElte6));
+        elements.outputs.cssResponsive.val(trim(outputs.cssResponsive));
+        elements.outputs.cssCoreTest.html(trim(outputs.cssCore));
+        elements.outputs.cssResponsiveTest.html(trim(outputs.cssResponsive));
+        resizeOutput(elements.outputs.cssCore[0]);
+        resizeOutput(elements.outputs.cssCoreIElte7[0]);
+        resizeOutput(elements.outputs.cssCoreIElte6[0]);
+        resizeOutput(elements.outputs.cssResponsive[0]);
+        
+    };
+    
+    trim = function(str) {
+        return str.replace(/^\s+/, '').replace(/\s+$/, '');
+    }
+   
+    makeCSSCore = function() {
+    
+        var css = '';
+        
+        css += '/* ZXCSS Layout 0.7: Core CSS */'+db.newline;
+        css += ''+db.newline;
+        css += '.col {float:left;width:100%;}'+db.newline;
+        css += '.clear {clear:left;}'+db.newline;
+        css += ''+db.newline;
+        css += '.row:after,'+db.newline;
+        css += '.row:before,'+db.newline;
+        css += '.col-centered:after,'+db.newline;
+        css += '.col-centered:before {content:"";display:table;}'+db.newline;
+        css += ''+db.newline;
+        css += '.row:after,'+db.newline;
+        css += '.col-centered:after {clear:both;}'+db.newline;
+        css += ''+db.newline;
+        css += '.col-centered {margin-right:auto;margin-left:auto;float:none;}'+db.newline;
+        css += ''+db.newline;
+
+        outputs.cssCore = css;
+    };
+    
+    makeCSSResponsive = function() {
         
         var i = 1
         ,   b
@@ -63,121 +141,207 @@ textarea {width:90%;}
         ,   css = ''
         ;
         
-        for (b = 0; b < app.numberOfBreakPointsLength; b++) {
-            
-            bp = b+1;
-            css += '@media all and (min-width:'+app.numberOfBreakPoints[b]+'px)'+app.space+'{'+app.newline;
+        css += '/* ZXCSS Layout 0.7: Responsive prototyping classes */'+db.newline;
+        css += ''+db.newline;
         
+        inputsBreakpointsLength = inputs.breakpoints.length;
+        for (b = 0; b < inputsBreakpointsLength; b++) {
+            
+            bp = '';
+            
+            if (b == 0) {
+                css += '.max460 {max-width:460px;}'+db.newline;
+                css += '.max700 {max-width:700px;}'+db.newline;
+                css += '.max940 {max-width:940px;}'+db.newline;
+                css += '.max1180 {max-width:1180px;}'+db.newline;
+                css += '.max1420 {max-width:1420px;}'+db.newline;
+                css += db.newline;
+            
+                    
+            }
+            if (b > 0) {
+                bp = '-b'+b;
+                css += '@media all and (min-width:'+inputs.breakpoints[b].at+'px)'+db.space+'{'+db.newline;
+            }
+            
             // clear and no clear
-            css += '.clear-b'+bp+app.space+'{clear:left;}'+app.newline;
-            css += '.noclear-b'+bp+app.space+'{clear:none;}'+app.newline;
+            css += '.col'+bp+db.space+'{float:left;width:100%;}'+db.newline;
+            css += '.nocol'+bp+db.space+'{float:none;width:auto;}'+db.newline;
+            css += '.clear'+bp+db.space+'{clear:left;}'+db.newline;
+            css += '.noclear'+bp+db.space+'{clear:none;}'+db.newline;
+            css += db.newline;
             
-            // Create an object where the properties are widths and the values are an array of objects with numerators and denominators
-            for (i; i < app.numberOfColumns; i++) {
-                j = 1;
-                for (j; j < app.numberOfColumns; j++) {
-                    if (app.widthClasses) {
-                        width = applyDecimalPlaces(100*i/j, app.decimalPlaces);
-                        if (width <= 100) {
-                            if (!widths[width]) {
-                                widths[width] = [];
-                            }
-                            widths[width].push({numerator:i, denominator:j});
-                        }
-                    }
-                    if (app.positionClasses) {
-                        position = applyDecimalPlaces(100*(i-1)/j, app.decimalPlaces);
-                        if (position < 100) {
-                            if (!positions[position]) {
-                                positions[position] = [];
-                            }
-                            positions[position].push({numerator:i, denominator:j});
-                        }
-                    }
-                }
+            css += '.row'+bp+db.space+'{margin-left:-'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
+            css += '.inn'+bp+db.space+'{margin-left:'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
+            css += db.newline;
+            
+            css += makeWidthClasses({
+                columns: inputs.breakpoints[b].columns,
+                bp: bp
+            });
+            css += db.newline;
+                                
+            css += makePositionClasses({
+                columns: inputs.breakpoints[b].columns,
+                bp: bp
+            });
+            css += db.newline;
+            
+            if (b > 0) {
+                css += db.newline + '}';
+                css += db.newline;
             }
             
-            
-            
-            // Create the widths classes
-            if (app.widthClasses) {
-                notFirst = false;
-                for (i in widths) {
-                    if (widths.hasOwnProperty(i)) {
-                        if (notFirst) {
-                            css += app.newline;
-                        }
-                        else {
-                            notFirst = true;
-                        }
-                        widthsi = widths[i];
-                        
-                        for (j = 0; j < widthsi.length; j++) {
-                            if (j > 0) {
-                                css += ','+app.space;
-                            }
-                            css += '.w'+widthsi[j].numerator+'o'+widthsi[j].denominator+'-b'+bp;
-                        }
-                    
-                        css += app.space+'{width:'+i+'%'+app.semicolon+'}';
-                    }
-                }
-                css += app.newline;
-            }
-            
-            // Create the position classes
-            if (app.positionClasses) {
-                notFirst = false;
-                for (i in positions) {
-                    if (positions.hasOwnProperty(i)) {
-                        if (notFirst) {
-                            css += app.newline;
-                            }
-                        else {
-                            notFirst = true;
-                        }
-                        positionsi = positions[i];
-                        for (j = 0; j < positionsi.length; j++) {
-                            if (j > 0) {
-                                css += ','+app.space;
-                            }
-                            css += '.p'+positionsi[j].numerator+'o'+positionsi[j].denominator+'-b'+bp;
-                        }
-                    
-                        css += app.space+'{margin-left:'+i+'%'+app.semicolon+'}';
-                    }
-                }
-                css += app.newline;
-                for (i = 1; i < app.numberOfColumns; i++) {
-                    for (j = 1; j < app.numberOfColumns; j++) {
-                        if ((i-1)/j < 1) {
-                            if (j > 1) {
-                                css += ','+app.space;
-                            }
-                            css += '.p'+i+'o'+j+'-b'+bp;
-                        }
-                    }
-                }
-                css += app.space+'{margin-right:-100%'+app.semicolon+'}';
-            }
-            
-            css += app.newline + '}';
+            css += db.newline;
             
         }
         
-        app.cssLength = css.length;
-        
-        resizeOutput();
-        
-        app.css = css;
+        outputs.cssResponsive = css;
         
     };
     
-    resizeOutput = function() {
-        app.els.output[0].style.height = "1px";
-        setTimeout(function() {
-            app.els.output[0].style.height = (app.els.output[0].scrollHeight)+"px";
-        }, 1);
+    makeCSSIElte7 = function() {
+        var css = '';
+        css += '/* ZXCSS Layout 0.7: IE lte 7 CSS */'+db.newline;
+        css += ''+db.newline;
+        css += '.col'+db.space+'{margin-right:-1px;}'+db.newline;
+        css += ''+db.newline;
+        css += '.row,'+db.newline;
+        css += '.col-centered,'+db.newline;
+        css += '.inn'+db.space+'{display:inline-block;}'+db.newline;
+        css += ''+db.newline;
+        css += '.row,'+db.newline;
+        css += '.col-centered,'+db.newline;
+        css += '.inn'+db.space+'{display:block;}'+db.newline;
+        outputs.cssCoreIElte7 = css;
+    };
+    
+    makeCSSIElte6 = function() {
+        var css = '';
+        css += '/* ZXCSS Layout 0.7: IE lte 6 CSS */'+db.newline;
+        css += ''+db.newline;
+        css += '.col'+db.space+'{word-wrap:break-word;overflow:hidden;display:inline;}'+db.newline;
+        outputs.cssCoreIElte6 = css;
+    };
+    
+    makeWidthClasses = function(o) {
+    
+        var css = ''
+        ,   i = 1
+        ,   j
+        ,   width
+        ,   widths = {}
+        ,   widthsi
+        ,   notFirst;
+        
+        // Create an object where the properties are widths and the values are an array of objects with numerators and denominators
+        for (i; i <= o.columns; i++) {
+            j = 1;
+            for (j; j <= o.columns; j++) {
+                width = applyDecimalPlaces(100*i/j, inputs.decimalPlaces);
+                if (width <= 100) {
+                    if (!widths[width]) {
+                        widths[width] = [];
+                    }
+                    widths[width].push({numerator:i, denominator:j});
+                }
+            }
+        }
+
+        // Create the widths classes
+        notFirst = false;
+        for (i in widths) {
+            if (widths.hasOwnProperty(i)) {
+                if (notFirst) {
+                    css += db.newline;
+                }
+                else {
+                    notFirst = true;
+                }
+                widthsi = widths[i];
+                
+                for (j = 0; j < widthsi.length; j++) {
+                    if (j > 0) {
+                        css += ','+db.space;
+                    }
+                    css += '.w'+widthsi[j].numerator+'o'+widthsi[j].denominator+o.bp;
+                }
+            
+                css += db.space+'{width:'+i+'%'+db.semicolon+'}';
+            }
+        }
+        
+        css += db.newline;
+        
+        return css;
+        
+    };
+    
+    makePositionClasses = function(o) {
+    
+        var css = ''
+        ,   i = 1
+        ,   j
+        ,   positions = {}
+        ,   position;
+        
+        // Create an object where the properties are widths and the values are an array of objects with numerators and denominators
+        for (i; i <= o.columns; i++) {
+            j = 1;
+            for (j; j <= o.columns; j++) {
+                position = applyDecimalPlaces(100*(i-1)/j, inputs.decimalPlaces);
+                if (position < 100) {
+                    if (!positions[position]) {
+                        positions[position] = [];
+                    }
+                    positions[position].push({numerator:i, denominator:j});
+                }
+            }
+        }    
+        // Create the position classes
+        if (inputs.positionClasses) {
+            notFirst = false;
+            for (i in positions) {
+                if (positions.hasOwnProperty(i)) {
+                    if (notFirst) {
+                        css += db.newline;
+                        }
+                    else {
+                        notFirst = true;
+                    }
+                    positionsi = positions[i];
+                    for (j = 0; j < positionsi.length; j++) {
+                        if (j > 0) {
+                            css += ','+db.space;
+                        }
+                        css += '.p'+positionsi[j].numerator+'o'+positionsi[j].denominator+o.bp;
+                    }
+                
+                    css += db.space+'{margin-left:'+i+'%'+db.semicolon+'}';
+                }
+            }
+            css += db.newline;
+            for (i = 1; i <= o.columns; i++) {
+                for (j = 1; j <= o.columns; j++) {
+                    if ((i-1)/j < 1) {
+                        if (j > 1) {
+                            css += ','+db.space;
+                        }
+                        css += '.p'+i+'o'+j+o.bp;
+                    }
+                }
+            }
+            css += db.space+'{margin-right:-100%'+db.semicolon+'}';
+        }
+
+        return css;
+        
+    };
+    
+    
+    resizeOutput = function(el) {
+        el.style.height = "1px";
+        el.style.height = (el.scrollHeight)+"px";
     };
     
     applyDecimalPlaces = function(num, decimalPlaces) {
@@ -185,26 +349,27 @@ textarea {width:90%;}
         return Math.floor(num * scaler)/scaler;
     };
     
-    outputCSS = function() {
-        app.els.output.val(app.css);
-        app.els.output[0].rows = app.cssLines;
-        app.els.outputLabelSpan.html(' '+app.cssLength);
-        app.els.styleClassesTest.html(app.css);
-    };
-    
     run = function() {
         
-        getInput();
-        app.space = ' ';
-        app.newline = "\n";
-        app.semicolon = ';';
-        if (app.minify) {
-            app.space = '';
-            app.newline = '';
-            app.semicolon = '';
+        getElements();
+        
+        getInputs();
+        
+        db.space = ' ';
+        db.newline = "\n";
+        db.tab = "\t";
+        db.semicolon = ';';
+        if (inputs.minify) {
+            db.space = '';
+            db.newline = '';
+            db.tab = '';
+            db.semicolon = '';
         }
-        createCSS();
-        outputCSS();
+        
+        makeCSS();
+        putCSS();
+        
+        elements.outputs.labelSpan.html(' '+outputs.cssCore.length);
         
     };
     
@@ -212,23 +377,6 @@ textarea {width:90%;}
         run();
     };
     
-    // Event logic
-    // On Dom Ready
-    $(function() {
-    
-        getElements();
-        run();
-        
-        // On change of various inputs
-        app.els.numberOfColumnsInput.on('change', inputChange);
-        app.els.numberOfBreakPointsInput.on('change', inputChange);
-        app.els.decimalPlaces.on('change', inputChange);
-        app.els.minify.on('change', inputChange);
-        app.els.widthClasses.on('change', inputChange);
-        app.els.positionClasses.on('change', inputChange);
-        
-    });
-
 
 }(this));
     
@@ -240,26 +388,67 @@ textarea {width:90%;}
 <body>
 
 <h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a></h1>
-<p>
-<label for="input-numberofcolumns">Columns</label>
-<input name="input-numberofcolumns" id="input-numberofcolumns" type="number" value="12" />
 
-<label for="input-numberofbreakpoints">Breakpoints</label>
-<input name="input-numberofbreakpoints" id="input-numberofbreakpoints" type="text" value="768,1024" />
+<div class="col w1o2 nocol-b1">
 
-<label for="input-decimalplaces">Decimal places</label>
-<input name="input-decimalplaces" id="input-decimalplaces" type="number" value="4" />
-</p>
-<p>
-<input name="input-widthclasses" id="input-widthclasses" type="checkbox" checked="checked" />
-<label for="input-widthclasses">Width classes</label>
+<div class="col w1o4-b1">
+<div class="form-breakpoint">
+<strong>Breakpoint 0</strong><br />
+<label for="input-at-0">At</label>
+<input name="input-at-0" id="input-at-0" type="number" class="input-at" value="0" disabled="disabled" />
+<label for="input-columns-0">Columns</label>
+<input name="input-columns-0" id="input-columns-0" class="input-columns" type="number" value="5" />
+<label for="input-gutter-0">Gutter</label>
+<input name="input-gutter-0" id="input-gutter-0" class="input-gutter" type="number" value="20" />
+Most layouts will be linear at this stage so 5 columns is more than enough
+</div>
+</div>
 
+<div class="col w1o4-b1">
+<div class="form-breakpoint">
+<strong>Breakpoint 1</strong><br />
+<label for="input-at-1">At</label>
+<input name="input-at-1" id="input-at-1" type="number" class="input-at" value="768" />
+<label for="input-columns-1">Columns</label>
+<input name="input-columns-1" id="input-columns-1" class="input-columns" type="number" value="12" />
+<label for="input-gutter-1">Gutter</label>
+<input name="input-gutter-1" id="input-gutter-1" class="input-gutter" type="number" value="20" />
+</div>
+</div>
+
+</div>
+
+
+<div class="col w1o2 nocol-b1">
+
+<div class="col w1o4-b1">
+<div class="form-breakpoint">
+<strong>Breakpoint 2</strong><br />
+<label for="input-at-2">At</label>
+<input name="input-at-2" id="input-at-2" type="number" class="input-at" value="1024" />
+<label for="input-columns-2">Columns</label>
+<input name="input-columns-2" id="input-columns-2" class="input-columns" type="number" value="12" />
+<label for="input-gutter-2">Gutter</label>
+<input name="input-gutter-2" id="input-gutter-2" class="input-gutter" type="number" value="20" />
+</div>
+</div>
+
+<div class="col w1o4-b1">
+
+
+<input name="input-minify" id="input-minify" type="checkbox" />
+<label for="input-minify">Minify</label>
+<br />
 <input name="input-positionclasses" id="input-positionclasses" type="checkbox" checked="checked" />
 <label for="input-positionclasses">Position classes</label>
+<br />
+<br />
+<label for="input-decimalplaces">Decimal places</label>
+<input name="input-decimalplaces" id="input-decimalplaces" type="number" value="4" />
 
-<input name="input-minify" id="input-minify" type="checkbox" checked="checked" />
-<label for="input-minify">Minify</label>
-</p>
+</div>
+
+</div>
 
 <div class="clear"></div>
 <div class="col w1o3-b1 w1o4-b2 p4o4-b2">a</div>
@@ -268,44 +457,30 @@ textarea {width:90%;}
 <div class="col w1o4-b2 p1o4-b2">c</div>
 <div class="clear"></div>
 
+
+<div class="col w1o2-b1">
+
 <p>
-<label for="output">Output<span></span></label>
-<textarea class="output" id="output" cols="60" rows="10"></textarea>
+<label for="output-csscore">Core CSS<span></span></label>
+<textarea class="output-csscore" id="output-csscore" cols="60" rows="10"></textarea>
 </p>
 
-bp0 0+    every column is width 100% except fixed width gutter column layouts
-bp1 768+  column layouts applied, widths needed
-bp2 1024+ full column layouts
+<p>
+<label for="output-csscoreielte7">Core CSS IE lte 7<span></span></label>
+<textarea class="output-csscoreielte7" id="output-csscoreielte7" cols="60" rows="10"></textarea>
+</p>
 
-layoutmastercss
-col inn clear
-lay-col
-lay-inn
-lay-clr
-<style>
-.lm-col {width:100%;float:left;}
-.lm-clear {clear:left;}
-@media all and (min-width:768px) {
-    .lm-w1o3-b1 {width:33.3333%;}
-    .lm-w2o3-b1 {width:66.6666%;}
-}
-@media all and (min-width:1024px) {
-    .lm-w1o4-b2 {width:25%;}
-    .lm-w2o4-b2 {width:50%;}
-    .lm-noclear-b2 {clear:none;}
-    .lm-p1o4-b2 {margin-left:0;margin-right:-100%;}
-    .lm-p2o4-b2 {margin-left:25%;margin-right:-100%;}
-    .lm-p4o4-b2 {margin-left:75%;margin-right:-100%;}
-}
-</style>
-<div class="lm-clear"></div>
-<div class="lm-col lm-w1o3-b1 lm-w1o4-b2 lm-p4o4-b2">a</div>
-<div class="lm-col lm-w2o3-b1 lm-w2o4-b2 lm-p2o4-b2">b</div>
-<div class="lm-clear lm-noclear-b2"></div>
-<div class="lm-col lm-w1o4-b2 lm-p1o4-b2">c</div>
-<div class="lm-clear"></div>
-
-
+<p>
+<label for="output-csscoreielte6">Core CSS IE lte 6<span></span></label>
+<textarea class="output-csscoreielte6" id="output-csscoreielte6" cols="60" rows="10"></textarea>
+</p>
+</div>
+<div class="col w1o2-b1">
+<p>
+<label for="output-cssresponsive">Responsive Prototyping CSS; Mobile First<span></span></label>
+<textarea class="output-cssresponsive" id="output-cssresponsive" cols="60" rows="10"></textarea>
+</p>
+</div>
 
 
 
