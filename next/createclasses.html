@@ -9,8 +9,8 @@ input[type=number], input[type=text], textarea {display:block;}
 textarea {width:90%;}
 </style>
 
-    <style class="csscoretest"></style>
-    <style class="cssresponsivetest"></style>
+<style class="csscoretest"></style>
+<style class="cssresponsivetest"></style>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -40,17 +40,20 @@ textarea {width:90%;}
         elements.inputs.at.on('change', inputChange);
         elements.inputs.columns.on('change', inputChange);
         elements.inputs.gutter.on('change', inputChange);
+        elements.inputs.maxWidths.on('change', inputChange);
         
     });
     
     // Actions
     getElements = function() {
+    
         elements.inputs.decimalPlaces = $('#input-decimalplaces');
         elements.inputs.minify = $('#input-minify');
         elements.inputs.positionClasses = $('#input-positionclasses');
         elements.inputs.at = $('.input-at');
         elements.inputs.columns = $('.input-columns');
         elements.inputs.gutter = $('.input-gutter');
+        elements.inputs.maxWidths = $('.input-maxwidths');
         
         elements.outputs.cssCore = $('.output-csscore');
         elements.outputs.cssCoreIElte6 = $('.output-csscoreielte6');
@@ -59,9 +62,11 @@ textarea {width:90%;}
         elements.outputs.labelSpan = $('label[for=output] span');
         elements.outputs.cssCoreTest = $('.csscoretest');
         elements.outputs.cssResponsiveTest = $('.cssresponsivetest');
+        
     };
     
     getInputs = function() {
+    
         inputs.breakpoints = [];
         $('.form-breakpoint').each(function(i) {
             inputs.breakpoints[i] = {
@@ -73,6 +78,9 @@ textarea {width:90%;}
         inputs.decimalPlaces = elements.inputs.decimalPlaces.val();
         inputs.minify = elements.inputs.minify[0].checked;
         inputs.positionClasses = elements.inputs.positionClasses[0].checked;
+        inputs.maxWidths = elements.inputs.maxWidths.val().replace(/\s+/g, '').split(',');
+        inputs.maxWidthsLength = inputs.maxWidths.length;
+        
     };
     
     makeCSS = function() {
@@ -100,7 +108,9 @@ textarea {width:90%;}
     };
     
     trim = function(str) {
+    
         return str.replace(/^\s+/, '').replace(/\s+$/, '');
+        
     }
    
     makeCSSCore = function() {
@@ -124,6 +134,7 @@ textarea {width:90%;}
         css += ''+db.newline;
 
         outputs.cssCore = css;
+        
     };
     
     makeCSSResponsive = function() {
@@ -149,16 +160,6 @@ textarea {width:90%;}
             
             bp = '';
             
-            if (b == 0) {
-                css += '.max460 {max-width:460px;}'+db.newline;
-                css += '.max700 {max-width:700px;}'+db.newline;
-                css += '.max940 {max-width:940px;}'+db.newline;
-                css += '.max1180 {max-width:1180px;}'+db.newline;
-                css += '.max1420 {max-width:1420px;}'+db.newline;
-                css += db.newline;
-            
-                    
-            }
             if (b > 0) {
                 bp = '-b'+b;
                 css += '@media all and (min-width:'+inputs.breakpoints[b].at+'px)'+db.space+'{'+db.newline;
@@ -173,6 +174,11 @@ textarea {width:90%;}
             
             css += '.row'+bp+db.space+'{margin-left:-'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
             css += '.inn'+bp+db.space+'{margin-left:'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
+            css += db.newline;
+            
+            for (i = 0; i < inputs.maxWidthsLength; i++) {
+                css += '.max'+inputs.maxWidths[i]+bp+db.space+'{max-width:'+inputs.maxWidths[i]+'px'+db.semicolon+'}'+db.newline;
+            }
             css += db.newline;
             
             css += makeWidthClasses({
@@ -201,6 +207,7 @@ textarea {width:90%;}
     };
     
     makeCSSIElte7 = function() {
+    
         var css = '';
         css += '/* ZXCSS Layout 0.7: IE lte 7 CSS */'+db.newline;
         css += ''+db.newline;
@@ -214,14 +221,17 @@ textarea {width:90%;}
         css += '.col-centered,'+db.newline;
         css += '.inn'+db.space+'{display:block;}'+db.newline;
         outputs.cssCoreIElte7 = css;
+        
     };
     
     makeCSSIElte6 = function() {
+    
         var css = '';
         css += '/* ZXCSS Layout 0.7: IE lte 6 CSS */'+db.newline;
         css += ''+db.newline;
         css += '.col'+db.space+'{word-wrap:break-word;overflow:hidden;display:inline;}'+db.newline;
         outputs.cssCoreIElte6 = css;
+        
     };
     
     makeWidthClasses = function(o) {
@@ -340,13 +350,17 @@ textarea {width:90%;}
     
     
     resizeOutput = function(el) {
+    
         el.style.height = "1px";
         el.style.height = (el.scrollHeight)+"px";
+        
     };
     
     applyDecimalPlaces = function(num, decimalPlaces) {
+    
         var scaler = Math.pow(10, decimalPlaces);
         return Math.floor(num * scaler)/scaler;
+        
     };
     
     run = function() {
@@ -374,7 +388,9 @@ textarea {width:90%;}
     };
     
     inputChange = function() {
+    
         run();
+        
     };
     
 
@@ -399,7 +415,7 @@ textarea {width:90%;}
 <label for="input-columns-0">Columns</label>
 <input name="input-columns-0" id="input-columns-0" class="input-columns" type="number" value="5" />
 <label for="input-gutter-0">Gutter</label>
-<input name="input-gutter-0" id="input-gutter-0" class="input-gutter" type="number" value="20" />
+<input name="input-gutter-0" id="input-gutter-0" class="input-gutter" type="number" value="10" />
 Most layouts will be linear at this stage so 5 columns is more than enough
 </div>
 </div>
@@ -443,6 +459,8 @@ Most layouts will be linear at this stage so 5 columns is more than enough
 <label for="input-positionclasses">Position classes</label>
 <br />
 <br />
+<label for="input-maxwidths">max-widths in px</label>
+<textarea name="input-maxwidths" id="input-maxwidths" class="input-maxwidths" rows="2" cols="15">460,700,940,1180,1420</textarea>
 <label for="input-decimalplaces">Decimal places</label>
 <input name="input-decimalplaces" id="input-decimalplaces" type="number" value="4" />
 
