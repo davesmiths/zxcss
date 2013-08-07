@@ -3,7 +3,9 @@
 .lay {margin-right:-1px;}
 
 .nut,
-.col {display:inline-block;}
+.col,
+.lay-centered {display:inline-block;}
 
 .nut,
-.col {display:block;}
+.col,
+.lay-centered {display:block;}

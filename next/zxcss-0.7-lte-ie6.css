@@ -2,5 +2,7 @@
 
 .lay {word-wrap:break-word;overflow:hidden;display:inline;}
 
+.aacol {overflow:hidden;}
+
 .nut,
-.col {height:1%;} 
+.col {}
