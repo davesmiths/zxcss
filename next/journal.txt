@@ -24,3 +24,29 @@ And that the beauty of a function is that the dependencies are delivered via the
 
 So, was thinking that instead of all this classes, prototyping malarkey that requires understanding of what "this" is 
 at any point, I'd just pass an object with everything in it and forget "this"
+
+
+_____________
+2013 August 7
+
+IE 6 and 7 bug
+
+asd
+<div class="col">
+  <div class="col w2o3">
+    <div class="gut" style="background:#dee;">Content
+    </div>
+  </div>
+  <div class="col w1o3">
+    <div class="gut" style="background:#ede;">Sidebar
+    </div>
+  </div>
+</div>
+asd
+
+Even though the outer .col is floated and therefore contains all floats.
+IE6 and 7 display asdasd next to each other before the layout, seemingly
+like the outer .col is not clearing floats.
+This is fixed by wrapping the second "asd" in a block level element. An inline element will not do
+
+

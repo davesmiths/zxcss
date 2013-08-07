@@ -1,61 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
 <title>ZXCSS</title>
 
 <!-- ZXCSS -->
-<!--[if lte IE 7]><link href="zxcss-0.7-lte-ie7.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
-<!--[if lte IE 6]><link href="zxcss-0.7-lte-ie6.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
-<link href="zxcss-0.7.css" rel="stylesheet" type="text/css" media="all" />
-<link href="zxcss-0.7-rapid.css" rel="stylesheet" type="text/css" media="all" />
-
+<!--[if lte IE 7]><link href="zxcss-0.7-lte-ie7.css" rel="stylesheet" type="text/css" /><![endif]-->
+<!--[if lte IE 6]><link href="zxcss-0.7-lte-ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+<link href="zxcss-0.7.css" rel="stylesheet" type="text/css" />
+<link href="zxcss-0.7-responsive-prototyping.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 
 /* Page Styles */
-body {margin:0 20px 80px 20px;padding:0;line-height:20px;}
+body {margin:0;padding:0;line-height:20px;}
 a:focus {background:#FF0;color:#000;}
 
-
-.layout-main {margin-left:-20px;}
-.layout-content {width:70%;}
-.layout-sidebar {width:30%;}
-.layout-main .inn {margin-left:20px;padding:20px;background:#eee;}
-
-/* Out-of-the-box Styles */
-.row-1 .row {margin-left:-20px;}
-.row-1 .row .inn {margin-left:20px;background:#ddd;padding:1px 20px;}
-
-/* Custom Classes Styles */
-.row-2 .row {margin-left:-20px;}
-.row-2 .row .inn {margin-left:20px;background:#ddd;padding:1px 20px;}
-.row-2 .col-page {width:auto!important;max-width:980px;width:980px;margin:0 auto;float:none;}
-.row-2 .col-page:before,
-.row-2 .col-page:after {content:"\0020";display:block;height:0;overflow:hidden;}
-.row-2 .col-page:after {clear:both;}
-
-/* Bog Standard 1 */
-.row-2 .row-3 .row {margin-left:-20px;}
-.row-2 .row-3 .row .inn {margin-left:20px;}
-.row-2 .row-3 .col-1 {width:50%;}
-.row-2 .row-3 .col-2,
-.row-2 .row-3 .col-3 {width:25%;}
-
-/* Bog Standard 2 */
-.row-2 .row-4 {margin-right:0;}
-.row-2 .row-4 .col-1 {width:50%;}
-.row-2 .row-4 .col-2 {width:25%;}
-.row-2 .row-4 .col-3 {width:25%;}
-.row-2 .row-4 .inn {margin-left:20px;}
-.row-2 .row-4 .col-3 .inn {margin-right:0;}
-
-/* Any Order Columns */
-.row-2 .row-5 .col {margin-right:-100%;width:33.3333%;}
-.row-2 .row-5 .col-1 {margin-left:33.3333%;}
-.row-2 .row-5 .col-2 {margin-left:66.6666%;}
-.row-2 .row-5 .col-3 {margin-left:0;}
-
 </style>
+<!--[if lte IE 8]><script src="demo-assets/respond.src.js"></script><![endif]-->
+
 
 </head>
 
@@ -73,16 +35,32 @@ a:focus {background:#FF0;color:#000;}
 &lt;/div&gt;</pre> 
 <h2>Layout styles</h2>
 <p>To produce the most robust and responsive layouts add custom classes to the rows, columns and inners as necessary:</p>
-<div class="row layout-main">
-  <div class="col layout-content">
-    <div class="inn">Content
+<div>Before</div>
+<div class="col">
+    <div class="nut">
+      <div class="lay w2o3 p2o3 w1o4-b1 p1o4-b1">
+        <div class="col gut" style="background:#dee;">Content
+        </div>
+      </div>
+      <div class="lay w1o3 p1o3 w3o4-b1 p2o4-b1">
+        <div class="col gut" style="background:#ede;">Sidebar
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col layout-sidebar">
-    <div class="inn">Sidebar
-    </div>
-  </div>
 </div>
+<div class="col">
+    <div class="nut">
+      <div class="lay w2o3">
+        <div class="col gut" style="background:#dee;">Content
+        </div>
+      </div>
+      <div class="lay w1o3">
+        <div class="col gut" style="background:#ede;">Sidebar
+        </div>
+      </div>
+    </div>
+</div>
+<div>After</div>
 <pre>
 .layout-content {width:70%;}
 .layout-sidebar {width:30%;}
@@ -313,6 +291,6 @@ a:focus {background:#FF0;color:#000;}
     </div>
   </div>
 </div>
-
+<!--[xxxxxxxif lte IE 6]><script src="https://getfirebug.com/releases/lite/1.3/firebug-lite.js"></script><![endif]-->
 </body>
 </html>

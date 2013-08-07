@@ -5,8 +5,10 @@
 <title>ZXCSS</title>
 
 <style type="text/css">
+body {margin:0;padding:0;line-height:20px;}
 input[type=number], input[type=text], textarea {display:block;}
 textarea {width:90%;}
+label[for^="input-at"] {position:absolute;left:-9999px;}
 </style>
 
 <style class="csscoretest"></style>
@@ -75,6 +77,7 @@ textarea {width:90%;}
                 gutter: $(this).find('.input-gutter').val()
             }
         });
+        inputs.breakpointsLength = inputs.breakpoints.length;
         inputs.decimalPlaces = elements.inputs.decimalPlaces.val();
         inputs.minify = elements.inputs.minify[0].checked;
         inputs.positionClasses = elements.inputs.positionClasses[0].checked;
@@ -119,21 +122,50 @@ textarea {width:90%;}
         
         css += '/* ZXCSS Layout 0.7: Core CSS */'+db.newline;
         css += ''+db.newline;
-        css += '.col {float:left;width:100%;}'+db.newline;
+        css += '.lay {float:left;width:100%;}'+db.newline;
         css += '.clear {clear:left;}'+db.newline;
         css += ''+db.newline;
-        css += '.row:after,'+db.newline;
-        css += '.row:before,'+db.newline;
-        css += '.col-centered:after,'+db.newline;
-        css += '.col-centered:before {content:"";display:table;}'+db.newline;
+        css += '.col:after,'+db.newline;
+        css += '.col:before,'+db.newline;
+        css += '.lay-centered:after,'+db.newline;
+        css += '.lay-centered:before {content:"";display:table;}'+db.newline;
+        css += '.col:after,'+db.newline;
+        css += '.lay-centered:after {clear:both;}'+db.newline;
         css += ''+db.newline;
-        css += '.row:after,'+db.newline;
-        css += '.col-centered:after {clear:both;}'+db.newline;
-        css += ''+db.newline;
-        css += '.col-centered {margin-right:auto;margin-left:auto;float:none;}'+db.newline;
+        css += '.lay-centered {margin-right:auto;margin-left:auto;float:none;}'+db.newline;
         css += ''+db.newline;
 
         outputs.cssCore = css;
+        
+    };
+    
+    makeCSSIElte7 = function() {
+    
+        var css = '';
+        css += '/* ZXCSS Layout 0.7: IE lte 7 CSS */'+db.newline;
+        css += ''+db.newline;
+        css += '.lay'+db.space+'{margin-right:-1px;}'+db.newline;
+        css += ''+db.newline;
+        css += '.nut,'+db.newline;
+        css += '.col'+db.space+'{display:inline-block;}'+db.newline;
+        css += ''+db.newline;
+        css += '.nut,'+db.newline;
+        css += '.col'+db.space+'{display:block;}'+db.newline;
+        outputs.cssCoreIElte7 = css;
+        
+    };
+    
+    makeCSSIElte6 = function() {
+    
+        var css = '';
+        css += '/* ZXCSS Layout 0.7: IE lte 6 CSS */'+db.newline;
+        css += ''+db.newline;
+        css += '.lay'+db.space+'{word-wrap:break-word;overflow:hidden;display:inline;}'+db.newline;
+        css += ''+db.newline;
+        css += '.nut,'+db.newline;
+        css += '.col'+db.space+'{height:1%;}'+db.newline;
+        css += ''+db.newline;
+        outputs.cssCoreIElte6 = css;
         
     };
     
@@ -155,25 +187,28 @@ textarea {width:90%;}
         css += '/* ZXCSS Layout 0.7: Responsive prototyping classes */'+db.newline;
         css += ''+db.newline;
         
-        inputsBreakpointsLength = inputs.breakpoints.length;
-        for (b = 0; b < inputsBreakpointsLength; b++) {
+        for (b = 0; b < inputs.breakpointsLength; b++) {
             
             bp = '';
             
             if (b > 0) {
+            
                 bp = '-b'+b;
+                
                 css += '@media all and (min-width:'+inputs.breakpoints[b].at+'px)'+db.space+'{'+db.newline;
+                
+                // clear and no clear
+                css += '.lay'+bp+db.space+'{float:left;width:100%;}'+db.newline;
+                css += '.nolay'+bp+db.space+'{float:none;width:auto;}'+db.newline;
+                css += '.clear'+bp+db.space+'{clear:left;}'+db.newline;
+                css += '.noclear'+bp+db.space+'{clear:none;}'+db.newline;
+                css += db.newline;
+                
             }
             
-            // clear and no clear
-            css += '.col'+bp+db.space+'{float:left;width:100%;}'+db.newline;
-            css += '.nocol'+bp+db.space+'{float:none;width:auto;}'+db.newline;
-            css += '.clear'+bp+db.space+'{clear:left;}'+db.newline;
-            css += '.noclear'+bp+db.space+'{clear:none;}'+db.newline;
-            css += db.newline;
             
-            css += '.row'+bp+db.space+'{margin-left:-'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
-            css += '.inn'+bp+db.space+'{margin-left:'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
+            css += '.nut'+bp+db.space+'{margin-left:-'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
+            css += '.gut'+bp+db.space+'{margin-left:'+inputs.breakpoints[b].gutter+'px;}'+db.newline;
             css += db.newline;
             
             for (i = 0; i < inputs.maxWidthsLength; i++) {
@@ -203,34 +238,6 @@ textarea {width:90%;}
         }
         
         outputs.cssResponsive = css;
-        
-    };
-    
-    makeCSSIElte7 = function() {
-    
-        var css = '';
-        css += '/* ZXCSS Layout 0.7: IE lte 7 CSS */'+db.newline;
-        css += ''+db.newline;
-        css += '.col'+db.space+'{margin-right:-1px;}'+db.newline;
-        css += ''+db.newline;
-        css += '.row,'+db.newline;
-        css += '.col-centered,'+db.newline;
-        css += '.inn'+db.space+'{display:inline-block;}'+db.newline;
-        css += ''+db.newline;
-        css += '.row,'+db.newline;
-        css += '.col-centered,'+db.newline;
-        css += '.inn'+db.space+'{display:block;}'+db.newline;
-        outputs.cssCoreIElte7 = css;
-        
-    };
-    
-    makeCSSIElte6 = function() {
-    
-        var css = '';
-        css += '/* ZXCSS Layout 0.7: IE lte 6 CSS */'+db.newline;
-        css += ''+db.newline;
-        css += '.col'+db.space+'{word-wrap:break-word;overflow:hidden;display:inline;}'+db.newline;
-        outputs.cssCoreIElte6 = css;
         
     };
     
@@ -399,15 +406,22 @@ textarea {width:90%;}
 
 </script>
 
+<!--[if lte IE 8]><script src="demo-assets/respond.min.js"></script><![endif]-->
+
 </head>
 
 <body>
 
+<div class="lay">
+
 <h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a></h1>
+<p><a href="demo-core-plus-responsive-prototyping.html">Demo using responsive prototyping classes</a></p>
 
-<div class="col w1o2 nocol-b1">
+<p>Compatible with IE 6+, Firefox 3.6+ and all the latest browsers.<br />For IE 8 and less to display similar to the latest browsers please use a polyfill like respond.js to fix media queries.</p>
 
-<div class="col w1o4-b1">
+<div class="lay w1o2 nolay-b1">
+
+<div class="lay w1o4-b1">
 <div class="form-breakpoint">
 <strong>Breakpoint 0</strong><br />
 <label for="input-at-0">At</label>
@@ -420,11 +434,11 @@ Most layouts will be linear at this stage so 5 columns is more than enough
 </div>
 </div>
 
-<div class="col w1o4-b1">
+<div class="lay w1o4-b1">
 <div class="form-breakpoint">
 <strong>Breakpoint 1</strong><br />
 <label for="input-at-1">At</label>
-<input name="input-at-1" id="input-at-1" type="number" class="input-at" value="768" />
+<input name="input-at-1" id="input-at-1" type="number" class="input-at" value="700" />
 <label for="input-columns-1">Columns</label>
 <input name="input-columns-1" id="input-columns-1" class="input-columns" type="number" value="12" />
 <label for="input-gutter-1">Gutter</label>
@@ -435,13 +449,13 @@ Most layouts will be linear at this stage so 5 columns is more than enough
 </div>
 
 
-<div class="col w1o2 nocol-b1">
+<div class="lay w1o2 nolay-b1">
 
-<div class="col w1o4-b1">
+<div class="lay w1o4-b1">
 <div class="form-breakpoint">
 <strong>Breakpoint 2</strong><br />
 <label for="input-at-2">At</label>
-<input name="input-at-2" id="input-at-2" type="number" class="input-at" value="1024" />
+<input name="input-at-2" id="input-at-2" type="number" class="input-at" value="1180" />
 <label for="input-columns-2">Columns</label>
 <input name="input-columns-2" id="input-columns-2" class="input-columns" type="number" value="12" />
 <label for="input-gutter-2">Gutter</label>
@@ -449,7 +463,7 @@ Most layouts will be linear at this stage so 5 columns is more than enough
 </div>
 </div>
 
-<div class="col w1o4-b1">
+<div class="lay w1o4-b1">
 
 
 <input name="input-minify" id="input-minify" type="checkbox" />
@@ -460,7 +474,7 @@ Most layouts will be linear at this stage so 5 columns is more than enough
 <br />
 <br />
 <label for="input-maxwidths">max-widths in px</label>
-<textarea name="input-maxwidths" id="input-maxwidths" class="input-maxwidths" rows="2" cols="15">460,700,940,1180,1420</textarea>
+<textarea name="input-maxwidths" id="input-maxwidths" class="input-maxwidths" rows="2" cols="15">700,740,940,980,1180,1220</textarea>
 <label for="input-decimalplaces">Decimal places</label>
 <input name="input-decimalplaces" id="input-decimalplaces" type="number" value="4" />
 
@@ -469,14 +483,23 @@ Most layouts will be linear at this stage so 5 columns is more than enough
 </div>
 
 <div class="clear"></div>
-<div class="col w1o3-b1 w1o4-b2 p4o4-b2">a</div>
-<div class="col w2o3-b1 w2o4-b2 p2o4-b2">b</div>
+<div class="lay w1o3-b1 w1o4-b2 p4o4-b2">a</div>
+<div class="lay w2o3-b1 w2o4-b2 p2o4-b2">b</div>
 <div class="clear noclear-b2"></div>
-<div class="col w1o4-b2 p1o4-b2">c</div>
+<div class="lay w1o4-b2 p1o4-b2">c</div>
 <div class="clear"></div>
 
 
-<div class="col w1o2-b1">
+There is no such thing as a row, they are columns
+<div class="lay-centered max700-b1 max1180-b2" style="background:#ede;">
+<div class="nut nut-b1">
+<div class="lay w1o2 w1o3-b1 w1o6-b2 p6o6-b2"><div class="gut gut-b1" style="background:#ddd;">a</div></div>
+<div class="lay w1o2 w2o3-b1 w5o6-b2 p1o6-b2"><div class="gut gut-b1" style="background:#ddd;">b<br/>b</div></div>
+</div>
+</div>
+
+
+<div class="lay w1o2-b1">
 
 <p>
 <label for="output-csscore">Core CSS<span></span></label>
@@ -493,14 +516,14 @@ Most layouts will be linear at this stage so 5 columns is more than enough
 <textarea class="output-csscoreielte6" id="output-csscoreielte6" cols="60" rows="10"></textarea>
 </p>
 </div>
-<div class="col w1o2-b1">
+<div class="lay w1o2-b1">
 <p>
 <label for="output-cssresponsive">Responsive Prototyping CSS; Mobile First<span></span></label>
 <textarea class="output-cssresponsive" id="output-cssresponsive" cols="60" rows="10"></textarea>
 </p>
 </div>
 
-
+</div>
 
 </body>
 </html>
