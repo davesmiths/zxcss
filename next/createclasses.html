@@ -61,6 +61,7 @@ label[for^="input-at"] {position:absolute;left:-9999px;}
         elements.outputs.cssCoreIElte6 = $('.output-csscoreielte6');
         elements.outputs.cssCoreIElte7 = $('.output-csscoreielte7');
         elements.outputs.cssResponsive = $('.output-cssresponsive');
+        elements.outputs.cssResponsiveIElte6 = $('.output-cssresponsiveielte6');
         elements.outputs.labelSpan = $('label[for=output] span');
         elements.outputs.cssCoreTest = $('.csscoretest');
         elements.outputs.cssResponsiveTest = $('.cssresponsivetest');
@@ -92,6 +93,7 @@ label[for^="input-at"] {position:absolute;left:-9999px;}
         makeCSSIElte7();
         makeCSSIElte6();
         makeCSSResponsive();
+        makeCSSResponsiveIElte6();
         
     };
      
@@ -101,12 +103,16 @@ label[for^="input-at"] {position:absolute;left:-9999px;}
         elements.outputs.cssCoreIElte7.val(trim(outputs.cssCoreIElte7));
         elements.outputs.cssCoreIElte6.val(trim(outputs.cssCoreIElte6));
         elements.outputs.cssResponsive.val(trim(outputs.cssResponsive));
+        elements.outputs.cssResponsiveIElte6.val(trim(outputs.cssResponsiveIElte6));
+        
         elements.outputs.cssCoreTest.html(trim(outputs.cssCore));
         elements.outputs.cssResponsiveTest.html(trim(outputs.cssResponsive));
+        
         resizeOutput(elements.outputs.cssCore[0]);
         resizeOutput(elements.outputs.cssCoreIElte7[0]);
         resizeOutput(elements.outputs.cssCoreIElte6[0]);
         resizeOutput(elements.outputs.cssResponsive[0]);
+        resizeOutput(elements.outputs.cssResponsiveIElte6[0]);
         
     };
     
@@ -164,8 +170,52 @@ label[for^="input-at"] {position:absolute;left:-9999px;}
         css += ''+db.newline;
         css += '.nut,'+db.newline;
         css += '.col'+db.space+'{height:1%;}'+db.newline;
+        
+        
+        css += '.nutie6 {display:inline-block;}'+db.newline;
+        css += '.nut {width:expression('+db.newline;
+        css += '    (function(self) {'+db.newline;
+        css += '        if (!self.zxcsslayoutthing) {'+db.newline;
+        css += '            self.zxcsslayoutthing=1;'+db.newline;
+        css += '            self.innerHTML = \'<div class="nutie6">\'+self.innerHTML+\'</div>\';'+db.newline;
+        css += '        }'+db.newline;
+        css += '        return "auto";'+db.newline;
+        css += '    }(this))'+db.newline;
+        css += ');}'+db.newline;
+
+        
         css += ''+db.newline;
         outputs.cssCoreIElte6 = css;
+        
+    };
+    
+    makeCSSResponsiveIElte6 = function() {
+    
+        var css = '';
+        css += '/* ZXCSS Layout 0.7: Responsive Prototyping Classes IE lte 6 CSS */'+db.newline;
+        for (b = 0; b < inputs.breakpointsLength; b++) {
+            
+            bp = '';
+            
+            if (b > 0) {
+                css += db.newline;
+                css += db.newline;
+                bp = '-b'+b;
+                css += '@media all and (min-width:'+inputs.breakpoints[b].at+'px)'+db.space+'{'+db.newline;
+            }
+            for (i = 0; i < inputs.maxWidthsLength; i++) {
+                if (i > 0) {
+                    css += db.newline;
+                }
+                css += '.max'+inputs.maxWidths[i]+bp+db.space+'{width:expression(this.scrollWidth'+db.space+'>'+db.space+inputs.maxWidths[i]+' ? "'+inputs.maxWidths[i]+'px" : "auto")'+db.semicolon+'}';
+            }
+            if (b > 0) {
+                css += db.newline + '}';
+            }
+
+            
+        }
+        outputs.cssResponsiveIElte6 = css;
         
     };
     
@@ -184,7 +234,7 @@ label[for^="input-at"] {position:absolute;left:-9999px;}
         ,   css = ''
         ;
         
-        css += '/* ZXCSS Layout 0.7: Responsive prototyping classes */'+db.newline;
+        css += '/* ZXCSS Layout 0.7: Responsive Prototyping Classes */'+db.newline;
         css += ''+db.newline;
         
         for (b = 0; b < inputs.breakpointsLength; b++) {
@@ -515,6 +565,12 @@ There is no such thing as a row, they are columns
 <label for="output-csscoreielte6">Core CSS IE lte 6<span></span></label>
 <textarea class="output-csscoreielte6" id="output-csscoreielte6" cols="60" rows="10"></textarea>
 </p>
+
+<p>
+<label for="output-cssresponsiveielte6">Responsive Prototyping CSS IE lte 6<span></span></label>
+<textarea class="output-cssresponsiveielte6" id="output-cssresponsiveielte6" cols="60" rows="10"></textarea>
+</p>
+
 </div>
 <div class="lay w1o2-b1">
 <p>
