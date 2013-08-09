@@ -50,3 +50,14 @@ like the outer .col is not clearing floats.
 This is fixed by wrapping the second "asd" in a block level element. An inline element will not do
 
 
+
+_____________
+2013 August 9
+
+I want to add a class to add a marginbottom equal to the line-height, probably should go on .col
+
+
+
+
+
+
