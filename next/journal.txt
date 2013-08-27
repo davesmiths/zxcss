@@ -58,6 +58,29 @@ I want to add a class to add a marginbottom equal to the line-height, probably s
 
 
 
+______________
+2013 August 27
+
+Writing up the problem with gutters and positioning the floats with IE6.
+The problem is
+<div class="layout-gutter">
+    <div class="layout w2o3 p2o3">
+        <div class="column gutter">
+        </div>
+    </div>
+    <div class="layout w1o3 p1o3">
+        <div class="column gutter">
+        </div>
+    </div>
+</div>
+
+where
+    layout gutter has a negative margin-left of 50px
+    gutter is margin-left:50px
+    p1o3,p2o3 are both margin-right:-100%;
+    p1o3 is margin-left:0;
+    p2o3 is margin-left:33.3333%
+
 
 
 
