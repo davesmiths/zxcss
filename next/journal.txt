@@ -129,4 +129,36 @@ where pos1 pos2 pos3 have margin-right:-100% and a margin-left to position them 
 
 Problem is the clear fails and 4,5,6 overlay 1,2,3.
 
-Solved by using margin-right:99%, but does affect positioning hmm.
+Solved by <del>using margin-right:99%, but does affect positioning</del> do something else.
+
+Solved by making sure the div.layout-clear is no hasLayout, giving it two children divs. The first
+float left width 100% and the second clear both. The full solution is here:
+<div class="layout-clear">
+    <div class="layout-ie6fix2"></div>
+    <div class="layout-ie6fix3"></div>
+</div>
+.layout-clear {clear:both;}
+.layout-ie6fix2 {float:left;width:100%;height:0;overflow:hidden;}
+.layout-ie6fix3 {clear:both;height:0;overflow:hidden;}
+
+
+
+________________
+2013 September 3
+
+There is a repaint issue in IE7 when using positional floats. However, there is hope as 
+after using the element inspector in the dev toolbar the repaint bug disappears.
+
+
+________________
+2013 September 4
+
+IE7 repaint bug raises its ugly head when using positional floats and an ancestor element
+has a background colour applied. It is solved by making that ancester hasLayout. So position:relative, 
+zoom:1 have worked so far.
+
+Found IE7 .column text-indent bug. If a .column has text-indent and it is the last in a layout column
+then the page can overflow by the textindent amount. Doesn't affect any other versions of IE.
+Solved by adding overflow:hidden to .column or .layout as IE6 requires overflow hidden for .layout anyway
+
+
