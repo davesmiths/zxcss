@@ -6,6 +6,8 @@
 
 <!-- ZXCSS -->
 
+
+
 <!--[if IE 7]>
 <style>
 
@@ -63,20 +65,34 @@
         }(this))
     );
 }
-
     /*
-        -   Note layout-clear must not get hasLayout otherwise positional floats won't be clearable
+        -   Rather than pollute JS and load more assets I have made use of MS CSS Expressions.
+            In this case it adds two divs as children to div.layout-clear and represent the 
+            the only way I could get positional floats cleared in IE 6 and 7.
+            Cunningly, dynamically added div.layout-clear elements are also fixed.
+            
+        -   Note that layout-clear must not get hasLayout otherwise positional floats 
+            won't be clearable
     */
     
     /*
-        Note IE 7 background repaint bug
-        When positional floats are used it is possible that a background
-        applied to an ancestor element may show correctly on page load but on scrolling 
-        the become lost or patchy. Thankfully I found a solution: to give the ancestor element
-        hasLayout
+        -   IE 7 background repaint bug
+            Happens when positional floats are used and a background has been 
+            applied to an ancestor element of the layout. The layout may show correctly 
+            on page load but on scrolling the become lost or patchy. Thankfully I found 
+            a solution: to give the ancestor element with the background hasLayout.
+        
+        -   IE 7 pixel-rounding bug
+            Happens when using positional floats where the layout is flush with the edge of 
+            the viewport and the layout hasn't been wrapped in a div.layout. Solve by wrapping
+            the layout in a div.layout.
     */
 </style>
 <![endif]-->
+
+
+
+
 
 <!--[if lte IE 6]>
 <style>
@@ -127,9 +143,14 @@
         }(this))
     );
 }
-
     /*
-        -   Note layout-clear must not get hasLayout otherwise positional floats won't be clearable
+        -   Rather than pollute JS and load more assets I have made use of MS CSS Expressions.
+            In this case it adds two divs as children to div.layout-clear and represent the 
+            the only way I could get positional floats cleared in IE 6 and 7.
+            Cunningly, dynamically added div.layout-clear elements are also fixed.
+            
+        -   Note that layout-clear must not get hasLayout otherwise positional floats 
+            won't be clearable
     */
     
 .layout-gutter-centered-ie6fix {float:left;width:100%;overflow:hidden;}
@@ -147,8 +168,10 @@
     );
 }
     /*
-        Didn't realise until now that I could assign an expression to any 
-        old made-up property, which saves overwriting useful/used ones
+        -   Inner wraps layout-gutter or layout-centered with a div, which ensures positional
+            floats in these scenarios layout correctly
+        -   Didn't realise until now that I could assign an expression to any 
+            old made-up property, which saves overwriting useful/used ones
     */
 
 </style>
@@ -271,7 +294,7 @@ window.onload = function() {
 <p>A functional, not beautiful, test page</p>
 
 
-<div class="tests">
+<div class="tests layout">
 
     <h2>Base</h2>
     <div><strong>Layout &gt; Layouts &gt; Columns</strong></div>
@@ -287,7 +310,6 @@ window.onload = function() {
         </div>
     </div>
 
-    
     
     <div><strong>Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="layout">
@@ -524,7 +546,7 @@ window.onload = function() {
         <div class="column style-colour3">6 </div>
     </div>
     <div class="layout-clear"></div>
-    
+
     <div><strong>Positional Layouts &gt; Columns, Clear Layouts</strong></div>
     <div class="layout pos1">
         <div class="column style-colour1">1<br />11<br />111<br />1111 </div>
@@ -546,7 +568,6 @@ window.onload = function() {
         <div class="column style-colour3">6<br />6 </div>
     </div>
     <div class="layout-clear"></div>
-    
     
     
 
@@ -1428,11 +1449,8 @@ window.onload = function() {
 
 
 
-
-
     <h2>Dynamically Added</h2>
     <div id="bob"></div>
-
 
 </div>
 
