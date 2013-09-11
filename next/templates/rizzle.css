@@ -1,0 +1,20 @@
+/* Rizzle 1.0 Core CSS */
+
+.{{ns}}{{layout}} {float:left;width:100%;}
+
+.{{ns}}{{layout-clear}} {clear:both;}
+
+.{{ns}}{{layout-centered}} {margin-left:auto;margin-right:auto;}
+.{{ns}}{{layout-centered}} {float:none;width:auto;}
+.{{ns}}{{layout-centered}}:after,
+.{{ns}}{{layout-centered}}:before {content:"";display:table;}
+.{{ns}}{{layout-centered}}:after {clear:both;}
+
+.{{ns}}{{layout-gutter}} {float:none;width:auto;}
+.{{ns}}{{layout-gutter}}:after,
+.{{ns}}{{layout-gutter}}:before {content:"";display:table;}
+.{{ns}}{{layout-gutter}}:after {clear:both;}
+
+.{{ns}}{{column}}:after,
+.{{ns}}{{column}}:before {content:"";display:table;}
+.{{ns}}{{column}}:after {clear:both;}

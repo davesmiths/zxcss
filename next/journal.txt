@@ -162,3 +162,17 @@ then the page can overflow by the textindent amount. Doesn't affect any other ve
 Solved by adding overflow:hidden to .column or .layout as IE6 requires overflow hidden for .layout anyway
 
 
+
+________________
+2013 September 8
+
+Rizzle
+rizzle.css
+rizzle-lte-ie7.css
+
+Testing Rizzle
+Using a template
+
+Customisation of Rizzle
+Same template can be used and then outputted to Rizzle proper
+

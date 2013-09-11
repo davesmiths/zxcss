@@ -1,0 +1,26 @@
+/* Rizzle 1.0 Responsive Prototyping Classes IE lte 6 CSS */
+
+.max700 {width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.max740 {width:expression(this.scrollWidth > 740 ? "740px" : "auto");}
+.max940 {width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.max980 {width:expression(this.scrollWidth > 980 ? "980px" : "auto");}
+.max1180 {width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.max1220 {width:expression(this.scrollWidth > 1220 ? "1220px" : "auto");}
+
+@media all and (min-width:700px) {
+.max700-b1 {width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.max740-b1 {width:expression(this.scrollWidth > 740 ? "740px" : "auto");}
+.max940-b1 {width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.max980-b1 {width:expression(this.scrollWidth > 980 ? "980px" : "auto");}
+.max1180-b1 {width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.max1220-b1 {width:expression(this.scrollWidth > 1220 ? "1220px" : "auto");}
+}
+
+@media all and (min-width:1180px) {
+.max700-b2 {width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.max740-b2 {width:expression(this.scrollWidth > 740 ? "740px" : "auto");}
+.max940-b2 {width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.max980-b2 {width:expression(this.scrollWidth > 980 ? "980px" : "auto");}
+.max1180-b2 {width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.max1220-b2 {width:expression(this.scrollWidth > 1220 ? "1220px" : "auto");}
+}
