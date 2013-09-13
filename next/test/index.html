@@ -115,6 +115,64 @@ h2 {margin:0;line-height:2;}
 
 .layout-positional {margin-right:-100%;}
 
+
+
+/* Layout > Gutter Column */
+.layout-guttercolumn:after,
+.layout-guttercolumn:before {content:"";display:table;}
+.layout-guttercolumn:after {clear:both;}
+.layout-guttercolumn {display:inline-block;}
+.layout-guttercolumn {display:block;}
+
+.layout-guttercolumn {margin-left:240px;}
+.layout-guttercolumn-item {float:left;display:inline;clear:left;width:220px;margin-left:-240px;position:static!important;position:relative;}
+/*potentially zoom:1 might work instead of position relative for IE6*/
+.layout-guttercolumn-clear {clear:left;}
+
+.layout-guttercolumn160 {margin-left:180px;}
+.layout-guttercolumn160-item {float:left;display:inline;clear:left;width:160px;margin-left:-180px;position:static!important;position:relative;}
+.layout-guttercolumn160-clear {clear:left;}
+
+.layout-guttercolumn100 {margin-left:120px;}
+.layout-guttercolumn100-item {float:left;display:inline;clear:left;width:100px;margin-left:-120px;position:static!important;position:relative;}
+.layout-guttercolumn100-clear {clear:left;}
+
+/* Layout > Gutter Column Alt */
+.layout-guttercolumnalt:after,
+.layout-guttercolumnalt:before {content:"";display:table;}
+.layout-guttercolumnalt:after {clear:both;}
+.layout-guttercolumnalt {display:inline-block;}
+.layout-guttercolumnalt {display:block;}
+
+.layout-guttercolumnalt {margin-right:240px;}
+.layout-guttercolumnalt-item {float:right;display:inline;clear:right;width:220px;margin-right:-220px;position:relative;right:-20px;}
+.layout-guttercolumnalt-clear {clear:right;}
+
+/* Layout > Gutter Column Adaptive */
+@media all and (max-width:700px) {
+	.layout-guttercolumn,
+	.layout-guttercolumnalt {margin-left:0;margin-right:0;}
+	.layout-guttercolumn-item,
+	.layout-guttercolumnalt-item {width:100%;margin-right:0;margin-left:0;position:relative;right:0;}
+}
+/*
+	Cross Browser Notes
+	- display:inline-block and display:block to make hasLayout in IE and ensure floats are contained
+	- Fix IE float margin bug: display:inline
+	- A version that wouldn't need to accommodate IE7 would have:
+		- .layout-guttercolumnalt-item {float:right;clear:right;width:220px;margin-right:-240px;}
+	- layout-guttercolumnalt
+		- The negative margin-right:-220px; is deliberately set to the same as the width.
+		  Reason being that it looks like IE 6 and 7 only work with a negative margin up to the size of the box when floating right.
+		- The position:relative;right:-20px; ensures we account for a gutter
+		- IE7 doesn't honour the item clears like it does on the layout-guttercolumn, there is no fix for this at this time
+	- layout-guttercolumn-item {float:left;display:inline;clear:left;width:220px;margin-left:-220px;position:relative;left:-20px;}
+      The above caused IE7 to keep making anything in the gutter jump once the mouse entered the viewport. 
+	  In particular the bug was triggered with the use of position:relative;left:-20px;
+	  Conversely the very thing that caused a bug here for IE7 is needed in the alt version
+*/
+
+
 </style>
 
 
@@ -159,13 +217,143 @@ window.onload = function() {
 <p><strong>Rizzle: Rock-solid CSS layouts</strong></p>
 <p>A functional, not beautiful, test page</p>
 
+<p>
+Definitions:<br />
+Col is the basic layout devise<br />
+Row is only needed to wrap two or more cols
+Gutter
+    row is horizontal
+        bottom or top
+    column is vertical
+        left or right
+</p>
+
+<div class="col">
+    <h1>asd</h1>
+    <div class="col-centered width-960max">
+        Potential blah
+        tune adjust offset
+        <div class="row gutter-left-hide gutter-left-hide-none-2up gutter-left-hide-1o2base gutter-bottom gutter-bottom-none-2up gutter-bottom-1base">
+            <div class="userstyle">
+                <div class="col width-1o4-1up pos-1o4-1up width-1o4-2up pos-2o4-2up pos">
+                    <div class="userstyle gutter-left gutter-left-none-2up gutter-left-1o2base-1up">1 </div>
+                </div>
+                <div class="clear clear-none-1up clear-2up"></div>
+                <div class="col width-2o4">
+                    <div class="userstyle gutter-left">2 </div>
+                </div>
+                <div class="col width-1o4">
+                    <div class="userstyle gutter-left">3 </div>
+                </div>
+            </div>
+        </div>
+        <div class="gutter-left gutter-left-4base gutter-left-8base-1up">
+            asdlkasdlkj
+            <img class="put-gutter-left put-gutter-left-8base" alt="" />
+        </div>
+        </div>
+        <div class="gutter-right gutter-right-8base">
+            asdlkasdlkj
+            <img class="put-gutter-right put-gutter-right-8base" alt="" />
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <h1>asd</h1>
+    <div class="col col-centered width-960max">
+        Potential blah
+        tune adjust offset
+        <div class="row gutter-left-hide gutter-left-hide-2up-none gutter-left-hide-1o2base gutter-bottom gutter-bottom-2up-none gutter-bottom-1base">
+            <div class="userstyle">
+                <div class="col width-1up-1o4 pos-1up-1o4 width-2up-1o4 pos-2up-2o4 pos">
+                    <div class="userstyle gutter-left gutter-left-2up-none gutter-left-1up-1o2base">1 </div>
+                </div>
+                <div class="clear-0up clear-1up-none clear-2up"></div>
+                <div class="col width-2o4">
+                    <div class="userstyle gutter-left">2 </div>
+                </div>
+                <div class="col width-1o4">
+                    <div class="userstyle gutter-left">3 </div>
+                </div>
+            </div>
+        </div>
+        <div class="col gutter-left-4base gutter-left-1up-8base">
+            asdlkasdlkj
+            <img class="put-gutter-left put-left-8base" alt="" />
+        </div>
+        </div>
+        <div class="col gutter-right-8base">
+            asdlkasdlkj
+            <img class="put-gutter-right-8base" alt="" />
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <h1>asd</h1>
+    <div class="col col-centered width-960max">
+        Potential blah
+        tune adjust offset
+        <div class="row col-gutter-hide col-gutter-hide-2up-none col-gutter-hide-1o2base row-gutter row-gutter-2up-none row-gutter-1base">
+            <div class="userstyle">
+                <div class="col width-1up-1o4 pos-1up-1o4 width-2up-1o4 pos-2up-2o4 pos">
+                    <div class="userstyle col-gutter col-gutter-2up-none col-gutter-1up-1o2base">1 </div>
+                </div>
+                <div class="clear-0up clear-1up-none clear-2up"></div>
+                <div class="col width-2o4">
+                    <div class="userstyle col-gutter">2 </div>
+                </div>
+                <div class="col width-1o4">
+                    <div class="userstyle col-gutter">3 </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-gutter-8base col-gutter-left-8base">
+            asdlkasdlkj
+            <img class="pull-gutter-8base" alt="" />
+        </div>
+        </div>
+        <div class="col col-gutter-push-8base">
+            asdlkasdlkj
+            <img class="push-8base" alt="" />
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <h1>asd</h1>
+    <div class="col col-centered width-960max">
+        Potential blah
+        tune adjust offset
+        <div class="row rowcolgutter fixcolgutter-2up-none rowcolgutterwidth-1o2base rowgutter rowgutter-2up-none rowgutterwidth-1base">
+            <div class="userstyle">
+                <div class="col width-1up-1o4 pos-1up-1o4 width-2up-1o4 pos-2up-2o4 pos">
+                    <div class="userstyle colgutter colgutter-2up-none colgutterwidth-1up-1o2base">1 </div>
+                </div>
+                <div class="clear-0up clear-1up-none clear-2up"></div>
+                <div class="col width-2o4">
+                    <div class="userstyle colgutter">2 </div>
+                </div>
+                <div class="col width-1o4">
+                    <div class="userstyle colgutter">3 </div>
+                </div>
+            </div>
+        </div>
+        <div class="col guttercol-8base">
+            asdlkasdlkj
+            <img class="" alt="" />
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col">
         <h1>asd</h1>
         <div class="row">
             <div class="col col-centered width-960max">
                 Potential blah
-                <div class="row gutter-col-sugar gutter-col-1o2-sugar gutter-row">
+                <div class="row gutter-col-sugar gutter-col-sugar-1o2 gutter-row">
                     <div class="box userstyle">
                         <div class="col width-1up-1o4 pos-1up-1o4 width-2up-1o4 pos-2up-2o4 pos">
                             <div class="userstyle gutter-1up-col-1o2 gutter-1up-col">1 </div>
