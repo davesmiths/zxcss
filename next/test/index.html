@@ -6,7 +6,7 @@
 
 <script>var lteie7 = false;</script>
 <!--[if lte IE 7]><script>lteie7 = true;</script><![endif]-->
-
+    
 <script src="../libraries/smallmoustache/smallmoustache.js"></script>
 <script src="../assets/moustachesarray.js.php"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -99,7 +99,6 @@ body {
 
 
 
-.style-maxwidth1 {max-width:800px;width:800px;}
 
 /* A tiny bit of styling */
 div.tests {line-height:3;}
@@ -115,58 +114,58 @@ h2 {margin:0;line-height:2;}
 
 .layout-positional {margin-right:-100%;}
 
-
+.clear {clear:both;}
 
 /* Layout > Gutter Column */
-.layout-guttercolumn:after,
-.layout-guttercolumn:before {content:"";display:table;}
-.layout-guttercolumn:after {clear:both;}
-.layout-guttercolumn {display:inline-block;}
-.layout-guttercolumn {display:block;}
+.col-layout:after,
+.col-layout:before {content:"";display:table;}
+.col-layout:after {clear:both;}
+.col-layout {display:inline-block;}
+.col-layout {display:block;}
+.clear-left {clear:left;}
 
-.layout-guttercolumn {margin-left:240px;}
-.layout-guttercolumn-item {float:left;display:inline;clear:left;width:220px;margin-left:-240px;position:static!important;position:relative;}
+.gutter-left-11base {margin-left:220px;}
+.pull-gutter-left-11base {float:left;display:inline;clear:left;width:200px;margin-left:-220px;position:static!important;position:relative;}
 /*potentially zoom:1 might work instead of position relative for IE6*/
-.layout-guttercolumn-clear {clear:left;}
 
-.layout-guttercolumn160 {margin-left:180px;}
-.layout-guttercolumn160-item {float:left;display:inline;clear:left;width:160px;margin-left:-180px;position:static!important;position:relative;}
-.layout-guttercolumn160-clear {clear:left;}
+.gutter-left-1o3 {margin-left:33.3333%;}
+.pull-gutter-left-1o3 {float:left;display:inline;clear:left;width:50%;margin-left:-50%;position:static!important;position:relative;}
+.gutter-left-1o4 {margin-left:25%;}
+.pull-gutter-left-1o4 {float:left;display:inline;clear:left;width:33.3333%;margin-left:-33.3333%;position:static!important;position:relative;}
+.gutter-left-1o5 {margin-left:20%;}
+.pull-gutter-left-1o5 {float:left;display:inline;clear:left;width:25%;margin-left:-25%;position:static!important;position:relative;}
 
-.layout-guttercolumn100 {margin-left:120px;}
-.layout-guttercolumn100-item {float:left;display:inline;clear:left;width:100px;margin-left:-120px;position:static!important;position:relative;}
-.layout-guttercolumn100-clear {clear:left;}
 
 /* Layout > Gutter Column Alt */
-.layout-guttercolumnalt:after,
-.layout-guttercolumnalt:before {content:"";display:table;}
-.layout-guttercolumnalt:after {clear:both;}
-.layout-guttercolumnalt {display:inline-block;}
-.layout-guttercolumnalt {display:block;}
+.clear-right {clear:right;}
 
-.layout-guttercolumnalt {margin-right:240px;}
-.layout-guttercolumnalt-item {float:right;display:inline;clear:right;width:220px;margin-right:-220px;position:relative;right:-20px;}
-.layout-guttercolumnalt-clear {clear:right;}
+.gutter-right-11base {margin-right:220px;}
+.pull-gutter-right-11base {float:right;display:inline;clear:right;width:200px;margin-right:-200px;position:relative;right:-20px;}
 
-/* Layout > Gutter Column Adaptive */
+.width-1o1 {width:100%;}
+.width-7base {width:140px;}
+.width-800max {max-width:800px;width:800px;}
+.height-auto {height:auto;}
+
+/* Layout > Gutter Column Adaptive * /
 @media all and (max-width:700px) {
-	.layout-guttercolumn,
-	.layout-guttercolumnalt {margin-left:0;margin-right:0;}
-	.layout-guttercolumn-item,
-	.layout-guttercolumnalt-item {width:100%;margin-right:0;margin-left:0;position:relative;right:0;}
+	.pos-gutter-left,
+	.pos-gutter-right {margin-left:0;margin-right:0;}
+	.pos-gutter-left-item,
+	.pos-gutter-right-item {width:100%;margin-right:0;margin-left:0;position:relative;right:0;}
 }
 /*
 	Cross Browser Notes
 	- display:inline-block and display:block to make hasLayout in IE and ensure floats are contained
 	- Fix IE float margin bug: display:inline
 	- A version that wouldn't need to accommodate IE7 would have:
-		- .layout-guttercolumnalt-item {float:right;clear:right;width:220px;margin-right:-240px;}
-	- layout-guttercolumnalt
+		- .pos-gutter-right-item {float:right;clear:right;width:220px;margin-right:-240px;}
+	- pos-gutter-right
 		- The negative margin-right:-220px; is deliberately set to the same as the width.
 		  Reason being that it looks like IE 6 and 7 only work with a negative margin up to the size of the box when floating right.
 		- The position:relative;right:-20px; ensures we account for a gutter
-		- IE7 doesn't honour the item clears like it does on the layout-guttercolumn, there is no fix for this at this time
-	- layout-guttercolumn-item {float:left;display:inline;clear:left;width:220px;margin-left:-220px;position:relative;left:-20px;}
+		- IE7 doesn't honour the item clears like it does on the pos-gutter-left, there is no fix for this at this time
+	- pos-gutter-left-item {float:left;display:inline;clear:left;width:220px;margin-left:-220px;position:relative;left:-20px;}
       The above caused IE7 to keep making anything in the gutter jump once the mouse entered the viewport. 
 	  In particular the bug was triggered with the use of position:relative;left:-20px;
 	  Conversely the very thing that caused a bug here for IE7 is needed in the alt version
@@ -228,6 +227,205 @@ Gutter
         left or right
 </p>
 
+lay
+-del- row - name works but only in certain situations
+-del- clearfix - name works but not particularly elegant
+-del- contain - name not working for me
+    clearfix to contain floats
+    
+lay-left (=lay) lay-right lay-centered
+    margins with auto
+    
+clear
+clear-none
+
+gut (=gut-1x)
+gut-2x gut-1o3
+gut-small (=gut-3x) gut-medium (=gut-5x) gut-large (=gut-11x)
+gut-none
+    margin lefts
+gut-right (=gut-right-1x)
+gut-right-small gut-right-medium gut-right-large
+gut-right-none
+    margin rights
+gut-row (=gut-row-1x)
+gut-row-none
+    margins bottoms
+gut-row-top (=gut-row-top-1x)
+    margin tops
+    
+gut-hide (=gut-hide-1x) gut-hide-none 
+    negative margin applied to lay
+
+col
+    float width 100%
+    
+pos
+pos-1o4 pos-2o3
+    margin lefts and negative margin rights only be used on col
+    
+pull
+    float left
+pull-right
+    float right
+    
+pull-gut (=pull-gut-medium =pull-gut-5x)
+pull-gut-small pull-gut-medium pull-gut-large
+    float left set width and pull beyond left edge into gutter
+    
+pull-gut-right (=push-gut-medium =push-gut-5x)
+pull-gut-right-small pull-gut-right-medium pull-gut-right-large
+    float right set width and pull beyond right edge into gutter
+    
+width width-max width-NoN width-Nmax
+    width and max-width
+
+<div class="lay-right width-960max style-colour1">asdkjhas</div>
+<div class="lay-left width-960max style-colour1">asdkjhas</div>
+<div class="lay-centered width-960max style-colour1">asdkjhas</div>
+<div class="lay">
+    <h1>Heading</h1>
+    <div class="lay-centered width-960max">
+        Potential blah
+        tune adjust offset
+        <div class="lay gut-hide gut-hide-none-2up gut-hide-1o2x gut-row gut-row-none-2up gut-row-1x">
+            <div class="userstyle">
+                <div class="col width-1o4-1up pos-1o4-1up width-1o4-2up pos-2o4-2up">
+                    <div class="userstyle gut gut-none-2up gut-1o2base-1up">1 </div>
+                </div>
+                <div class="clear clear-none-1up clear-2up"></div>
+                <div class="col width-2o4">
+                    <div class="userstyle gut">2 </div>
+                </div>
+                <div class="col width-1o4">
+                    <div class="userstyle gut">3 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="lay">
+    <div class="lay gut-large style-colour1">
+        <p class="pull-gut-large">
+            <img src="./../assets/images/1.jpg" class="width-1o1" alt="" />
+            asdlkasdlkj
+        </p>
+        <p>asdkjasd</p>
+    </div>
+    <p>asd</p>
+    <div class="lay gut-right-large style-colour2">
+        <img src="./../assets/images/1.jpg" class="pull-gut-right-large" alt="" />
+        asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj 
+    </div>
+</div>
+
+
+
+
+
+<div class="lay-right width-960max style-colour1" style="margin-left:auto;width:300px">asdkjhas</div>
+<div class="lay-left width-960max style-colour1" style="margin-right:auto;width:300px;">asdkjhas</div>
+<div class="lay-centered width-960max style-colour1" style="margin-left:auto;margin-right:auto;width:300px;">asdkjhas</div>
+<div class="lay">
+    <h1>Heading</h1>
+    <div class="lay-centered width-960max">
+        Potential blah
+        tune adjust offset
+        <div class="lay gutter-left-hide gutter-left-hide-none-2up gutter-left-hide-1o2base gutter-bottom gutter-bottom-none-2up gutter-bottom-1base">
+            <div class="userstyle">
+                <div class="col width-1o4-1up pos-1o4-1up width-1o4-2up pos-2o4-2up">
+                    <div class="userstyle gutter-left gutter-left-none-2up gutter-left-1o2base-1up">1 </div>
+                </div>
+                <div class="clear clear-none-1up clear-2up"></div>
+                <div class="col width-2o4">
+                    <div class="userstyle gutter-left">2 </div>
+                </div>
+                <div class="col width-1o4">
+                    <div class="userstyle gutter-left">3 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="lay">
+    <div class="lay gutter-left-11base style-colour1">
+        <p class="pull-gutter-left-11base">
+            <img src="./../assets/images/1.jpg" class="width-1o1" alt="" />
+            asdlkasdlkj
+        </p>
+        <p>asdkjasd</p>
+    </div>
+    <p>asd</p>
+    <div class="lay gutter-right-11base style-colour2">
+        <img src="./../assets/images/1.jpg" class="pull-gutter-right-11base" alt="" />
+        asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj 
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--
+<div class="col">
+    <h1>asd</h1>
+    <div class="col-cewidth-960max">
+        Potential blah
+        tune adjust offset
+        <div class="row gutter-left-hide gutter-left-hide-none-2up gutter-left-hide-1o2base gutter-bottom gutter-bottom-none-2up gutter-bottom-1base">
+            <div class="userstyle">
+                <div class="col width-1o4-1up pos-1o4-1up width-1o4-2up pos-2o4-2up">
+                    <div class="userstyle gutter-left gutter-left-none-2up gutter-left-1o2base-1up">1 </div>
+                </div>
+                <div class="clear clear-none-1up clear-2up"></div>
+                <div class="col width-2o4">
+                    <div class="userstyle gutter-left">2 </div>
+                </div>
+                <div class="col width-1o4">
+                    <div class="userstyle gutter-left">3 </div>
+                </div>
+            </div>
+        </div>
+        <div class="gutter-left gutter-left-4base gutter-left-8base-1up">
+            asdlkasdlkj
+            <img src="./../assets/images/1.jpg" style="display:block" class="pos-gutter-left pos-gutter-left-8base width-7base height-auto" alt="" />
+        </div>
+        <div class="gutter-right gutter-right-8base">
+            asdlkasdlkj
+            <img class="pos-gutter-right pos-gutter-right-8base" alt="" />
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<p>asdasd</p>
+<div class="col">
+    <div class="col-gutter-left style-colour1">
+        <p class="pos-col-gutter-left">
+            <img src="./../assets/images/1.jpg" class="width-1o1" alt="" />
+            asdlkasdlkj
+        </p>
+        <p>asdkjasd</p>
+    </div>
+    <p>asd</p>
+    <div class="col-gutter-right style-colour2">
+        <img src="./../assets/images/1.jpg" class="pos-gutter-right" alt="" />
+        asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj asdlkasdlkj 
+    </div>
+    
+</div>
+-->
+
+
+
+
+
+
+<!--
 <div class="col">
     <h1>asd</h1>
     <div class="col-centered width-960max">
@@ -250,7 +448,6 @@ Gutter
         <div class="gutter-left gutter-left-4base gutter-left-8base-1up">
             asdlkasdlkj
             <img class="put-gutter-left put-gutter-left-8base" alt="" />
-        </div>
         </div>
         <div class="gutter-right gutter-right-8base">
             asdlkasdlkj
@@ -282,7 +479,6 @@ Gutter
             asdlkasdlkj
             <img class="put-gutter-left put-left-8base" alt="" />
         </div>
-        </div>
         <div class="col gutter-right-8base">
             asdlkasdlkj
             <img class="put-gutter-right-8base" alt="" />
@@ -309,10 +505,9 @@ Gutter
                 </div>
             </div>
         </div>
-        <div class="col col-gutter-8base col-gutter-left-8base">
+        <div class="col col-gutter-8base gutter-left-8base">
             asdlkasdlkj
             <img class="pull-gutter-8base" alt="" />
-        </div>
         </div>
         <div class="col col-gutter-push-8base">
             asdlkasdlkj
@@ -433,6 +628,7 @@ Gutter
         </div>
     </div>
 </div>
+-->
 
 <div class="tests layout">
 
@@ -530,7 +726,7 @@ Gutter
     
     <h2>Centered</h2>
     <div><strong>Centered Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="layout layout1">
             <div class="column style-colour1">1 </div>
         </div>
@@ -543,7 +739,7 @@ Gutter
     </div>
     
     <div><strong>Centered Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="layout pos1">
             <div class="column style-colour1">1 </div>
         </div>
@@ -556,7 +752,7 @@ Gutter
     </div>
     
     <div><strong>Centered Layout &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="layout layout-gutter">
             <div class="layout layout1">
                 <div class="column column-gutter style-colour1">1 </div>
@@ -571,7 +767,7 @@ Gutter
     </div>
     
     <div><strong>Centered Layout &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="layout layout-gutter">
             <div class="layout pos1">
                 <div class="column column-gutter style-colour1">1 </div>
@@ -587,7 +783,7 @@ Gutter
     
     
     <div><strong>Centered Layout &gt; Column &gt; Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="column style-colour4">
             <div class="layout">
                 <div class="layout layout1">
@@ -604,7 +800,7 @@ Gutter
     </div>
     
     <div><strong>Centered Layout &gt; Column &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="column style-colour4">
             <div class="layout">
                 <div class="layout pos1">
@@ -621,7 +817,7 @@ Gutter
     </div>
     
     <div><strong>Centered Layout &gt; Column &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="column style-colour4">
             <div class="layout layout-gutter">
                 <div class="layout layout1">
@@ -640,7 +836,7 @@ Gutter
     
     
     <div><strong>Centered Layout &gt; Column &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="layout layout-centered style-maxwidth1">
+    <div class="layout layout-centered width-800max">
         <div class="column style-colour4">
             <div class="layout layout-gutter">
                 <div class="layout pos1">
