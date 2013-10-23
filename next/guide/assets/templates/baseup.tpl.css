@@ -1,0 +1,153 @@
+/*
+/*  BaseUp 1.0 CSS
+*/
+
+.{{ns}}{{col}} {float:left;width:100%;}
+.{{ns}}{{pullleft}} {float:left;}
+.{{ns}}{{pullright}} {float:right;}
+.{{ns}}{{pos}} {margin-right:-100%;}
+
+.{{ns}}{{lay}}:after,
+.{{ns}}{{lay}}:before,
+.{{ns}}{{layleft}}:after,
+.{{ns}}{{layleft}}:before,
+.{{ns}}{{layright}}:after,
+.{{ns}}{{layright}}:before,
+.{{ns}}{{laycentered}}:after,
+.{{ns}}{{laycentered}}:before {content:"";display:table;}
+.{{ns}}{{lay}}:after,
+.{{ns}}{{layleft}}:after,
+.{{ns}}{{layright}}:after,
+.{{ns}}{{laycentered}}:after {clear:both;}
+
+.{{ns}}{{layleft}} {margin-right:auto;}
+.{{ns}}{{layright}} {margin-left:auto;}
+.{{ns}}{{laycentered}} {margin-left:auto;margin-right:auto;}
+
+.{{ns}}{{clear}} {clear:both;}
+{{#breakpoints}}
+{{#bp}}
+
+@media all and (min-width:{{at}}px) {
+
+.{{ns}}{{col}}{{bp}} {float:left;width:100%;}
+.{{ns}}{{colnone}}{{bp}} {float:none;width:auto;}
+.{{ns}}{{clear}}{{bp}} {clear:left;}
+.{{ns}}{{clearnone}}{{bp}} {clear:none;}
+{{/bp}}
+
+
+/* Gut */
+.{{ns}}{{gut}}{{bp}} {margin-left:{{gutter}}px;}
+{{#gutters}}
+.{{ns}}{{gut}}-{{i}}x{{bp}} {margin-left:{{gutter}}px;}
+{{/gutters}}
+.{{ns}}{{gut}}-1o2x{{bp}} {margin-left:{{gutter1o2}}px;}
+
+.{{ns}}{{gutsmall}}{{bp}} {margin-left:{{gutsmallmargin}}px;}
+.{{ns}}{{gutmedium}}{{bp}} {margin-left:{{gutmediummargin}}px;}
+.{{ns}}{{gutlarge}}{{bp}} {margin-left:{{gutlargemargin}}px;}
+
+.{{ns}}{{gut}}-none{{bp}} {margin-left:0;}
+
+
+/* Gut Right */
+.{{ns}}{{gutright}}{{bp}} {margin-right:{{gutter}}px;}
+{{#gutters}}
+.{{ns}}{{gutright}}-{{i}}x{{bp}} {margin-right:{{gutter}}px;}
+{{/gutters}}
+.{{ns}}{{gutright}}-1o2x{{bp}} {margin-right:{{gutter1o2}}px;}
+
+.{{ns}}{{gutrightsmall}}{{bp}} {margin-right:{{gutsmallmargin}}px;}
+.{{ns}}{{gutrightmedium}}{{bp}} {margin-right:{{gutmediummargin}}px;}
+.{{ns}}{{gutrightlarge}}{{bp}} {margin-right:{{gutlargemargin}}px;}
+.{{ns}}{{gutright}}-none{{bp}} {margin-right:0;}
+
+
+
+/* Gut Hide */
+.{{ns}}{{guthide}}{{bp}} {margin-left:-{{gutter}}px;}
+{{#gutters}}
+.{{ns}}{{guthide}}-{{i}}x{{bp}} {margin-left:-{{gutter}}px;}
+{{/gutters}}
+.{{ns}}{{guthide}}-1o2x{{bp}} {margin-left:-{{gutter1o2}}px;}
+.{{ns}}{{guthide}}-none{{bp}} {margin-left:0;}
+
+
+
+/* Gut Row */
+.{{ns}}{{gutrow}}{{bp}} {margin-bottom:{{gutter}}px;}
+{{#gutters}}
+.{{ns}}{{gutrow}}-{{i}}x{{bp}} {margin-bottom:{{gutter}}px;}
+{{/gutters}}
+.{{ns}}{{gutrow}}-1o2x{{bp}} {margin-bottom:{{gutter1o2}}px;}
+.{{ns}}{{gutrow}}-none{{bp}} {margin-bottom:0;}
+
+
+
+/* Pull Gut */
+.{{ns}}{{pullgutsmall}}{{bp}},
+.{{ns}}{{pullgutmedium}}{{bp}},
+.{{ns}}{{pullgutlarge}}{{bp}},
+{{#pullguts}}{{#isnotfirst}}, {{/isnotfirst}}.{{ns}}{{pullgut}}-{{i}}x{{bp}}{{/pullguts}}
+{float:left;display:inline;clear:both;position:static!important;position:relative;}
+
+.{{ns}}{{pullgut}}{{bp}} {margin-left:-{{base5}}px;width:{{base4}}px;}
+{{#pullguts}}
+.{{ns}}{{pullgut}}-{{i}}x{{bp}} {margin-left:-{{marginleft}}px;width:{{width}}px;}
+{{/pullguts}}
+
+.{{ns}}{{pullgutsmall}}{{bp}} {margin-left:-{{pullgutsmallmargin}}px;width:{{pullgutsmallwidth}}px;}
+.{{ns}}{{pullgutmedium}}{{bp}} {margin-left:-{{pullgutmediummargin}}px;width:{{pullgutmediumwidth}}px;}
+.{{ns}}{{pullgutlarge}}{{bp}} {margin-left:-{{pullgutlargemargin}}px;width:{{pullgutlargewidth}}px;}
+.{{ns}}{{pullgut}}-none{{bp}} {margin-left:0;width:auto;float:none;position:static;}
+
+
+
+/* Pull Gut Right */
+.{{ns}}{{pullgutrightsmall}}{{bp}},
+.{{ns}}{{pullgutrightmedium}}{{bp}},
+.{{ns}}{{pullgutrightlarge}}{{bp}},
+{{#pullgutrights}}{{#isnotfirst}}, {{/isnotfirst}}.{{ns}}{{pullgutright}}-{{i}}x{{bp}}{{/pullgutrights}}
+{float:right;display:inline;clear:both;position:relative;}
+            
+.{{ns}}{{pullgutright}}{{bp}} {margin-right:-{{base5}}px;width:{{base4}}px;}
+{{#pullgutrights}}
+.{{ns}}{{pullgutright}}-{{i}}x{{bp}} {margin-right:-{{marginright}}px;width:{{width}}px;right:-{{right}}px;}
+{{/pullgutrights}}
+
+.{{ns}}{{pullgutrightsmall}}{{bp}} {margin-right:-{{pullgutrightsmallmargin}}px;width:{{pullgutrightsmallwidth}}px;right:-{{pullgutrightsmallright}}px;}
+.{{ns}}{{pullgutrightmedium}}{{bp}} {margin-right:-{{pullgutrightmediummargin}}px;width:{{pullgutrightmediumwidth}}px;right:-{{pullgutrightmediumright}}px;}
+.{{ns}}{{pullgutrightlarge}}{{bp}} {margin-right:-{{pullgutrightlargemargin}}px;width:{{pullgutrightlargewidth}}px;right:-{{pullgutrightlargeright}}px;}
+.{{ns}}{{pullgutright}}-none{{bp}} {margin-right:0;width:auto;float:none;position:static;}
+
+
+
+/* Max Width */
+.{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
+{{#maxwidths}}
+.{{ns}}{{widthmax}}-{{maxwidth}}{{bp}} {max-width:{{maxwidth}}px;}
+{{/maxwidths}}
+
+
+
+/* Width */
+{{#widths}}
+{{#fractions}}{{#isnotfirst}}, {{/isnotfirst}}.{{ns}}{{width}}-{{numerator}}o{{denominator}}{{bp}}{{/fractions}} {width:{{value}}%;}
+{{/widths}}
+
+
+
+/* Pos */
+{{#poss}}
+{{#fractions}}{{#isnotfirst}}, {{/isnotfirst}}.{{ns}}{{pos}}-{{numerator}}o{{denominator}}{{bp}}{{/fractions}} {margin-left:{{value}}%;}
+{{/poss}}
+
+{{#poss}}{{#fractions}}{{#isnotveryfirst}}, {{/isnotveryfirst}}.{{ns}}{{pos}}-{{numerator}}o{{denominator}}{{bp}}{{/fractions}}{{/poss}} {margin-right:-100%;}
+
+{{#bp}}
+}
+{{/bp}}
+
+{{/breakpoints}}
+
