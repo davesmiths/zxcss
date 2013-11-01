@@ -41,10 +41,10 @@
 
 /*  - Pull Gut and Pull Gut Right
 * /
-.pull-gut-small,
-.pull-gut-medium,
-.pull-gut-large,
-.pull-gut-1x, .pull-gut-2x, .pull-gut-3x, .pull-gut-4x, .pull-gut-5x, .pull-gut-6x, .pull-gut-7x, .pull-gut-8x, .pull-gut-9x, .pull-gut-10x, .pull-gut-11x, .pull-gut-12x
+.pull-gut-left-small,
+.pull-gut-left-medium,
+.pull-gut-left-large,
+.pull-gut-left-1x, .pull-gut-left-2x, .pull-gut-left-3x, .pull-gut-left-4x, .pull-gut-left-5x, .pull-gut-left-6x, .pull-gut-left-7x, .pull-gut-left-8x, .pull-gut-left-9x, .pull-gut-left-10x, .pull-gut-left-11x, .pull-gut-left-12x
 {display:inline-block;}
 
 .pull-gut-right-small,
@@ -53,10 +53,10 @@
 .pull-gut-right-1x, .pull-gut-right-2x, .pull-gut-right-3x, .pull-gut-right-4x, .pull-gut-right-5x, .pull-gut-right-6x, .pull-gut-right-7x, .pull-gut-right-8x, .pull-gut-right-9x, .pull-gut-right-10x, .pull-gut-right-11x, .pull-gut-right-12x
 {display:inline-block;}
 
-.pull-gut-small,
-.pull-gut-medium,
-.pull-gut-large,
-.pull-gut-1x, .pull-gut-2x, .pull-gut-3x, .pull-gut-4x, .pull-gut-5x, .pull-gut-6x, .pull-gut-7x, .pull-gut-8x, .pull-gut-9x, .pull-gut-10x, .pull-gut-11x, .pull-gut-12x
+.pull-gut-left-small,
+.pull-gut-left-medium,
+.pull-gut-left-large,
+.pull-gut-left-1x, .pull-gut-left-2x, .pull-gut-left-3x, .pull-gut-left-4x, .pull-gut-left-5x, .pull-gut-left-6x, .pull-gut-left-7x, .pull-gut-left-8x, .pull-gut-left-9x, .pull-gut-left-10x, .pull-gut-left-11x, .pull-gut-left-12x
 {display:block;}
 
 .pull-gut-right-small,
@@ -64,10 +64,10 @@
 .pull-gut-right-large,
 .pull-gut-right-1x, .pull-gut-right-2x, .pull-gut-right-3x, .pull-gut-right-4x, .pull-gut-right-5x, .pull-gut-right-6x, .pull-gut-right-7x, .pull-gut-right-8x, .pull-gut-right-9x, .pull-gut-right-10x, .pull-gut-right-11x, .pull-gut-right-12x
 {display:block;}
-.pull-gut-small-1up,
-.pull-gut-medium-1up,
-.pull-gut-large-1up,
-.pull-gut-1x-1up, .pull-gut-2x-1up, .pull-gut-3x-1up, .pull-gut-4x-1up, .pull-gut-5x-1up, .pull-gut-6x-1up, .pull-gut-7x-1up, .pull-gut-8x-1up, .pull-gut-9x-1up, .pull-gut-10x-1up, .pull-gut-11x-1up, .pull-gut-12x-1up
+.pull-gut-left-small-1up,
+.pull-gut-left-medium-1up,
+.pull-gut-left-large-1up,
+.pull-gut-left-1x-1up, .pull-gut-left-2x-1up, .pull-gut-left-3x-1up, .pull-gut-left-4x-1up, .pull-gut-left-5x-1up, .pull-gut-left-6x-1up, .pull-gut-left-7x-1up, .pull-gut-left-8x-1up, .pull-gut-left-9x-1up, .pull-gut-left-10x-1up, .pull-gut-left-11x-1up, .pull-gut-left-12x-1up
 {display:inline-block;}
 
 .pull-gut-right-small-1up,
@@ -76,10 +76,10 @@
 .pull-gut-right-1x-1up, .pull-gut-right-2x-1up, .pull-gut-right-3x-1up, .pull-gut-right-4x-1up, .pull-gut-right-5x-1up, .pull-gut-right-6x-1up, .pull-gut-right-7x-1up, .pull-gut-right-8x-1up, .pull-gut-right-9x-1up, .pull-gut-right-10x-1up, .pull-gut-right-11x-1up, .pull-gut-right-12x-1up
 {display:inline-block;}
 
-.pull-gut-small-1up,
-.pull-gut-medium-1up,
-.pull-gut-large-1up,
-.pull-gut-1x-1up, .pull-gut-2x-1up, .pull-gut-3x-1up, .pull-gut-4x-1up, .pull-gut-5x-1up, .pull-gut-6x-1up, .pull-gut-7x-1up, .pull-gut-8x-1up, .pull-gut-9x-1up, .pull-gut-10x-1up, .pull-gut-11x-1up, .pull-gut-12x-1up
+.pull-gut-left-small-1up,
+.pull-gut-left-medium-1up,
+.pull-gut-left-large-1up,
+.pull-gut-left-1x-1up, .pull-gut-left-2x-1up, .pull-gut-left-3x-1up, .pull-gut-left-4x-1up, .pull-gut-left-5x-1up, .pull-gut-left-6x-1up, .pull-gut-left-7x-1up, .pull-gut-left-8x-1up, .pull-gut-left-9x-1up, .pull-gut-left-10x-1up, .pull-gut-left-11x-1up, .pull-gut-left-12x-1up
 {display:block;}
 
 .pull-gut-right-small-1up,
@@ -87,10 +87,10 @@
 .pull-gut-right-large-1up,
 .pull-gut-right-1x-1up, .pull-gut-right-2x-1up, .pull-gut-right-3x-1up, .pull-gut-right-4x-1up, .pull-gut-right-5x-1up, .pull-gut-right-6x-1up, .pull-gut-right-7x-1up, .pull-gut-right-8x-1up, .pull-gut-right-9x-1up, .pull-gut-right-10x-1up, .pull-gut-right-11x-1up, .pull-gut-right-12x-1up
 {display:block;}
-.pull-gut-small-2up,
-.pull-gut-medium-2up,
-.pull-gut-large-2up,
-.pull-gut-1x-2up, .pull-gut-2x-2up, .pull-gut-3x-2up, .pull-gut-4x-2up, .pull-gut-5x-2up, .pull-gut-6x-2up, .pull-gut-7x-2up, .pull-gut-8x-2up, .pull-gut-9x-2up, .pull-gut-10x-2up, .pull-gut-11x-2up, .pull-gut-12x-2up
+.pull-gut-left-small-2up,
+.pull-gut-left-medium-2up,
+.pull-gut-left-large-2up,
+.pull-gut-left-1x-2up, .pull-gut-left-2x-2up, .pull-gut-left-3x-2up, .pull-gut-left-4x-2up, .pull-gut-left-5x-2up, .pull-gut-left-6x-2up, .pull-gut-left-7x-2up, .pull-gut-left-8x-2up, .pull-gut-left-9x-2up, .pull-gut-left-10x-2up, .pull-gut-left-11x-2up, .pull-gut-left-12x-2up
 {display:inline-block;}
 
 .pull-gut-right-small-2up,
@@ -99,10 +99,10 @@
 .pull-gut-right-1x-2up, .pull-gut-right-2x-2up, .pull-gut-right-3x-2up, .pull-gut-right-4x-2up, .pull-gut-right-5x-2up, .pull-gut-right-6x-2up, .pull-gut-right-7x-2up, .pull-gut-right-8x-2up, .pull-gut-right-9x-2up, .pull-gut-right-10x-2up, .pull-gut-right-11x-2up, .pull-gut-right-12x-2up
 {display:inline-block;}
 
-.pull-gut-small-2up,
-.pull-gut-medium-2up,
-.pull-gut-large-2up,
-.pull-gut-1x-2up, .pull-gut-2x-2up, .pull-gut-3x-2up, .pull-gut-4x-2up, .pull-gut-5x-2up, .pull-gut-6x-2up, .pull-gut-7x-2up, .pull-gut-8x-2up, .pull-gut-9x-2up, .pull-gut-10x-2up, .pull-gut-11x-2up, .pull-gut-12x-2up
+.pull-gut-left-small-2up,
+.pull-gut-left-medium-2up,
+.pull-gut-left-large-2up,
+.pull-gut-left-1x-2up, .pull-gut-left-2x-2up, .pull-gut-left-3x-2up, .pull-gut-left-4x-2up, .pull-gut-left-5x-2up, .pull-gut-left-6x-2up, .pull-gut-left-7x-2up, .pull-gut-left-8x-2up, .pull-gut-left-9x-2up, .pull-gut-left-10x-2up, .pull-gut-left-11x-2up, .pull-gut-left-12x-2up
 {display:block;}
 
 .pull-gut-right-small-2up,
@@ -177,26 +177,26 @@
 /* The following crashes IE 6, so am not supporting max width in IE 6 except for the basics
             
 
-.width-max {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-220 {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
-.width-max-460 {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
-.width-max-700 {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-940 {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
-.width-max-1180 {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-1420 {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
+.lay-centered, .width-max {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-1xe {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
+.width-max-2xe {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
+.width-max-3xe {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-4xe {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.width-max-5xe {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.width-max-6xe {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
 
 
             
             
 @media all and (min-width:700px) {
 
-.width-max {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-220-1up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
-.width-max-460-1up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
-.width-max-700-1up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-940-1up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
-.width-max-1180-1up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-1420-1up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
+.lay-centered, .width-max {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-1xe-1up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
+.width-max-2xe-1up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
+.width-max-3xe-1up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-4xe-1up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.width-max-5xe-1up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.width-max-6xe-1up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
 
 }
 
@@ -204,13 +204,13 @@
             
 @media all and (min-width:1180px) {
 
-.width-max {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-220-2up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
-.width-max-460-2up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
-.width-max-700-2up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-940-2up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
-.width-max-1180-2up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-1420-2up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
+.lay-centered, .width-max {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.width-max-1xe-2up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
+.width-max-2xe-2up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
+.width-max-3xe-2up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-4xe-2up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.width-max-5xe-2up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.width-max-6xe-2up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
 
 }
 

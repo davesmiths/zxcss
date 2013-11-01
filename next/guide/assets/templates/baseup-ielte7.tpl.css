@@ -137,9 +137,9 @@
 @media all and (min-width:{{at}}px) {
 {{/bp}}
 
-.{{widthmax}} {_width:expression(this.scrollWidth > {{maxwidthbp}} ? "{{maxwidthbp}}px" : "auto");}
+.{{ns}}{{laycentered}}, .{{widthmax}} {_width:expression(this.scrollWidth > {{maxwidthbp}} ? "{{maxwidthbp}}px" : "auto");}
 {{#maxwidths}}
-.{{widthmax}}-{{maxwidth}}{{bp}} {_width:expression(this.scrollWidth > {{maxwidth}} ? "{{maxwidth}}px" : "auto");}
+.{{widthmax}}-{{xe}}xe{{bp}} {_width:expression(this.scrollWidth > {{maxwidth}} ? "{{maxwidth}}px" : "auto");}
 {{/maxwidths}}
 
 {{#bp}}

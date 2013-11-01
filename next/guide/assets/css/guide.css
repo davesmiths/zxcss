@@ -1,7 +1,7 @@
 /* Page styles */
 body {margin:0;padding:0 40px 40px 40px;line-height:20px;}
 p {margin:0 0 20px 0;}
-input[type=number], input[type=text], textarea {display:block;}
+input[type=number], input[type=text], textarea {}
 textarea {width:90%;}
 table label {position:absolute;left:-9999px;}
 table th {text-align: left;}

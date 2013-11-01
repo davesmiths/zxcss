@@ -3,9 +3,29 @@
 */
 
 .{{ns}}{{col}} {float:left;width:100%;}
-.{{ns}}{{pullleft}} {float:left;}
-.{{ns}}{{pullright}} {float:right;}
+.{{ns}}{{pullleft}} {float:left;width:100%;}
+.{{ns}}{{pullright}} {float:right;width:100%;}
 .{{ns}}{{pos}} {margin-right:-100%;}
+
+
+{{#breakpoints}}
+{{#isgt0}}
+@media all and (min-width:{{at}}px) {
+
+    .{{ns}}{{layleft}},
+    .{{ns}}{{layright}},
+    .{{ns}}{{laycentered}},
+    .{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
+    
+{{#isfirst}}
+    .{{ns}}{{pullleft}},
+    .{{ns}}{{pullright}} {width:auto;}
+    
+{{/isfirst}}
+}
+{{/isgt0}}
+
+{{/breakpoints}}
 
 .{{ns}}{{lay}}:after,
 .{{ns}}{{lay}}:before,
@@ -37,18 +57,50 @@
 {{/bp}}
 
 
-/* Gut */
-.{{ns}}{{gut}}{{bp}} {margin-left:{{gutter}}px;}
+/* Gut Lay */
+.{{ns}}{{gutlay}}{{bp}} {margin-bottom:{{gutter}}px;}
 {{#gutters}}
-.{{ns}}{{gut}}-{{i}}x{{bp}} {margin-left:{{gutter}}px;}
+{{#isforlay}}
+.{{ns}}{{gutlay}}-{{i}}x{{bp}} {margin-bottom:{{gutter}}px;}
+{{/isforlay}}
 {{/gutters}}
-.{{ns}}{{gut}}-1o2x{{bp}} {margin-left:{{gutter1o2}}px;}
+.{{ns}}{{gutlay}}-1o2x{{bp}} {margin-bottom:{{gutter1o2}}px;}
+.{{ns}}{{gutlay}}-none{{bp}} {margin-bottom:0;}
+
+
+/* Gut Col */
+.{{ns}}{{gutcol}}{{bp}} {margin-left:{{gutter}}px;}
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{gutcol}}-{{i}}x{{bp}} {margin-left:{{gutter}}px;}
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{gutcol}}-1o2x{{bp}} {margin-left:{{gutter1o2}}px;}
+.{{ns}}{{gutcol}}-none{{bp}} {margin-left:0;}
+
+
+/* Gut Hide */
+.{{ns}}{{gutcolhide}}{{bp}} {margin-left:-{{gutter}}px;}
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{gutcolhide}}-{{i}}x{{bp}} {margin-left:-{{gutter}}px;}
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{gutcolhide}}-1o2x{{bp}} {margin-left:-{{gutter1o2}}px;}
+.{{ns}}{{gutcolhide}}-none{{bp}} {margin-left:0;}
+
+
+/* Gut Left */
+.{{ns}}{{gutleft}}{{bp}} {margin-left:{{gutter}}px;}
+{{#gutters}}
+.{{ns}}{{gutleft}}-{{i}}x{{bp}} {margin-left:{{gutter}}px;}
+{{/gutters}}
+.{{ns}}{{gutleft}}-1o2x{{bp}} {margin-left:{{gutter1o2}}px;}
 
 .{{ns}}{{gutsmall}}{{bp}} {margin-left:{{gutsmallmargin}}px;}
 .{{ns}}{{gutmedium}}{{bp}} {margin-left:{{gutmediummargin}}px;}
 .{{ns}}{{gutlarge}}{{bp}} {margin-left:{{gutlargemargin}}px;}
-
-.{{ns}}{{gut}}-none{{bp}} {margin-left:0;}
+.{{ns}}{{gutleft}}-none{{bp}} {margin-left:0;}
 
 
 /* Gut Right */
@@ -62,26 +114,6 @@
 .{{ns}}{{gutrightmedium}}{{bp}} {margin-right:{{gutmediummargin}}px;}
 .{{ns}}{{gutrightlarge}}{{bp}} {margin-right:{{gutlargemargin}}px;}
 .{{ns}}{{gutright}}-none{{bp}} {margin-right:0;}
-
-
-
-/* Gut Hide */
-.{{ns}}{{guthide}}{{bp}} {margin-left:-{{gutter}}px;}
-{{#gutters}}
-.{{ns}}{{guthide}}-{{i}}x{{bp}} {margin-left:-{{gutter}}px;}
-{{/gutters}}
-.{{ns}}{{guthide}}-1o2x{{bp}} {margin-left:-{{gutter1o2}}px;}
-.{{ns}}{{guthide}}-none{{bp}} {margin-left:0;}
-
-
-
-/* Gut Row */
-.{{ns}}{{gutrow}}{{bp}} {margin-bottom:{{gutter}}px;}
-{{#gutters}}
-.{{ns}}{{gutrow}}-{{i}}x{{bp}} {margin-bottom:{{gutter}}px;}
-{{/gutters}}
-.{{ns}}{{gutrow}}-1o2x{{bp}} {margin-bottom:{{gutter1o2}}px;}
-.{{ns}}{{gutrow}}-none{{bp}} {margin-bottom:0;}
 
 
 
@@ -124,14 +156,14 @@
 
 
 /* Max Width */
-.{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
 {{#maxwidths}}
-.{{ns}}{{widthmax}}-{{maxwidth}}{{bp}} {max-width:{{maxwidth}}px;}
+.{{ns}}{{widthmax}}-{{xe}}xe{{bp}} {max-width:{{maxwidth}}px;}
 {{/maxwidths}}
 
 
 
 /* Width */
+.{{ns}}{{width}}-auto{{bp}} {width:auto;}
 {{#widths}}
 {{#fractions}}{{#isnotfirst}}, {{/isnotfirst}}.{{ns}}{{width}}-{{numerator}}o{{denominator}}{{bp}}{{/fractions}} {width:{{value}}%;}
 {{/widths}}

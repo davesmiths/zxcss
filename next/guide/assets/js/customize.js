@@ -32,28 +32,29 @@
                 ,laycentered: 'lay-centered'
                 ,layleft: 'lay-left'
                 ,layright: 'lay-right'   
-                ,gut: 'gut'
+                ,gutcol: 'gut-col'
+                ,gutleft: 'gut-left'
+                ,gutcolhide: 'gut-col-hide'
+                ,gutlay: 'gut-lay'
                 ,gutsmallmultiplier: 4
                 ,gutmediummultiplier: 9
                 ,gutlargemultiplier: 14
-                ,gutsmall: 'gut-small'
-                ,gutmedium: 'gut-medium'
-                ,gutlarge: 'gut-large'
+                ,gutsmall: 'gut-left-small'
+                ,gutmedium: 'gut-left-medium'
+                ,gutlarge: 'gut-left-large'
                 ,gutright: 'gut-right'
                 ,gutrightsmall: 'gut-right-small'
                 ,gutrightmedium: 'gut-right-medium'
                 ,gutrightlarge: 'gut-right-large'
-                ,guthide: 'gut-hide'
-                ,gutrow: 'gut-row'
                 ,col: 'col'
                 ,colnone: 'col-none'
                 ,pullright: 'pull-right'
                 ,pullleft: 'pull-left'
-                ,pullgut: 'pull-gut'
+                ,pullgut: 'pull-gut-left'
                 ,pullgutright: 'pull-gut-right'
-                ,pullgutsmall: 'pull-gut-small'
-                ,pullgutmedium: 'pull-gut-medium'
-                ,pullgutlarge: 'pull-gut-large'
+                ,pullgutsmall: 'pull-gut-left-small'
+                ,pullgutmedium: 'pull-gut-left-medium'
+                ,pullgutlarge: 'pull-gut-left-large'
                 ,pullgutrightsmall: 'pull-gut-right-small'
                 ,pullgutrightmedium: 'pull-gut-right-medium'
                 ,pullgutrightlarge: 'pull-gut-right-large'
@@ -204,6 +205,8 @@
         db.breakpoints = [];
         for (i = 0; i < db.breakpointsLength; i++) {
             db.breakpoints[i] = {
+                isGT0: (i > 0) ? true : false,
+                isFirst: (i === 1) ? true : false,
                 at: input.breakpoints[i].at,
                 gutter: input.breakpoints[i].gutter,
                 gutterBasex: input.breakpoints[i].gutterBasex
@@ -231,13 +234,17 @@
             // at
             tibi.at = db.breakpoints[i].at;
             
+            // isFirst
+            tibi.isfirst = db.breakpoints[i].isFirst;
+            tibi.isgt0 = db.breakpoints[i].isGT0;
+            
             // maxwidth based on breakpoints
             tibi.maxwidthbp = db.maxWidthsBP[i];
             
             // maxwidths based on base
             tibi.maxwidths = [];
             for (j = 0; j < db.maxWidthsLength; j++) {
-                tibi.maxwidths.push({maxwidth: db.maxWidths[j]});
+                tibi.maxwidths.push({maxwidth: db.maxWidths[j], xe:j+1});
             }
             
             // widths
@@ -252,10 +259,12 @@
             tibi.gutters = [];
             for (j = 1; j < 13; j++) {
                 isnotfirst = (j > 1) ? 1 : 0;
+                isforlay = (j < 7) ? 1 : 0;
                 tibi.gutters.push({
                     gutter: db.breakpoints[i].gutter * j
                     ,i: j
                     ,isnotfirst: isnotfirst
+                    ,isforlay: isforlay
                 });
             }
             
