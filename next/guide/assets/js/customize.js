@@ -28,39 +28,54 @@
             }
             ,input: {
                 ns: ''
+                
                 ,lay: 'lay'
                 ,laycentered: 'lay-centered'
                 ,layleft: 'lay-left'
-                ,layright: 'lay-right'   
-                ,gutcol: 'gut-col'
-                ,gutleft: 'gut-left'
-                ,gutcolhide: 'gut-col-hide'
-                ,gutlay: 'gut-lay'
+                ,layright: 'lay-right'
+                
+                ,col: 'col'
+                ,colgut: 'col-gut'
+                ,colguthide: 'hide-col-gut'
+                ,colnone: 'col-none'
+                
+                ,inngut: 'gut'
+                ,innguthide: 'hide-gut-left'
+                ,innnone: 'gut-none'
+                
                 ,gutsmallmultiplier: 4
                 ,gutmediummultiplier: 9
                 ,gutlargemultiplier: 14
+                
+                ,gutleft: 'gut-left'
                 ,gutsmall: 'gut-left-small'
                 ,gutmedium: 'gut-left-medium'
                 ,gutlarge: 'gut-left-large'
+                
                 ,gutright: 'gut-right'
                 ,gutrightsmall: 'gut-right-small'
                 ,gutrightmedium: 'gut-right-medium'
                 ,gutrightlarge: 'gut-right-large'
-                ,col: 'col'
-                ,colnone: 'col-none'
-                ,pullright: 'pull-right'
+                
+                ,gutbot: 'gut-bottom'
+                
                 ,pullleft: 'pull-left'
+                ,pullright: 'pull-right'
+                
                 ,pullgut: 'pull-gut-left'
-                ,pullgutright: 'pull-gut-right'
                 ,pullgutsmall: 'pull-gut-left-small'
                 ,pullgutmedium: 'pull-gut-left-medium'
                 ,pullgutlarge: 'pull-gut-left-large'
+                
+                ,pullgutright: 'pull-gut-right'
                 ,pullgutrightsmall: 'pull-gut-right-small'
                 ,pullgutrightmedium: 'pull-gut-right-medium'
                 ,pullgutrightlarge: 'pull-gut-right-large'
+                
                 ,clear: 'clear'
                 ,clearnone: 'clear-none'
                 ,width: 'width'
+                ,height: 'height'
                 ,widthmax: 'width-max'
                 ,pos: 'pos'
                 ,clearie6and7fixp1: 'clear-ie6and7fixp1'
@@ -198,6 +213,7 @@
         db.maxWidthsBP.unshift(db.maxWidthsBP[0]);
         db.maxWidthsBPLength = input.maxWidthsBPLength;
         
+        
         db.base = input.base;
         db.breakpointsLength = input.breakpointsLength;
         db.ajaxCall = {};
@@ -216,6 +232,9 @@
         // Template Input
         ti.ns = db.ns;
         ti.breakpoints = [];
+        
+        // widths
+        ti.widths = makeWidthClasses({columns: db.columns});
         
         for (i = 0; i < db.breakpointsLength; i++) {
         
@@ -244,24 +263,34 @@
             // maxwidths based on base
             tibi.maxwidths = [];
             for (j = 0; j < db.maxWidthsLength; j++) {
-                tibi.maxwidths.push({maxwidth: db.maxWidths[j], xe:j+1});
+                tibi.maxwidths.push({maxwidth: db.maxWidths[j], dx:j+1});
             }
             
             // widths
             tibi.widths = makeWidthClasses({columns: db.columns});
+            
+            // cols
+            tibi.cols = [];
+            for (j = 0; j < db.columns; j++) {
+                tibi.cols.push({
+                    num:j+1
+                    ,width:round(100/(j+1), db.decimalPlaces)
+                });
+            } 
             
             // poss
             tibi.poss = makePositionClasses({columns: db.columns});
             
             // gutter
             tibi.gutter = db.breakpoints[i].gutter;
-            tibi.gutter1o2 = applyDecimalPlaces(db.breakpoints[i].gutter/2, db.decimalPlaces);
+            tibi.gutter1o2 = round(db.breakpoints[i].gutter/2, db.decimalPlaces);
             tibi.gutters = [];
             for (j = 1; j < 13; j++) {
                 isnotfirst = (j > 1) ? 1 : 0;
                 isforlay = (j < 7) ? 1 : 0;
                 tibi.gutters.push({
                     gutter: db.breakpoints[i].gutter * j
+                    ,halfgutter: round(db.breakpoints[i].gutter * j / 2, db.decimalPlaces)
                     ,i: j
                     ,isnotfirst: isnotfirst
                     ,isforlay: isforlay
@@ -276,36 +305,103 @@
             tibi.gutrightmediummargin = db.breakpoints[i].gutter * db.gutmultipliermedium;
             tibi.gutrightlargemargin = db.breakpoints[i].gutter * db.gutmultiplierlarge;
 
+            
+            // half gutters
+            tibi.halfgutter = round(db.breakpoints[i].gutter/2, db.decimalPlaces);
+            tibi.halfgutter1o2 = round(db.breakpoints[i].gutter/4, db.decimalPlaces);
+            
+            // Pullguts gutters
+            pullgutGutters = [
+                {
+                    'name': ''
+                    ,'multiplier': 0
+                }
+                ,{
+                    'name': '-gut-1o2x'
+                    ,'multiplier': 1/2
+                }
+                ,{
+                    'name': '-gut-1x'
+                    ,'multiplier': 1
+                }
+            ];
+            pullgutGuttersLength = pullgutGutters.length;
+            
+            pullgutNames = [
+                {
+                    name: ''
+                    ,multiplier: 3
+                }
+                ,{
+                    name: '-small'
+                    ,multiplier: db.gutmultipliersmall
+                }
+                ,{
+                    name: '-medium'
+                    ,multiplier: db.gutmultipliermedium
+                }
+                ,{
+                    name: '-large'
+                    ,multiplier: db.gutmultiplierlarge
+                }
+            ];
+            pullgutNamesLength = pullgutNames.length;
+            
             // pullguts
             tibi.pullguts = [];
+            isnotfirst = 0;
             for (j = 1; j < 13; j++) {
-                isnotfirst = (j > 1) ? 1 : 0;
-                tibi.pullguts.push({
-                    marginleft: db.breakpoints[i].gutter * j
-                    ,width: db.breakpoints[i].gutter * (j - 1)
-                    ,i: j
-                    ,isnotfirst: isnotfirst
-                });
+                for (m = 0; m < pullgutGuttersLength; m++) {
+                    tibi.pullguts.push({
+                        marginleft: db.breakpoints[i].gutter * j
+                        ,width: db.breakpoints[i].gutter * j - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
+                        ,name: db.templates.input.pullgut + '-' + j + 'x' + pullgutGutters[m].name
+                        ,isnotfirst: isnotfirst
+                    });
+                    isnotfirst = 1;
+                }
+            }
+            // Small medium large
+            for (j = 1; j < pullgutNamesLength; j++) {
+                for (m = 0; m < pullgutGuttersLength; m++) {
+                    tibi.pullguts.push({
+                        marginleft: db.breakpoints[i].gutter * pullgutNames[j].multiplier
+                        ,width: db.breakpoints[i].gutter * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
+                        ,name: db.templates.input.pullgut + pullgutNames[j].name + pullgutGutters[m].name
+                        ,isnotfirst: isnotfirst
+                    });
+                    isnotfirst = 1;
+                }
             }
             
-            tibi.pullgutsmallmargin = db.breakpoints[i].gutter * db.gutmultipliersmall;
-            tibi.pullgutsmallwidth = db.breakpoints[i].gutter * (db.gutmultipliersmall - 1);
-            tibi.pullgutmediummargin = db.breakpoints[i].gutter * db.gutmultipliermedium;
-            tibi.pullgutmediumwidth = db.breakpoints[i].gutter * (db.gutmultipliermedium - 1);
-            tibi.pullgutlargemargin = db.breakpoints[i].gutter * db.gutmultiplierlarge;
-            tibi.pullgutlargewidth = db.breakpoints[i].gutter * (db.gutmultiplierlarge - 1);
             
             // pullgutrights
             tibi.pullgutrights = [];
+            isnotfirst = 0;
             for (j = 1; j < 13; j++) {
-                isnotfirst = (j > 1) ? 1 : 0;
-                tibi.pullgutrights.push({
-                    marginright: db.breakpoints[i].gutter * (j - 1)
-                    ,width: db.breakpoints[i].gutter * (j - 1)
-                    ,right: db.breakpoints[i].gutter
-                    ,i: j
-                    ,isnotfirst: isnotfirst
-                });
+                for (m = 0; m < pullgutGuttersLength; m++) {
+                    tibi.pullgutrights.push({
+                        marginright: db.breakpoints[i].gutter * j - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
+                        ,width: db.breakpoints[i].gutter * j - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
+                        ,right: db.breakpoints[i].gutter * pullgutGutters[m].multiplier
+                        ,name: db.templates.input.pullgutright + '-' + j + 'x' + pullgutGutters[m].name
+                        ,isnotfirst: isnotfirst
+                    });
+                    isnotfirst = 1;
+                }
+            }
+            // Small medium large
+            for (j = 1; j < pullgutNamesLength; j++) {
+                for (m = 0; m < pullgutGuttersLength; m++) {
+                    tibi.pullgutrights.push({
+                        marginright: db.breakpoints[i].gutter * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
+                        ,width: db.breakpoints[i].gutter * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
+                        ,right: db.breakpoints[i].gutter * pullgutGutters[m].multiplier
+                        ,name: db.templates.input.pullgutright + pullgutNames[j].name + pullgutGutters[m].name
+                        ,isnotfirst: isnotfirst
+                    });
+                    isnotfirst = 1;
+                }
             }
             
             tibi.pullgutrightsmallmargin = db.breakpoints[i].gutter * (db.gutmultipliersmall - 1);
@@ -364,8 +460,9 @@
             ,j
             ,width
             ,widths = {}
+            ,widthsAll = []
             ,widthsi
-            ,output = []
+            ,output = {widths:[], widthsall: []}
             ,columns = o.columns
         ;
         
@@ -373,7 +470,7 @@
         for (i; i <= columns; i++) {
             j = 1;
             for (j; j <= columns; j++) {
-                width = applyDecimalPlaces(100*i/j, db.decimalPlaces);
+                width = round(100*i/j, db.decimalPlaces);
                 if (width <= 100) {
                     if (!widths[width]) {
                         widths[width] = [];
@@ -384,15 +481,23 @@
                         ,isnotfirst:true
                     });
                 }
+                output.widthsall.push({
+                    numerator:i
+                    ,denominator:j
+                    ,isnotfirst:true
+                });
             }
         }
+        
+        output.widthsall[0].isnotfirst = false;
+        
         for (i in widths) {
 
             if (widths.hasOwnProperty(i)) {
                 
                 fractions = widths[i];
                 fractions[0].isnotfirst = false;
-                output.push({
+                output.widths.push({
                     fractions: widths[i]
                     ,value: i
                 });
@@ -419,7 +524,7 @@
         for (i; i <= o.columns; i++) {
             j = 1;
             for (j; j <= columns; j++) {
-                position = applyDecimalPlaces(100*(i-1)/j, db.decimalPlaces);
+                position = round(100*(i-1)/j, db.decimalPlaces);
                 if (position < 100) {
                     if (!positions[position]) {
                         positions[position] = [];
@@ -460,7 +565,7 @@
         
     };
     
-    applyDecimalPlaces = function(num, decimalPlaces) {
+    round = function(num, decimalPlaces) {
     
         var scaler = Math.pow(10, decimalPlaces);
         return Math.floor(num * scaler)/scaler;

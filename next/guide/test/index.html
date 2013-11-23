@@ -43,15 +43,15 @@ h2 {margin:0;line-height:2;}
 
 var html = '';
 html += '<div><strong>Testing IE6 for dynamically added layouts: Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>';
-html += '<div class="lay gut-hide">';
-html += '    <div class="col width-2o10 pos-6o10">';
-html += '        <div class="gut style-colour1">1</div>';
+html += '<div class="lay hide-gut-left">';
+html += '    <div class="col width-1o8 pos-5o8">';
+html += '        <div class="gut-left style-colour1">1</div>';
 html += '    </div>';
-html += '    <div class="col width-5o10 pos-1o10">';
-html += '        <div class="gut style-colour2">2</div>';
+html += '    <div class="col width-4o8 pos-1o8">';
+html += '        <div class="gut-left style-colour2">2</div>';
 html += '    </div>';
-html += '    <div class="col width-3o10 pos-8o10">';
-html += '        <div class="gut style-colour3">3</div>';
+html += '    <div class="col width-3o8 pos-6o8">';
+html += '        <div class="gut-left style-colour3">3</div>';
 html += '    </div>';
 html += '</div>';
 
@@ -118,9 +118,9 @@ lay-left (=lay) lay-right lay-centered
 clear
 clear-none
 
-gut (=gut-1x)
+gut-left (=gut-1x)
 gut-2x gut-1o3
-gut-small (=gut-3x) gut-medium (=gut-5x) gut-large (=gut-11x)
+gut-left-small (=gut-3x) gut-left-medium (=gut-5x) gut-left-large (=gut-11x)
 gut-none
     margin lefts
 gut-right (=gut-right-1x)
@@ -133,7 +133,7 @@ gut-row-none
 gut-row-top (=gut-row-top-1x)
     margin tops
     
-gut-hide (=gut-hide-1x) gut-hide-none 
+hide-gut-left (=hide-gut-left-1x) hide-gut-left-none 
     negative margin applied to lay
 
 col
@@ -148,11 +148,11 @@ pull
 pull-right
     float right
     
-pull-gut (=pull-gut-medium =pull-gut-5x)
-pull-gut-small pull-gut-medium pull-gut-large
+pull-gut-left (=pull-gut-left-medium =pull-gut-5x)
+pull-gut-left-small pull-gut-left-medium pull-gut-left-large
     float left set width and pull beyond left edge into gutter
     
-pull-gut-right (=push-gut-medium =push-gut-5x)
+pull-gut-right (=push-gut-left-medium =push-gut-5x)
 pull-gut-right-small pull-gut-right-medium pull-gut-right-large
     float right set width and pull beyond right edge into gutter
     
@@ -166,22 +166,22 @@ width-max width-max-N
 <div class="clear"></div>
 <div class="lay width-max-1180">
 
-    <div class="lay gut-small style-colour1">
-        <p class="pull-gut-small">
+    <div class="lay gut-left-small style-colour1">
+        <p class="pull-gut-left-small">
             <img src="./assets/images/4.jpg" class="width-1o1" alt="" />
             <span>a</span>sd lka sdlkj
         </p>
         <p>asdkjasd</p>
     </div>
-    <div class="lay gut-medium style-colour1">
-        <p class="pull-gut-medium">
+    <div class="lay gut-left-medium style-colour1">
+        <p class="pull-gut-left-medium">
             <img src="./assets/images/3.jpg" class="width-1o1" alt="" />
             asdlkasdlkj
         </p>
         <p>asdkjasd</p>
     </div>
-    <div class="lay gut-large style-colour1">
-        <p class="pull-gut-large">
+    <div class="lay gut-left-large style-colour1">
+        <p class="pull-gut-left-large">
             <img src="./assets/images/2.jpg" class="width-1o1" alt="" />
             <span>a</span>sdlkasdlkj
         </p>
@@ -210,13 +210,13 @@ width-max width-max-N
     <h2>Base</h2>
     <div><strong>Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-1o5">
+        <div class="col width-1o8">
             <div class="userstyle style-colour1">1 </div>
         </div>
-        <div class="col width-1o2">
+        <div class="col width-4o8">
             <div class="userstyle style-colour2">2 </div>
         </div>
-        <div class="col width-3o10">
+        <div class="col width-3o8">
             <div class="userstyle style-colour3">3 </div>
         </div>
     </div>
@@ -224,13 +224,13 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-2o10 pos-6o10">
+        <div class="col width-1o8 pos-5o8">
             <div class="userstyle style-colour1">1 </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
+        <div class="col width-4o8 pos-1o8">
             <div class="userstyle style-colour2">2 </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
+        <div class="col width-3o8 pos-6o8">
             <div class="userstyle style-colour3">3 </div>
         </div>
     </div>
@@ -238,57 +238,57 @@ width-max width-max-N
     
     <h2>Gutters</h2>
     <div><strong>Gutter Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-1o5">
-            <div class="userstyle gut style-colour1">1 </div>
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8">
+            <div class="userstyle gut-left style-colour1">1 </div>
         </div>
-        <div class="col width-1o2">
-            <div class="userstyle gut style-colour2">2 </div>
+        <div class="col width-1o8">
+            <div class="userstyle gut-left style-colour2">2 </div>
         </div>
-        <div class="col width-3o10">
-            <div class="userstyle gut style-colour3">3 </div>
+        <div class="col width-6o8">
+            <div class="userstyle gut-left style-colour3">3 </div>
         </div>
     </div>
     
     <div><strong>Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-2o10 pos-6o10">
-            <div class="userstyle gut style-colour1">1 </div>
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8 pos-5o10">
+            <div class="userstyle gut-left style-colour1">1 </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
-            <div class="userstyle gut style-colour2">2 </div>
+        <div class="col width-4o8 pos-1o8">
+            <div class="userstyle gut-left style-colour2">2 </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
-            <div class="userstyle gut style-colour3">3 </div>
+        <div class="col width-3o8 pos-5o8">
+            <div class="userstyle gut-left style-colour3">3 </div>
         </div>
     </div>
     
     <div><strong>Gutter Layout &gt; Column &gt; Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="userstyle style-colour4">
-            <div class="col width-1o5">
-                <div class="userstyle gut style-colour1">1 </div>
+    <div class="userstyle style-colour4">
+        <div class="lay hide-gut-left">
+            <div class="col width-2o8">
+                <div class="userstyle gut-left style-colour1">1 </div>
             </div>
-            <div class="col width-1o2">
-                <div class="userstyle gut style-colour2">2 </div>
+            <div class="col width-2o8">
+                <div class="userstyle gut-left style-colour2">2 </div>
             </div>
-            <div class="col width-3o10">
-                <div class="userstyle gut style-colour3">3 </div>
+            <div class="col width-4o8">
+                <div class="userstyle gut-left style-colour3">3 </div>
             </div>
         </div>
     </div>
     
     <div><strong>Gutter Layout &gt; Column &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="userstyle style-colour4">
-            <div class="col width-2o10 pos-6o10">
-                <div class="userstyle gut style-colour1">1 </div>
+    <div class="userstyle style-colour4">
+        <div class="lay hide-gut-left">
+            <div class="col width-1o8 pos-5o8">
+                <div class="userstyle gut-left style-colour1">1 </div>
             </div>
-            <div class="col width-5o10 pos-1o10">
-                <div class="userstyle gut style-colour2">2 </div>
+            <div class="col width-4o8 pos-1o8">
+                <div class="userstyle gut-left style-colour2">2 </div>
             </div>
-            <div class="col width-3o10 pos-8o10">
-                <div class="userstyle gut style-colour3">3 </div>
+            <div class="col width-3o8 pos-6o8">
+                <div class="userstyle gut-left style-colour3">3 </div>
             </div>
         </div>
     </div>
@@ -302,56 +302,56 @@ width-max width-max-N
     <h2>Centered</h2>
     <div><strong>Centered Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay lay-centered width-max-940">
-        <div class="col width-1o5">
+        <div class="col width-1o8">
             <div class="userstyle style-colour1">1 </div>
         </div>
-        <div class="col width-1o2">
+        <div class="col width-1o8">
             <div class="userstyle style-colour2">2 </div>
         </div>
-        <div class="col width-3o10">
+        <div class="col width-6o8">
             <div class="userstyle style-colour3">3 </div>
         </div>
     </div>
     
     <div><strong>Centered Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay lay-centered width-max-940">
-        <div class="col width-2o10 pos-6o10">
+        <div class="col width-1o8 pos-5o8">
             <div class="userstyle style-colour1">1 </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
+        <div class="col width-4o8 pos-1o8">
             <div class="userstyle style-colour2">2 </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
+        <div class="col width-3o8 pos-6o8">
             <div class="userstyle style-colour3">3 </div>
         </div>
     </div>
     
     <div><strong>Centered Layout &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay lay-centered width-max-940">
-        <div class="lay gut-hide">
-            <div class="col width-1o5">
-                <div class="userstyle gut style-colour1">1 </div>
+        <div class="lay hide-gut-left">
+            <div class="col width-1o8">
+                <div class="userstyle gut-left style-colour1">1 </div>
             </div>
-            <div class="col width-1o2">
-                <div class="userstyle gut style-colour2">2 </div>
+            <div class="col width-1o8">
+                <div class="userstyle gut-left style-colour2">2 </div>
             </div>
-            <div class="col width-3o10">
-                <div class="userstyle gut style-colour3">3 </div>
+            <div class="col width-6o8">
+                <div class="userstyle gut-left style-colour3">3 </div>
             </div>
         </div>
     </div>
     
     <div><strong>Centered Layout &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay lay-centered width-max-940">
-        <div class="lay gut-hide">
-            <div class="col width-2o10 pos-6o10">
-                <div class="userstyle gut style-colour1">1 </div>
+        <div class="lay hide-gut-left">
+            <div class="col width-1o8 pos-5o8">
+                <div class="userstyle gut-left style-colour1">1 </div>
             </div>
-            <div class="col width-5o10 pos-1o10">
-                <div class="userstyle gut style-colour2">2 </div>
+            <div class="col width-4o8 pos-1o8">
+                <div class="userstyle gut-left style-colour2">2 </div>
             </div>
-            <div class="col width-3o10 pos-8o10">
-                <div class="userstyle gut style-colour3">3 </div>
+            <div class="col width-3o8 pos-6o8">
+                <div class="userstyle gut-left style-colour3">3 </div>
             </div>
         </div>
     </div>
@@ -361,13 +361,13 @@ width-max width-max-N
     <div class="lay lay-centered width-max-940">
         <div class="userstyle style-colour4">
             <div class="lay">
-                <div class="col width-1o5">
+                <div class="col width-1o8">
                     <div class="userstyle style-colour1">1 </div>
                 </div>
-                <div class="col width-1o2">
+                <div class="col width-1o8">
                     <div class="userstyle style-colour2">2 </div>
                 </div>
-                <div class="col width-3o10">
+                <div class="col width-6o8">
                     <div class="userstyle style-colour3">3 </div>
                 </div>
             </div>
@@ -378,13 +378,13 @@ width-max width-max-N
     <div class="lay lay-centered width-max-940">
         <div class="userstyle style-colour4">
             <div class="lay">
-                <div class="col width-2o10 pos-6o10">
+                <div class="col width-1o8 pos-5o8">
                     <div class="userstyle style-colour1">1 </div>
                 </div>
-                <div class="col width-5o10 pos-1o10">
+                <div class="col width-4o8 pos-1o8">
                     <div class="userstyle style-colour2">2 </div>
                 </div>
-                <div class="col width-3o10 pos-8o10">
+                <div class="col width-3o8 pos-6o8">
                     <div class="userstyle style-colour3">3 </div>
                 </div>
             </div>
@@ -394,15 +394,15 @@ width-max width-max-N
     <div><strong>Centered Layout &gt; Column &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay lay-centered width-max-940">
         <div class="userstyle style-colour4">
-            <div class="lay gut-hide">
-                <div class="col width-1o5">
-                    <div class="userstyle gut style-colour1">1 </div>
+            <div class="lay hide-gut-left">
+                <div class="col width-1o8">
+                    <div class="userstyle gut-left style-colour1">1 </div>
                 </div>
-                <div class="col width-1o2">
-                    <div class="userstyle gut style-colour2">2 </div>
+                <div class="col width-1o8">
+                    <div class="userstyle gut-left style-colour2">2 </div>
                 </div>
-                <div class="col width-3o10">
-                    <div class="userstyle gut style-colour3">3 </div>
+                <div class="col width-6o8">
+                    <div class="userstyle gut-left style-colour3">3 </div>
                 </div>
             </div>
         </div>
@@ -413,15 +413,15 @@ width-max width-max-N
     <div><strong>Centered Layout &gt; Column &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay lay-centered width-max-940">
         <div class="userstyle style-colour4">
-            <div class="lay gut-hide">
-                <div class="col width-2o10 pos-6o10">
-                    <div class="userstyle gut style-colour1">1 </div>
+            <div class="lay hide-gut-left">
+                <div class="col width-1o8 pos-5o8">
+                    <div class="userstyle gut-left style-colour1">1 </div>
                 </div>
-                <div class="col width-5o10 pos-1o10">
-                    <div class="userstyle gut style-colour2">2 </div>
+                <div class="col width-4o8 pos-1o8">
+                    <div class="userstyle gut-left style-colour2">2 </div>
                 </div>
-                <div class="col width-3o10 pos-8o10">
-                    <div class="userstyle gut style-colour3">3 </div>
+                <div class="col width-3o8 pos-6o8">
+                    <div class="userstyle gut-left style-colour3">3 </div>
                 </div>
             </div>
         </div>
@@ -437,45 +437,45 @@ width-max width-max-N
     <h2>Cleared</h2>
     
     <div><strong>Layouts &gt; Columns, Clear Layouts</strong></div>
-    <div class="col width-1o5">
+    <div class="col width-1o8">
         <div class="userstyle style-colour1">1 </div>
     </div>
-    <div class="col width-1o2">
+    <div class="col width-1o8">
         <div class="userstyle style-colour2">2 </div>
     </div>
-    <div class="col width-3o10">
+    <div class="col width-6o8">
         <div class="userstyle style-colour3">3 </div>
     </div>
     <div class="clear"></div>
-    <div class="col width-1o5">
+    <div class="col width-1o8">
         <div class="userstyle style-colour1">4 </div>
     </div>
-    <div class="col width-1o2">
+    <div class="col width-1o8">
         <div class="userstyle style-colour2">5 </div>
     </div>
-    <div class="col width-3o10">
+    <div class="col width-6o8">
         <div class="userstyle style-colour3">6 </div>
     </div>
     <div class="clear"></div>
 
     <div><strong>Positional Layouts &gt; Columns, Clear Layouts</strong></div>
-    <div class="col width-2o10 pos-6o10">
+    <div class="col width-1o8 pos-5o8">
         <div class="userstyle style-colour1">1 should see 11,111,1111<br />11<br />111<br />1111 </div>
     </div>
-    <div class="col width-5o10 pos-1o10">
+    <div class="col width-4o8 pos-1o8">
         <div class="userstyle style-colour2">2 </div>
     </div>
-    <div class="col width-3o10 pos-8o10">
+    <div class="col width-3o8 pos-6o8">
         <div class="userstyle style-colour3">3 </div>
     </div>
     <div class="clear"></div>
-    <div class="col width-2o10 pos-6o10">
+    <div class="col width-1o8 pos-5o8">
         <div class="userstyle style-colour1">4 </div>
     </div>
-    <div class="col width-5o10 pos-1o10">
+    <div class="col width-4o8 pos-1o8">
         <div class="userstyle style-colour2">5 </div>
     </div>
-    <div class="col width-3o10 pos-8o10">
+    <div class="col width-3o8 pos-6o8">
         <div class="userstyle style-colour3">6 should see 66<br />66 </div>
     </div>
     <div class="clear"></div>
@@ -488,46 +488,46 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-1o5">
+        <div class="col width-1o8">
             <div class="userstyle style-colour1">1
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-1o2">
+        <div class="col width-4o8">
             <div class="userstyle style-colour2">2
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
+        <div class="col width-3o8">
             <div class="userstyle style-colour3">3
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
@@ -538,46 +538,46 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-1o5">
+        <div class="col width-1o8">
             <div class="userstyle style-colour1">1
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-1o2">
+        <div class="col width-4o8">
             <div class="userstyle style-colour2">2
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
+        <div class="col width-3o8">
             <div class="userstyle style-colour3">3
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
@@ -587,46 +587,46 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Positional Layouts &gt; Columns &gt; Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-2o10 pos-6o10">
+        <div class="col width-1o8 pos-5o8">
             <div class="userstyle style-colour1">1
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
+        <div class="col width-4o8 pos-1o8">
             <div class="userstyle style-colour2">2
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
+        <div class="col width-3o8 pos-6o8">
             <div class="userstyle style-colour3">3
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
@@ -636,46 +636,46 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-2o10 pos-6o10">
+        <div class="col width-1o8 pos-5o8">
             <div class="userstyle style-colour1">1
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
+        <div class="col width-4o8 pos-1o8">
             <div class="userstyle style-colour2">2
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
+        <div class="col width-3o8 pos-6o8">
             <div class="userstyle style-colour3">3
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
@@ -691,47 +691,47 @@ width-max width-max-N
     <h2>Nested Gutters</h2>
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-1o5">
+        <div class="col width-1o8">
             <div class="userstyle style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-1o2">
+        <div class="col width-4o8">
             <div class="userstyle style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
+        <div class="col width-3o8">
             <div class="userstyle style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -740,47 +740,47 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-1o5">
+        <div class="col width-1o8">
             <div class="userstyle style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-1o2">
+        <div class="col width-4o8">
             <div class="userstyle style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
+        <div class="col width-3o8">
             <div class="userstyle style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -789,47 +789,47 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Positional Layouts &gt; Columns &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-2o10 pos-6o10">
+        <div class="col width-1o8 pos-5o8">
             <div class="userstyle style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
+        <div class="col width-4o8 pos-1o8">
             <div class="userstyle style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
+        <div class="col width-3o8 pos-6o8">
             <div class="userstyle style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -838,47 +838,47 @@ width-max width-max-N
     
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
     <div class="lay">
-        <div class="col width-2o10 pos-6o10">
+        <div class="col width-1o8 pos-5o8">
             <div class="userstyle style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
+        <div class="col width-4o8 pos-1o8">
             <div class="userstyle style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
+        <div class="col width-3o8 pos-6o8">
             <div class="userstyle style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -892,48 +892,48 @@ width-max width-max-N
     
     <h2>Gutters Nested Gutters</h2>
     <div><strong>Gutter Layout &gt; Layouts &gt; Columns &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-1o5">
-            <div class="userstyle gut style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8">
+            <div class="userstyle gut-left style-colour1">1
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col width-1o2">
-            <div class="userstyle gut style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
-                    </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
-                    </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
-            <div class="userstyle gut style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+        <div class="col width-4o8">
+            <div class="userstyle gut-left style-colour2">2
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col width-3o8">
+            <div class="userstyle gut-left style-colour3">3
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
+                    </div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
+                    </div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -941,48 +941,48 @@ width-max width-max-N
     </div>
     
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-1o5">
-            <div class="userstyle gut style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8">
+            <div class="userstyle gut-left style-colour1">1
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col width-1o2">
-            <div class="userstyle gut style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
-                    </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
-                    </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
-            <div class="userstyle gut style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+        <div class="col width-4o8">
+            <div class="userstyle gut-left style-colour2">2
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col width-3o8">
+            <div class="userstyle gut-left style-colour3">3
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
+                    </div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
+                    </div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -990,48 +990,48 @@ width-max width-max-N
     </div>
     
     <div><strong>Layout &gt; Positional Layouts &gt; Columns &gt; Gutter Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-2o10 pos-6o10">
-            <div class="userstyle gut style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8 pos-5o8">
+            <div class="userstyle gut-left style-colour1">1
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col width-5o10 pos-1o10">
-            <div class="userstyle gut style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
-                    </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
-                    </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
-            <div class="userstyle gut style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-1o5">
-                        <div class="userstyle gut style-colour4">1</div>
+        <div class="col width-4o8 pos-1o8">
+            <div class="userstyle gut-left style-colour2">2
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col width-3o8 pos-6o8">
+            <div class="userstyle gut-left style-colour3">3
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
+                    </div>
+                    <div class="col width-4o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
+                    </div>
+                    <div class="col width-3o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -1039,48 +1039,48 @@ width-max width-max-N
     </div>
     
     <div><strong>Layout &gt; Layouts &gt; Columns &gt; Gutter Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-2o10 pos-6o10">
-            <div class="userstyle gut style-colour1">1
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8 pos-5o8">
+            <div class="userstyle gut-left style-colour1">1
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col width-5o10 pos-1o10">
-            <div class="userstyle gut style-colour2">2
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
-                    </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
-                    </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
-            <div class="userstyle gut style-colour3">3
-                <div class="lay gut-hide">
-                    <div class="col width-2o10 pos-6o10">
-                        <div class="userstyle gut style-colour4">1</div>
+        <div class="col width-4o8 pos-1o8">
+            <div class="userstyle gut-left style-colour2">2
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
-                        <div class="userstyle gut style-colour5">2</div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
-                        <div class="userstyle gut style-colour6">3</div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col width-3o8 pos-6o8">
+            <div class="userstyle gut-left style-colour3">3
+                <div class="lay hide-gut-left">
+                    <div class="col width-1o8 pos-5o8">
+                        <div class="userstyle gut-left style-colour4">1</div>
+                    </div>
+                    <div class="col width-4o8 pos-1o8">
+                        <div class="userstyle gut-left style-colour5">2</div>
+                    </div>
+                    <div class="col width-3o8 pos-6o8">
+                        <div class="userstyle gut-left style-colour6">3</div>
                     </div>
                 </div>
             </div>
@@ -1095,47 +1095,47 @@ width-max width-max-N
     <h2>Gutters Nested</h2>
     
     <div><strong>Gutter Layout &gt; Layouts &gt; Columns &gt; Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-1o5">
-            <div class="userstyle gut style-colour1">1
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8">
+            <div class="userstyle gut-left style-colour1">1
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-1o2">
-            <div class="userstyle gut style-colour2">2
+        <div class="col width-4o8">
+            <div class="userstyle gut-left style-colour2">2
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
-            <div class="userstyle gut style-colour3">3
+        <div class="col width-3o8">
+            <div class="userstyle gut-left style-colour3">3
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
@@ -1144,47 +1144,47 @@ width-max width-max-N
     </div>
     
     <div><strong>Gutter Layout &gt; Layouts &gt; Columns &gt; Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-1o5">
-            <div class="userstyle gut style-colour1">1
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8">
+            <div class="userstyle gut-left style-colour1">1
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-1o2">
-            <div class="userstyle gut style-colour2">2
+        <div class="col width-4o8">
+            <div class="userstyle gut-left style-colour2">2
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10">
-            <div class="userstyle gut style-colour3">3
+        <div class="col width-3o8">
+            <div class="userstyle gut-left style-colour3">3
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
@@ -1193,47 +1193,47 @@ width-max width-max-N
     </div>
     
     <div><strong>Gutter Layout &gt; Positional Layouts &gt; Columns &gt; Layout &gt; Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-2o10 pos-6o10">
-            <div class="userstyle gut style-colour1">1
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8 pos-5o8">
+            <div class="userstyle gut-left style-colour1">1
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
-            <div class="userstyle gut style-colour2">2
+        <div class="col width-4o8 pos-1o8">
+            <div class="userstyle gut-left style-colour2">2
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
-            <div class="userstyle gut style-colour3">3
+        <div class="col width-3o8 pos-6o8">
+            <div class="userstyle gut-left style-colour3">3
                 <div class="lay">
-                    <div class="col width-1o5">
+                    <div class="col width-1o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-1o2">
+                    <div class="col width-4o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10">
+                    <div class="col width-3o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
@@ -1242,47 +1242,47 @@ width-max width-max-N
     </div>
     
     <div><strong>Gutter Layout &gt; Layouts &gt; Columns &gt; Layout &gt; Positional Layouts &gt; Columns</strong></div>
-    <div class="lay gut-hide">
-        <div class="col width-2o10 pos-6o10">
-            <div class="userstyle gut style-colour1">1
+    <div class="lay hide-gut-left">
+        <div class="col width-1o8 pos-5o8">
+            <div class="userstyle gut-left style-colour1">1
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-5o10 pos-1o10">
-            <div class="userstyle gut style-colour2">2
+        <div class="col width-4o8 pos-1o8">
+            <div class="userstyle gut-left style-colour2">2
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col width-3o10 pos-8o10">
-            <div class="userstyle gut style-colour3">3
+        <div class="col width-3o8 pos-6o8">
+            <div class="userstyle gut-left style-colour3">3
                 <div class="lay">
-                    <div class="col width-2o10 pos-6o10">
+                    <div class="col width-1o8 pos-5o8">
                         <div class="userstyle style-colour4">1</div>
                     </div>
-                    <div class="col width-5o10 pos-1o10">
+                    <div class="col width-4o8 pos-1o8">
                         <div class="userstyle style-colour5">2</div>
                     </div>
-                    <div class="col width-3o10 pos-8o10">
+                    <div class="col width-3o8 pos-6o8">
                         <div class="userstyle style-colour6">3</div>
                     </div>
                 </div>

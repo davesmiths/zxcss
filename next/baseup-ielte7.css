@@ -174,16 +174,66 @@
 
 
 /* Rizzle 1.0 Responsive Prototyping Classes IE lte 6 CSS */
-/* The following crashes IE 6, so am not supporting max width in IE 6 except for the basics
+/* The following crashes IE 6, so am not supporting max width in IE 6 except for the basics */
             
+/*
+.lay-centered,
+.width-max {
+    _width:expression(
+        (function(self) {
+            var width = 700
+                ,delay = 250
+                ,run = function() {
+                    // As it is not possible to return a value to the expression now we 
+                    // have gone asynchronous. We capture the current expression, overwrite it
+                    // momentarily with the new width and reapply the expression
+                    
+                    // Capture the existing expression
+                    var expression = self.style.getExpression('width');
+                    
+                    // Set the element width to auto to capture its natural width
+                    self.style.width = 'auto';
+                    // Do the max-width expression
+                    self.style.width = self.scrollWidth >= width ? width + 'px' : 'auto';
+                    
+                    // Reapply the expression
+                    // One workaround needed here, when applying an expression it gets fired
+                    // therefore the expressionreset expando is used to flag this and prevent
+                    // an infinite loop
+                    setTimeout(function() {
+                        self.expressionreset = true;
+                        self.style.setExpression(
+                            'width'
+                            ,expression
+                        );
+                    }, 1);
 
-.lay-centered, .width-max {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-1xe {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
-.width-max-2xe {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
-.width-max-3xe {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-4xe {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
-.width-max-5xe {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-6xe {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
+                }
+            ;
+            // If this is the first call ensure our expression is applied
+            if (self.tid === undefined) {
+                run();
+                self.tid = true;
+            }
+            // Otherwise throttle calls with clearTimeout and delay
+            else {
+                clearTimeout(self.tid);
+                if (self.expressionreset === undefined) {
+                    self.tid = setTimeout(run, delay);
+                }
+                else {
+                    self.expressionreset = undefined;
+                }
+            }
+        }(this))
+    );
+}
+.width-max-1xd {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
+.width-max-2xd {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
+.width-max-3xd {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-4xd {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.width-max-5xd {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.width-max-6xd {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
 
 
             
@@ -191,12 +241,12 @@
 @media all and (min-width:700px) {
 
 .lay-centered, .width-max {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-1xe-1up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
-.width-max-2xe-1up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
-.width-max-3xe-1up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-4xe-1up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
-.width-max-5xe-1up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-6xe-1up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
+.width-max-1xd-1up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
+.width-max-2xd-1up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
+.width-max-3xd-1up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-4xd-1up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.width-max-5xd-1up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.width-max-6xd-1up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
 
 }
 
@@ -205,12 +255,12 @@
 @media all and (min-width:1180px) {
 
 .lay-centered, .width-max {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-1xe-2up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
-.width-max-2xe-2up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
-.width-max-3xe-2up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
-.width-max-4xe-2up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
-.width-max-5xe-2up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
-.width-max-6xe-2up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
+.width-max-1xd-2up {_width:expression(this.scrollWidth > 220 ? "220px" : "auto");}
+.width-max-2xd-2up {_width:expression(this.scrollWidth > 460 ? "460px" : "auto");}
+.width-max-3xd-2up {_width:expression(this.scrollWidth > 700 ? "700px" : "auto");}
+.width-max-4xd-2up {_width:expression(this.scrollWidth > 940 ? "940px" : "auto");}
+.width-max-5xd-2up {_width:expression(this.scrollWidth > 1180 ? "1180px" : "auto");}
+.width-max-6xd-2up {_width:expression(this.scrollWidth > 1420 ? "1420px" : "auto");}
 
 }
 
