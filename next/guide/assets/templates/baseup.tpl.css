@@ -3,7 +3,7 @@
 */
 
 .{{ns}}{{col}} {float:left;width:100%;}
-.{{ns}}cols > div {float:left;width:100%;}
+.{{ns}}cols > * {float:left;width:100%;} /* Width not set as the selector specificity is too high for later width classes to over-rule */
 .{{ns}}{{pullleft}} {float:left;width:100%;}
 .{{ns}}{{pullright}} {float:right;width:100%;}
 .{{ns}}{{pos}} {margin-right:-100%;}
@@ -19,11 +19,11 @@
     .{{ns}}{{laycentered}},
     .{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
     
-{{#isfirst}}
+{{#issecond}}
     .{{ns}}{{pullleft}},
     .{{ns}}{{pullright}} {width:auto;}
     
-{{/isfirst}}
+{{/issecond}}
 }
 {{/isgt0}}
 
@@ -80,7 +80,7 @@
 .{{ns}}{{colgut}}-none{{bp}} {padding-left:0;padding-right:0;}
 
 
-/* Hide Col Gutter */
+/* Hide Col Gutter * /
 .{{ns}}{{colguthide}}{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
 {{#gutters}}
 {{#isforlay}}
@@ -89,7 +89,7 @@
 {{/gutters}}
 .{{ns}}{{colguthide}}-1o2x{{bp}} {margin-left:-{{halfgutter1o2}}px;margin-right:-{{halfgutter1o2}}px;}
 .{{ns}}{{colguthide}}-none{{bp}} {margin-left:0;margin-right:0;}
-
+/**/
 
 /* Hide Gutter Left */
 .{{ns}}{{innguthide}}{{bp}} {margin-left:-{{gutter}}px;}
@@ -173,6 +173,16 @@
 {{/maxwidths}}
 
 
+
+/* Widths */
+.{{ns}}{{width}}s-auto{{bp}} > * {width:auto;}
+{{#widths}}{{#widths}}
+{{#fractions}}{{#isnotfirst}},
+{{/isnotfirst}}.{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} > *{{/fractions}} {width:{{value}}%;}
+{{/widths}}{{/widths}}
+
+
+
 /* Width */
 .{{ns}}{{width}}-auto{{bp}} {width:auto;}
 {{#widths}}{{#widths}}
@@ -184,20 +194,22 @@
 
 /* Cols */
 {{#cols}}
-.{{ns}}cols-{{num}}-list{{bp}} > li,
-.{{ns}}cols-{{num}}-divs{{bp}} > div {float:left;width:{{width}}%;}
+.{{ns}}cols-{{num}}{{bp}} > *,
+.{{ns}}cols-{{num}}-col{{bp}} .col {float:left;width:{{width}}%;}
 {{/cols}}
 
-/* Guts */
-.guts-list > li,
-.guts-list > div {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.guts-1o2x-list {margin-left:-5px;margin-right:-5px;}
-.guts-1o2x-list > li {margin-bottom:10px;padding-left:5px;padding-right:5px;}
-.guts-list {margin-left:-10px;margin-right:-10px;}
-.guts-list > li {margin-bottom:20px;padding-left:10px;padding-right:10px;}
-.guts-1x-list {margin-left:-10px;margin-right:-10px;}
-.guts-1x-list > li {margin-bottom:20px;padding-left:20px;padding-right:20px;}
+/* Guts */
+.guts > *,
+.guts-1x > *,
+.guts-1o2x > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+
+.guts-1o2x {margin-left:-5px;margin-right:-5px;}
+.guts-1o2x > * {margin-bottom:10px;padding-left:5px;padding-right:5px;}
+.guts {margin-left:-10px;margin-right:-10px;}
+.guts > * {margin-bottom:20px;padding-left:10px;padding-right:10px;}
+.guts-1x {margin-left:-10px;margin-right:-10px;}
+.guts-1x > * {margin-bottom:20px;padding-left:20px;padding-right:20px;}
 
 
 

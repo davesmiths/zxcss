@@ -10,6 +10,8 @@
 
 body {margin:0;padding:0 0 100px 0;line-height:20px;font-family:helvetica, arial;}
 h1, h2 {margin:0;line-height:40px}
+h1 small,
+h2 small {display:block;line-height:20px;font-style:italic;margin-top:-5px;margin-bottom:20px;opacity:0.7;}
 p {margin-top:0;margin-bottom:20px;}
 
 .style1 {background:#eee;}
@@ -43,68 +45,85 @@ textarea {width:95%;padding:20px;margin-bottom:20px;}
 
 
 
-
-<h2>Centered</h2>
+<section class="a b c">
+<h2>Centered <small>Class A, B, C</small></h2>
 <div class="style1">
     <div class="lay-centered">
-        <div class="col">
-            <div class="item">lay-centered</div>
-        </div>
+        <div class="item">lay-centered</div>
     </div>
 </div>
-<!---->
 <div class="style1">
     <div class="lay-centered width-max-2dx">
-        <div class="col">
-            <div class="item">lay-centered width-max-3dx</div>
-        </div>
+        <div class="item">lay-centered width-max-3dx</div>
     </div>
 </div>
 <div class="style1">
     <div class="lay-centered width-max-1dx width-max-2dx-1up width-max-3dx-2up">
-        <div class="col">
-            <div class="item">lay-centered width-max-1dx width-max-2dx-1up width-max-3dx-2up</div>
-        </div>
+        <div class="item">lay-centered width-max-1dx width-max-2dx-1up width-max-3dx-2up</div>
     </div>
 </div>
-<!---->
+</section>
 
 
 
-
-<h2>Left and Right</h2>
+<section class="a b c">
+<h2>Left and Right <small>Class A, B, C</small></h2>
 <div class="style1">
     <div class="lay-left">
-        <div class="col">
-            <div class="item">lay-left</div>
-        </div>
+        <div class="item">lay-left</div>
     </div>
 </div>
 <div class="style1">
     <div class="lay-right">
-        <div class="col">
-            <div class="item">lay-right</div>
-        </div>
+        <div class="item">lay-right</div>
     </div>
 </div>
+</section>
 
 
 
 
-
-<h2>Columns</h2>
-<p>Latest browsers can take advantage of cols</p>
-<div class="lay cols gut-bottom">
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">1</span>  col width-1o8-1up</div></div>
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">2</span>  col width-1o8-1up</div></div>
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">3</span>  col width-1o8-1up</div></div>
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">4</span>  col width-1o8-1up</div></div>
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">5</span>  col width-1o8-1up</div></div>
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">6</span>  col width-1o8-1up</div></div>
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">7</span>  col width-1o8-1up</div></div>
-    <div class="width-1o8-1up"><div class="item"><span class="source-order">8</span>  col width-1o8-1up</div></div>
+<section class="a">
+<h2>Columns <small>Class A</small></h2>
+<div class="lay cols widths-1o8-1up gut-bottom">
+    <div><div class="item"><span class="source-order">1</span>div</div></div>
+    <div><div class="item"><span class="source-order">2</span>div</div></div>
+    <div><div class="item"><span class="source-order">3</span>div</div></div>
+    <div class="width-2o8-1up"><div class="item"><span class="source-order">4</span>div.width-2o8-1up</div></div>
+    <div><div class="item"><span class="source-order">5</span>div</div></div>
+    <div><div class="item"><span class="source-order">7</span>div</div></div>
+    <div><div class="item"><span class="source-order">8</span>div</div></div>
 </div>
-<p>Legacy browsers need col on each div</p>
+<p>Applied to a list</p>
+<ul class="lay cols widths-1o5-1up">
+    <li><div class="item"><span class="source-order">1</span>li</div></li>
+    <li><div class="item"><span class="source-order">2</span>li</div></li>
+    <li><div class="item"><span class="source-order">3</span>li</div></li>
+    <li><div class="item"><span class="source-order">4</span>li</div></li>
+    <li><div class="item"><span class="source-order">5</span>li</div></li>
+</ul>
+<p>Applied to links</p>
+<div class="lay cols widths-1o3-1up">
+    <a href=""><div class="item"><span class="source-order">1</span>a</div></a>
+    <a href=""><div class="item"><span class="source-order">2</span>a</div></a>
+    <a href=""><div class="item"><span class="source-order">3</span>a</div></a>
+</div>
+
+<textarea rows="10">&lt;div class="lay cols widths-1o8-1up"&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div class="width-2o8-1up"&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+</section>
+
+
+
+<section class="b c">
+<h2>Columns <small>Class B, C: Legacy browsers require col on each div</small></h2>
 <div class="lay gut-bottom">
     <div class="col width-1o8-1up"><div class="item"><span class="source-order">1</span>  col width-1o8-1up</div></div>
     <div class="col width-1o8-1up"><div class="item"><span class="source-order">2</span>  col width-1o8-1up</div></div>
@@ -131,29 +150,38 @@ textarea {width:95%;padding:20px;margin-bottom:20px;}
     <div class="col width-1o5-1up"><div class="item"><span class="source-order">4</span>col width-1o5-1up</div></div>
     <div class="col width-1o5-1up"><div class="item"><span class="source-order">5</span>col width-1o5-1up</div></div>
 </div>
-
-
-
-<h2>Columns with gutters</h2>
-<p>Compatible with the latest browsers that support box-sizing</p>
-<div class="lay hide-col-gut gut-bottom">
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">1</span> col width-1o8-1up</div></div>
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">2</span> col width-1o8-1up</div></div>
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">3</span> col width-1o8-1up</div></div>
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">4</span> col width-1o8-1up</div></div>
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">5</span> col width-1o8-1up</div></div>
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">6</span> col width-1o8-1up</div></div>
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">7</span> col width-1o8-1up</div></div>
-    <div class="col width-1o8-1up col-gut"><div class="item"><span class="source-order">8</span> col width-1o8-1up</div></div>
-</div>
-<textarea rows="4">&lt;div class="lay hide-col-gut"&gt;
-    &lt;div class="col width-1o2-1up col-gut"&gt;&lt;/div&gt;
-    &lt;div class="col width-1o2-1up col-gut"&gt;&lt;/div&gt;
+<textarea rows="4">&lt;div class="lay"&gt;
+    &lt;div class="col width-1o2-1up"&gt;&lt;/div&gt;
+    &lt;div class="col width-1o2-1up"&gt;&lt;/div&gt;
 &lt;/div&gt;</textarea>
+</section>
 
 
-<h2>Columns with gutters</h2>
-<p>Compatible with the latest and legacy browsers and handles layouts flush to the viewport</p>
+
+
+<section class="a">
+<h2>Columns with gutters <small>Class A: Compatible with the latest browsers where box-sizing is supported</small></h2>
+<div class="lay cols guts widths-1o8-1up gut-bottom">
+    <div><div class="item"><span class="source-order">1</span>width-1o8-1up</div></div>
+    <div><div class="item"><span class="source-order">2</span>width-1o8-1up</div></div>
+    <div><div class="item"><span class="source-order">3</span>width-1o8-1up</div></div>
+    <div><div class="item"><span class="source-order">4</span>width-1o8-1up</div></div>
+    <div><div class="item"><span class="source-order">5</span>width-1o8-1up</div></div>
+    <div><div class="item"><span class="source-order">6</span>width-1o8-1up</div></div>
+    <div><div class="item"><span class="source-order">7</span>width-1o8-1up</div></div>
+    <div><div class="item"><span class="source-order">8</span>width-1o8-1up</div></div>
+</div>
+<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts"&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+</section>
+
+
+
+
+<section class="b c">
+<h2>Columns with gutters <small>Class B, C: Compatible with legacy and latest browsers, and layouts flush to the viewport</small></h2>
 <div class="lay hide-gut-left gut-bottom">
     <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source-order">1</span> col width-1o8-1up</div></div></div>
     <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source-order">2</span> col width-1o8-1up</div></div></div>
@@ -184,22 +212,32 @@ textarea {width:95%;padding:20px;margin-bottom:20px;}
     &lt;div class="col width-1o2-1up"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
     &lt;div class="col width-1o2-1up"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;</textarea>
+</section>
 
 
 
-
-
-<h2>Columns Positioned</h2>
-<div class="lay hide-gut-left gut-bottom">
-    <div class="col width-1o8-1up pos-4o8-1up "><div class="gut-left"><div class="item"><span class="source-order">1</span>col width-1o8-1up pos-4o8-1up</div></div></div>
-    <div class="col width-1o8-1up pos-6o8-1up "><div class="gut-left"><div class="item"><span class="source-order">2</span>col width-1o8-1up pos-6o8-1up</div></div></div>
-    <div class="col width-1o8-1up pos-2o8-1up "><div class="gut-left"><div class="item"><span class="source-order">3</span>col width-1o8-1up pos-2o8-1up</div></div></div>
-    <div class="col width-1o8-1up pos-8o8-1up "><div class="gut-left"><div class="item"><span class="source-order">4</span>col width-1o8-1up pos-8o8-1up</div></div></div>
-    <div class="col width-1o8-1up pos-1o8-1up "><div class="gut-left"><div class="item"><span class="source-order">5</span>col width-1o8-1up pos-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up pos-7o8-1up "><div class="gut-left"><div class="item"><span class="source-order">6</span>col width-1o8-1up pos-7o8-1up</div></div></div>
-    <div class="col width-1o8-1up pos-3o8-1up "><div class="gut-left"><div class="item"><span class="source-order">7</span>col width-1o8-1up pos-3o8-1up</div></div></div>
-    <div class="col width-1o8-1up pos-5o8-1up "><div class="gut-left"><div class="item"><span class="source-order">8</span>col width-1o8-1up pos-5o8-1up</div></div></div>
+<section class="a">
+<h2>Columns Positioned <small>Class A</small></h2>
+<div class="lay cols widths-1o8-1up guts gut-bottom">
+    <div class="pos-4o8-1up"><div class="item"><span class="source-order">1</span>width-1o8-1up pos-4o8-1up</div></div>
+    <div class="pos-6o8-1up"><div class="item"><span class="source-order">2</span>width-1o8-1up pos-6o8-1up</div></div>
+    <div class="pos-2o8-1up"><div class="item"><span class="source-order">3</span>width-1o8-1up pos-2o8-1up</div></div>
+    <div class="pos-8o8-1up"><div class="item"><span class="source-order">4</span>width-1o8-1up pos-8o8-1up</div></div>
+    <div class="pos-1o8-1up"><div class="item"><span class="source-order">5</span>width-1o8-1up pos-1o8-1up</div></div>
+    <div class="pos-7o8-1up"><div class="item"><span class="source-order">6</span>width-1o8-1up pos-7o8-1up</div></div>
+    <div class="pos-3o8-1up"><div class="item"><span class="source-order">7</span>width-1o8-1up pos-3o8-1up</div></div>
+    <div class="pos-5o8-1up"><div class="item"><span class="source-order">8</span>width-1o8-1up pos-5o8-1up</div></div>
 </div>
+<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts"&gt;
+    &lt;div class="pos-2o2-1up"&gt;&lt;/div&gt;
+    &lt;div class="pos-1o2-1up"&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+</section>
+
+
+
+<section class="b c">
+<h2>Columns Positioned <small>Class B, C</small></h2>
 <div class="lay hide-gut-left gut-bottom">
     <div class="col width-2o3-1up pos-2o3-1up"><div class="gut-left"><div class="item"><span class="source-order">1</span>col width-2o3-1up pos-2o3-1up</div></div></div>
     <div class="col width-1o3-1up pos-1o3-1up"><div class="gut-left"><div class="item"><span class="source-order">2</span>col width-1o3-1up pos-1o3-1up</div></div></div>
@@ -220,13 +258,14 @@ textarea {width:95%;padding:20px;margin-bottom:20px;}
     &lt;div class="col width-1o2-1up pos-2o2-1up"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
     &lt;div class="col width-1o2-1up pos-1o2-1up"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;</textarea>
+</section>
 
 
 
+<section class="a b c">
+<h2>Gutter and Pull Gutter <small>Class A, B, C</small></h2>
 
-<h2>Gutter Column</h2>
-
-<h3>Div</h3>
+<h3>Divs</h3>
 <div class="lay gut-right-medium">
     <div class="pull-gut-right-medium"><div class="item">lay gut-right-medium</div></div>
     <div class="item">Text test text test text test text</div>
@@ -291,11 +330,12 @@ textarea {width:95%;padding:20px;margin-bottom:20px;}
         <div class="item">Text test text test text test text</div>
     </li>
 </ul>
+</section>
 
 
 
-
-<h2>Pull</h2>
+<section class="a b c">
+<h2>Pull <small>Class A, B, C</small></h2>
 <div class="pull-right">
     <div class="item">
     pull-right
@@ -333,29 +373,19 @@ textarea {width:95%;padding:20px;margin-bottom:20px;}
     pull-left gut-right
     </div>
 </div>
-                
+</section>
+
 <div class="clear"></div>
 
 
-<h2>Non-nestable layouts</h2>
-list laid out in 5 columns
-<ul class="lay cols-5-1up">
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-</ul>
-<div class="lay cols-5-1up">
-    <div><div class="item">col</div></div>
-    <div><div class="item">col</div></div>
-    <div><div class="item">col</div></div>
-    <div><div class="item">col</div></div>
-    <div><div class="item">col</div></div>
-    <div><div class="item">col</div></div>
-</div>
-<div class="lay cols-5-col-1up">
+
+
+
+
+
+<h2>Non-nestable layouts <small>Class B, C</small></h2>
+<p>.col laid out in 5 columns</p>
+<div class="lay cols widths-1o5-1up">
     <div class="col"><div class="item">col</div></div>
     <div class="col"><div class="item">col</div></div>
     <div class="col"><div class="item">col</div></div>
@@ -363,13 +393,14 @@ list laid out in 5 columns
     <div class="col"><div class="item">col</div></div>
     <div class="col"><div class="item">col</div></div>
 </div>
+<p>.col laid out in 5 columns with gutter</p>
 <div class="lay cols-5-col-1up hide-gut-left">
-    <div class="col gut-bottom"><div class="item gut-left">col</div></div>
-    <div class="col gut-bottom"><div class="item gut-left">col</div></div>
-    <div class="col gut-bottom"><div class="item gut-left">col</div></div>
-    <div class="col gut-bottom"><div class="item gut-left">col</div></div>
-    <div class="col gut-bottom"><div class="item gut-left">col</div></div>
-    <div class="col gut-bottom"><div class="item gut-left">col</div></div>
+    <div class="col"><div class="item gut-left gut-bottom">col</div></div>
+    <div class="col"><div class="item gut-left gut-bottom">col</div></div>
+    <div class="col"><div class="item gut-left gut-bottom">col</div></div>
+    <div class="col"><div class="item gut-left gut-bottom">col</div></div>
+    <div class="col"><div class="item gut-left gut-bottom">col</div></div>
+    <div class="col"><div class="item gut-left gut-bottom">col</div></div>
 </div>
 <div class="lay cols-5-1up hide-col-gut">
     <div class="col col-gut gut-bottom"><div class="item">col</div></div>
@@ -386,24 +417,6 @@ list laid out in 5 columns
     <li><div class="item">col</div></li>
     <li><div class="item">col</div></li>
     <li><div class="item">col</div></li>
-</ul>
-<p>lay cols-5-list guts-list</p>
-<ul class="lay cols-5-list guts-list">
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-    <li><div class="item">col</div></li>
-</ul>
-</ul>
-<ul class="lay cols-5-list gut-left-hide">
-    <li><div class="item gut-left">col</div></li>
-    <li><div class="item gut-left">col</div></li>
-    <li><div class="item gut-left">col</div></li>
-    <li><div class="item gut-left">col</div></li>
-    <li><div class="item gut-left">col</div></li>
-    <li><div class="item gut-left">col</div></li>
 </ul>
 
 

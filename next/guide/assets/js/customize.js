@@ -222,7 +222,8 @@
         for (i = 0; i < db.breakpointsLength; i++) {
             db.breakpoints[i] = {
                 isGT0: (i > 0) ? true : false,
-                isFirst: (i === 1) ? true : false,
+                isFirst: (i === 0) ? true : false,
+                isSecond: (i === 1) ? true : false,
                 at: input.breakpoints[i].at,
                 gutter: input.breakpoints[i].gutter,
                 gutterBasex: input.breakpoints[i].gutterBasex
@@ -255,6 +256,7 @@
             
             // isFirst
             tibi.isfirst = db.breakpoints[i].isFirst;
+            tibi.issecond = db.breakpoints[i].isSecond;
             tibi.isgt0 = db.breakpoints[i].isGT0;
             
             // maxwidth based on breakpoints
@@ -485,11 +487,13 @@
                     numerator:i
                     ,denominator:j
                     ,isnotfirst:true
+                    ,isfirstWidth:false
                 });
             }
         }
         
         output.widthsall[0].isnotfirst = false;
+        output.widthsall[0].isfirstWidth = true;
         
         for (i in widths) {
 
