@@ -1,9 +1,8 @@
 /*
 /*  BaseUp 1.0 CSS
 */
-
 .col {float:left;width:100%;}
-.cols > * {float:left;width:100%;} /* Width not set as the selector specificity is too high for later width classes to over-rule */
+.cols > * {float:left;width:100%;}
 .pull-left {float:left;width:100%;}
 .pull-right {float:right;width:100%;}
 .pos {margin-right:-100%;}
@@ -367,41 +366,77 @@
 
 /* Widths */
 .widths-auto > * {width:auto;}
+.widths-1o5 .col-cols,
 .widths-1o5 > * {width:20%;}
+.widths-1o4 .col-cols,
 .widths-1o4 > *,
+.widths-2o8 .col-cols,
 .widths-2o8 > * {width:25%;}
+.widths-2o5 .col-cols,
 .widths-2o5 > * {width:40%;}
+.widths-1o2 .col-cols,
 .widths-1o2 > *,
+.widths-2o4 .col-cols,
 .widths-2o4 > *,
+.widths-3o6 .col-cols,
 .widths-3o6 > *,
+.widths-4o8 .col-cols,
 .widths-4o8 > * {width:50%;}
+.widths-3o5 .col-cols,
 .widths-3o5 > * {width:60%;}
+.widths-3o4 .col-cols,
 .widths-3o4 > *,
+.widths-6o8 .col-cols,
 .widths-6o8 > * {width:75%;}
+.widths-4o5 .col-cols,
 .widths-4o5 > * {width:80%;}
+.widths-1o1 .col-cols,
 .widths-1o1 > *,
+.widths-2o2 .col-cols,
 .widths-2o2 > *,
+.widths-3o3 .col-cols,
 .widths-3o3 > *,
+.widths-4o4 .col-cols,
 .widths-4o4 > *,
+.widths-5o5 .col-cols,
 .widths-5o5 > *,
+.widths-6o6 .col-cols,
 .widths-6o6 > *,
+.widths-7o7 .col-cols,
 .widths-7o7 > *,
+.widths-8o8 .col-cols,
 .widths-8o8 > * {width:100%;}
+.widths-1o3 .col-cols,
 .widths-1o3 > *,
+.widths-2o6 .col-cols,
 .widths-2o6 > * {width:33.3333%;}
+.widths-1o6 .col-cols,
 .widths-1o6 > * {width:16.6666%;}
+.widths-1o7 .col-cols,
 .widths-1o7 > * {width:14.2857%;}
+.widths-1o8 .col-cols,
 .widths-1o8 > * {width:12.5%;}
+.widths-2o3 .col-cols,
 .widths-2o3 > *,
+.widths-4o6 .col-cols,
 .widths-4o6 > * {width:66.6666%;}
+.widths-2o7 .col-cols,
 .widths-2o7 > * {width:28.5714%;}
+.widths-3o7 .col-cols,
 .widths-3o7 > * {width:42.8571%;}
+.widths-3o8 .col-cols,
 .widths-3o8 > * {width:37.5%;}
+.widths-4o7 .col-cols,
 .widths-4o7 > * {width:57.1428%;}
+.widths-5o6 .col-cols,
 .widths-5o6 > * {width:83.3333%;}
+.widths-5o7 .col-cols,
 .widths-5o7 > * {width:71.4285%;}
+.widths-5o8 .col-cols,
 .widths-5o8 > * {width:62.5%;}
+.widths-6o7 .col-cols,
 .widths-6o7 > * {width:85.7142%;}
+.widths-7o8 .col-cols,
 .widths-7o8 > * {width:87.5%;}
 
 
@@ -446,7 +481,6 @@
 .width-7o8 {width:87.5%;}
 
 
-
 /* Cols */
 .cols-1 > *,
 .cols-1-col .col {float:left;width:100%;}
@@ -469,14 +503,28 @@
 /* Guts */
 .guts > *,
 .guts-1x > *,
+.guts-2x > *,
 .guts-1o2x > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
 .guts-1o2x {margin-left:-5px;margin-right:-5px;}
-.guts-1o2x > * {margin-bottom:10px;padding-left:5px;padding-right:5px;}
+.guts-1o2x > * {padding-left:5px;padding-right:5px;margin-bottom:10px;}
 .guts {margin-left:-10px;margin-right:-10px;}
-.guts > * {margin-bottom:20px;padding-left:10px;padding-right:10px;}
+.guts > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
 .guts-1x {margin-left:-10px;margin-right:-10px;}
-.guts-1x > * {margin-bottom:20px;padding-left:20px;padding-right:20px;}
+.guts-1x > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.guts-2x {margin-left:-20px;margin-right:-20px;}
+.guts-2x > * {padding-left:20px;padding-right:20px;margin-bottom:40px;}
+
+
+/* Guts Full-Width class a */
+.guts-fw-1o2x {margin-left:-10px;}
+.guts-fw-1o2x > * > * {margin-left:10px;margin-bottom:10px;}
+.guts-fw {margin-left:-20px;}
+.guts-fw > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-1x {margin-left:-20px;}
+.guts-fw-1x > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-2x {margin-left:-40px;}
+.guts-fw-2x > * > * {margin-left:40px;margin-bottom:40px;}
 
 
 
@@ -554,6 +602,8 @@
 .pos-6o8,
 .pos-7o7,
 .pos-8o8 {margin-right:-100%;}
+
+
 
 
 
@@ -879,41 +929,77 @@
 
 /* Widths */
 .widths-auto-1up > * {width:auto;}
+.widths-1o5-1up .col-cols,
 .widths-1o5-1up > * {width:20%;}
+.widths-1o4-1up .col-cols,
 .widths-1o4-1up > *,
+.widths-2o8-1up .col-cols,
 .widths-2o8-1up > * {width:25%;}
+.widths-2o5-1up .col-cols,
 .widths-2o5-1up > * {width:40%;}
+.widths-1o2-1up .col-cols,
 .widths-1o2-1up > *,
+.widths-2o4-1up .col-cols,
 .widths-2o4-1up > *,
+.widths-3o6-1up .col-cols,
 .widths-3o6-1up > *,
+.widths-4o8-1up .col-cols,
 .widths-4o8-1up > * {width:50%;}
+.widths-3o5-1up .col-cols,
 .widths-3o5-1up > * {width:60%;}
+.widths-3o4-1up .col-cols,
 .widths-3o4-1up > *,
+.widths-6o8-1up .col-cols,
 .widths-6o8-1up > * {width:75%;}
+.widths-4o5-1up .col-cols,
 .widths-4o5-1up > * {width:80%;}
+.widths-1o1-1up .col-cols,
 .widths-1o1-1up > *,
+.widths-2o2-1up .col-cols,
 .widths-2o2-1up > *,
+.widths-3o3-1up .col-cols,
 .widths-3o3-1up > *,
+.widths-4o4-1up .col-cols,
 .widths-4o4-1up > *,
+.widths-5o5-1up .col-cols,
 .widths-5o5-1up > *,
+.widths-6o6-1up .col-cols,
 .widths-6o6-1up > *,
+.widths-7o7-1up .col-cols,
 .widths-7o7-1up > *,
+.widths-8o8-1up .col-cols,
 .widths-8o8-1up > * {width:100%;}
+.widths-1o3-1up .col-cols,
 .widths-1o3-1up > *,
+.widths-2o6-1up .col-cols,
 .widths-2o6-1up > * {width:33.3333%;}
+.widths-1o6-1up .col-cols,
 .widths-1o6-1up > * {width:16.6666%;}
+.widths-1o7-1up .col-cols,
 .widths-1o7-1up > * {width:14.2857%;}
+.widths-1o8-1up .col-cols,
 .widths-1o8-1up > * {width:12.5%;}
+.widths-2o3-1up .col-cols,
 .widths-2o3-1up > *,
+.widths-4o6-1up .col-cols,
 .widths-4o6-1up > * {width:66.6666%;}
+.widths-2o7-1up .col-cols,
 .widths-2o7-1up > * {width:28.5714%;}
+.widths-3o7-1up .col-cols,
 .widths-3o7-1up > * {width:42.8571%;}
+.widths-3o8-1up .col-cols,
 .widths-3o8-1up > * {width:37.5%;}
+.widths-4o7-1up .col-cols,
 .widths-4o7-1up > * {width:57.1428%;}
+.widths-5o6-1up .col-cols,
 .widths-5o6-1up > * {width:83.3333%;}
+.widths-5o7-1up .col-cols,
 .widths-5o7-1up > * {width:71.4285%;}
+.widths-5o8-1up .col-cols,
 .widths-5o8-1up > * {width:62.5%;}
+.widths-6o7-1up .col-cols,
 .widths-6o7-1up > * {width:85.7142%;}
+.widths-7o8-1up .col-cols,
 .widths-7o8-1up > * {width:87.5%;}
 
 
@@ -958,7 +1044,6 @@
 .width-7o8-1up {width:87.5%;}
 
 
-
 /* Cols */
 .cols-1-1up > *,
 .cols-1-col-1up .col {float:left;width:100%;}
@@ -979,16 +1064,30 @@
 
 
 /* Guts */
-.guts > *,
-.guts-1x > *,
-.guts-1o2x > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+.guts-1up > *,
+.guts-1x-1up > *,
+.guts-2x-1up > *,
+.guts-1o2x-1up > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.guts-1o2x {margin-left:-5px;margin-right:-5px;}
-.guts-1o2x > * {margin-bottom:10px;padding-left:5px;padding-right:5px;}
-.guts {margin-left:-10px;margin-right:-10px;}
-.guts > * {margin-bottom:20px;padding-left:10px;padding-right:10px;}
-.guts-1x {margin-left:-10px;margin-right:-10px;}
-.guts-1x > * {margin-bottom:20px;padding-left:20px;padding-right:20px;}
+.guts-1o2x-1up {margin-left:-5px;margin-right:-5px;}
+.guts-1o2x-1up > * {padding-left:5px;padding-right:5px;margin-bottom:10px;}
+.guts-1up {margin-left:-10px;margin-right:-10px;}
+.guts-1up > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.guts-1x-1up {margin-left:-10px;margin-right:-10px;}
+.guts-1x-1up > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.guts-2x-1up {margin-left:-20px;margin-right:-20px;}
+.guts-2x-1up > * {padding-left:20px;padding-right:20px;margin-bottom:40px;}
+
+
+/* Guts Full-Width class a */
+.guts-fw-1o2x-1up {margin-left:-10px;}
+.guts-fw-1o2x-1up > * > * {margin-left:10px;margin-bottom:10px;}
+.guts-fw-1up {margin-left:-20px;}
+.guts-fw-1up > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-1x-1up {margin-left:-20px;}
+.guts-fw-1x-1up > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-2x-1up {margin-left:-40px;}
+.guts-fw-2x-1up > * > * {margin-left:40px;margin-bottom:40px;}
 
 
 
@@ -1066,6 +1165,8 @@
 .pos-6o8-1up,
 .pos-7o7-1up,
 .pos-8o8-1up {margin-right:-100%;}
+
+
 
 }
 
@@ -1392,41 +1493,77 @@
 
 /* Widths */
 .widths-auto-2up > * {width:auto;}
+.widths-1o5-2up .col-cols,
 .widths-1o5-2up > * {width:20%;}
+.widths-1o4-2up .col-cols,
 .widths-1o4-2up > *,
+.widths-2o8-2up .col-cols,
 .widths-2o8-2up > * {width:25%;}
+.widths-2o5-2up .col-cols,
 .widths-2o5-2up > * {width:40%;}
+.widths-1o2-2up .col-cols,
 .widths-1o2-2up > *,
+.widths-2o4-2up .col-cols,
 .widths-2o4-2up > *,
+.widths-3o6-2up .col-cols,
 .widths-3o6-2up > *,
+.widths-4o8-2up .col-cols,
 .widths-4o8-2up > * {width:50%;}
+.widths-3o5-2up .col-cols,
 .widths-3o5-2up > * {width:60%;}
+.widths-3o4-2up .col-cols,
 .widths-3o4-2up > *,
+.widths-6o8-2up .col-cols,
 .widths-6o8-2up > * {width:75%;}
+.widths-4o5-2up .col-cols,
 .widths-4o5-2up > * {width:80%;}
+.widths-1o1-2up .col-cols,
 .widths-1o1-2up > *,
+.widths-2o2-2up .col-cols,
 .widths-2o2-2up > *,
+.widths-3o3-2up .col-cols,
 .widths-3o3-2up > *,
+.widths-4o4-2up .col-cols,
 .widths-4o4-2up > *,
+.widths-5o5-2up .col-cols,
 .widths-5o5-2up > *,
+.widths-6o6-2up .col-cols,
 .widths-6o6-2up > *,
+.widths-7o7-2up .col-cols,
 .widths-7o7-2up > *,
+.widths-8o8-2up .col-cols,
 .widths-8o8-2up > * {width:100%;}
+.widths-1o3-2up .col-cols,
 .widths-1o3-2up > *,
+.widths-2o6-2up .col-cols,
 .widths-2o6-2up > * {width:33.3333%;}
+.widths-1o6-2up .col-cols,
 .widths-1o6-2up > * {width:16.6666%;}
+.widths-1o7-2up .col-cols,
 .widths-1o7-2up > * {width:14.2857%;}
+.widths-1o8-2up .col-cols,
 .widths-1o8-2up > * {width:12.5%;}
+.widths-2o3-2up .col-cols,
 .widths-2o3-2up > *,
+.widths-4o6-2up .col-cols,
 .widths-4o6-2up > * {width:66.6666%;}
+.widths-2o7-2up .col-cols,
 .widths-2o7-2up > * {width:28.5714%;}
+.widths-3o7-2up .col-cols,
 .widths-3o7-2up > * {width:42.8571%;}
+.widths-3o8-2up .col-cols,
 .widths-3o8-2up > * {width:37.5%;}
+.widths-4o7-2up .col-cols,
 .widths-4o7-2up > * {width:57.1428%;}
+.widths-5o6-2up .col-cols,
 .widths-5o6-2up > * {width:83.3333%;}
+.widths-5o7-2up .col-cols,
 .widths-5o7-2up > * {width:71.4285%;}
+.widths-5o8-2up .col-cols,
 .widths-5o8-2up > * {width:62.5%;}
+.widths-6o7-2up .col-cols,
 .widths-6o7-2up > * {width:85.7142%;}
+.widths-7o8-2up .col-cols,
 .widths-7o8-2up > * {width:87.5%;}
 
 
@@ -1471,7 +1608,6 @@
 .width-7o8-2up {width:87.5%;}
 
 
-
 /* Cols */
 .cols-1-2up > *,
 .cols-1-col-2up .col {float:left;width:100%;}
@@ -1492,16 +1628,30 @@
 
 
 /* Guts */
-.guts > *,
-.guts-1x > *,
-.guts-1o2x > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+.guts-2up > *,
+.guts-1x-2up > *,
+.guts-2x-2up > *,
+.guts-1o2x-2up > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.guts-1o2x {margin-left:-5px;margin-right:-5px;}
-.guts-1o2x > * {margin-bottom:10px;padding-left:5px;padding-right:5px;}
-.guts {margin-left:-10px;margin-right:-10px;}
-.guts > * {margin-bottom:20px;padding-left:10px;padding-right:10px;}
-.guts-1x {margin-left:-10px;margin-right:-10px;}
-.guts-1x > * {margin-bottom:20px;padding-left:20px;padding-right:20px;}
+.guts-1o2x-2up {margin-left:-5px;margin-right:-5px;}
+.guts-1o2x-2up > * {padding-left:5px;padding-right:5px;margin-bottom:10px;}
+.guts-2up {margin-left:-10px;margin-right:-10px;}
+.guts-2up > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.guts-1x-2up {margin-left:-10px;margin-right:-10px;}
+.guts-1x-2up > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.guts-2x-2up {margin-left:-20px;margin-right:-20px;}
+.guts-2x-2up > * {padding-left:20px;padding-right:20px;margin-bottom:40px;}
+
+
+/* Guts Full-Width class a */
+.guts-fw-1o2x-2up {margin-left:-10px;}
+.guts-fw-1o2x-2up > * > * {margin-left:10px;margin-bottom:10px;}
+.guts-fw-2up {margin-left:-20px;}
+.guts-fw-2up > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-1x-2up {margin-left:-20px;}
+.guts-fw-1x-2up > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-2x-2up {margin-left:-40px;}
+.guts-fw-2x-2up > * > * {margin-left:40px;margin-bottom:40px;}
 
 
 
@@ -1579,5 +1729,7 @@
 .pos-6o8-2up,
 .pos-7o7-2up,
 .pos-8o8-2up {margin-right:-100%;}
+
+
 
 }

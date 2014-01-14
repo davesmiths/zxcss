@@ -4,7 +4,8 @@
 if (isset($_POST['output-css'], $_POST['output-cssielte7'])) {
     
     $css = $_POST['output-css'];
-    $cssIElte7 = $_POST['output-cssielte7'];
+    $cssIElte8 = $_POST['output-cssielte8'];
+    $jsIElte8 = $_POST['output-jsielte8'];
     
     //$file = tmpfile();
     $file = tempnam('tmp', 'zip');
@@ -15,7 +16,8 @@ if (isset($_POST['output-css'], $_POST['output-cssielte7'])) {
     $zip->open($file, ZipArchive::OVERWRITE);
     
     $zip->addFromString('baseup.css', $css);
-    $zip->addFromString('baseup-ielte7.css', $cssIElte7);
+    $zip->addFromString('baseup-ielte8.css', $cssIElte8);
+    $zip->addFromString('baseup-ielte8.js', $jsIElte8);
     
     $zip->close();
     

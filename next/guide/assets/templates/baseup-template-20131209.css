@@ -178,7 +178,8 @@
 .{{ns}}{{width}}s-auto{{bp}} > * {width:auto;}
 {{#widths}}{{#widths}}
 {{#fractions}}{{#isnotfirst}},
-{{/isnotfirst}}.{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} > *{{/fractions}} {width:{{value}}%;}
+{{/isnotfirst}}.{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} .col-cols{{/fractions}},
+.{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} > *{{/fractions}} {width:{{value}}%;}
 {{/widths}}{{/widths}}
 
 
@@ -200,16 +201,30 @@
 
 
 /* Guts */
-.guts > *,
-.guts-1x > *,
-.guts-1o2x > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+.guts{{bp}} > *,
+.guts-1x{{bp}} > *,
+.guts-2x{{bp}} > *,
+.guts-1o2x{{bp}} > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.guts-1o2x {margin-left:-5px;margin-right:-5px;}
-.guts-1o2x > * {margin-bottom:10px;padding-left:5px;padding-right:5px;}
-.guts {margin-left:-10px;margin-right:-10px;}
-.guts > * {margin-bottom:20px;padding-left:10px;padding-right:10px;}
-.guts-1x {margin-left:-10px;margin-right:-10px;}
-.guts-1x > * {margin-bottom:20px;padding-left:20px;padding-right:20px;}
+.guts-1o2x{{bp}} {margin-left:-5px;margin-right:-5px;}
+.guts-1o2x{{bp}} > * {padding-left:5px;padding-right:5px;margin-bottom:10px;}
+.guts{{bp}} {margin-left:-10px;margin-right:-10px;}
+.guts{{bp}} > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.guts-1x{{bp}} {margin-left:-10px;margin-right:-10px;}
+.guts-1x{{bp}} > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.guts-2x{{bp}} {margin-left:-20px;margin-right:-20px;}
+.guts-2x{{bp}} > * {padding-left:20px;padding-right:20px;margin-bottom:40px;}
+
+
+/* Guts Full-Width class a */
+.guts-fw-1o2x{{bp}} {margin-left:-10px;}
+.guts-fw-1o2x{{bp}} > * > * {margin-left:10px;margin-bottom:10px;}
+.guts-fw{{bp}} {margin-left:-20px;}
+.guts-fw{{bp}} > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-1x{{bp}} {margin-left:-20px;}
+.guts-fw-1x{{bp}} > * > * {margin-left:20px;margin-bottom:20px;}
+.guts-fw-2x{{bp}} {margin-left:-40px;}
+.guts-fw-2x{{bp}} > * > * {margin-left:40px;margin-bottom:40px;}
 
 
 

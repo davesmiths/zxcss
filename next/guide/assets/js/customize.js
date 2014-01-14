@@ -22,12 +22,19 @@
                 source: ''
                 ,output: ''
             }
-            ,cssIElte7: {
+            ,cssIElte8: {
+                source: ''
+                ,output: ''
+            }
+            ,jsIElte8: {
                 source: ''
                 ,output: ''
             }
             ,input: {
                 ns: ''
+                
+                ,isiecss: false
+                ,isiejs: false
                 
                 ,lay: 'lay'
                 ,laycentered: 'lay-centered'
@@ -111,7 +118,8 @@
         els.input.formbreakpoint = $('.form-breakpoint');
         
         els.output.css = $('.output-css');
-        els.output.cssIElte7 = $('.output-cssielte7');
+        els.output.cssIElte8 = $('.output-cssielte8');
+        els.output.jsIElte8 = $('.output-jsielte8');
         
         els.advanced = $('.advanced');
         els.css = $('.css');
@@ -124,7 +132,7 @@
     
         var callback = o.callback;
         
-        db.inputAjaxCalls = {callback: callback, expected: 2, count: 0};
+        db.inputAjaxCalls = {callback: callback, expected: 3, count: 0};
         
         input.breakpoints = [];
         els.input.formbreakpoint.each(function(i) {
@@ -150,13 +158,18 @@
         input.gutmultiplierlarge = els.input.gutmultiplierlarge.val();
         
         
-        $.ajax('./../assets/templates/baseup.tpl.css',{dataType:'text',async:false}).done(function(text) {
+        $.ajax('./../assets/templates/baseup-tpl.css.php',{dataType:'text',async:false}).done(function(text) {
             db.templates.css.template = text;
             inputDone();
         });
         
-        $.ajax('./../assets/templates/baseup-ielte7.tpl.css',{dataType:'text',async:false}).done(function(text) {
-            db.templates.cssIElte7.template = text;
+        $.ajax('./../assets/templates/baseup-tpl-ielte8.css.php',{dataType:'text',async:false}).done(function(text) {
+            db.templates.cssIElte8.template = text;
+            inputDone();
+        });
+        
+        $.ajax('./../assets/templates/baseup-tpl-ielte8.js.php',{dataType:'text',async:false}).done(function(text) {
+            db.templates.jsIElte8.template = text;
             inputDone();
         });
         
@@ -235,7 +248,7 @@
         ti.breakpoints = [];
         
         // widths
-        ti.widths = makeWidthClasses({columns: db.columns});
+        ti.widthclasses = makeWidthClasses({columns: db.columns}); // returns {widths:, widthsall:}
         
         for (i = 0; i < db.breakpointsLength; i++) {
         
@@ -269,7 +282,7 @@
             }
             
             // widths
-            tibi.widths = makeWidthClasses({columns: db.columns});
+            tibi.widthclasses = makeWidthClasses({columns: db.columns});
             
             // cols
             tibi.cols = [];
@@ -426,7 +439,12 @@
         
         
         db.templates.css.output = Mustache.render(db.templates.css.template, db.templates.input);
-        db.templates.cssIElte7.output = Mustache.render(db.templates.cssIElte7.template, db.templates.input);
+        
+        db.templates.input.isiecss = true;
+        db.templates.cssIElte8.output = Mustache.render(db.templates.cssIElte8.template, db.templates.input);
+
+        db.templates.input.isiejs = true;
+        db.templates.jsIElte8.output = Mustache.render(db.templates.jsIElte8.template, db.templates.input);
 
         return callback();
         
@@ -436,13 +454,15 @@
             
         // Put CSS
         els.output.css.val(trim(db.templates.css.output));
-        els.output.cssIElte7.val(trim(db.templates.cssIElte7.output));
+        els.output.cssIElte8.val(trim(db.templates.cssIElte8.output));
+        els.output.jsIElte8.val(trim(db.templates.jsIElte8.output));
         
         els.input.maxWidths.val(db.maxWidths);
         els.input.maxWidthsBP.val(db.maxWidthsBP.slice(1));
         
         resizeOutput(els.output.css[0]);
-        resizeOutput(els.output.cssIElte7[0]);
+        resizeOutput(els.output.cssIElte8[0]);
+        resizeOutput(els.output.jsIElte8[0]);
         
         //els.output.labelSpan.html(' '+db.output.css.length);
     };
@@ -660,7 +680,7 @@
                 ,togglePointer = (/#advanced/g.exec(window.location.href)) ? 1 : 0
                 ,html = '<a href="">'+toggleText[togglePointer]+'</a>'
             ;
-            console.log(togglePointer);
+//console.log(togglePointer);
             els.toggleHTML = $(html);
             els.toggleHTML = els.advanced.before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
             els.toggleHTML.on('click', function() {
@@ -669,7 +689,8 @@
                 $this.text(toggleText[togglePointer]);
                 els.advanced.toggleClass('inactive');
                 resizeOutput(els.output.css[0]);
-                resizeOutput(els.output.cssIElte7[0]);
+                resizeOutput(els.output.cssIElte8[0]);
+                resizeOutput(els.output.jsIElte8[0]);
                 return false;
             });
         }());
@@ -688,7 +709,7 @@
 //                $this.text(toggleText[togglePointer]);
 //                els.css.toggleClass('inactive');
 //                resizeOutput(els.output.css[0]);
-//                resizeOutput(els.output.cssIElte7[0]);
+//                resizeOutput(els.output.cssIElte8[0]);
 //                return false;
 //            });
 //        }());
