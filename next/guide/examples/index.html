@@ -10,8 +10,11 @@
 <style>
 
 body {margin:0;padding:0 0 100px 0;line-height:20px;font-family:helvetica, arial;}
-h1, h2 {margin:0;line-height:40px}
+h1, h2, h3 {line-height:40px;padding:0 20px;}
+h1, h2 {margin:0;}
 section {margin-bottom:40px;}
+header {padding:20px;}
+pre {padding:0 20px;}
 h1 small,
 h2 small {display:block;line-height:20px;font-style:italic;margin-top:-5px;margin-bottom:20px;opacity:0.7;}
 p {margin-top:0;margin-bottom:20px;}
@@ -25,7 +28,7 @@ p {margin-top:0;margin-bottom:20px;}
 .source {color:#aaa;display:block;}
 a .source {text-decoration:none;}
 
-textarea {width:95%;padding:20px;margin-bottom:20px;}
+textarea {width:90%;padding:20px;margin-bottom:20px;margin-left:20px;}
 
 .grid-5 .col {width:20%;}
 
@@ -47,6 +50,9 @@ main.a h2 .grades,
 main.b h2 .grades,
 main.c h2 .grades,
 main.afw h2 .grades {display:block;}
+
+
+hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 </style>
 
@@ -99,7 +105,6 @@ main.afw h2 .grades {display:block;}
             html += '<a href="#class-a" class="filter-class-a">Class A Browsers</a> ';
             html += '<a href="#class-afw" class="filter-class-afw">Class A Browsers Full-Width Friendly</a> ';
             html += '<a href="#class-b" class="filter-class-b">Class B Browsers</a> ';
-            html += '<a href="#class-c" class="filter-class-c">Class C Browsers</a> ';
             html += '</p>';
             
             $filters_placeholder = $('.filters-placeholder').html(html);
@@ -115,9 +120,6 @@ main.afw h2 .grades {display:block;}
                 else if (fragment[0] == '#class-b') {
                     filter_class_b();
                 }
-                else if (fragment[0] == '#class-c') {
-                    filter_class_c();
-                }
                 else if (fragment[0] == '#class-afw') {
                     filter_class_afw();
                 }
@@ -125,16 +127,13 @@ main.afw h2 .grades {display:block;}
             
         };
         
-        classes = 'a b c afw';
+        classes = 'a b afw';
         
         filter_class_a = function() {
             $main.removeClass(classes).addClass('a');
         };
         filter_class_b = function() {
             $main.removeClass(classes).addClass('b');
-        };
-        filter_class_c = function() {
-            $main.removeClass(classes).addClass('c');
         };
         filter_class_afw = function() {
             $main.removeClass(classes).addClass('afw');
@@ -161,9 +160,6 @@ main.afw h2 .grades {display:block;}
            else if ($el.is('.filter-class-b')) {
                 filter_class_b();
            }
-           else if ($el.is('.filter-class-c')) {
-                filter_class_c();
-           }
            else if ($el.is('.filter-class-afw')) {
                 filter_class_afw();
            }
@@ -182,6 +178,7 @@ main.afw h2 .grades {display:block;}
 
 <body>
 
+<header>
 <p><a href="./../">BaseUp</a></p>
 <div class="filters-placeholder"></div>
 <div class="lay cols widths-1o2-1up">
@@ -189,11 +186,13 @@ main.afw h2 .grades {display:block;}
 <dl>
     <dt>Class A</dt>
         <dd>Latest and greatest</dd>
+        <dd>IE 9+</dd>
     <dt>Class B</dt>
-        <dd>box-sizing border-box is not supported</dd>
-    <dt>Class C</dt>
-        <dd>IE 6, 7, 8</dd>
-        <dd>Media Queries and child selectors are not supported</dd>
+        <dd>Legacy browsers+</dd>
+        <dd>box-sizing border-box unsupported</dd>
+        <dd>Media Queries unsupported</dd>
+        <dd>Child selectors unsupported</dd>
+        <dd>IE 8-</dd>
 </dl>
 </div>
 <div>
@@ -214,21 +213,17 @@ main.afw h2 .grades {display:block;}
 <p>Support notes gathered from caniuse.com and Mozilla MDN</p>
 </div>
 </div>
-
+</header>
 <main>
+
+
+
+
 
 
 
 <section class="a afw">
 <h2>Columns <small>Class A</small></h2>
-<div class="lay cols gut-bottom">
-    <div><div class="item"><span class="source">div 1</span>&nbsp;</div></div>
-    <div><div class="item"><span class="source">div 2</span>&nbsp;</div></div>
-</div>
-<textarea rows="4">&lt;div class="lay cols"&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
 <div class="lay cols widths-1o8-1up gut-bottom">
     <div><div class="item"><span class="source">div 1</span>&nbsp;</div></div>
     <div><div class="item"><span class="source">div 2</span>&nbsp;</div></div>
@@ -251,7 +246,7 @@ main.afw h2 .grades {display:block;}
     <a href=""><div class="item"><span class="source">a 3</span>&nbsp;</div></a>
 </div>
 
-<textarea rows="10">&lt;div class="lay cols widths-1o8-1up"&gt;
+<textarea rows="8">&lt;div class="lay cols widths-1o8-1up"&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
@@ -264,44 +259,12 @@ main.afw h2 .grades {display:block;}
 
 
 
+
+
+
+
 <section class="b">
-<h2>Columns <small>Class B, C: Legacy browsers require col on each div</small></h2>
-<div class="lay cols widths-1o8-1up gut-bottom">
-    <div><div class="item"><span class="source">div 1</span></div></div>
-    <div><div class="item"><span class="source">div 2</span></div></div>
-    <div><div class="item"><span class="source">div 3</span></div></div>
-    <div><div class="item"><span class="source">div 4</span></div></div>
-    <div><div class="item"><span class="source">div 5</span></div></div>
-    <div><div class="item"><span class="source">div 6</span></div></div>
-    <div><div class="item"><span class="source">div 7</span></div></div>
-    <div><div class="item"><span class="source">div 8</span></div></div>
-</div>
-<ul class="lay cols gut-bottom">
-    <li class="width-2o3-1up"><div class="item"><span class="source">li 1</span>width-2o3-1up</div></li>
-    <li class="width-1o3-1up"><div class="item"><span class="source">li 2</span>width-1o3-1up</div></li>
-</ul>
-<div class="lay cols widths-1o3-1up gut-bottom">
-    <a href=""><div class="item"><span class="source">a 1</span></div></a>
-    <a href=""><div class="item"><span class="source">a 2</span></div></a>
-    <a href=""><div class="item"><span class="source">a 3</span></div></a>
-</div>
-<div class="lay cols widths-1o5-1up gut-bottom">
-    <div><div class="item"><span class="source">div 1</span></div></div>
-    <div><div class="item"><span class="source">div 2</span></div></div>
-    <div><div class="item"><span class="source">div 3</span></div></div>
-    <div><div class="item"><span class="source">div 4</span></div></div>
-    <div><div class="item"><span class="source">div 5</span></div></div>
-</div>
-<textarea rows="4">&lt;div class="lay cols widths-1o2-1up"&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
-</section>
-
-
-
-<section class="c">
-<h2>Columns <small>Class C: Legacy browsers require col on each div</small></h2>
+<h2>Columns <small>Class B: Legacy+ browsers require col and width classes on each div</small></h2>
 <div class="lay gut-bottom">
     <div class="col width-1o8"><div class="item"><span class="source">div 1</span>col width-1o8</div></div>
     <div class="col width-1o8"><div class="item"><span class="source">div 2</span>col width-1o8</div></div>
@@ -330,8 +293,14 @@ main.afw h2 .grades {display:block;}
 
 
 
+
+<hr />
+
+
+
+
 <section class="a">
-<h2>Columns with gutters <small>Class A: Compatible with the latest browsers where box-sizing is supported</small></h2>
+<h2>Columns and gutters <small>Class A</small></h2>
 <div class="lay cols guts widths-1o8-1up gut-bottom">
     <div><div class="item"><span class="source">div 1</span>&nbsp;</div></div>
     <div><div class="item"><span class="source">div 2</span>&nbsp;</div></div>
@@ -365,8 +334,62 @@ main.afw h2 .grades {display:block;}
 
 
 
+
+
+
+<section class="b">
+<h2>Columns and gutters (full-width friendly) <small>Class B</small></h2>
+<div class="lay hide-gut-left gut-bottom">
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 1</span>col width-1o8</div></div></div>
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 2</span>col width-1o8</div></div></div>
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 3</span>col width-1o8</div></div></div>
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 4</span>col width-1o8</div></div></div>
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 5</span>col width-1o8</div></div></div>
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 6</span>col width-1o8</div></div></div>
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 7</span>col width-1o8</div></div></div>
+    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 8</span>col width-1o8</div></div></div>
+</div>
+<div class="lay hide-gut-left-2x gut-bottom">
+    <div class="col width-2o3"><div class="gut-left-2x"><div class="item"><span class="source">div 1</span>col width-2o3</div></div></div>
+    <div class="col width-1o3"><div class="gut-left-2x"><div class="item"><span class="source">div 2</span>col width-1o3</div></div></div>
+</div>
+<div class="lay hide-gut-left-1o2x gut-bottom">
+    <div class="col width-1o3"><div class="gut-left-1o2x"><div class="item"><span class="source">div 1</span>col width-1o3</div></div></div>
+    <div class="col width-1o3"><div class="gut-left-1o2x"><div class="item"><span class="source">div 2</span>col width-1o3</div></div></div>
+    <div class="col width-1o3"><div class="gut-left-1o2x"><div class="item"><span class="source">div 3</span>col width-1o3</div></div></div>
+</div>
+<textarea rows="4">&lt;div class="lay hide-gut-left"&gt;
+    &lt;div class="col width-1o2"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="col width-1o2"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+<!--
+<h3>Options</h3>
+<pre><code>.gut-left
+.gut-left-1x
+.gut-left-2x
+.gut-left-&hellip;
+.gut-left-<var>n</var>x
+.gut-left-1o2x
+.gut-left-none
+
+.hide-gut-left
+.hide-gut-left-1x
+.hide-gut-left-2x
+.hide-gut-left-&hellip;
+.hide-gut-left-<var>n</var>x
+.hide-gut-left-1o2x
+.hide-gut-left-none</code></pre>
+-->
+</section>
+
+
+
+
+
+
+
 <section class="afw">
-<h2>Columns with gutters full-width friendly <small>Class A: Compatible with the latest browsers where box-sizing is supported</small></h2>
+<h2>Columns and gutters: full-width friendly <small>Class A</small></h2>
 <div class="lay cols guts-fw widths-1o8-1up gut-bottom">
     <div><div><div class="item"><span class="source">div 1</span>&nbsp;</div></div></div>
     <div><div><div class="item"><span class="source">div 2</span>&nbsp;</div></div></div>
@@ -400,69 +423,10 @@ main.afw h2 .grades {display:block;}
 
 
 
-<section class="b">
-<h2>Columns with gutters (full-width friendly) <small>Class B: Compatible with legacy and latest browsers, and layouts flush to the viewport</small></h2>
-<div class="lay hide-gut-left gut-bottom">
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 1</span>col width-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 2</span>col width-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 3</span>col width-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 4</span>col width-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 5</span>col width-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 6</span>col width-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 7</span>col width-1o8-1up</div></div></div>
-    <div class="col width-1o8-1up"><div class="gut-left"><div class="item"><span class="source">div 8</span>col width-1o8-1up</div></div></div>
-</div>
-<div class="lay hide-gut-left-2x gut-bottom">
-    <div class="col width-2o3-1up"><div class="gut-left-2x"><div class="item"><span class="source">div 1</span>col width-2o3-1up</div></div></div>
-    <div class="col width-1o3-1up"><div class="gut-left-2x"><div class="item"><span class="source">div 2</span>col width-1o3-1up</div></div></div>
-</div>
-<div class="lay hide-gut-left-1o2x gut-bottom">
-    <div class="col width-1o3-1up"><div class="gut-left-1o2x"><div class="item"><span class="source">div 1</span>col width-1o3-1up</div></div></div>
-    <div class="col width-1o3-1up"><div class="gut-left-1o2x"><div class="item"><span class="source">div 2</span>col width-1o3-1up</div></div></div>
-    <div class="col width-1o3-1up"><div class="gut-left-1o2x"><div class="item"><span class="source">div 3</span>col width-1o3-1up</div></div></div>
-</div>
-<div class="lay hide-gut-left gut-bottom">
-    <div class="col width-1o5-1up"><div class="gut-left"><div class="item"><span class="source">div 1</span>col width-1o5-1up</div></div></div>
-    <div class="col width-1o5-1up"><div class="gut-left"><div class="item"><span class="source">div 2</span>col width-1o5-1up</div></div></div>
-    <div class="col width-1o5-1up"><div class="gut-left"><div class="item"><span class="source">div 3</span>col width-1o5-1up</div></div></div>
-    <div class="col width-1o5-1up"><div class="gut-left"><div class="item"><span class="source">div 4</span>col width-1o5-1up</div></div></div>
-    <div class="col width-1o5-1up"><div class="gut-left"><div class="item"><span class="source">div 5</span>col width-1o5-1up</div></div></div>
-</div>
-<textarea rows="4">&lt;div class="lay hide-gut-left"&gt;
-    &lt;div class="col width-1o2-1up"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div class="col width-1o2-1up"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
-</section>
+
+<hr />
 
 
-
-
-<section class="c">
-<h2>Columns with gutters (full-width friendly) <small>Class C: Compatible with legacy and latest browsers, and layouts flush to the viewport</small></h2>
-<div class="lay hide-gut-left gut-bottom">
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 1</span>col width-1o8</div></div></div>
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 2</span>col width-1o8</div></div></div>
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 3</span>col width-1o8</div></div></div>
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 4</span>col width-1o8</div></div></div>
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 5</span>col width-1o8</div></div></div>
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 6</span>col width-1o8</div></div></div>
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 7</span>col width-1o8</div></div></div>
-    <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 8</span>col width-1o8</div></div></div>
-</div>
-<div class="lay hide-gut-left-2x gut-bottom">
-    <div class="col width-2o3"><div class="gut-left-2x"><div class="item"><span class="source">div 1</span>col width-2o3</div></div></div>
-    <div class="col width-1o3"><div class="gut-left-2x"><div class="item"><span class="source">div 2</span>col width-1o3</div></div></div>
-</div>
-<div class="lay hide-gut-left-1o2x gut-bottom">
-    <div class="col width-1o3"><div class="gut-left-1o2x"><div class="item"><span class="source">div 1</span>col width-1o3</div></div></div>
-    <div class="col width-1o3"><div class="gut-left-1o2x"><div class="item"><span class="source">div 2</span>col width-1o3</div></div></div>
-    <div class="col width-1o3"><div class="gut-left-1o2x"><div class="item"><span class="source">div 3</span>col width-1o3</div></div></div>
-</div>
-<textarea rows="4">&lt;div class="lay hide-gut-left"&gt;
-    &lt;div class="col width-1o2"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div class="col width-1o2"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
-</section>
 
 
 
@@ -486,8 +450,11 @@ main.afw h2 .grades {display:block;}
 
 
 
-<section class="b c">
-<h2>Columns positioned <small>Class B, C</small></h2>
+
+
+
+<section class="b">
+<h2>Columns positioned <small>Class B</small></h2>
 <div class="lay gut-bottom">
     <div class="col width-2o3-1up pos-2o3-1up"><div class="item"><span class="source">div 1</span>col width-2o3-1up pos-2o3-1up</div></div>
     <div class="col width-1o3-1up pos-1o3-1up"><div class="item"><span class="source">div 2</span>col width-1o3-1up pos-1o3-1up</div></div>
@@ -512,8 +479,16 @@ main.afw h2 .grades {display:block;}
 
 
 
+
+
+<hr />
+
+
+
+
+
 <section class="a">
-<h2>Columns positioned with gutters <small>Class A</small></h2>
+<h2>Columns positioned and gutters <small>Class A</small></h2>
 <div class="lay cols widths-1o8-1up guts gut-bottom">
     <div class="pos-4o8-1up"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
     <div class="pos-6o8-1up"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
@@ -532,28 +507,10 @@ main.afw h2 .grades {display:block;}
 
 
 
-<section class="afw">
-<h2>Columns positioned with gutters full-width friendly <small>Class A</small></h2>
-<div class="lay cols widths-1o8-1up guts-fw gut-bottom">
-    <div class="pos-4o8-1up"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
-    <div class="pos-6o8-1up"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
-    <div class="pos-2o8-1up"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>
-    <div class="pos-8o8-1up"><div class="item"><span class="source">div 4</span>pos-8o8-1up</div></div>
-    <div class="pos-1o8-1up"><div class="item"><span class="source">div 5</span>pos-1o8-1up</div></div>
-    <div class="pos-7o8-1up"><div class="item"><span class="source">div 6</span>pos-7o8-1up</div></div>
-    <div class="pos-3o8-1up"><div class="item"><span class="source">div 7</span>pos-3o8-1up</div></div>
-    <div class="pos-5o8-1up"><div class="item"><span class="source">div 8</span>pos-5o8-1up</div></div>
-</div>
-<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw"&gt;
-    &lt;div class="pos-2o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div class="pos-1o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
-</section>
 
 
-
-<section class="b c">
-<h2>Columns positioned with gutters (full-width friendly) <small>Class B, C</small></h2>
+<section class="b">
+<h2>Columns positioned and gutters (full-width friendly) <small>Class B</small></h2>
 <div class="lay hide-gut-left gut-bottom">
     <div class="col width-2o3-1up pos-2o3-1up"><div class="gut-left"><div class="item"><span class="source">div 1</span>col width-2o3-1up pos-2o3-1up</div></div></div>
     <div class="col width-1o3-1up pos-1o3-1up"><div class="gut-left"><div class="item"><span class="source">div 2</span>col width-1o3-1up pos-1o3-1up</div></div></div>
@@ -578,13 +535,104 @@ main.afw h2 .grades {display:block;}
 
 
 
-<section class="a afw b c">
-<h2>Gutter and pull gutter <small>Class A, B, C</small></h2>
+
+
+
+<section class="afw">
+<h2>Columns positioned and gutters: full-width friendly <small>Class A</small></h2>
+<div class="lay cols widths-1o8-1up guts-fw gut-bottom">
+    <div class="pos-4o8-1up"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
+    <div class="pos-6o8-1up"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
+    <div class="pos-2o8-1up"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>
+    <div class="pos-8o8-1up"><div class="item"><span class="source">div 4</span>pos-8o8-1up</div></div>
+    <div class="pos-1o8-1up"><div class="item"><span class="source">div 5</span>pos-1o8-1up</div></div>
+    <div class="pos-7o8-1up"><div class="item"><span class="source">div 6</span>pos-7o8-1up</div></div>
+    <div class="pos-3o8-1up"><div class="item"><span class="source">div 7</span>pos-3o8-1up</div></div>
+    <div class="pos-5o8-1up"><div class="item"><span class="source">div 8</span>pos-5o8-1up</div></div>
+</div>
+<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw"&gt;
+    &lt;div class="pos-2o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="pos-1o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+</section>
+
+
+
+
+
+
+<hr />
+
+
+
+
+
+
+
+<section class="a afw b">
+<h2>Pull <small>Class A and B</small></h2>
+<div class="pull-right">
+    <div class="item">
+    <span class="source">div</span>pull-right
+    </div>
+</div>
+
+<div class="pull-right">
+    <div class="item">
+    <span class="source">div</span>pull-right
+    </div>
+</div>
+<div class="clear"></div>
+<div class="pull-right gut-left">
+    <div class="item">
+    <span class="source">div</span>pull-right gut-left
+    </div>
+</div>
+
+<div class="pull-right gut-left">
+    <div class="item">
+    <span class="source">div</span>pull-right gut-left
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<div class="pull-left gut-right">
+    <div class="item">
+    <span class="source">div</span>pull-left gut-right
+    </div>
+</div>
+
+<div class="pull-left gut-right">
+    <div class="item">
+    <span class="source">div</span>pull-left gut-right
+    </div>
+</div>
+</section>
+
+<div class="clear"></div>
+
+
+
+
+
+
+<hr />
+
+
+
+
+
+<section class="a afw b">
+<h2>Pull Gutter <small>Class A and B</small></h2>
 
 <h3>Divs</h3>
 <div class="lay gut-right-small">
-    <div class="pull-gut-right-small"><div class="item"><span class="source">div</span>pull- gut- right- small</div></div>
-    <div class="item"><span class="source">div</span>lay gut-right-small</div></div>
+    <div class="pull-gut-right-small">
+        <div class="item" title="pull-gut-right-small" style="overflow:hidden;text-overflow:ellipsis;white-space: nowrap"><span class="source">div</span>pull-gut-right-small</div>
+    </div>
+    <div class="item"><span class="source">div</span>lay gut-right-small</div>
+</div>
 </div>
 <div class="lay gut-right-medium">
     <div class="pull-gut-right-medium"><div class="item"><span class="source">div</span>pull-gut-right-medium</div></div>
@@ -595,24 +643,8 @@ main.afw h2 .grades {display:block;}
     <div class="item"><span class="source">div</span>lay gut-right-large</div></div>
 </div>
 <div class="lay gut-right-large">
-    <div class="pull-gut-right-large-gut-1o2x"><div class="item"><span class="source">div</span>pull-gut-right-large-gut-1o2x</div></div>
-    <div class="item"><span class="source">div</span>lay gut-right-large-gut-1o2x</div></div>
-</div>
-<div class="lay gut-right-large">
     <div class="pull-gut-right-large-gut-1x"><div class="item"><span class="source">div</span>pull-gut-right-large-gut-1x</div></div>
-    <div class="item"><span class="source">div</span>lay gut-right-large-gut-1x</div></div>
-</div>
-<div class="lay gut-right-12x">
-    <div class="pull-gut-right-12x"><div class="item"><span class="source">div</span>pull-gut-right-12x</div></div>
-    <div class="item"><span class="source">div</span>lay gut-right-12x</div></div>
-</div>
-<div class="lay gut-right-12x">
-    <div class="pull-gut-right-12x-gut-1o2x"><div class="item"><span class="source">div</span>pull-gut-right-12x-gut-1o2x</div></div>
-    <div class="item"><span class="source">div</span>lay gut-right-12x-gut-1o2x</div></div>
-</div>
-<div class="lay gut-right-12x">
-    <div class="pull-gut-right-12x-gut-1x"><div class="item"><span class="source">div</span>pull-gut-right-1x</div></div>
-    <div class="item"><span class="source">div</span>lay gut-right-12x-gut-1x</div></div>
+    <div class="item"><span class="source">div</span>lay gut-right-large</div></div>
 </div>
 <div class="lay gut-left-12x">
     <div class="pull-gut-left-12x"><div class="item"><span class="source">div</span>pull-gut-left-12x</div></div>
@@ -644,7 +676,7 @@ main.afw h2 .grades {display:block;}
 </ul>
 
 <h3>List items</h3>
-<ul class="lay">
+<ul>
     <li class="lay gut-left-large">
         <div class="pull-gut-left-large"><div class="item"><span class="source">div</span>pull-gut-left-large</div></div>
         <div class="item"><span class="source">li</span>gut-left-large</div>
@@ -662,56 +694,10 @@ main.afw h2 .grades {display:block;}
 
 
 
-<section class="a afw b c">
-<h2>Pull <small>Class A, B, C</small></h2>
-<div class="pull-right">
-    <div class="item">
-    <span class="source">div</span>pull-right
-    </div>
-</div>
-
-<div class="pull-right">
-    <div class="item">
-    <span class="source">div</span>pull-right
-    </div>
-</div>
-<div class="clear"></div>
-<div class="pull-right gut-left">
-    <div class="item">
-    <span class="source">div</span>pull-right gut-left
-    </div>
-</div>
-
-<div class="pull-right gut-left">
-    <div class="item">
-    <span class="source">div</span>pull-right gut-left
-    </div>
-</div>
-
-<div class="clear"></div>
-
-<div class="pull-left gut-right">
-    <div class="item">
-    <span class="source">div</span>pull-left gut-right
-    </div>
-</div>
-
-<div class="pull-left gut-right">
-    <div class="item">
-    <span class="source">div</span>pull-left gut-right
-    </div>
-</div>
-</section>
-
-<div class="clear"></div>
-
-
-
-
 
 <!--
-<section class="b c">
-<h2>Non-nestable layouts <small>Class B, C</small></h2>
+<section class="b">
+<h2>Non-nestable layouts <small>Class B</small></h2>
 <p>.col laid out in 5 columns</p>
 <div class="lay cols widths-1o5-1up">
     <div class="col"><div class="item">col</div></div>
@@ -760,8 +746,17 @@ main.afw h2 .grades {display:block;}
 </section>
 -->
 
-<section class="a afw b c">
-<h2>Centered <small>Class A, B, C</small></h2>
+
+
+
+
+<hr />
+
+
+
+
+<section class="a afw b">
+<h2>Centered <small>Class A and B</small></h2>
 <div class="style1">
     <div class="lay-centered">
         <div class="item">lay-centered</div>
@@ -781,8 +776,16 @@ main.afw h2 .grades {display:block;}
 
 
 
-<section class="a afw b c">
-<h2>Left and right <small>Class A, B, C</small></h2>
+
+
+<hr />
+
+
+
+
+
+<section class="a afw b">
+<h2>Left and right <small>Class A and B</small></h2>
 <div class="style1">
     <div class="lay-left">
         <div class="item">lay-left</div>
@@ -794,6 +797,8 @@ main.afw h2 .grades {display:block;}
     </div>
 </div>
 </section>
+
+
 
 
 
