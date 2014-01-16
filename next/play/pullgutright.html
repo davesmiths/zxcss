@@ -1,14 +1,621 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8" />
 <title>Padded</title>
 <style>
 
-.pullgutright {float:right;display:inline;clear:both;position:relative;}
+body {padding:20px;line-height:20px;max-width:800px;}
+
+h2 {font-size:1.2em;font-weight: normal;color:#41494b;border-top:20px solid #5e7076;margin-top:80px;background:#ffffaa;padding:20px;}
+h3 small,
+h2 small {display:block;}
+p {margin-top:0;margin-bottom:20px;}
+
+.item {background:#e2f1f6;border:2px solid #bad4db;padding:20px;}
+
+
 </style>
 </head>
 
 <body>
+
+
+
+<h2>Test 1<small>float:right</small></h2>
+<style>
+.t1 .lay {display:inline-block;}
+.t1 .lay {display:block;}
+.t1 .lay:after,
+.t1 .lay:before {content:"";display:table;}
+.t1 .lay:after {clear:both;}
+.t1 .gut-right-medium {margin-right:220px;}
+.t1 .pull-gut-right-medium {float:right;display:inline;clear:both;position:relative;width:200px;margin-right:-200px;right:-20px;}
+</style>
+<div class="t1">
+    <div class="lay gut-right-medium">
+        <div class="pull-gut-right-medium">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right-medium">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>
+    </div>
+</div>
+
+
+
+<h2>Test 2<small>float:right</small></h2>
+<style>
+.t2 .lay {display:inline-block;}
+.t2 .lay {display:block;}
+.t2 .lay:after,
+.t2 .lay:before {content:"";display:table;}
+.t2 .lay:after {clear:both;}
+.t2 .gut-right-medium-gut-none {margin-right:200px;}
+.t2 .pull-gut-right-medium-gut-none {float:right;display:inline;clear:both;position:relative;width:200px;margin-right:-200px;}
+</style>
+<div class="t2">
+    <div class="lay gut-right-medium-gut-none">
+        <div class="pull-gut-right-medium-gut-none">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right-medium-gut-none">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>
+    </div>
+</div>
+
+
+
+<h2>Test 3<small>float:right</small></h2>
+<style>
+.t3 .lay {display:inline-block;}
+.t3 .lay {display:block;}
+.t3 .lay:after,
+.t3 .lay:before {content:"";display:table;}
+.t3 .lay:after {clear:both;}
+.t3 .gut-right-medium-gut-1o2x {margin-right:210px;}
+.t3 .pull-gut-right-medium-gut-1o2x {float:right;display:inline;clear:both;position:relative;width:200px;margin-right:-200px;right:-10px;}
+</style>
+<div class="t3">
+    <div class="lay gut-right-medium-gut-1o2x">
+        <div class="pull-gut-right-medium-gut-1o2x">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right-medium-gut-1o2x">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>
+    </div>
+</div>
+
+
+
+<h2>Test 4<small>right</small></h2>
+<style>
+.t4 .lay {display:inline-block;}
+.t4 .lay {display:block;}
+.t4 .lay:after,
+.t4 .lay:before {content:"";display:table;}
+.t4 .lay:after {clear:both;}
+.t4 .gut-right-11x {margin-right:220px;}
+.t4 .pull-gut-right-10x {float:right;display:inline;clear:both;position:relative;width:200px;margin-right:-200px;right:-20px;}
+</style>
+<div class="t4">
+    <div class="lay gut-right-11x">
+        <div class="pull-gut-right-10x">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right-10x">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>
+    </div>
+</div>
+
+
+
+
+<h2>float:left margin-left:100% right:-20px <small>Fails because the margin blocks the content from moving up</small></h2>
+<style>
+.t5 .lay {display:inline-block;}
+.t5 .lay {display:block;}
+.t5 .lay:after,
+.t5 .lay:before {content:"";display:table;}
+.t5 .lay:after {clear:both;}
+.t5 .gut-right {margin-right:220px;}
+.t5 .pull-gut-right {width:200px;margin-left:100%;right:-20px;float:left;display:inline;clear:both;position:relative;}
+</style>
+<div class="t5">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+<h2>float:left left:100% right:-20px <small>Fails because the right -20px does not pull the block across</small></h2>
+<style>
+.t6 .lay {display:inline-block;}
+.t6 .lay {display:block;}
+.t6 .lay:after,
+.t6 .lay:before {content:"";display:table;}
+.t6 .lay:after {clear:both;}
+.t6 .gut-right {margin-right:220px;}
+.t6 .pull-gut-right {width:200px;left:100%;right:-20px;float:left;display:inline;clear:both;position:relative;}
+</style>
+<div class="t6">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+<h2>float:left left:100% margin-left:-20px <small></small></h2>
+<style>
+.t7 .lay {display:inline-block;}
+.t7 .lay {display:block;}
+.t7 .lay:after,
+.t7 .lay:before {content:"";display:table;}
+.t7 .lay:after {clear:both;}
+.t7 .gut-right {margin-right:220px;}
+.t7 .pull-gut-right {width:200px;left:100%;margin-left:20px;float:left;display:inline;clear:both;position:relative;}
+</style>
+<div class="t7">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+<p>Floats float flush to the containing block's edge, and therefore will always fall inside padding or borders</p>
+
+
+
+
+<h2>Test 8<small>float:left margin-right:-200px</small></h2>
+<style>
+.t8 .lay {display:inline-block;}
+.t8 .lay {display:block;}
+.t8 .lay:after,
+.t8 .lay:before {content:"";display:table;}
+.t8 .lay:after {clear:both;}
+.t8 .gut-right {margin-right:220px;}
+.t8 .pull-gut-right {width:200px;float:left;margin-right:-200px;left:100%;margin-left:20px;display:inline;clear:both;position:relative;margin-top:5px;}
+</style>
+<div class="t8">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+<h2>Test 9<small>float:right</small></h2>
+<style>
+.t9 .lay {display:inline-block;}
+.t9 .lay {display:block;}
+.t9 .lay:after,
+.t9 .lay:before {content:"";display:table;}
+.t9 .lay:after {clear:both;}
+.t9 .gut-right {margin-right:220px;}
+.t9 .pull-gut-right {width:200px;float:right;margin-right:-200px;left:20px;display:inline;clear:both;position:relative;margin-top:5px;}
+</style>
+<div class="t9">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+<h2>Test 10<small>All good</small></h2>
+<style>
+.t10 .lay {display:inline-block;}
+.t10 .lay {display:block;}
+.t10 .lay:after,
+.t10 .lay:before {content:"";display:table;}
+.t10 .lay:after {clear:both;}
+
+.t10 .pull-gut-rights {margin-right:220px;}
+.t10 .pull-gut-rights > .pull-gut {width:200px;float:right;margin-right:-200px;left:20px;display:inline;clear:both;position:relative;}
+
+.t10 .pull-gut-rights-10x-2x {margin-right:240px;}
+.t10 .pull-gut-rights-10x-2x > .pull-gut {width:200px;float:right;margin-right:-200px;left:40px;display:inline;clear:both;position:relative;}
+
+.t10 .gut-pull-gut-right {margin-right:220px;}
+.t10 .pull-gut-right {width:200px;float:right;margin-right:-200px;left:20px;display:inline;clear:both;position:relative;}
+
+.t10 .gut-pull-gut-right-11x-2x {margin-right:260px;}
+.t10 .pull-gut-right-11x-2x {float:right;width:220px;margin-right:-220px;left:40px;display:inline;clear:both;position:relative;}
+
+/* Issue on the pull-gut in IE 6 and 7 (IE 8+ is fine) where there is more than one pull float, they all stack on top of each other.
+// Solution is to take a pixel off the margin-right, or add a padding-right of 1px to either the pull-get or gut-pull-gut
+*/
+
+</style>
+<div class="t10">
+    <div class="lay pull-gut-rights"><!--  pull-gut-rights-medium pull-gut-rights-10x pull-gut-rights-medium-2x pull-gut-rights-10x-2x -->
+        <div class="pull-gut">
+            <div class="item">Class A Pull Gut</div>
+        </div>
+        <div class="pull-gut">
+            <div class="item">Class A Pull Gut</div>
+        </div>
+        <div class="item">Class A</div>
+    </div>
+    <div class="lay pull-gut-rights-10x-2x">
+        <div class="pull-gut">
+            <div class="item">Class A Pull Gut</div>
+        </div>
+        <div class="pull-gut">
+            <div class="item">Class A Pull Gut</div>
+        </div>
+        <div class="item">Class A</div>
+    </div>
+    <div class="lay gut-pull-gut-right"><!-- gut-pull-gut-right-medium   gut-pull-gut-right-11x  gut-pull-gut-right-11x-2x -->
+        <div class="pull-gut-right">    <!-- pull-gut-right-medium       pull-gut-right-11x      pull-gut-right-11x-2x -->
+            <div class="item">Class B Pull Gut</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Class B Pull Gut</div>
+        </div>
+        <div class="item">Class B</div>
+    </div>
+    <div class="lay gut-pull-gut-right-11x-2x">
+        <div class="pull-gut-right-11x-2x">
+            <div class="item">Class B Pull Gut</div>
+        </div>
+        <div class="pull-gut-right-11x-2x">
+            <div class="item">Class B Pull Gut</div>
+        </div>
+        <div class="item">Class B</div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<h2>Test 10 use casing<small></small></h2>
+<style>
+.t10a .lay {display:inline-block;}
+.t10a .lay {display:block;}
+.t10a .lay:after,
+.t10a .lay:before {content:"";display:table;}
+.t10a .lay:after {clear:both;}
+
+.t10a .gut-pull-gut-rights {margin-right:220px;}
+
+.t10a .gut-pull-gut-rights > .pull-gut,
+.t10a .gut-pull-gut-rights > * > .pull-gut {width:200px;float:right;margin-right:-200px;left:20px;display:inline;clear:both;position:relative;}
+
+.t10a .gut-pull-gut-rights-10x-2x {margin-right:240px;}
+.t10a .gut-pull-gut-rights-10x-2x > .pull-gut,
+.t10a .gut-pull-gut-rights-10x-2x > * > .pull-gut {width:200px;float:right;margin-right:-200px;left:40px;display:inline;clear:both;position:relative;}
+
+.t10a .gut-pull-gut-right {margin-right:220px;}
+.t10a .pull-gut-right {width:200px;float:right;margin-right:-200px;left:20px;display:inline;clear:both;position:relative;}
+
+.t10a .gut-pull-gut-right-11x-2x {margin-right:260px;}
+.t10a .pull-gut-right-11x-2x {float:right;width:220px;margin-right:-220px;left:40px;display:inline;clear:both;position:relative;}
+
+.t10a .person {border-bottom:1px solid #ddd;padding-bottom:0px;margin-bottom: 20px;}
+.t10a .person2 {padding:20px 20px 1px 20px;background:#eee;margin-bottom: 20px;}
+
+.t10a .image {width:100%;height:100px;background:#ddd;text-align:center;line-height:100px;margin-bottom:20px;}
+/* Issue on the pull-gut in IE 6 and 7 (IE 8+ is fine) where there is more than one pull float, they all stack on top of each other.
+// Solution is to take a pixel off the margin-right, or add a padding-right of 1px to either the pull-get or gut-pull-gut
+*/
+
+</style>
+<div class="t10a">
+
+
+    <h3>Layout > Thing <small>Things within a layout</small></h3>
+    <div class="lay gut-pull-gut-rights">
+        <div class="pull-gut">
+            <div class="image">Image</div>
+        </div>
+        <div class="pull-gut">
+            <div class="image">Image</div>
+        </div>
+        <p>On the first Monday of the month of April, 1625, the market town of Meung, in which the author of ROMANCE OF THE ROSE was born, appeared to be in as perfect a state of revolu- tion as if the Huguenots had just made a second La Rochelle of it. Many citizens, seeing the women flying toward the High Street, leaving their children crying at the open doors, hastened to don the cuirass, and supporting their somewhat uncertain courage with a musket or a partisan, directed their steps toward the hostelry of the Jolly Miller, before which was gathered, increasing every minute, a compact group, vocifer- ous and full of curiosity.</p>
+        <p>In those times panics were common, and few days passed without some city or other registering in its archives an event of this kind. There were nobles, who made war against each other; there was the king, who made war against the cardinal; there was Spain, which made war against the king. Then, in ad- dition to these concealed or public, secret or open wars, there were robbers, mendicants, Huguenots, wolves, and scoundrels, who made war upon everybody. The citizens always took up arms readily against thieves, wolves or scoundrels, often against nobles or Huguenots, sometimes against the king, but never against cardinal or Spain. It resulted, then, from this habit that on the said first Monday of April, 1625, the citizens, on hearing the clamor, and seeing neither the red-and-yellow standard nor the livery of the Duc de Richelieu, rushed toward the hostel of the Jolly Miller. When arrived there, the cause of the hubbub was apparent to all.</p>
+
+    </div>
+    
+    <div class="lay gut-pull-gut-rights">
+        <div class="thing">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Bob Bobbanickle</strong> Directed their steps toward the hostelry of the Jolly Miller, before which was gathered, increasing every minute, a compact group, vocifer- ous and full of curiosity.</p>
+        </div>
+        <div class="thing">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Fred Frangle</strong>A young man-we can sketch his portrait at a dash.</p>
+        </div>
+        <div class="thing">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Maddy Mippit</strong>A young man-we can sketch his portrait at a dash.</p>
+        </div>
+    </div>
+        
+    <h3>Thing > Layout <small>Each thing has it's own layout, so no matter where a thing moves it's layout goes with it</small></h3>
+    <div class="person">
+        <div class="lay gut-pull-gut-rights">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Bob Bobbanickle</strong> Directed their steps toward the hostelry of the Jolly Miller, before which was gathered, increasing every minute, a compact group, vocifer- ous and full of curiosity.</p>
+        </div>
+    </div>
+    <div class="person">
+        <div class="lay gut-pull-gut-rights">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Fred Frangle</strong>A young man-we can sketch his portrait at a dash.</p>
+        </div>
+    </div>
+    <div class="person">
+        <div class="lay gut-pull-gut-rights">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Maddy Mippit</strong>A young man-we can sketch his portrait at a dash.</p>
+        </div>
+    </div>
+    
+    <h3>Thing > Layout: Variation 2 <small></small></h3>
+    <div class="person2">
+        <div class="lay gut-pull-gut-rights">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Bob Bobbanickle</strong> Directed their steps toward the hostelry of the Jolly Miller, before which was gathered, increasing every minute, a compact group, vocifer- ous and full of curiosity.</p>
+        </div>
+    </div>
+    <div class="person2">
+        <div class="lay gut-pull-gut-rights">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Fred Frangle</strong>A young man-we can sketch his portrait at a dash.</p>
+        </div>
+    </div>
+    <div class="person2">
+        <div class="lay gut-pull-gut-rights">
+            <div class="pull-gut">
+                <div class="image">Image</div>
+            </div>
+            <p><strong>Maddy Mippit</strong>A young man-we can sketch his portrait at a dash.</p>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+
+
+<h2>Test 11<small>float:left margin-left:-100% left:200% border-left:20px</small></h2>
+<style>
+.t11 .lay {display:inline-block;}
+.t11 .lay {display:block;}
+.t11 .lay:after,
+.t11 .lay:before {content:"";display:table;}
+.t11 .lay:after {clear:both;}
+.t11 .gut-right {margin-right:220px;}
+.t11 .pull-gut-right {width:200px;float:left;margin-left:-100%;left:200%;border-left:20px solid transparent;display:inline;position:relative;clear:both;}
+</style>
+<div class="t11">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+
+
+<h2>Test 12<small>float:left margin-left:-100% left:200% padding-left:20px</small></h2>
+<style>
+.t12 .lay {display:inline-block;}
+.t12 .lay {display:block;}
+.t12 .lay:after,
+.t12 .lay:before {content:"";display:table;}
+.t12 .lay:after {clear:both;}
+.t12 .gut-right {padding-right:200px;}
+.t12 .pull-gut-right {width:180px;padding-left:20px;float:left;margin-left:-100%;left:200%;position:relative;clear:both;}
+</style>
+<div class="t12">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+<h2>Test 13<small>float:left margin-left:-100% left:200% with inner div for gutter</small></h2>
+<style>
+.t13 .lay {display:inline-block;}
+.t13 .lay {display:block;}
+.t13 .lay:after,
+.t13 .lay:before {content:"";display:table;}
+.t13 .lay:after {clear:both;}
+.t13 .gut-right {margin-right:220px;}
+.t13 .gut-left {margin-left:20px;}
+.t13 .pull-gut-right {width:220px;float:left;margin-left:-100%;left:200%;position:relative;clear:both;}
+</style>
+<div class="t13">
+    <div class="lay gut-right">
+        <div class="pull-gut-right"><div class="gut-left">
+            <div class="item">Blah</div>
+        </div></div>
+        <div class="pull-gut-right"><div class="gut-left">
+            <div class="item">Blah</div>
+        </div></div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+<h2>Test 14<small>float:left margin-left:20px left:100% margin-right:-100%</small></h2>
+<style>
+.t14 .lay {display:inline-block;}
+.t14 .lay {display:block;}
+.t14 .lay:after,
+.t14 .lay:before {content:"";display:table;}
+.t14 .lay:after {clear:both;}
+.t14 .gut-right {margin-right:220px;}
+.t14 .pull-gut-right {width:200px;margin-left:20px;float:left;margin-right:-100%;left:100%;position:relative;clear:both;}
+</style>
+<div class="t14">
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Blah</div>
+        </div>
+        <div class="item">Blah</div>  
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Bootstrap<small></small></h2>
+<style>
+.t11 .lay {display:inline-block;}
+.t11 .lay {display:block;}
+.t11 .lay:after,
+.t11 .lay:before {content:"";display:table;}
+.t11 .lay:after {clear:both;}
+
+.t11 .lay > .pull-gut {width:200px;float:right;margin-left:20px;}
+.t11 .lay > .pull-gut-body {overflow:hidden;background:#eee;padding:20px;}
+.image {width:100%;height:100px;background:#ddd;text-align:center;line-height:110px;margin-bottom:20px;}
+/* Issue on the pull-gut in IE 6 and 7 (IE 8+ is fine) where there is more than one pull float, they all stack on top of each other.
+// Solution is to take a pixel off the margin-right, or add a padding-right of 1px to either the pull-get or gut-pull-gut
+*/
+
+</style>
+<div class="t11">
+    <div class="lay">
+        <div class="pull-gut">
+            <div class="image">Class A Pull Gut</div>
+        </div>
+        <div class="pull-gut-body">
+            <p>A young man-we can sketch his portrait at a dash.</p>
+        </div>
+        <div class="pull-gut">
+            <div class="image">Class A Pull Gut</div>
+        </div>
+        <div class="pull-gut-body">
+            <p>A young man-we can sketch his portrait at a dash. A young man-we can sketch his portrait at a dash.</p>
+        </div>
+    </div>
+    <div class="lay">
+        <div class="lay">
+            <div class="pull-gut">
+                <div class="image">Class A Pull Gut</div>
+            </div>
+            <div class="pull-gut-body">
+                <p>A young man-we can sketch his portrait at a dash. A young man-we can sketch his portrait at a dash.</p>
+                
+                <div class="pull-gut">
+                    <div class="image">Class A Pull Gut</div>
+                </div>
+            </div>
+        </div>
+        <div class="lay">
+            <div class="pull-gut">
+                <div class="image">Class A Pull Gut</div>
+            </div>
+            <div class="pull-gut-body">
+                <p>A young man-we can sketch his portrait at a dash.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
