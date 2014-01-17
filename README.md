@@ -7,5 +7,3 @@ __Status: Good to use__
 Get your hands dirty with demo.html.
 
 Comments, questions and corrections welcomed :)
-
-Test
