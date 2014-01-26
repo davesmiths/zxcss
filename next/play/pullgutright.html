@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <title>Padded</title>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <style>
 
 body {padding:20px;line-height:20px;max-width:800px;}
@@ -481,16 +482,60 @@ p {margin-top:0;margin-bottom:20px;}
 .t14 .gut-left {margin-left:220px;}
 .t14 .pull-gut-right {float:left;position:relative;width:200px;margin-left:20px;margin-right:-100%;left:100%;clear:both;display:inline;}
 .t14 .pull-gut-left {float:right;position:relative;width:200px;margin-right:20px;margin-left:-100%;right:100%;clear:both;display:inline;}
-.t14 .ielte7fix {float:left;margin-left:1px;}
+.t14 .ielte7fix {float:left;margin-left:1px;height:1px;}
 
 .t14 .width {width:200px;height:auto;}
 .t14 .gut {margin-left:20px;}
 .t14 .gutright {margin-right:20px;}
 .t14 .pullright {float:left;position:relative;margin-right:-100%;left:100%;clear:both;display:inline;}
 .t14 .pullleft {float:left;position:relative;margin-right:-100%;right:100%;clear:both;display:inline;}
+
+/*
+    IE 7 and 6 bug
+    float:right;margin-left:-100%;
+    Instead of this making the floated element appear to the right of the containing block with 
+    all following content running under it as if it wasn't there, the element appears to the left in exactly
+    the same way as if it had the rule float:left;margin-right:-100%;
+    Can't fix this, so thinking of a way to gracefully degrade
+        Best solution I can think of is to not have the gutter but float the item.
+    
+*/
 </style>
 <div class="t14">
     <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Pull 1</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 2</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 3</div>
+        </div>
+        <div class="item">Content 1</div>  
+        <div class="pull-gut-right">
+            <div class="item">Pull 4</div>
+        </div>
+        <div class="item">Content 2</div>  
+    </div>
+    <div class="lay gut-left">
+        <div class="pull-gut-left">
+            <div class="item">Pull 1</div>
+        </div>
+        <div class="pull-gut-left">
+            <div class="item">Pull 2</div>
+        </div>
+        <div class="pull-gut-left">
+            <div class="item">Pull 3</div>
+        </div>
+        <div class="item">a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a Content 1: Aoijasd asdosajf sdoijg dfngkdsfgosidjf gsodfhg dsfgkjsdfg iojsdfgo ijdsf gndsfglsdkfjg dsfjgdsfgjiosdfjg sdfogijadfg sadjfskdfjlaskdfj dfgijodsfigjds fgjksdflgkdsfjkgjsdf gjidifgoidjsf gsd fgjsd ifgojidsfgoisdfjg d fg jdsfiogjs difgosdifj gsdfijgsd ofigj sdfogji sdfgd sfgjo</div>  
+        <div class="pull-gut-left">
+            <div class="item">Pull 4</div>
+        </div>
+        <div class="item">Content 2: Aoijasd asdosajf sdoijg dfngkdsfgosidjf gsodfhg dsfgkjsdfg iojsdfgo ijdsf gndsfglsdkfjg dsfjgdsfgjiosdfjg sdfogijadfg sadjfskdfjlaskdfj dfgijodsfigjds fgjksdflgkdsfjkgjsdf gjidifgoidjsf gsd fgjsd ifgojidsfgoisdfjg d fg jdsfiogjs difgosdifj gsdfijgsd ofigj sdfogji sdfgd sfgjo</div>  
+    </div>
+    <div class="lay gut-right">
+        <div class="ielte7fix"></div>
         <div class="pull-gut-right">
             <div class="item">Pull 1</div>
         </div>
@@ -503,14 +548,12 @@ p {margin-top:0;margin-bottom:20px;}
         <div class="pull-gut-right">
             <div class="item">Pull 3</div>
         </div>
-        <div class="ielte7fix"></div>
         <div class="item">Content 1</div>  
 
         <div class="ielte7fix"></div>
         <div class="pull-gut-right">
             <div class="item">Pull 4</div>
         </div>
-        <div class="ielte7fix"></div>
         <div class="item">Content 2</div>  
     </div>
     <div class="lay gut-left">
@@ -537,12 +580,16 @@ p {margin-top:0;margin-bottom:20px;}
         <div class="item">Content 2: Aoijasd asdosajf sdoijg dfngkdsfgosidjf gsodfhg dsfgkjsdfg iojsdfgo ijdsf gndsfglsdkfjg dsfjgdsfgjiosdfjg sdfogijadfg sadjfskdfjlaskdfj dfgijodsfigjds fgjksdflgkdsfjkgjsdf gjidifgoidjsf gsd fgjsd ifgojidsfgoisdfjg d fg jdsfiogjs difgosdifj gsdfijgsd ofigj sdfogji sdfgd sfgjo</div>  
     </div>
     <div class="lay gut-right">
+        <div class="ielte7fix"></div>
         <div class="pullright">ASDoija sdoiajsd aosidj aslkdna lsdka sdlakns</div>
+        <div class="ielte7fix"></div>
         <div class="pullright">ASD asldkasjdpiajsdf asodfhas dklfjas dfjksdfj</div>
         asdkjsaskdjhasdkjhasdkjahsdkjh aksjdhasdkjhas dkjads kjhasdjashdousdh aosduha sduhasd kajsdhaocuhsad ochascd oashdc
+        <div class="ielte7fix"></div>
         <div class="pullright">ASDoija sdoiajsd aosidj aslkdna lsdka sdlakns</div>
+        <div class="ielte7fix"></div>   
         <div class="pullright">ASD asldkasjdpiajsdf asodfhas dklfjas dfjksdfj</div>
-        <p>asdkjsaskdjhasdkjhasdkjahsdkjh aksjdhasdkjhas dkjads kjhasdjashdousdh aosduha sduhasd kajsdhaocuhsad ochascd oashdc</p>
+        <div>asdkjsaskdjhasdkjhasdkjahsdkjh aksjdhasdkjhas dkjads kjhasdjashdousdh aosduha sduhasd kajsdhaocuhsad ochascd oashdc</div>
         <p class="lay">
             <img class="pullright" src="-/images/orion-nebula-space-galaxy.jpg" alt="orion-nebula-space-galaxy" width="320" height="202" />
             fsapok sadfjs dflkasjdf psaidjf aosfhas dofij asdfsifuhsad fuhsdf osidfj sadoiajs dfhsadfkjhs dfksjdf oasihdf asodfh askdfjhs dfoisahdf oasdifh sdkfjas dlfkja sdflkjsad fpiasjdf oasidjf asdofija skdbasdkfjh dsfkjashd flaksjd gladfkjasdofijasd foisajdf aerghadfhas dfjsd nadsjfnasldfj asdfij sdghlaskdjf sdhosaid 
@@ -556,6 +603,27 @@ p {margin-top:0;margin-bottom:20px;}
             fsapok sadfjs dflkasjdf psaidjf aosfhas dofij asdfsifuhsad fuhsdf osidfj sadoiajs dfhsadfkjhs dfksjdf oasihdf asodfh askdfjhs dfoisahdf oasdifh sdkfjas dlfkja sdflkjsad fpiasjdf oasidjf asdofija skdbasdkfjh dsfkjashd flaksjd gladfkjasdofijasd foisajdf aerghadfhas dfjsd nadsjfnasldfj asdfij sdghlaskdjf sdhosaid 
         </p>
     </div>
+    <div class="lay gut-right ietest">
+        <div class="pull-gut-right">
+            <div class="item">Pull 1</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 2</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 3</div>
+        </div>
+        <div class="item">Content 1</div>  
+        <div class="pull-gut-right">
+            <div class="item">Pull 4</div>
+        </div>
+        <div class="item">Content 2</div>  
+    </div>
+    <script>
+        $('.t14 .ietest').find('.pull-gut-right').each(function() {
+            $(this).before();
+        });
+    </script>
     
 </div>
 
