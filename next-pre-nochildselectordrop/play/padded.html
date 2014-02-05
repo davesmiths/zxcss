@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--[if lt IE 9]>
+<meta http-equiv="X-UA-Compatible" content="IE=5.5" />
+<![endif]-->
+<title>Padded</title>
+
+<!--[if lt IE 8]>
+<style>
+/*
+/*  BaseUp 1.0 IE lte 7
+*/
+
+/*  1. Fix the double margin float bug in IE 6
+/*  2. Prevent unbroken strings of text and URLs breaking the layout in IE 6
+/*  3. Prevent images wider than the column width breaking the layout in IE 6
+/*  4. Account for pixel-rounding of percentages in IE 6 and 7
+/*  Note I'm using the underscore hack to target IE 6
+*/
+.col {
+    _display:inline; /* 1 */
+    _word-wrap:break-word; /* 2 */
+    _overflow:hidden; /* 3 */
+    margin-right:-1px; /* 4 */
+}
+
+
+/*  - Fix for a text-indent bug in IE 7
+/*    If text-indent is added to . and the column butts up against the viewport
+/*    then the amount of text-indent overflows and causes the scrollbar to appear
+/*
+/*  I am commenting this fix out as text-indent is fairly rare and I'd prefer to use overflow:hidden 
+/*  as little as possible, but am keeping it here for future reference
+/*
+/*.,
+/*. {overflow:hidden;}
+*/
+
+/*  - Trigger hasLayout to fix layout issues in IE 6 and 7
+*/
+.lay,
+.lay-left,
+.lay-right,
+.lay-centered {display:inline-block;}
+.lay,
+.lay-left,
+.lay-right,
+.lay-centered {display:block;}
+
+
+
+/*  - Fix for .clear to work when placed after positional floats in IE 6 and 7
+/*    MS CSS Expressions were used to keep all the fixes in one asset 
+/*    and out of the way.
+/*    Dynamically added div.clear elements are also fixed.
+/*  - Note clear must not have hasLayout triggered otherwise the fix will fail
+/*  - Note Positional floats can also be cleared with a wrapping .lay element
+*/
+.clear-ie6and7fixp1 {float:left;width:100%;height:0;overflow:hidden;}
+.clear-ie6and7fixp2 {clear:both;height:0;overflow:hidden;}
+.clear {
+    rizzlecssproperty:expression(
+        (function(self) {
+            // Ensure any real action is done only once
+            if (!self['rizzlecsspropertything2']) {
+                self['rizzlecsspropertything2']=1;
+                self.innerHTML = '<div class="clear-ie6and7fixp1"></div><div class="clear-ie6and7fixp2"></div>'+self.innerHTML;
+            }
+            return 'none';
+        }(this))
+    );
+}
+
+
+/*  - Fix for .lay .lay-left, lay-right and .lay-centered to ensure positional
+/*    floats display as expected in IE 6
+/*  - Aside, didn't realise until now that I could assign an expression to any 
+/*    old made-up property, which saves overwriting useful/used ones
+*/
+.lay-ie6fix {float:left;width:100%;}
+.lay,
+.lay-left,
+.lay-right,
+.lay-centered {
+    _rizzlecssproperty:expression(
+        (function(self) {
+            // Ensure any real action is done only once
+            if (!self['rizzlecsspropertything']) {
+                self['rizzlecsspropertything']=1;
+                self.innerHTML = '<div class="lay-ie6fix">'+self.innerHTML+'</div>';
+            }
+            return 'none';
+        }(this))
+    );
+}
+</style>
+<![endif]-->
+<style>
+
+body {margin:0;padding:0;}
+
+.clear {clear:both;}
+
+.lay {margin-bottom:20px;}
+.lay .col .item {height:50px;}
+.lay .col1 .item {background:#bcc;}
+.lay .col2 .item {background:#cbc;}
+.lay .col3 .item {background:#ccb;}
+
+.lay .col1 {background:#dee;}
+.lay .col2 {background:#ede;}
+.lay .col3 {background:#eed;}
+
+.lay1 .col1 {width:60%;margin-left:20%;}
+.lay1 .col2 {width:20%;margin-left:80%;}
+.lay1 .col3 {width:20%;margin-left:0%;}
+.lay1 .col1,
+.lay1 .col2,
+.lay1 .col3 {float:left;margin-right:-100%;}
+
+.lay2 {margin:0 -20px;}
+.lay2 .col1 {width:60%;margin-left:20%;}
+.lay2 .col2 {width:20%;margin-left:80%;}
+.lay2 .col3 {width:20%;margin-left:0%;}
+.lay2 .col1,
+.lay2 .col2,
+.lay2 .col3 {float:left;margin-right:-100%;}
+.lay2 .col1,
+.lay2 .col2,
+.lay2 .col3 {padding:0 20px;box-sizing:border-box;-moz-box-sizing: border-box;}
+
+.lay2b {margin:0 0 0 -40px;}
+.lay2b .col1 {width:60%;margin-left:20%;}
+.lay2b .col2 {width:20%;margin-left:80%;}
+.lay2b .col3 {width:20%;margin-left:0%;}
+.lay2b .col1,
+.lay2b .col2,
+.lay2b .col3 {float:left;margin-right:-100%;}
+.lay2b .inn {margin:0 0 0 40px;}
+
+.lay3 {margin:0 -25px;}
+.lay3 .col1 {width:60%;margin-left:20%;}
+.lay3 .col2 {width:20%;margin-left:80%;}
+.lay3 .col3 {width:20%;margin-left:0%;}
+.lay3 .col1,
+.lay3 .col2,
+.lay3 .col3 {float:left;margin-right:-100%;}
+.lay3 .col1,
+.lay3 .col2,
+.lay3 .col3 {padding-left:20px;padding-right:20px;border-left:5px solid #977;border-right:5px solid #977;box-sizing:border-box;-moz-box-sizing: border-box;}
+
+.lay3b {margin-left:-50px;}
+.lay3b .col1 {width:60%;margin-left:20%;}
+.lay3b .col2 {width:20%;margin-left:80%;}
+.lay3b .col3 {width:20%;margin-left:0%;}
+.lay3b .col1,
+.lay3b .col2,
+.lay3b .col3 {float:left;margin-right:-100%;}
+.lay3b .inn {margin-left:20px;padding-left:20px;border-left:10px solid #977;}
+
+</style>
+</head>
+
+<body>
+
+<p>Plain columns</p>
+<div class="lay lay1">
+<div class="col col1"><div class="item">1</div></div>
+<div class="col col2"><div class="item">2</div></div>
+<div class="col col3"><div class="item">3</div></div>
+</div>
+
+<div class="clear"></div>
+<p>Purist columns with gutter: lay > col</p>
+<div class="lay lay2">
+<div class="col col1"><div class="item">1</div></div>
+<div class="col col2"><div class="item">2</div></div>
+<div class="col col3"><div class="item">3</div></div>
+</div>
+
+<div class="clear"></div>
+
+<p>Pragmatic columns with gutter: lay > col > inn</p>
+<div class="lay lay2b">
+<div class="col col1"><div class="inn"><div class="item">1</div></div></div>
+<div class="col col2"><div class="inn"><div class="item">2</div></div></div>
+<div class="col col3"><div class="inn"><div class="item">3</div></div></div>
+</div>
+
+<div class="clear"></div>
+
+<p>Purist columns with gutter and border: lay > col</p>
+<div class="lay lay3">
+<div class="col col1"><div class="item">1</div></div>
+<div class="col col2"><div class="item">2</div></div>
+<div class="col col3"><div class="item">3</div></div>
+</div>
+
+<div class="clear"></div>
+<p>Pragmatic columns with gutter and border: lay > col > inn</p>
+
+<div class="lay lay3b">
+<div class="col col1"><div class="inn"><div class="item">1</div></div></div>
+<div class="col col2"><div class="inn"><div class="item">2</div></div></div>
+<div class="col col3"><div class="inn"><div class="item">3</div></div></div>
+</div>
+
+
+</body>
+</html>

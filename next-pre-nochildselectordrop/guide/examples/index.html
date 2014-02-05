@@ -68,11 +68,14 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 <![endif]-->
 
 
-<!--[if lte IE 8]><link href="../../baseup-ielte8.css" rel="stylesheet" /><![endif]-->
+<!--[if lte IE 7]><link href="../../baseup-ielte7.css" rel="stylesheet" /><![endif]-->
 <link href="../../baseup.css" rel="stylesheet" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
+<!--
+<script src="../assets/js/Respond-master/respond.min.js"></script>
+-->
 
 <script>
     
@@ -169,12 +172,8 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
         });
         
     }(jQuery));
-
-
+    
 </script>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
-
 </head>
 
 <body>
@@ -187,15 +186,14 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 <dl>
     <dt>Class A</dt>
         <dd>Latest and greatest</dd>
-        <dd>Dependencies: Media Query and box-sizing border-box support</dd>
         <dd>IE 9+</dd>
     <dt>Class B</dt>
-        <dd>Dependencies: Child selector support</dd>
-        <dd>IE 7+</dd>
-    <dt>Unsupported</dt>
-        <dd>IE 6-</dd>
+        <dd>Legacy browsers+</dd>
+        <dd>box-sizing border-box unsupported</dd>
+        <dd>Media Queries unsupported</dd>
+        <dd>Child selectors unsupported</dd>
+        <dd>IE 8-</dd>
 </dl>
-<p>box-sizing border-box support is needed for .guts</p>
 </div>
 <div>
 <dl>
@@ -203,14 +201,14 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
         <dd>IE 9+, Firefox 3.5+, Safari 4+, Opera 9.5+</dd>
         <dd><a href="http://caniuse.com/css-mediaqueries">Media Queries (caniuse.com)</a></dd>
         <dd><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries#Browser_compatibility">Media Queries (developer.mozilla.org)</a></dd>
-    <dt>box-sizing border-box</dt>
-        <dd>IE 8+, Opera 9.5+, Safari 3+</dd>
-        <dd><a href="http://caniuse.com/css3-boxsizing">box-sizing (caniuse.com)</a></dd>
-        <dd><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing#Browser_compatibility">box-sizing (developer.mozilla.org)</a></dd>
     <dt>Child selector &gt;</dt>
         <dd>IE 7+</dd>
         <dd><a href="http://caniuse.com/css-sel2">Child selectors (caniuse.com)</a></dd>
         <dd><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Child_selectors#Browser_compatibility">Child selectors (developer.mozilla.org)</a></dd>
+    <dt>box-sizing border-box</dt>
+        <dd>IE 8+, Opera 9.5+, Safari 3+</dd>
+        <dd><a href="http://caniuse.com/css3-boxsizing">box-sizing (caniuse.com)</a></dd>
+        <dd><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing#Browser_compatibility">box-sizing (developer.mozilla.org)</a></dd>
 </dl>
 <p>Support notes gathered from caniuse.com and Mozilla MDN</p>
 </div>

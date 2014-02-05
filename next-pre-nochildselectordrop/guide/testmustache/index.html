@@ -1,0 +1,192 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../assets/js/mustachejs/mustache.js"></script>
+<script>
+    
+    var input = {
+    
+        breakpoints: [
+            {
+                bp: ''
+                ,at: 0
+                ,maxwidth: 480
+                ,maxwidths: [
+                    {maxwidth:345}
+                    ,{maxwidth:690}
+                ]
+                ,widths: [
+                    {
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:0}
+                        ]
+                        ,value: 30
+                    }
+                    ,{
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:0}
+                        ]
+                        ,value: 40
+                    }
+                ]
+                ,poss: [
+                    {
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:0}
+                        ]
+                        ,value: 30
+                    }
+                    ,{
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:0}
+                        ]
+                        ,value: 40
+                    }
+                ]
+                ,gutter: 10
+                ,gutter1o2: 5
+                ,gutters: [
+                    {i: 1, gutter: 20, isnotlast: 1}
+                    ,{i: 2, gutter: 30, isnotlast: 1}
+                    ,{i: 3, gutter: 40, isnotlast: 1}
+                    ,{i: 4, gutter: 50}
+                ]
+                ,pullguts: [
+                    {i:1,marginleft:10,width:0,isnotlast:1}
+                    ,{i:2,marginleft:20,width:10,isnotlast:1}
+                    ,{i:3,marginleft:30,width:20,isnotlast:1}
+                    ,{i:4,marginleft:40,width:30}
+                ]
+                ,pullgutrights: [
+                    {i:1,marginright:10,width:0,isnotlast:1}
+                    ,{i:2,marginright:20,width:10,isnotlast:1}
+                    ,{i:3,marginright:30,width:20,isnotlast:1}
+                    ,{i:4,marginright:40,width:30}
+                ]
+                ,base2: 10
+                ,base3: 20
+                ,base4: 30
+                ,base5: 40
+                ,base6: 50
+                ,base7: 60
+                ,base8: 70
+                ,base9: 80
+            }
+            ,{
+                bp: '-1up'
+                ,at: 345
+                ,maxwidth: 960
+                ,maxwidths: [
+                    {maxwidth:345}
+                    ,{maxwidth:690}
+                ]
+                ,widths: [
+                    {
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:1}
+                        ]
+                        ,value: 30
+                    }
+                    ,{
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:1}
+                        ]
+                        ,value: 40
+                    }
+                ]
+                ,poss: [
+                    {
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:0}
+                        ]
+                        ,value: 30
+                    }
+                    ,{
+                        fractions:[
+                            {fraction:'1o1',isnotlast:1}
+                            ,{fraction:'1o2',isnotlast:0}
+                        ]
+                        ,value: 40
+                    }
+                ]
+                ,gutter: 20
+                ,gutter1o2: 10
+                ,gutters: [
+                    {i: 1, gutter: 20, isnotlast: 1}
+                    ,{i: 2, gutter: 30, isnotlast: 1}
+                    ,{i: 3, gutter: 40, isnotlast: 1}
+                    ,{i: 4, gutter: 50}
+                ]
+                ,pullguts: [
+                    {i:1,marginleft:20,width:0,isnotlast:1}
+                    ,{i:2,marginleft:40,width:20,isnotlast:1}
+                    ,{i:3,marginleft:60,width:40,isnotlast:1}
+                    ,{i:4,marginleft:80,width:60}
+                ]
+                ,pullgutrights: [
+                    {i:1,marginright:10,width:0,isnotlast:1}
+                    ,{i:2,marginright:20,width:10,isnotlast:1}
+                    ,{i:3,marginright:30,width:20,isnotlast:1}
+                    ,{i:4,marginright:40,width:30}
+                ]
+                ,base2: 40
+                ,base3: 60
+                ,base4: 80
+                ,base5: 100
+                ,base6: 120
+                ,base7: 140
+                ,base8: 160
+                ,base9: 180
+            }
+        ]
+        ,'ns': ''
+        ,'lay': 'lay'
+        ,'lay-centered': 'lay-centered'
+        ,'lay-left': 'lay-left'
+        ,'lay-right': 'lay-right'   
+        ,'gut': 'gut'
+        ,'gut-right': 'gut-right'
+        ,'gut-hide': 'gut-hide'
+        ,'gut-row': 'gut-row'
+        ,'col': 'col'
+        ,'col-none': 'col-none'
+        ,'pull-right': 'pull-right'
+        ,'pull-left': 'pull-left'
+        ,'pull-gut': 'pull-gut'
+        ,'pull-gut-right': 'pull-gut-right'
+        ,'clear': 'clear'
+        ,'clear-none': 'clear-none'
+        ,'width': 'width'
+        ,'width-max': 'width-max'
+        ,'pos': 'pos'
+        ,'clear-ie6and7fixp1': 'clear-ie6and7fixp1'
+        ,'clear-ie6and7fixp2': 'clear-ie6and7fixp2'
+        ,'lay-ie6fix': 'lay-ie6fix'
+        ,'layout-gutter': 'layout-gutter'
+        ,'rizzlecssproperty': 'rizzlecssproperty'
+
+    };
+    $.ajax('template.css').done(function(template) {
+        var output = Mustache.render(template, input);
+        $(function() {
+            $('.output').html(output);
+        });
+    });
+    $.ajax('template-ie7.css').done(function(template) {
+        var output = Mustache.render(template, input);
+        $(function() {
+            $('.output2').html(output);
+        });
+    });
+    
+</script>
+<h2>template.css</h2>
+<pre class="output"></pre>
+<h2>template-ie7.css</h2>
+<pre class="output2"></pre>
+

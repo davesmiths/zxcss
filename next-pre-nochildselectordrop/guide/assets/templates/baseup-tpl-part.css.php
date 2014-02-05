@@ -1,5 +1,36 @@
 
 
+/* Col Gutter */
+.{{ns}}{{colgut}}{{bp}},
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{colgut}}-{{i}}x{{bp}},
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{colgut}}-1o2x{{bp}},
+.{{ns}}{{colgut}}-none{{bp}} {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+
+.{{ns}}{{colgut}}{{bp}} {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{colgut}}-{{i}}x{{bp}} {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{colgut}}-1o2x{{bp}} {padding-left:{{halfgutter1o2}}px;padding-right:{{halfgutter1o2}}px;}
+.{{ns}}{{colgut}}-none{{bp}} {padding-left:0;padding-right:0;}
+
+
+/* Hide Col Gutter * /
+.{{ns}}{{colguthide}}{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{colguthide}}-{{i}}x{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{colguthide}}-1o2x{{bp}} {margin-left:-{{halfgutter1o2}}px;margin-right:-{{halfgutter1o2}}px;}
+.{{ns}}{{colguthide}}-none{{bp}} {margin-left:0;margin-right:0;}
+/**/
+
 /* Hide Gutter Left */
 .{{ns}}{{innguthide}}{{bp}} {margin-left:-{{gutter}}px;}
 {{#gutters}}

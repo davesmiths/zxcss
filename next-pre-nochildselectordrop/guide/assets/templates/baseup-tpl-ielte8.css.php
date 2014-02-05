@@ -8,7 +8,7 @@
 /*  4. Account for pixel-rounding of percentages in IE 6 and 7
 /*  Note I'm using the underscore hack to target IE 6
 */
-.cols > * {
+.col {
     _display:inline; /* 1 */
     _word-wrap:break-word; /* 2 */
     _overflow:hidden; /* 3 */

@@ -1,4 +1,95 @@
+/*
+/*  BaseUp 1.0 CSS
+*/
 
+.{{ns}}{{col}} {float:left;width:100%;}
+.{{ns}}cols > * {float:left;width:100%;} /* Width not set as the selector specificity is too high for later width classes to over-rule */
+.{{ns}}{{pullleft}} {float:left;width:100%;}
+.{{ns}}{{pullright}} {float:right;width:100%;}
+.{{ns}}{{pos}} {margin-right:-100%;}
+.{{ns}}{{lay}} {list-style-type:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0;}
+
+
+{{#breakpoints}}
+{{#isgt0}}
+@media all and (min-width:{{at}}px) {
+
+    .{{ns}}{{layleft}},
+    .{{ns}}{{layright}},
+    .{{ns}}{{laycentered}},
+    .{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
+    
+{{#issecond}}
+    .{{ns}}{{pullleft}},
+    .{{ns}}{{pullright}} {width:auto;}
+    
+{{/issecond}}
+}
+{{/isgt0}}
+
+{{/breakpoints}}
+
+.{{ns}}{{lay}}:after,
+.{{ns}}{{lay}}:before,
+.{{ns}}{{layleft}}:after,
+.{{ns}}{{layleft}}:before,
+.{{ns}}{{layright}}:after,
+.{{ns}}{{layright}}:before,
+.{{ns}}{{laycentered}}:after,
+.{{ns}}{{laycentered}}:before {content:"";display:table;}
+.{{ns}}{{lay}}:after,
+.{{ns}}{{layleft}}:after,
+.{{ns}}{{layright}}:after,
+.{{ns}}{{laycentered}}:after {clear:both;}
+
+.{{ns}}{{layleft}} {margin-right:auto;}
+.{{ns}}{{layright}} {margin-left:auto;}
+.{{ns}}{{laycentered}} {margin-left:auto;margin-right:auto;}
+
+.{{ns}}{{clear}} {clear:both;}
+{{#breakpoints}}
+{{#bp}}
+
+@media all and (min-width:{{at}}px) {
+
+.{{ns}}{{col}}{{bp}} {float:left;width:100%;}
+.{{ns}}{{colnone}}{{bp}} {float:none;width:auto;}
+.{{ns}}{{clear}}{{bp}} {clear:left;}
+.{{ns}}{{clearnone}}{{bp}} {clear:none;}
+{{/bp}}
+
+
+
+/* Col Gutter */
+.{{ns}}{{colgut}}{{bp}},
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{colgut}}-{{i}}x{{bp}},
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{colgut}}-1o2x{{bp}},
+.{{ns}}{{colgut}}-none{{bp}} {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+
+.{{ns}}{{colgut}}{{bp}} {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{colgut}}-{{i}}x{{bp}} {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{colgut}}-1o2x{{bp}} {padding-left:{{halfgutter1o2}}px;padding-right:{{halfgutter1o2}}px;}
+.{{ns}}{{colgut}}-none{{bp}} {padding-left:0;padding-right:0;}
+
+
+/* Hide Col Gutter * /
+.{{ns}}{{colguthide}}{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
+{{#gutters}}
+{{#isforlay}}
+.{{ns}}{{colguthide}}-{{i}}x{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
+{{/isforlay}}
+{{/gutters}}
+.{{ns}}{{colguthide}}-1o2x{{bp}} {margin-left:-{{halfgutter1o2}}px;margin-right:-{{halfgutter1o2}}px;}
+.{{ns}}{{colguthide}}-none{{bp}} {margin-left:0;margin-right:0;}
+/**/
 
 /* Hide Gutter Left */
 .{{ns}}{{innguthide}}{{bp}} {margin-left:-{{gutter}}px;}
@@ -85,20 +176,21 @@
 
 /* Widths */
 .{{ns}}{{width}}s-auto{{bp}} > * {width:auto;}
-{{#widthclasses}}{{#widths}}
+{{#widths}}{{#widths}}
 {{#fractions}}{{#isnotfirst}},
-{{/isnotfirst}}.{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} .col-cols,
+{{/isnotfirst}}.{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} .col-cols{{/fractions}},
 .{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} > *{{/fractions}} {width:{{value}}%;}
-{{/widths}}{{/widthclasses}}
+{{/widths}}{{/widths}}
 
 
 
 /* Width */
 .{{ns}}{{width}}-auto{{bp}} {width:auto;}
-{{#widthclasses}}{{#widths}}
+{{#widths}}{{#widths}}
 {{#fractions}}{{#isnotfirst}},
 {{/isnotfirst}}.{{ns}}{{width}}-{{numerator}}o{{denominator}}{{bp}}{{/fractions}} {width:{{value}}%;}
-{{/widths}}{{/widthclasses}}
+{{/widths}}{{/widths}}
+
 
 
 /* Cols */
@@ -145,4 +237,9 @@
 {{#poss}}{{#fractions}}{{#isnotveryfirst}},
 {{/isnotveryfirst}}.{{ns}}{{pos}}-{{numerator}}o{{denominator}}{{bp}}{{/fractions}}{{/poss}} {margin-right:-100%;}
 
+{{#bp}}
+}
+{{/bp}}
+
+{{/breakpoints}}
 
