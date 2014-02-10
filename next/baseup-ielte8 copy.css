@@ -31,9 +31,6 @@
 //. {overflow:hidden;}
 */
 
-/* Do this or do nothing and let the layout wrap, maybe let the layout wrap, or only use guts-fw for broadest compatibility */
-.guts {*margin-left:0!important;*margin-right:0!important;}
-.guts > * {*padding-left:0!important;*padding-right:0!important;}
 
 .lay,
 .lay-left,

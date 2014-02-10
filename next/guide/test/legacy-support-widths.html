@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Test BaseUp</title>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link href="../../baseup.css" rel="stylesheet" />
+<script src="../../baseup.js"></script>
+<script>
+    // Engage legacy support
+    $(function() {
+        $('button').on('click', function() {
+            $('.clear').baseUp({legacySupportClear:'apply'});
+            $('.lay, .lay-left, .lay-right, .lay-centered').baseUp({legacySupportLay:'apply'});            
+            $("[class^='widths-'],[class*=' widths-']").baseUp({legacySupportWidths:'apply'});            
+            $('.cols').baseUp({legacySupportCols:'apply'});            
+        });
+    });
+</script>
+<style type="text/css">
+
+/* Page Styles */
+
+body {
+	margin: 0;
+	padding: 0;
+	line-height: 20px;
+	background: #fff;
+}
+p {margin:0 0 20px 0;}
+.wrap {background:#eed;}
+
+
+/* A tiny bit of styling */
+div.tests {line-height:3;}
+.style-colour1 {background:#ABB0FF;}
+.style-colour2 {background:#E09DE8;}
+.style-colour3 {background:#FFB7A9;}
+.style-colour4 {background:#9AE6E8;}
+.style-colour5 {background:#ACFFAF;}
+.style-colour6 {background:#ff9bAa;}
+h2 {margin:0;line-height:2;}
+
+.userstyle {text-indent:0px;}
+
+.height-auto {height:auto;}
+.item {background:#ddd;padding:10px;}
+
+</style>
+
+
+</head>
+
+<body>
+
+<div class="lay-centered cols widths-1o8 widths-1o8 gut-bottom" style="width:800px;">
+    <div class="a width-1o4"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 4</span>pos-8o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 5</span>pos-1o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 6</span>pos-7o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 7</span>pos-3o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 8</span>pos-5o8-1up</div></div>
+</div>
+<button>Turn on legacy support</button>
+
+
+</body>
+</html>

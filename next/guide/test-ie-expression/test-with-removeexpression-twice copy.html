@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+
+<title>BaseUp</title>
+
+<style>
+
+div {
+    iefixproperty1:expression(
+        (function(self) {
+            if (!self['ietest']) {
+                self['ietest'] = 1;
+            }
+            else {
+                self['ietest']++;
+            }
+            
+            clearTimeout(self['ietesttimeout']);
+            self['ietesttimeout'] = setTimeout(function() {
+                self.style.removeExpression('iefixproperty1');
+                //document.recalc();
+            }, 1);
+            // http://msdn.microsoft.com/en-us/library/aa358798%28v=vs.85%29.aspx
+            
+            self.innerHTML += 'div:'+self['ietest'] + ',';
+            
+            return 'auto';
+        }(this))
+    );
+}
+
+div.test {
+    iefixproperty2:expression(
+        (function(self) {
+            if (!self['ietest']) {
+                self['ietest'] = 1;
+            }
+            else {
+                self['ietest']++;
+            }
+            
+            clearTimeout(self['ietesttimeout']);
+            self['ietesttimeout'] = setTimeout(function() {
+                self.style.removeExpression('iefixproperty2');
+                //document.recalc();
+            }, 1);
+            // http://msdn.microsoft.com/en-us/library/aa358798%28v=vs.85%29.aspx
+            
+            self.innerHTML += 'div.test:'+self['ietest'] + ',';
+            
+            return 'auto';
+        }(this))
+    );
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+<p><a href="./">BaseUp</a></p>
+<h1 class="subheaded">BaseUp</h1>
+
+<p><a href="test-with-removeexpression.html">With removeExpression</a>, <a href="test-without-removeexpression.html">without removeExpression</a></p>
+<p>With two expressions on same elements, removeExpression</p>
+
+
+<p>Seems to cause IE 6 to crash when switching between the different tests, with timeout of 5 or less, but was ok for 50.</p>
+
+<p id="ietest"></p>
+
+<div> </div>
+<div> </div>
+<div> </div>
+<div> </div>
+<div class="test"> </div>
+<div> </div>
+<div> </div>
+<div> </div>
+<div> </div>
+<div> </div>
+<div> </div>
+
+</body>
+</html>

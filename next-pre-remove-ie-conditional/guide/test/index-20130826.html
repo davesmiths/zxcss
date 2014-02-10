@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>ZXCSS</title>
+
+<!-- ZXCSS -->
+
+<!--[if lte IE 7]>
+<style>
+.layout {display:inline;margin-right:-1px;}
+.column {display:inline-block;}
+.column {display:block;}
+.layout-gutter {display:inline-block;}
+.layout-gutter {display:block;}
+.layout-centered {display:inline-block;}
+.layout-centered {display:block;}
+</style>
+<![endif]-->
+
+<!--[if lte IE 6]>
+<style>
+.layout-gutter-ie6fix {display:inline-block;}
+.layout-gutter {width:expression(
+    (function(self) {
+        // Ensure any real action is done only once
+        if (!self.zxcsslayoutthing) {
+            self.zxcsslayoutthing=1;
+            self.innerHTML = '<div class="layout-gutter-ie6fix">'+self.innerHTML+'</div>';
+            //alert(self.innerHTML);
+        }
+        return "auto";
+    }(this))
+);}
+</style>
+<![endif]-->
+
+<style type="text/css">
+/* Page Styles */
+
+
+body {
+	margin: 0 50px;
+	padding: 0;
+	line-height: 20px;
+}
+a:focus {
+	background: #FF0;
+	color: #000;
+}
+.wrap {background:#eef;}
+.clear {clear:both;}
+
+.column:after,
+.column:before {content:"";display:table;}
+.column:after {clear:both;}
+
+.layout-gutter:after,
+.layout-gutter:before {content:"";display:table;}
+.layout-gutter:after {clear:both;}
+
+.layout-centered:after,
+.layout-centered:before {content:"";display:table;}
+.layout-centered:after {clear:both;}
+
+.layout-centered {margin-left:auto;margin-right:auto;}
+
+.layout-gutter {margin-left:-50px;}
+.gutter {margin-left:50px;}
+
+.layout {float:left;width:100%;}
+.layout1 {width:20%;}
+.layout2 {width:50%;}
+.layout3 {width:30%;}
+.layout11 {width:40%;}
+.layout12 {width:60%;}
+.playout1 {width:20%;margin-left:50%;margin-right:-100%;}
+.playout2 {width:50%;margin-left:0%;margin-right:-100%;}
+.playout3 {width:30%;margin-left:70%;margin-right:-100%;}
+.playout11 {width:40%;margin-left:60%;margin-right:-100%;}
+.playout12 {width:60%;margin-left:0%;margin-right:-100%;}
+
+
+
+</style>
+<!--[if lte IE 3]><script src="demo-assets/respond.src.js"></script><![endif]-->
+<!--[if lte IE 3]><script src="http://getfirebug.com/releases/lite/1.3/firebug-lite.js"></script><![endif]-->
+
+
+<script>
+
+var html = '';
+html += '<div class="layout-gutter">';
+html += '    <div class="layout playout1">';
+html += '        <div class="column gutter" style="background:#dee;">Column 1</div>';
+html += '    </div>';
+html += '    <div class="layout playout2">';
+html += '        <div class="column gutter" style="background:#ede;">Column 2</div>';
+html += '    </div>';
+html += '    <div class="layout playout3">';
+html += '        <div class="column gutter" style="background:#edd;">Column 3</div>';
+html += '    </div>';
+html += '</div>';
+
+setTimeout(function() {
+    document.getElementById('bob').innerHTML = html;
+}, 1000);
+
+</script>
+
+
+</head>
+
+<body>
+<div class="wrap">
+<h1><a href="http://www.dave-smith.info/zxcss-layout/">ZXCSS</a></h1>
+<p>Hi, Dave here, welcome to my intro and demo of ZXCSS</p>
+<h2>Base styles</h2>
+<p>No changes<br />
+Not a white-space issue. Not a line-height issue</p>
+<p>Does something<br />
+margin-right:-200%, doesn't fix all though</p>
+<p>The base styles ensure cross-browser compatibility and leave you free to concentrate on layout:</p>
+
+
+<div id="bob"></div>
+
+<!--
+<pre>&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;column&quot;&gt;
+    &lt;div class=&quot;inn&quot;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre> 
+-->
+
+<h2>Layout styles</h2>
+<p>To produce the most robust and responsive layouts add custom classes to the rows, columns and inners as necessary:</p>
+
+<!-- Active -->
+<p>Problem is that layout-gutter is marginleft-50px but this is not honoured unless it has a childhaslayoutwrappingcontent</p>
+<div class="layout-gutter">
+    <div class="layout layout1">
+        <div class="column gutter" style="background:#dee;">Column 1</div>
+    </div>
+    <div class="layout layout2">
+        <div class="column gutter" style="background:#ede;">Column 2
+            <div class="layout-gutter">
+                <div class="layout layout1">
+                    <div class="column gutter" style="background:#dee;">Column 1</div>
+                </div>
+                <div class="layout layout2">
+                    <div class="column gutter" style="background:#fff;">Column 2</div>
+                </div>
+                <div class="layout layout3">
+                    <div class="column gutter" style="background:#edd;">Column 3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout layout3">
+        <div class="column gutter" style="background:#edd;">Column 3</div>
+    </div>
+</div>
+
+<div class="layout-gutter">
+    <div class="layout layout1">
+        <div class="column gutter" style="background:#dee;">Column 1 </div>
+    </div>
+    <div class="layout layout2">
+        <div class="column gutter" style="background:#ede;">Column 2 </div>
+    </div>
+    <div class="layout layout3">
+        <div class="column gutter" style="background:#edd;">Column 3 </div>
+    </div>
+</div>
+
+<!-- Works in IE 6 -->
+<div class="layout-centered" style="max-width:800px;margin-bottom:50px;">
+    <div class="column" style="background:#aff;padding:0px;">
+        <div class="layout-gutter">
+            <div class="layout layout1">
+                <div class="column gutter" style="background:#dee;">Column 1 </div>
+            </div>
+            <div class="layout layout2">
+                <div class="column gutter" style="background:#ede;">Column 2 </div>
+            </div>
+            <div class="layout layout3">
+                <div class="column gutter" style="background:#edd;">Column 3 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p style="border-top:1px solid #555;margin-top:100px;">Para</p>
+<div class="layout-gutter">
+    <div class="layout playout1">
+        <div class="column gutter" style="background:#dee;">Column 1 </div>
+    </div>
+    <div class="layout playout2">
+        <div class="column gutter" style="background:#ede;">Column 2 </div>
+    </div>
+    <div class="layout playout3">
+        <div class="column gutter" style="background:#edd;">Column 3 </div>
+    </div>
+</div>
+
+<!-- Works in IE 6 -->
+<div class="layout-centered" style="max-width:800px;">
+    <div class="column" style="background:#fee;padding:0px;">
+        <div class="layout-gutter">
+            <div class="layout playout1">
+                <div class="column gutter" style="background:#dee;">Column 1 </div>
+            </div>
+            <div class="layout playout2">
+                <div class="column gutter" style="background:#ede;">Column 2 </div>
+            </div>
+            <div class="layout playout3">
+                <div class="column gutter" style="background:#edd;">Column 3 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<p><strong>Older tests</strong></p>
+<!-- First -->
+<div class="layout-gutter">
+    <div class="column">
+        <div class="layout layout1">
+          <div class="column gutter" style="background:#dee;">Column 1 </div>
+        </div>
+        <div class="layout layout2">
+          <div class="column gutter" style="background:#ede;">Column 2 </div>
+        </div>
+        <div class="layout layout3">
+          <div class="column gutter" style="background:#edd;">Column 3 </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pseudo Code -->
+<div class="layout centered maxwidth">
+    <div class="column style padding background border">
+        ...
+        <div class="layout">
+            <div class="column style padding background border">
+                <div class="layout-gutter">
+                    <div class="layout-gutter-ie6fix">
+                        <div class="layout w1o2">
+                            <div class="column gutter style padding background border">
+                            </div>
+                        </div>
+                        <div class="layout w1o2">
+                            <div class="column gutter style padding background border">
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        ...
+    </div>
+</div>
+
+
+<div class="layout-gutter">
+    <div class="column">
+        <div class="layout layout1">
+            <div class="column gutter" style="background:#dee;">Column 1 </div>
+        </div>
+        <div class="layout layout2">
+            <div class="column gutter" style="background:#ede;">Column 2 </div>
+        </div>
+        <div class="layout layout3">
+            <div class="column gutter" style="background:#edd;">Column 3 </div>
+        </div>
+    </div>
+</div>
+
+<div>Before</div>
+
+<!--
+<div class="column">
+    <div class="layout-gutter">
+      <div class="layout w2o3">
+        <div class="column gutter" style="background:#dee;">Content
+        </div>
+      </div>
+      <div class="layout w1o3">
+        <div class="column gutter" style="background:#ede;">Sidebar
+        </div>
+      </div>
+    </div>
+</div>
+-->
+<div>After</div>
+
+</div>
+</body>
+</html>

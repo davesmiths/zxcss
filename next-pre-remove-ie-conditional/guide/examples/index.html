@@ -56,17 +56,22 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 </style>
 
+<!--[if !IE]> -->
+<link href="ie10+" />
+<!-- <![endif]-->
+<!--[if IE 9]>
+<link href="ie9" />
+<![endif]-->
+<!--[if lte IE 8]>
+<link href=""></link>
+<script src=""></script>
+<![endif]-->
+
+
+<!--[if lte IE 8]><link href="../../baseup-ielte8.css" rel="stylesheet" /><![endif]-->
+<link href="../../baseup.css" rel="stylesheet" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link href="../../baseup.css" rel="stylesheet" />
-<script src="../../baseup.js"></script>
-<script>
-    // Engage legacy support
-    $(function() {
-        $('.clear').baseUp({legacySupportClear:'apply'});
-        $('.lay, .lay-left, .lay-right, .lay-centered').baseUp({legacySupportLay:'apply'});
-    });
-</script>
 
 
 <script>

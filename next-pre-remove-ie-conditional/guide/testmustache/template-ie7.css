@@ -1,0 +1,124 @@
+/* Rizzle 1.0 lte IE 7 */
+
+/*  1. Fix the double margin float bug in IE 6
+/*  2. Prevent unbroken strings of text and URLs breaking the layout in IE 6
+/*  3. Prevent images wider than the column width breaking the layout in IE 6
+/*  4. Account for pixel-rounding of percentages in IE 6 and 7
+/*  Note I'm using the underscore hack to target IE 6
+*/
+.{{ns}}{{col}} {
+    _display:inline; /* 1 */
+    _word-wrap:break-word; /* 2 */
+    _overflow:hidden; /* 3 */
+    margin-right:-1px; /* 4 */
+}
+
+
+/*  - Fix for a text-indent bug in IE 7
+/*    If text-indent is added to .{{ns}}{{column}} and the column butts up against the viewport
+/*    then the amount of text-indent overflows and causes the scrollbar to appear
+/*
+/*  I am commenting this fix out as text-indent is fairly rare and I'd prefer to use overflow:hidden 
+/*  as little as possible, but am keeping it here for future reference
+/*
+/*.{{ns}}{{layout}},
+/*.{{ns}}{{column}} {overflow:hidden;}
+*/
+
+/*  - Trigger hasLayout to fix layout issues in IE 6 and 7
+*/
+.{{ns}}{{lay}},
+.{{ns}}{{lay-left}},
+.{{ns}}{{lay-right}},
+.{{ns}}{{lay-centered}} {display:inline-block;}
+.{{ns}}{{lay}},
+.{{ns}}{{lay-left}},
+.{{ns}}{{lay-right}},
+.{{ns}}{{lay-centered}} {display:block;}
+
+
+/*  - Fix for .{{ns}}{{clear}} to work when placed after positional floats in IE 6 and 7
+/*    MS CSS Expressions were used to keep all the fixes in one asset 
+/*    and out of the way.
+/*    Dynamically added div.{{ns}}{{clear}} elements are also fixed.
+/*  - Note {{ns}}{{clear}} must not have hasLayout triggered otherwise the fix will fail
+/*  - Note Positional floats can also be cleared with a wrapping .{{ns}}{{lay}} element
+*/
+.{{ns}}{{clear-ie6and7fixp1}} {float:left;width:100%;height:0;overflow:hidden;}
+.{{ns}}{{clear-ie6and7fixp2}} {clear:both;height:0;overflow:hidden;}
+.{{ns}}{{clear}} {
+    {{ns}}{{rizzlecssproperty}}:expression(
+        (function(self) {
+            // Ensure any real action is done only once
+            if (!self['{{ns}}{{rizzlecssproperty}}thing2']) {
+                self['{{ns}}{{rizzlecssproperty}}thing2']=1;
+                self.innerHTML = '<div class="{{ns}}{{clear-ie6and7fixp1}}"></div><div class="{{ns}}{{clear-ie6and7fixp2}}"></div>'+self.innerHTML;
+            }
+            return 'none';
+        }(this))
+    );
+}
+
+
+/*  - Fix for .{{ns}}{{lay}} .{{ns}}{{lay-left}}, {{ns}}{{lay-right}} and .{{ns}}{{lay-centered}} to ensure positional
+/*    floats display as expected in IE 6
+/*  - Aside, didn't realise until now that I could assign an expression to any 
+/*    old made-up property, which saves overwriting useful/used ones
+*/
+.{{ns}}{{lay-ie6fix}} {float:left;width:100%;overflow:hidden;}
+.{{ns}}{{lay}},
+.{{ns}}{{lay-left}},
+.{{ns}}{{lay-right}},
+.{{ns}}{{lay-centered}} {
+    _{{ns}}{{rizzlecssproperty}}:expression(
+        (function(self) {
+            // Ensure any real action is done only once
+            if (!self['{{ns}}{{rizzlecssproperty}}thing']) {
+                self['{{ns}}{{rizzlecssproperty}}thing']=1;
+                self.innerHTML = '<div class="{{ns}}{{lay-ie6fix}}">'+self.innerHTML+'</div>';
+            }
+            return 'none';
+        }(this))
+    );
+}
+
+
+/*  - IE 7 background repaint bug
+/*    This bug happens when positional floats are used and a background has been 
+/*    applied to an ancestor element of the layout. The layout may show correctly 
+/*    on page load but on scrolling the become lost or patchy. Thankfully I found 
+/*    a solution: to trigger hasLayout on the ancestor element with the background.
+/*  
+/*  - IE 7 pixel-rounding bug
+/*    Happens when using positional floats where the layout is flush with the edge of 
+/*    the viewport and the layout hasn't been wrapped in a div.{{ns}}{{lay}}. Solve by wrapping
+/*    the layout in a div.{{ns}}{{lay}}.
+*/
+
+
+
+
+
+/* Rizzle 1.0 Responsive Prototyping Classes IE lte 6 CSS */
+{{#breakpoints}}
+            
+{{#bp}}
+@media all and (min-width:{{at}}px) {
+{{/bp}}
+
+.{{width-max}}{{bp}} {_width:expression(this.scrollWidth > {{maxwidth}} ? "{{maxwidth}}px" : "auto");}
+{{#maxwidths}}
+.{{width-max}}-{{maxwidth}}{{bp}} {_width:expression(this.scrollWidth > {{maxwidth}} ? "{{maxwidth}}px" : "auto");}
+{{/maxwidths}}
+
+{{#bp}}
+}
+{{/bp}}
+
+            
+{{/breakpoints}}
+
+
+
+
+
