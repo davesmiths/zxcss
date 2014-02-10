@@ -65,6 +65,8 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
     $(function() {
         $('.clear').baseUp({legacySupportClear:'apply'});
         $('.lay, .lay-left, .lay-right, .lay-centered').baseUp({legacySupportLay:'apply'});
+        $("[class^='widths-'],[class*=' widths-']").baseUp({legacySupportWidths:'apply'});
+        $('.cols').baseUp({legacySupportCols:'apply'});
     });
 </script>
 

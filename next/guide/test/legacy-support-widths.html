@@ -13,9 +13,9 @@
     $(function() {
         $('button').on('click', function() {
             $('.clear').baseUp({legacySupportClear:'apply'});
-            $('.lay, .lay-left, .lay-right, .lay-centered').baseUp({legacySupportLay:'apply'});            
-            $("[class^='widths-'],[class*=' widths-']").baseUp({legacySupportWidths:'apply'});            
-            $('.cols').baseUp({legacySupportCols:'apply'});            
+            $('.lay, .lay-left, .lay-right, .lay-centered').baseUp({legacySupportLay:'apply'});
+            $("[class^='widths-'],[class*=' widths-']").baseUp({legacySupportWidths:'apply'});
+            $('.cols').baseUp({legacySupportCols:'apply'});
         });
     });
 </script>
@@ -51,11 +51,23 @@ h2 {margin:0;line-height:2;}
 </style>
 
 
+<script src="../assets/js/respond.js"></script>
 </head>
 
 <body>
 
-<div class="lay-centered cols widths-1o8 widths-1o8 gut-bottom" style="width:800px;">
+<div class="lay-centered cols widths-1o3 widths-1o8 gut-bottom" style="width:800px;">
+    <div class="a width-1o4"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 4</span>pos-8o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 5</span>pos-1o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 6</span>pos-7o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 7</span>pos-3o8-1up</div></div>
+    <div class="a"><div class="item"><span class="source">div 8</span>pos-5o8-1up</div></div>
+</div>
+
+<div class="lay-centered cols widths-1o8-1up gut-bottom" style="width:800px;">
     <div class="a width-1o4"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
     <div class="a"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
     <div class="a"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>

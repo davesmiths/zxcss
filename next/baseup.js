@@ -15,9 +15,6 @@
     $.fn.baseUp = function(o) {
         
         /*  - Fix for .clear to work when placed after positional floats in IE 6 and 7
-        //    MS CSS Expressions were used to keep all the fixes in one asset 
-        //    and out of the way.
-        //    Dynamically added div.clear elements are also fixed.
         //  - Note clear must not have hasLayout triggered otherwise the fix will fail
         //  - Note Positional floats can also be cleared with a wrapping .lay element
         */
@@ -34,8 +31,6 @@
 
         /*  - Fix for .lay .lay-left, lay-right and .lay-centered to ensure positional
         //    floats display as expected in IE 6
-        //  - Aside, didn't realise until now that I could assign an expression to any 
-        //    old made-up property, which saves overwriting useful/used ones
         */
         if (o.legacySupportLay) {
             if (isIE == 6) {
@@ -53,7 +48,7 @@
             if (isIE == 6) {
                 return this.each(function() {
                     var $this = $(this)
-                        ,val = $this.attr('class').match(/\s?widths-[0-9o]+/g);
+                        ,val = $this.attr('class').match(/\s?widths-[0-9a-z-]+/g);
                     ;
                     // Get the last set widths class if more than one is set
                     val = val[val.length - 1];
@@ -63,7 +58,7 @@
                         $this = $this.find('> .baseup-legacy-support-lay');
                     }
                     
-                    $this.find('> div').not(".clear, [class^='width-'],[class*=' width-']").each(function() {
+                    $this.find('> *').not(".clear, [class^='width-'],[class*=' width-']").each(function() {
                         $(this).addClass(val);
                     });
                     
@@ -83,7 +78,7 @@
                         $this = $this.find('> .baseup-legacy-support-lay');
                     }
                     
-                    $this.find('> div').not('.clear').each(function() {
+                    $this.find('> *').not('.clear').each(function() {
                         $(this).addClass('col');
                     });
                     
