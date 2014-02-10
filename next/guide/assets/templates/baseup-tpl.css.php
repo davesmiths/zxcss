@@ -1,5 +1,5 @@
 /*
-/*  BaseUp 1.0 CSS
+//  BaseUp 1.0 CSS
 */
 .{{ns}}{{col}} {float:left;width:100%;}
 .{{ns}}cols > * {float:left;width:100%;}

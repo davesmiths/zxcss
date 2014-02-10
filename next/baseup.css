@@ -1,5 +1,5 @@
 /*
-/*  BaseUp 1.0 CSS
+//  BaseUp 1.0 CSS
 */
 .col {float:left;width:100%;}
 .cols > * {float:left;width:100%;}
@@ -326,6 +326,7 @@
 .width-max-4dx {max-width:940px;}
 .width-max-5dx {max-width:1180px;}
 .width-max-6dx {max-width:1420px;}
+.width-max-7dx {max-width:1660px;}
 
 
 
@@ -854,6 +855,7 @@
 .width-max-4dx-1up {max-width:940px;}
 .width-max-5dx-1up {max-width:1180px;}
 .width-max-6dx-1up {max-width:1420px;}
+.width-max-7dx-1up {max-width:1660px;}
 
 
 
@@ -1383,6 +1385,7 @@
 .width-max-4dx-2up {max-width:940px;}
 .width-max-5dx-2up {max-width:1180px;}
 .width-max-6dx-2up {max-width:1420px;}
+.width-max-7dx-2up {max-width:1660px;}
 
 
 

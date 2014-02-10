@@ -173,7 +173,7 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 </script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+<script src="../assets/js/respond.js"></script>
 
 </head>
 
@@ -190,8 +190,10 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
         <dd>Dependencies: Media Query and box-sizing border-box support</dd>
         <dd>IE 9+</dd>
     <dt>Class B</dt>
+        <dd>Using respond.js to patch media query support will work</dd>
+        <dd>To completely support IE 7 use the full-width friendly markup</dd>
         <dd>Dependencies: Child selector support</dd>
-        <dd>IE 7+</dd>
+        <dd>IE 7 and 8</dd>
     <dt>Unsupported</dt>
         <dd>IE 6-</dd>
 </dl>
@@ -491,6 +493,7 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 <section class="a">
 <h2>Columns positioned and gutters <small>Class A</small></h2>
+<p>If Media Query support has been polyfilled IE 7 will still have problems here because it lacks box-sizing support, the full-width friendly version works though</p>
 <div class="lay cols widths-1o8-1up guts gut-bottom">
     <div class="pos-4o8-1up"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
     <div class="pos-6o8-1up"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>

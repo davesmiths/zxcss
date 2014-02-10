@@ -1,34 +1,37 @@
 /*
-/*  BaseUp IE lte 8
+//  BaseUp IE lte 8
 */
 
-/*  1. Fix the double margin float bug in IE 6
-/*  2. Prevent unbroken strings of text and URLs breaking the layout in IE 6
-/*  3. Prevent images wider than the column width breaking the layout in IE 6
-/*  4. Account for pixel-rounding of percentages in IE 6 and 7
-/*  Note I'm using the underscore hack to target IE 6
-*/
-.col {
+.col,
+.cols > * {
     _display:inline; /* 1 */
     _word-wrap:break-word; /* 2 */
     _overflow:hidden; /* 3 */
     margin-right:-1px; /* 4 */
 }
+/*  1. Fix the double margin float bug in IE 6
+//  2. Prevent unbroken strings of text and URLs breaking the layout in IE 6
+//  3. Prevent images wider than the column width breaking the layout in IE 6
+//  4. Account for pixel-rounding of percentages in IE 6 and 7
+//  Note I'm using the underscore hack to target IE 6
+*/
 
 
 /*  - Fix for a text-indent bug in IE 7
-/*    If text-indent is added to . and the column butts up against the viewport
-/*    then the amount of text-indent overflows and causes the scrollbar to appear
-/*
-/*  I am commenting this fix out as text-indent is fairly rare and I'd prefer to use overflow:hidden 
-/*  as little as possible, but am keeping it here for future reference
-/*
-/*.,
-/*. {overflow:hidden;}
+//    If text-indent is added to . and the column butts up against the viewport
+//    then the amount of text-indent overflows and causes the scrollbar to appear
+//
+//  I am commenting this fix out as text-indent is fairly rare and I'd prefer to use overflow:hidden 
+//  as little as possible, but am keeping it here for future reference
+//
+//.,
+//. {overflow:hidden;}
 */
 
-/*  - Trigger hasLayout to fix layout issues in IE 6 and 7
-*/
+/* Do this or do nothing and let the layout wrap, maybe let the layout wrap, or only use guts-fw for broadest compatibility */
+.guts {*margin-left:0!important;*margin-right:0!important;}
+.guts > * {*padding-left:0!important;*padding-right:0!important;}
+
 .lay,
 .lay-left,
 .lay-right,
@@ -37,6 +40,8 @@
 .lay-left,
 .lay-right,
 .lay-centered {display:block;}
+/*  - Trigger hasLayout to fix layout issues in IE 6 and 7
+*/
 
 
 /*  - Pull Gut and Pull Gut Right
@@ -112,11 +117,11 @@
 {display:block;}
 
 /*  - Fix for .clear to work when placed after positional floats in IE 6 and 7
-/*    MS CSS Expressions were used to keep all the fixes in one asset 
-/*    and out of the way.
-/*    Dynamically added div.clear elements are also fixed.
-/*  - Note clear must not have hasLayout triggered otherwise the fix will fail
-/*  - Note Positional floats can also be cleared with a wrapping .lay element
+//    MS CSS Expressions were used to keep all the fixes in one asset 
+//    and out of the way.
+//    Dynamically added div.clear elements are also fixed.
+//  - Note clear must not have hasLayout triggered otherwise the fix will fail
+//  - Note Positional floats can also be cleared with a wrapping .lay element
 */
 .clear-ie6and7fixp1 {float:left;width:100%;height:0;overflow:hidden;}
 .clear-ie6and7fixp2 {clear:both;height:0;overflow:hidden;}
@@ -135,16 +140,16 @@
 
 
 /*  - Fix for .lay .lay-left, lay-right and .lay-centered to ensure positional
-/*    floats display as expected in IE 6
-/*  - Aside, didn't realise until now that I could assign an expression to any 
-/*    old made-up property, which saves overwriting useful/used ones
+//    floats display as expected in IE 6
+//  - Aside, didn't realise until now that I could assign an expression to any 
+//    old made-up property, which saves overwriting useful/used ones
 */
 .lay-ie6fix {float:left;width:100%;}
-.lay,
-.lay-left,
-.lay-right,
-.lay-centered {
-    _rizzlecssproperty:expression(
+* html .lay,
+* html .lay-left,
+* html .lay-right,
+* html .lay-centered {
+    rizzlecssproperty:expression(
         (function(self) {
             // Ensure any real action is done only once
             if (!self['rizzlecsspropertything']) {
@@ -155,16 +160,20 @@
         }(this))
     );
 }
+/*    Employing star hack to target IE 6 only. The underscore hack didn't hack-it.
+//    Thanks http://stackoverflow.com/questions/247743/evaluate-a-css-expression-only-in-ie7-w-out-using-conditional-comments
+*/
+
 
 
 /*  - IE 7 background repaint bug
-/*    This bug happens when positional floats are used and a background has been 
-/*    applied to an ancestor element of the layout. The layout may show correctly 
-/*    on page load but on scrolling the become lost or patchy. Thankfully I found 
-/*    a solution: to trigger hasLayout on the ancestor element with the background.
-/*  
-/*  - IE 7 pixel-rounding bug
-/*    Happens when using positional floats where the layout is flush with the edge of 
-/*    the viewport and the layout hasn't been wrapped in a div.lay. Solve by wrapping
-/*    the layout in a div.lay.
+//    This bug happens when positional floats are used and a background has been 
+//    applied to an ancestor element of the layout. The layout may show correctly 
+//    on page load but on scrolling the become lost or patchy. Thankfully I found 
+//    a solution: to trigger hasLayout on the ancestor element with the background.
+//  
+//  - IE 7 pixel-rounding bug
+//    Happens when using positional floats where the layout is flush with the edge of 
+//    the viewport and the layout hasn't been wrapped in a div.lay. Solve by wrapping
+//    the layout in a div.lay.
 */
