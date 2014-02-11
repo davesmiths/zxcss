@@ -68,6 +68,30 @@
         }
         
         
+        if (o.legacySupportGuts) {
+            if (isIE == 6) {
+                return this.each(function() {
+                    var $this = $(this)
+                        ,val = $this.attr('class').match(/\s?guts-fw[0-9a-z-]*/g);
+                    ;
+                    // Get the last set widths class if more than one is set
+                    val = val[val.length - 1];
+                    val = val.replace('guts-fw', 'gut-left');
+                    
+                    if ($this.find('> .baseup-legacy-support-lay').length) {
+                        $this = $this.find('> .baseup-legacy-support-lay');
+                    }
+                    
+                    $this.find('> * > *').not(".clear, [class^='gut-left-'],[class*=' gut-left-']").each(function() {
+                        $(this).addClass(val);
+                    });
+                    
+                    
+                });
+            }
+        }
+        
+        
         if (o.legacySupportCols) {
             if (isIE == 6) {
                 return this.each(function() {
