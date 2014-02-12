@@ -60,16 +60,6 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link href="../../baseup.css" rel="stylesheet" />
 <script src="../../baseup.js"></script>
-<script>
-    // Engage legacy support
-    $(function() {
-        $('.clear').baseUp({legacySupportClear:'apply'});
-        $('.lay, .lay-left, .lay-right, .lay-centered').baseUp({legacySupportLay:'apply'});
-        $("[class^='widths-'],[class*=' widths-']").baseUp({legacySupportWidths:'apply'});
-        $("[class^='guts-fw'],[class*=' guts-fw']").baseUp({legacySupportGuts:'apply'});
-        $('.cols').baseUp({legacySupportCols:'apply'});
-    });
-</script>
 
 
 <script>
@@ -266,7 +256,7 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 
 <section class="b">
-<h2>Columns <small>Class B: Legacy+ browsers require col and width classes on each div</small></h2>
+<h2>Columns <small>Class B: Legacy browsers may require col and width classes on each div</small></h2>
 <div class="lay gut-bottom">
     <div class="col width-1o8"><div class="item"><span class="source">div 1</span>col width-1o8</div></div>
     <div class="col width-1o8"><div class="item"><span class="source">div 2</span>col width-1o8</div></div>
@@ -303,6 +293,7 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 <section class="a">
 <h2>Columns and gutters <small>Class A</small></h2>
+<p>If Media Query support has been polyfilled IE 7 will still have problems here because it lacks box-sizing support, use the full-width friendly version for greatest compatibility</p>
 <div class="lay cols guts widths-1o8-1up gut-bottom">
     <div><div class="item"><span class="source">div 1</span>&nbsp;</div></div>
     <div><div class="item"><span class="source">div 2</span>&nbsp;</div></div>
@@ -338,9 +329,45 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 
 
+<section class="afw">
+<h2>Columns and gutters: full-width friendly <small>Class A</small></h2>
+<div class="lay cols guts-fw widths-1o8-1up gut-bottom">
+    <div><div><div class="item"><span class="source">div 1</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 2</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 3</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 4</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 5</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 6</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 7</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 8</span>&nbsp;</div></div></div>
+</div>
+<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw"&gt;
+    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+<div class="lay cols guts-fw-2x widths-1o8-1up gut-bottom">
+    <div><div><div class="item"><span class="source">div 1</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 2</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 3</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 4</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 5</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 6</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 7</span>&nbsp;</div></div></div>
+    <div><div><div class="item"><span class="source">div 8</span>&nbsp;</div></div></div>
+</div>
+<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw-2x"&gt;
+    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+</section>
+
+
+
+
+
 
 <section class="b">
-<h2>Columns and gutters (full-width friendly) <small>Class B</small></h2>
+<h2>Columns and gutters (full-width friendly) <small>Class B Legacy browsers may require extra classes each div</small></h2>
 <div class="lay hide-gut-left gut-bottom">
     <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 1</span>col width-1o8</div></div></div>
     <div class="col width-1o8"><div class="gut-left"><div class="item"><span class="source">div 2</span>col width-1o8</div></div></div>
@@ -390,42 +417,6 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 
 
-<section class="afw">
-<h2>Columns and gutters: full-width friendly <small>Class A</small></h2>
-<div class="lay cols guts-fw widths-1o8-1up gut-bottom">
-    <div><div><div class="item"><span class="source">div 1</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 2</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 3</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 4</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 5</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 6</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 7</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 8</span>&nbsp;</div></div></div>
-</div>
-<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw"&gt;
-    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
-<div class="lay cols guts-fw-2x widths-1o8-1up gut-bottom">
-    <div><div><div class="item"><span class="source">div 1</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 2</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 3</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 4</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 5</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 6</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 7</span>&nbsp;</div></div></div>
-    <div><div><div class="item"><span class="source">div 8</span>&nbsp;</div></div></div>
-</div>
-<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw-2x"&gt;
-    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
-</section>
-
-
-
-
-
 <hr />
 
 
@@ -456,7 +447,7 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 
 <section class="b">
-<h2>Columns positioned <small>Class B</small></h2>
+<h2>Columns positioned <small>Class B Legacy browsers may require extra classes each div</small></h2>
 <div class="lay gut-bottom">
     <div class="col width-2o3-1up pos-2o3-1up"><div class="item"><span class="source">div 1</span>col width-2o3-1up pos-2o3-1up</div></div>
     <div class="col width-1o3-1up pos-1o3-1up"><div class="item"><span class="source">div 2</span>col width-1o3-1up pos-1o3-1up</div></div>
@@ -491,7 +482,7 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 
 <section class="a">
 <h2>Columns positioned and gutters <small>Class A</small></h2>
-<p>If Media Query support has been polyfilled IE 7 will still have problems here because it lacks box-sizing support, the full-width friendly version works though</p>
+<p>If Media Query support has been polyfilled IE 7 will still have problems here because it lacks box-sizing support, use the full-width friendly version for greatest compatibility</p>
 <div class="lay cols widths-1o8-1up guts gut-bottom">
     <div class="pos-4o8-1up"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
     <div class="pos-6o8-1up"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
@@ -505,6 +496,30 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 <textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts"&gt;
     &lt;div class="pos-2o2-1up"&gt;&lt;/div&gt;
     &lt;div class="pos-1o2-1up"&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+</section>
+
+
+
+
+
+
+
+<section class="afw">
+<h2>Columns positioned and gutters: full-width friendly <small>Class A</small></h2>
+<div class="lay cols widths-1o8-1up guts-fw gut-bottom">
+    <div class="pos-4o8-1up"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
+    <div class="pos-6o8-1up"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
+    <div class="pos-2o8-1up"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>
+    <div class="pos-8o8-1up"><div class="item"><span class="source">div 4</span>pos-8o8-1up</div></div>
+    <div class="pos-1o8-1up"><div class="item"><span class="source">div 5</span>pos-1o8-1up</div></div>
+    <div class="pos-7o8-1up"><div class="item"><span class="source">div 6</span>pos-7o8-1up</div></div>
+    <div class="pos-3o8-1up"><div class="item"><span class="source">div 7</span>pos-3o8-1up</div></div>
+    <div class="pos-5o8-1up"><div class="item"><span class="source">div 8</span>pos-5o8-1up</div></div>
+</div>
+<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw"&gt;
+    &lt;div class="pos-2o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="pos-1o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;</textarea>
 </section>
 
@@ -535,30 +550,6 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
     &lt;div class="col width-1o2-1up pos-1o2-1up"&gt;&lt;div class="gut-left"&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;</textarea>
 </section>
-
-
-
-
-
-
-<section class="afw">
-<h2>Columns positioned and gutters: full-width friendly <small>Class A</small></h2>
-<div class="lay cols widths-1o8-1up guts-fw gut-bottom">
-    <div class="pos-4o8-1up"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
-    <div class="pos-6o8-1up"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
-    <div class="pos-2o8-1up"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>
-    <div class="pos-8o8-1up"><div class="item"><span class="source">div 4</span>pos-8o8-1up</div></div>
-    <div class="pos-1o8-1up"><div class="item"><span class="source">div 5</span>pos-1o8-1up</div></div>
-    <div class="pos-7o8-1up"><div class="item"><span class="source">div 6</span>pos-7o8-1up</div></div>
-    <div class="pos-3o8-1up"><div class="item"><span class="source">div 7</span>pos-3o8-1up</div></div>
-    <div class="pos-5o8-1up"><div class="item"><span class="source">div 8</span>pos-5o8-1up</div></div>
-</div>
-<textarea rows="4">&lt;div class="lay cols widths-1o2-1up guts-fw"&gt;
-    &lt;div class="pos-2o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div class="pos-1o2-1up"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;</textarea>
-</section>
-
 
 
 
@@ -761,8 +752,8 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 <section class="a afw b">
 <h2>Centered <small>Class A and B</small></h2>
 <div class="style1">
-    <div class="lay-centered">
-        <div class="item">lay-centered</div>
+    <div class="lay-centered width-max">
+        <div class="item">lay-centered width-max</div>
     </div>
 </div>
 <div class="style1">
@@ -790,13 +781,13 @@ hr {border:0;border-top:20px solid #eee;margin-bottom:40px;margin-top:40px;}
 <section class="a afw b">
 <h2>Left and right <small>Class A and B</small></h2>
 <div class="style1">
-    <div class="lay-left">
-        <div class="item">lay-left</div>
+    <div class="lay-left width-max">
+        <div class="item">lay-left width-max</div>
     </div>
 </div>
 <div class="style1">
-    <div class="lay-right">
-        <div class="item">lay-right</div>
+    <div class="lay-right width-max">
+        <div class="item">lay-right width-max</div>
     </div>
 </div>
 </section>

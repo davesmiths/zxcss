@@ -1,11 +1,11 @@
 <?php ini_set('display_errors','1');ini_set('display_startup_errors','1');error_reporting(E_ALL|E_STRICT); ?>
 <?php
 
-if (isset($_POST['output-css'], $_POST['output-cssielte7'])) {
+if (isset($_POST['output-css'], $_POST['output-js'], $_POST['output-legacysupport'])) {
     
+    $legacysupport = $_POST['output-legacysupport'];
     $css = $_POST['output-css'];
-    $cssIElte8 = $_POST['output-cssielte8'];
-    $jsIElte8 = $_POST['output-jsielte8'];
+    $js = $_POST['output-js'];
     
     //$file = tmpfile();
     $file = tempnam('tmp', 'zip');
@@ -16,8 +16,10 @@ if (isset($_POST['output-css'], $_POST['output-cssielte7'])) {
     $zip->open($file, ZipArchive::OVERWRITE);
     
     $zip->addFromString('baseup.css', $css);
-    $zip->addFromString('baseup-ielte8.css', $cssIElte8);
-    $zip->addFromString('baseup-ielte8.js', $jsIElte8);
+    
+    if ($legacysupport === true) {
+        $zip->addFromString('baseup.js', $js);
+    }
     
     $zip->close();
     

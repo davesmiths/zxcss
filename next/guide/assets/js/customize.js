@@ -11,7 +11,37 @@
     ;
     
     db = {
-        outputToggles: [
+        sel: {
+            input: {
+                decimalPlaces: '#input-decimalplaces'
+                ,positionClasses: '#input-positionclasses'
+                ,columns: '.input-columns'
+                ,at: '.input-at'
+                ,gutter: '.input-gutter'
+                ,gutterBasex: '.input-gutter-basex'
+                ,maxWidths: '.input-maxwidths'
+                ,maxWidthsBP: '.input-maxwidths-bp'
+                ,classNamespace: '#input-classnamespace'
+                ,breakpointadd: '.input-breakpoint-add'
+                ,base: '#input-base'
+                ,legacysupport: '.input-legacysupport'
+                
+                ,gutmultipliersmall: '#input-gutmultipliersmall'
+                ,gutmultipliermedium: '#input-gutmultipliermedium'
+                ,gutmultiplierlarge: '#input-gutmultiplierlarge'
+                
+                ,formbreakpoint: '.form-breakpoint'
+                ,formbreakpointremove: '.form-breakpoint-remove'
+            }
+            ,output: {
+                css: '.output-css'
+                ,js: '.output-js'
+                
+            }
+            ,advanced: '.advanced'
+            ,css: '.css'
+        }
+        ,outputToggles: [
             {title: 'Position Classes', name: 'input-positionclasses'}
             ,{title: 'Width Classes', name: 'input-widthclasses'}
             ,{title: 'Gutter Classes', name: 'input-gutterclasses'}
@@ -22,11 +52,7 @@
                 source: ''
                 ,output: ''
             }
-            ,cssIElte8: {
-                source: ''
-                ,output: ''
-            }
-            ,jsIElte8: {
+            ,js: {
                 source: ''
                 ,output: ''
             }
@@ -35,6 +61,7 @@
                 
                 ,isiecss: false
                 ,isiejs: false
+                ,legacysupport: true
                 
                 ,lay: 'lay'
                 ,laycentered: 'lay-centered'
@@ -98,6 +125,7 @@
     // Actions
     elements = function() {
     
+        
         els.input.decimalPlaces = $('#input-decimalplaces');
         els.input.positionClasses = $('#input-positionclasses');
         els.input.columns = $('.input-columns');
@@ -108,18 +136,18 @@
         els.input.maxWidthsBP = $('.input-maxwidths-bp');
         els.input.classNamespace = $('#input-classnamespace');
         els.input.breakpointadd = $('.input-breakpoint-add');
-        els.input.breakpointremove = $('.input-breakpoint-remove');
         els.input.base = $('#input-base');
+        els.input.legacysupport = $('.input-legacysupport');
         
         els.input.gutmultipliersmall = $('#input-gutmultipliersmall');
         els.input.gutmultipliermedium = $('#input-gutmultipliermedium');
         els.input.gutmultiplierlarge = $('#input-gutmultiplierlarge');
         
         els.input.formbreakpoint = $('.form-breakpoint');
+        els.input.formbreakpointremove = $('.form-breakpoint-remove');
         
         els.output.css = $('.output-css');
-        els.output.cssIElte8 = $('.output-cssielte8');
-        els.output.jsIElte8 = $('.output-jsielte8');
+        els.output.js = $('.output-js');
         
         els.advanced = $('.advanced');
         els.css = $('.css');
@@ -132,7 +160,7 @@
     
         var callback = o.callback;
         
-        db.inputAjaxCalls = {callback: callback, expected: 3, count: 0};
+        db.inputAjaxCalls = {callback: callback, expected: 2, count: 0};
         
         input.breakpoints = [];
         els.input.formbreakpoint.each(function(i) {
@@ -152,24 +180,20 @@
         input.maxWidthsBP = els.input.maxWidthsBP.val().replace(/\s+/g, '').split(',');
         input.maxWidthsBPLength = input.maxWidthsBP.length;
         input.base = els.input.base.val();
+        input.legacysupport = els.input.legacysupport[0].checked;
         
         input.gutmultipliersmall = els.input.gutmultipliersmall.val();
         input.gutmultipliermedium = els.input.gutmultipliermedium.val();
         input.gutmultiplierlarge = els.input.gutmultiplierlarge.val();
         
         
-        $.ajax('./../assets/templates/baseup-tpl.css.php',{dataType:'text',async:false}).done(function(text) {
+        $.ajax('./../assets/templates/baseup-tpl.css',{dataType:'text',async:false}).done(function(text) {
             db.templates.css.template = text;
             inputDone();
         });
         
-        $.ajax('./../assets/templates/baseup-tpl-ielte8.css.php',{dataType:'text',async:false}).done(function(text) {
-            db.templates.cssIElte8.template = text;
-            inputDone();
-        });
-        
-        $.ajax('./../assets/templates/baseup-tpl-ielte8.js.php',{dataType:'text',async:false}).done(function(text) {
-            db.templates.jsIElte8.template = text;
+        $.ajax('./../assets/templates/baseup-tpl.js',{dataType:'text',async:false}).done(function(text) {
+            db.templates.js.template = text;
             inputDone();
         });
         
@@ -225,7 +249,6 @@
         db.maxWidthsBP = maxWidths;
         db.maxWidthsBP.unshift(db.maxWidthsBP[0]);
         db.maxWidthsBPLength = input.maxWidthsBPLength;
-        
         
         db.base = input.base;
         db.breakpointsLength = input.breakpointsLength;
@@ -437,14 +460,11 @@
             
         }
         
+        db.templates.input.legacysupport = input.legacysupport;
         
         db.templates.css.output = Mustache.render(db.templates.css.template, db.templates.input);
         
-        db.templates.input.isiecss = true;
-        db.templates.cssIElte8.output = Mustache.render(db.templates.cssIElte8.template, db.templates.input);
-
-        db.templates.input.isiejs = true;
-        db.templates.jsIElte8.output = Mustache.render(db.templates.jsIElte8.template, db.templates.input);
+        db.templates.js.output = Mustache.render(db.templates.js.template, db.templates.input);
 
         return callback();
         
@@ -454,15 +474,13 @@
             
         // Put CSS
         els.output.css.val(trim(db.templates.css.output));
-        els.output.cssIElte8.val(trim(db.templates.cssIElte8.output));
-        els.output.jsIElte8.val(trim(db.templates.jsIElte8.output));
+        els.output.js.val(trim(db.templates.js.output));
         
         els.input.maxWidths.val(db.maxWidths);
         els.input.maxWidthsBP.val(db.maxWidthsBP.slice(1));
         
         resizeOutput(els.output.css[0]);
-        resizeOutput(els.output.cssIElte8[0]);
-        resizeOutput(els.output.jsIElte8[0]);
+        resizeOutput(els.output.js[0]);
         
         //els.output.labelSpan.html(' '+db.output.css.length);
     };
@@ -666,73 +684,32 @@
         run();
         return false;
     };
-    breakpointRemove = function() {
-        
-    };
     
     init = function() {
         
         elements();
         
         (function() {
-            var toggleText = ['Bonza Options', 'Hide Bonza']
+            var toggleText = ['Options woah bonza!', 'Hide my moomins']
                 ,toggleTextLength = toggleText.length
                 ,togglePointer = (/#advanced/g.exec(window.location.href)) ? 1 : 0
-                ,html = '<a href="">'+toggleText[togglePointer]+'</a>'
+                ,html = '<p><a href="">'+toggleText[togglePointer]+'</a></p>'
             ;
 //console.log(togglePointer);
             els.toggleHTML = $(html);
             els.toggleHTML = els.advanced.before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
-            els.toggleHTML.on('click', function() {
+            els.toggleHTML.on('click', 'a', function() {
                 var $this = $(this);
                 togglePointer = (togglePointer + 1) % toggleTextLength;
                 $this.text(toggleText[togglePointer]);
                 els.advanced.toggleClass('inactive');
                 resizeOutput(els.output.css[0]);
-                resizeOutput(els.output.cssIElte8[0]);
-                resizeOutput(els.output.jsIElte8[0]);
+                resizeOutput(els.output.js[0]);
                 return false;
             });
         }());
         
-//        (function() {
-//            var toggleText = ['CSS', 'Hide CSS']
-//                ,toggleTextLength = toggleText.length
-//                ,togglePointer = 0
-//                ,html = '<a href="">'+toggleText[togglePointer]+'</a>'
-//            ;
-//            els.toggleHTML = $(html);
-//            els.toggleHTML = els.css.before(els.toggleHTML).addClass('inactive').prev();
-//            els.toggleHTML.on('click', function() {
-//                var $this = $(this);
-//                togglePointer = (togglePointer + 1) % toggleTextLength;
-//                $this.text(toggleText[togglePointer]);
-//                els.css.toggleClass('inactive');
-//                resizeOutput(els.output.css[0]);
-//                resizeOutput(els.output.cssIElte8[0]);
-//                return false;
-//            });
-//        }());
-        
-        // On change of various input
-        els.input.decimalPlaces.on('change', inputChange);
-        els.input.positionClasses.on('change', inputChange);
-        els.input.at.on('change', inputChange);
-        els.input.columns.on('change', inputChange);
-        els.input.maxWidths.on('change', inputChange);
-        els.input.maxWidthsBP.on('change', inputChange);
-        els.input.classNamespace.on('change', inputChange);
-        
-        els.input.base.on('change', inputBaseChange);
-        els.input.gutterBasex.on('change', inputGutterBasexChange);
-        els.input.gutter.on('change', inputGutterChange);
-        
-        els.input.gutmultipliersmall.on('change', inputChange);
-        els.input.gutmultipliermedium.on('change', inputChange);
-        els.input.gutmultiplierlarge.on('change', inputChange);
-                
-        els.input.breakpointadd.on('click', breakpointAdd);
-        els.input.breakpointremove.on('click', breakpointRemove);
+        els.input.formbreakpoint.slice(1).append('<td class="form-breakpoint-remove"><span tabindex="-1">x</span></td>').parent().find('tr:first').append('<th>Remove</th>');
         
         run();
         
@@ -748,16 +725,61 @@
         }});
         
     }
-    
-    
-    
-    // Event Logic
-    // On Dom Ready
-    $(function() {
-        init();
-    });
+    $(document)
+        .on('change', function(e) {
+            
+            var $t = $(e.target)
+            ;
+            
+            // On change of various input
+            if (
+                $t.is(db.sel.input.decimalPlaces)
+                || $t.is(db.sel.input.positionClasses)
+                || $t.is(db.sel.input.at)
+                || $t.is(db.sel.input.columns)
+                || $t.is(db.sel.input.maxWidths)
+                || $t.is(db.sel.input.maxWidthsBP)
+                || $t.is(db.sel.input.classNamespace)
+                || $t.is(db.sel.input.legacysupport)
+                || $t.is(db.sel.input.gutmultipliersmall)
+                || $t.is(db.sel.input.gutmultipliermedium)
+                || $t.is(db.sel.input.gutmultiplierlarge)
+            ) {
+                inputChange();
+            }
+            
+            if ($t.is(db.sel.input.base)) {
+                inputBaseChange();
+            }
+            if ($t.is(db.sel.input.gutterBasex)) {
+                inputGutterBasexChange();
+            }
+            if ($t.is(db.sel.input.gutter)) {
+                inputGutterChange();
+            }
+            
+            
+            
+        })
+        .on('click', function(e) {
+            var $t = $(e.target)
+                ,rtn = true;
+            ;
+            if ($t.is(db.sel.input.breakpointadd)) {
+                breakpointAdd();
+                rtn = false;
+            }
+            else if ($t.is(db.sel.input.formbreakpointremove)) {
+                $t.parent().remove();
+                inputChange();
+                rtn = false;
+            };
 
+            return rtn;
+        })
+        .ready(init);
 
+    
 }(this));
 
 
