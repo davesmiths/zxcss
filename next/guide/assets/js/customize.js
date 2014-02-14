@@ -126,31 +126,6 @@
     elements = function() {
     
         
-        els.input.decimalPlaces = $('#input-decimalplaces');
-        els.input.positionClasses = $('#input-positionclasses');
-        els.input.columns = $('.input-columns');
-        els.input.at = $('.input-at');
-        els.input.gutter = $('.input-gutter');
-        els.input.gutterBasex = $('.input-gutter-basex');
-        els.input.maxWidths = $('.input-maxwidths');
-        els.input.maxWidthsBP = $('.input-maxwidths-bp');
-        els.input.classNamespace = $('#input-classnamespace');
-        els.input.breakpointadd = $('.input-breakpoint-add');
-        els.input.base = $('#input-base');
-        els.input.legacysupport = $('.input-legacysupport');
-        
-        els.input.gutmultipliersmall = $('#input-gutmultipliersmall');
-        els.input.gutmultipliermedium = $('#input-gutmultipliermedium');
-        els.input.gutmultiplierlarge = $('#input-gutmultiplierlarge');
-        
-        els.input.formbreakpoint = $('.form-breakpoint');
-        els.input.formbreakpointremove = $('.form-breakpoint-remove');
-        
-        els.output.css = $('.output-css');
-        els.output.js = $('.output-js');
-        
-        els.advanced = $('.advanced');
-        els.css = $('.css');
         
     };
     
@@ -163,28 +138,28 @@
         db.inputAjaxCalls = {callback: callback, expected: 2, count: 0};
         
         input.breakpoints = [];
-        els.input.formbreakpoint.each(function(i) {
+        $(db.sel.input.formbreakpoint).each(function(i) {
             input.breakpoints[i] = {
                 at: $(this).find('.input-at').val(),
                 gutter: $(this).find('.input-gutter').val(),
                 gutterBasex: $(this).find('.input-gutter-basex').val()
             }
         });
-        input.columns = els.input.columns.val();
+        input.columns = $(db.sel.input.columns).val();
         input.breakpointsLength = input.breakpoints.length;
-        input.decimalPlaces = els.input.decimalPlaces.val();
-        input.positionClasses = els.input.positionClasses[0].checked;
-        input.classNamespace = els.input.classNamespace.val().replace(/\s+/g, '');
-        input.maxWidths = els.input.maxWidths.val().replace(/\s+/g, '').split(',');
+        input.decimalPlaces = $(db.sel.input.decimalPlaces).val();
+        input.positionClasses = $(db.sel.input.positionClasses)[0].checked;
+        input.classNamespace = $(db.sel.input.classNamespace).val().replace(/\s+/g, '');
+        input.maxWidths = $(db.sel.input.maxWidths).val().replace(/\s+/g, '').split(',');
         input.maxWidthsLength = input.maxWidths.length;
-        input.maxWidthsBP = els.input.maxWidthsBP.val().replace(/\s+/g, '').split(',');
+        input.maxWidthsBP = $(db.sel.input.maxWidthsBP).val().replace(/\s+/g, '').split(',');
         input.maxWidthsBPLength = input.maxWidthsBP.length;
-        input.base = els.input.base.val();
-        input.legacysupport = els.input.legacysupport[0].checked;
+        input.base = $(db.sel.input.base).val();
+        input.legacysupport = $(db.sel.input.legacysupport)[0].checked;
         
-        input.gutmultipliersmall = els.input.gutmultipliersmall.val();
-        input.gutmultipliermedium = els.input.gutmultipliermedium.val();
-        input.gutmultiplierlarge = els.input.gutmultiplierlarge.val();
+        input.gutmultipliersmall = $(db.sel.input.gutmultipliersmall).val();
+        input.gutmultipliermedium = $(db.sel.input.gutmultipliermedium).val();
+        input.gutmultiplierlarge = $(db.sel.input.gutmultiplierlarge).val();
         
         
         $.ajax('./../assets/templates/baseup-tpl.css',{dataType:'text',async:false}).done(function(text) {
@@ -473,16 +448,16 @@
     output = function() {
             
         // Put CSS
-        els.output.css.val(trim(db.templates.css.output));
-        els.output.js.val(trim(db.templates.js.output));
+        $(db.sel.output.css).val(trim(db.templates.css.output));
+        $(db.sel.output.js).val(trim(db.templates.js.output));
         
-        els.input.maxWidths.val(db.maxWidths);
-        els.input.maxWidthsBP.val(db.maxWidthsBP.slice(1));
+        $(db.sel.input.maxWidths).val(db.maxWidths);
+        $(db.sel.input.maxWidthsBP).val(db.maxWidthsBP.slice(1));
         
-        resizeOutput(els.output.css[0]);
-        resizeOutput(els.output.js[0]);
+        resizeOutput($(db.sel.output.css)[0]);
+        resizeOutput($(db.sel.output.js)[0]);
         
-        //els.output.labelSpan.html(' '+db.output.css.length);
+        //$(db.sel.output.labelSpan).html(' '+db.output.css.length);
     };
     
     
@@ -648,12 +623,12 @@
         
         clearTimeout(db.tid.inputGutterBasexChange);
         
-        els.input.gutterBasex.each(function() {
+        $(db.sel.input.gutterBasex).each(function() {
             multipliers.push($(this).val());
         });
-        els.input.gutter.each(function(i) {
+        $(db.sel.input.gutter).each(function(i) {
             var $this = $(this);
-            $this.val(multipliers[i] * els.input.base.val());
+            $this.val(multipliers[i] * $(db.sel.input.base).val());
         });
         
         db.tid.inputGutterBasexChange = setTimeout(run, 400);
@@ -665,12 +640,12 @@
         
         clearTimeout(db.tid.inputGutterChange);
         
-        els.input.gutter.each(function() {
+        $(db.sel.input.gutter).each(function() {
             gutters.push($(this).val());
         });
-        els.input.gutterBasex.each(function(i) {
+        $(db.sel.input.gutterBasex).each(function(i) {
             var $this = $(this);
-            $this.val(gutters[i] / els.input.base.val());
+            $this.val(gutters[i] / $(db.sel.input.base).val());
         });
         
         db.tid.inputGutterChange = setTimeout(run, 400);
@@ -678,7 +653,7 @@
     };
     
     breakpointAdd = function() {
-        var last = els.input.formbreakpoint.last();
+        var last = $(db.sel.input.formbreakpoint).last();
         last.after(last.clone());
         last.next().find('td:first').text(input.breakpointsLength);
         run();
@@ -697,19 +672,19 @@
             ;
 //console.log(togglePointer);
             els.toggleHTML = $(html);
-            els.toggleHTML = els.advanced.before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
+            els.toggleHTML = $(db.sel.advanced).before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
             els.toggleHTML.on('click', 'a', function() {
                 var $this = $(this);
                 togglePointer = (togglePointer + 1) % toggleTextLength;
                 $this.text(toggleText[togglePointer]);
-                els.advanced.toggleClass('inactive');
-                resizeOutput(els.output.css[0]);
-                resizeOutput(els.output.js[0]);
+                $(db.sel.advanced).toggleClass('inactive');
+                resizeOutput($(db.sel.output.css)[0]);
+                resizeOutput($(db.sel.output.js)[0]);
                 return false;
             });
         }());
         
-        els.input.formbreakpoint.slice(1).append('<td class="form-breakpoint-remove"><span tabindex="-1">x</span></td>').parent().find('tr:first').append('<th>Remove</th>');
+        $(db.sel.input.formbreakpoint).slice(1).append('<td class="form-breakpoint-remove"><span tabindex="-1">x</span></td>').parent().find('tr:first').append('<th>Remove</th>');
         
         run();
         

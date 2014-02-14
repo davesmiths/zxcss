@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Padded</title>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<style>
+
+body {padding:20px;line-height:20px;max-width:800px;}
+
+p {margin-top:0;margin-bottom:20px;}
+
+.item {background:#e2f1f6;border:2px solid #bad4db;padding:20px;}
+.clear {clear:both;}
+
+
+
+.clear-ie6and7fixp1 {float:left;width:100%;height:0;overflow:hidden;}
+.clear-ie6and7fixp2 {clear:both;height:0;overflow:hidden;}
+
+
+
+.t14 .lay {display:inline-block;}
+.t14 .lay {display:block;}
+.t14 .lay:after,
+.t14 .lay:before {content:"";display:table;}
+.t14 .lay:after {clear:both;}
+.t14 .gut-right {margin-right:220px;}
+.t14 .gut-left {margin-left:220px;}
+.t14 .gut-right-1x {margin-right:20px;}
+.t14 .gut-left-1x {margin-left:20px;}
+.t14 .pull-gut-right {float:left;position:relative;margin-right:-100%;left:100%;clear:both;display:inline;margin-left:20px;}
+.t14 .pull-gut-left {float:right;position:relative;margin-left:-100%;right:100%;clear:both;display:inline;margin-right:20px;}
+
+/* Question of sensible defaults
+   Do I use a 1x margin on pull-gut-right and pull-gut-left?
+       Would save having to add an extra class each time 
+       Yes
+    
+*/
+
+/* CSS hack for IE 6 and 7 preferred */
+.t14 .gut-right {*margin-right:0;}
+.t14 .gut-left {*margin-left:0;}
+.t14 .pull-gut-right {*margin-right:0;*left:0;*float:right;}
+.t14 .pull-gut-left {*margin-left:0;*right:0;*float:left;}
+
+.t14 .width-10x {width:200px;}
+
+/* Part of JS hack */
+.baseup-legacy-support-before-pullgut {float:left;margin-left:1px;height:1px;display:inline;}
+</style>
+
+
+<script>
+    
+    // isIE
+    /* github.com/davesmiths/isIE */var isIE=false,isIEmode;/*@cc_on isIE=@_jscript_version;@*/if(isIE!==false){if(isIE==5.8)isIE=8;else if(isIE==5.7 && window.XMLHttpRequest)isIE=7;else if(isIE==5.7 || isIE==5.6)isIE=6;else if(isIE<=5.5)isIE=5;isIEmode=isIE;if(document.documentMode)isIEmode=document.documentMode;}
+
+    /*
+    Decided against a JS hack and chose to do a CSS hack to undo the classes applied
+    $(document)
+    .ready(function() {
+        if (isIE === 7 || isIE === 6) {
+        
+            // Pull Gut Right fix: IE 6 not perfect, pull-guts are down a few pixels, but all content is visible and in the right location
+            $('.t14').find('.pull-gut-right').each(function() {
+                var $this = $(this)
+                    ,className = 'baseup-legacy-support-before-pullgut'
+                ;
+                
+                if ($this.prev().not(className)) {
+                    $(this).before('<div class="'+className+'"></div>');
+                }
+            });
+        }
+    });
+    */
+</script>
+
+</head>
+
+<body>
+
+<h2>IE 8+ ok, IE 6 and 7 with hack via JS probably best</h2>
+<pre>
+IE 7 and 6 bug
+float:right;margin-left:-100%;
+Instead of this making the floated element appear to the right of the containing block with 
+all following content running under it as if it wasn't there, the element appears to the left in exactly
+the same way as if it had the rule float:left;margin-right:-100%;
+Can't fix this, so thinking of a way to gracefully degrade
+    Best solution I can think of is to not have the gutter but float the item.
+</pre>
+<div class="t14">
+    <div class="lay">
+        <div class="pull-gut-right">
+            <div class="item">Pull 1</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 2</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 3</div>
+        </div>
+        <div class="item">Content 1</div>  
+        <div class="pull-gut-right">
+            <div class="item">Pull 4</div>
+        </div>
+        <div class="item">Content 2</div>  
+    </div>
+    <div class="lay gut-right">
+        <div class="pull-gut-right">
+            <div class="item">Pull 1</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 2</div>
+        </div>
+        <div class="pull-gut-right">
+            <div class="item">Pull 3</div>
+        </div>
+        <div class="item">Content 1</div>  
+        <div class="pull-gut-right">
+            <div class="item">Pull 4</div>
+        </div>
+        <div class="item">Content 2</div>  
+    </div>
+    <div class="lay gut-right">
+        <div class="pull-gut-right width-10x">
+            <div class="item">Pull 1</div>
+        </div>
+        <div class="pull-gut-right width-10x">
+            <div class="item">Pull 2</div>
+        </div>
+        <div class="pull-gut-right width-10x">
+            <div class="item">Pull 3</div>
+        </div>
+        <div class="item">Content 1</div>  
+        <div class="pull-gut-right width-10x">
+            <div class="item">Pull 4</div>
+        </div>
+        <div class="item">Content 2</div>  
+    </div>
+    <div class="lay gut-left">
+        <div class="pull-gut-left width-10x">
+            <div class="item">Pull 1</div>
+        </div>
+        <div class="pull-gut-left width-10x">
+            <div class="item">Pull 2</div>
+        </div>
+        <div class="pull-gut-left width-10x">
+            <div class="item">Pull 3</div>
+        </div>
+        <div class="item">a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a Content 1: Aoijasd asdosajf sdoijg dfngkdsfgosidjf gsodfhg dsfgkjsdfg iojsdfgo ijdsf gndsfglsdkfjg dsfjgdsfgjiosdfjg sdfogijadfg sadjfskdfjlaskdfj dfgijodsfigjds fgjksdflgkdsfjkgjsdf gjidifgoidjsf gsd fgjsd ifgojidsfgoisdfjg d fg jdsfiogjs difgosdifj gsdfijgsd ofigj sdfogji sdfgd sfgjo</div>  
+        <div class="pull-gut-left width-10x">
+            <div class="item">Pull 4</div>
+        </div>
+        <div class="item">Content 2: Aoijasd asdosajf sdoijg dfngkdsfgosidjf gsodfhg dsfgkjsdfg iojsdfgo ijdsf gndsfglsdkfjg dsfjgdsfgjiosdfjg sdfogijadfg sadjfskdfjlaskdfj dfgijodsfigjds fgjksdflgkdsfjkgjsdf gjidifgoidjsf gsd fgjsd ifgojidsfgoisdfjg d fg jdsfiogjs difgosdifj gsdfijgsd ofigj sdfogji sdfgd sfgjo</div>  
+    </div>
+    <div class="lay gut-right">
+        <div class="pull-gut-right width-10x">ASDoija sdoiajsd aosidj aslkdna lsdka sdlakns</div>
+        <div class="pull-gut-right width-10x">ASD asldkasjdpiajsdf asodfhas dklfjas dfjksdfj</div>
+        asdkjsaskdjhasdkjhasdkjahsdkjh aksjdhasdkjhas dkjads kjhasdjashdousdh aosduha sduhasd kajsdhaocuhsad ochascd oashdc
+        <div class="pull-gut-right width-10x">ASDoija sdoiajsd aosidj aslkdna lsdka sdlakns</div>
+        <div class="pull-gut-right width-10x">ASD asldkasjdpiajsdf asodfhas dklfjas dfjksdfj</div>
+        <div>asdkjsaskdjhasdkjhasdkjahsdkjh aksjdhasdkjhas dkjads kjhasdjashdousdh aosduha sduhasd kajsdhaocuhsad ochascd oashdc</div>
+        <p class="lay">
+            <img class="pull-gut-right width-10x" src="-/images/orion-nebula-space-galaxy.jpg" alt="orion-nebula-space-galaxy" width="320" height="202" />
+            fsapok sadfjs dflkasjdf psaidjf aosfhas dofij asdfsifuhsad fuhsdf osidfj sadoiajs dfhsadfkjhs dfksjdf oasihdf asodfh askdfjhs dfoisahdf oasdifh sdkfjas dlfkja sdflkjsad fpiasjdf oasidjf asdofija skdbasdkfjh dsfkjashd flaksjd gladfkjasdofijasd foisajdf aerghadfhas dfjsd nadsjfnasldfj asdfij sdghlaskdjf sdhosaid 
+        </p>
+        <p class="lay">
+            <img class="pull-gut-right width-10x" src="-/images/orion-nebula-space-galaxy.jpg" alt="orion-nebula-space-galaxy" width="320" height="202" />
+            fsapok sadfjs dflkasjdf psaidjf aosfhas dofij asdfsifuhsad fuhsdf osidfj sadoiajs dfhsadfkjhs dfksjdf oasihdf asodfh askdfjhs dfoisahdf oasdifh sdkfjas dlfkja sdflkjsad fpiasjdf oasidjf asdofija skdbasdkfjh dsfkjashd flaksjd gladfkjasdofijasd foisajdf aerghadfhas dfjsd nadsjfnasldfj asdfij sdghlaskdjf sdhosaid 
+        </p>
+        <p class="lay">
+            <img class="pull-gut-right width-10x" src="-/images/orion-nebula-space-galaxy.jpg" alt="orion-nebula-space-galaxy" width="320" height="202" />
+            fsapok sadfjs dflkasjdf psaidjf aosfhas dofij asdfsifuhsad fuhsdf osidfj sadoiajs dfhsadfkjhs dfksjdf oasihdf asodfh askdfjhs dfoisahdf oasdifh sdkfjas dlfkja sdflkjsad fpiasjdf oasidjf asdofija skdbasdkfjh dsfkjashd flaksjd gladfkjasdofijasd foisajdf aerghadfhas dfjsd nadsjfnasldfj asdfij sdghlaskdjf sdhosaid 
+        </p>
+    </div>
+    
+</div>
+
+</body>
+</html>

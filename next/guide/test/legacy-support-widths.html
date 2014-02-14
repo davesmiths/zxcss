@@ -7,7 +7,23 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link href="../../baseup.css" rel="stylesheet" />
-<script src="../../baseup.js"></script>
+<script>
+    $(document)
+    .on('click', function(e) {
+        var $e = $(e.target)
+            ,rtn = true
+        ;
+        if ($e.is('button')) {
+            if ($('script[src="../../baseup.js"]').length === 0) {
+                $('head').append('<'+'script src="../../baseup.js"><'+'/script>');
+            }
+            rtn = false;
+        }
+        return rtn;
+    })
+    .ready(function() {
+    });
+</script>
 <style type="text/css">
 
 /* Page Styles */
@@ -45,6 +61,7 @@ h2 {margin:0;line-height:2;}
 
 <body>
 
+<p><a href="../">BaseUp</a></p>
 <div class="lay-centered cols widths-1o3 widths-1o8 gut-bottom" style="width:800px;">
     <div class="a width-1o4"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
     <div class="a"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
@@ -57,7 +74,7 @@ h2 {margin:0;line-height:2;}
 </div>
 
 <p>Testing RWD with Media Query polyfill</p>
-<div class="lay-centered cols widths-1o8 widths-2o8-1up widths-4o8-2up gut-bottom" style="width:800px;">
+<div class="lay-centered cols widths-4o8 widths-2o8-1up widths-1o8-2up gut-bottom">
     <div class="a"><div class="item"><span class="source">div 1</span>pos-4o8-1up</div></div>
     <div class="a"><div class="item"><span class="source">div 2</span>pos-6o8-1up</div></div>
     <div class="a"><div class="item"><span class="source">div 3</span>pos-2o8-1up</div></div>

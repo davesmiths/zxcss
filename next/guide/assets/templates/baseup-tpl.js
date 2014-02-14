@@ -55,6 +55,7 @@
                 
                     var $cols = $this = $(this)
                         ,val
+                        ,valLength
                     ;
                     
                     
@@ -69,16 +70,39 @@
                     
                     
                     // Widths classes
+                    // Copies the class div.{{width}}s-blah or div.{{width}}s-blah-Nup, renames to {{width}}-blah or {{width}}-blah-Nup and applies to all children except with .clear class or those already with a {{width}} class
                     val = $this.attr('class').match(/\s?{{width}}s-[0-9a-z-]+/g);
                     if (val) {
-                        // Get the last set widths class if more than one is set
-                        val = val[val.length - 1];
-                        val = val.replace('{{width}}s', '{{width}}');
+                        valLength = val.length;
+                        // Get the last set {{width}}s class if more than one is set
+                        for (i = 0; i < valLength; i++) {
+                            val[i] = val[i].replace('{{width}}s', '{{width}}');
+                            if (m = val[i].match(/([0-9]+)up$/)) {
+                                val[i] = {bp: m[1], val: val[i]};
+                            }
+                            else {
+                                val[i] = {bp: 0, val: val[i]};
+                            }
+                                
+                        }
                         
-                        $cols.find('> *').not(".{{clear}}, [class^='{{width}}-'],[class*=' {{width}}-']").each(function() {
-                            $(this).addClass(val);
+                        $cols.find('> *').not('.clear').each(function() {
+                            var $this = $(this)
+                                ,className = $this.attr('class')
+                                ,bp
+                            ;
+                            for (i = 0; i < valLength; i++) {
+                                bp = val[i].bp + 'up';
+                                if (val[i].bp === 0) {
+                                    bp = '';
+                                }
+                                if (!className.match(new RegExp("/\s?{{width}}-[0-9a-z]+"+bp+"/g"))) {
+                                    $this.addClass(val[i].val);
+                                }
+                            }
                         });                        
                     }
+
 
 
                     // Guts Full Width Friendly classes
@@ -129,7 +153,7 @@
     $(function() {
         $('.{{ns}}{{clear}}').baseUp({legacySupportClear:true});
         $('.{{ns}}{{lay}}, .{{ns}}{{layleft}}, .{{ns}}{{layright}}, .{{ns}}{{laycentered}}').baseUp({legacySupportLay:true});
-        $('.{{ns}}{{cols}}').baseUp({legacySupportCols:true});
+        $('.{{ns}}{{col}}s').baseUp({legacySupportCols:true});
     });
 
     

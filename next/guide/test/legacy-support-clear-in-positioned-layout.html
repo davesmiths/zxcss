@@ -7,7 +7,24 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link href="../../baseup.css" rel="stylesheet" />
-<script src="../../baseup.js"></script>
+<script>
+    $(document)
+    .on('click', function(e) {
+        var $e = $(e.target)
+            ,rtn = true
+        ;
+        if ($e.is('button')) {
+            if ($('script[src="../../baseup.js"]').length === 0) {
+                $('head').append('<'+'script src="../../baseup.js"><'+'/script>');
+            }
+            rtn = false;
+        }
+        return rtn;
+    })
+    .ready(function() {
+    });
+</script>
+
 <style type="text/css">
 
 /* Page Styles */
