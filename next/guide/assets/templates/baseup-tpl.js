@@ -64,19 +64,19 @@
                         $cols = $this.find('> .baseup-legacy-support-{{lay}}');
                     }
                     
-                    $cols.find('> *').not('.{{clear}}').each(function() {
-                        $(this).addClass('col');
+                    $cols.find('> *').not('.{{ns}}{{clear}}').each(function() {
+                        $(this).addClass('{{ns}}{{col}}');
                     });
                     
                     
                     // Widths classes
                     // Copies the class div.{{width}}s-blah or div.{{width}}s-blah-Nup, renames to {{width}}-blah or {{width}}-blah-Nup and applies to all children except with .clear class or those already with a {{width}} class
-                    val = $this.attr('class').match(/\s?{{width}}s-[0-9a-z-]+/g);
+                    val = $this.attr('class').match(/\s?{{ns}}{{width}}s-[0-9a-z-]+/g);
                     if (val) {
                         valLength = val.length;
                         // Get the last set {{width}}s class if more than one is set
                         for (i = 0; i < valLength; i++) {
-                            val[i] = val[i].replace('{{width}}s', '{{width}}');
+                            val[i] = val[i].replace('{{ns}}{{width}}s', '{{ns}}{{width}}');
                             if (m = val[i].match(/([0-9]+)up$/)) {
                                 val[i] = {bp: m[1], val: val[i]};
                             }
@@ -86,7 +86,7 @@
                                 
                         }
                         
-                        $cols.find('> *').not('.clear').each(function() {
+                        $cols.find('> *').not('.{{ns}}{{clear}}').each(function() {
                             var $this = $(this)
                                 ,className = $this.attr('class')
                                 ,bp
@@ -96,7 +96,7 @@
                                 if (val[i].bp === 0) {
                                     bp = '';
                                 }
-                                if (!className.match(new RegExp("/\s?{{width}}-[0-9a-z]+"+bp+"/g"))) {
+                                if (!className.match(new RegExp("/\s?{{ns}}{{width}}-[0-9a-z]+"+bp+"/g"))) {
                                     $this.addClass(val[i].val);
                                 }
                             }
@@ -106,14 +106,14 @@
 
 
                     // Guts Full Width Friendly classes
-                    val = $this.attr('class').match(/\s?guts-fw[0-9a-z-]*/g);
+                    val = $this.attr('class').match(/\s?{{ns}}{{gutsfw}}[0-9a-z-]*/g);
 
                     if (val) {
                         // Get the last set widths class if more than one is set
                         val = val[val.length - 1];
-                        val = val.replace('guts-fw', 'gut-left');
+                        val = val.replace('{{ns}}{{gutsfw}}', '{{ns}}{{gutleft}}');
                         
-                        $cols.find('> * > *').not(".{{clear}}, [class^='gut-left-'],[class*=' gut-left-']").each(function() {
+                        $cols.find('> * > *').not(".{{ns}}{{clear}}, [class^='{{ns}}{{gutleft}}-'],[class*=' {{ns}}{{gutleft}}-']").each(function() {
                             $(this).addClass(val);
                         });
                     }
@@ -122,28 +122,6 @@
                 });
                 
             }
-            // For IE 6 or 7 at the mo, but really it's whether box-sizing border-box is supported
-            // CSS hacks used instead for greater transparency
-            /*if (isIE == 6 || isIE == 7) {
-            
-                this.each(function() {
-                
-                    var $this = $(this)
-                        ,val
-                    ;
-                    
-                    // Guts classes: Remove the guts class because the guts class is dependent on border-box
-                    val = $this.attr('class').match(/\s?guts(?!-fw)-?[0-9a-z-]+|\s?guts(?!-fw)/g);
-
-                    if (val) {
-                        // Get the last set widths class if more than one is set
-                        val = val[val.length - 1];
-                        $this.removeClass(val);
-                        alert(val + ' ' + $this.attr('class'));
-                    }
-                    
-                });
-            }*/
             return this;
 
         }

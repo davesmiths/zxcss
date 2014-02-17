@@ -73,6 +73,8 @@
                 ,colguthide: 'hide-col-gut'
                 ,colnone: 'col-none'
                 
+                ,gutsfw: 'guts-fw'
+                
                 ,inngut: 'gut'
                 ,innguthide: 'hide-gut-left'
                 ,innnone: 'gut-none'

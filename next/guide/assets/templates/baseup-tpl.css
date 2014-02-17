@@ -148,31 +148,18 @@
 .{{ns}}{{gutbot}}-none{{bp}} {margin-bottom:0;}
 
 
-/* Pull Gut */
-{{#pullguts}}{{#isnotfirst}},
-{{/isnotfirst}}.{{ns}}{{name}}{{bp}}{{/pullguts}}
-{float:left;display:inline;clear:both;position:static!important;position:relative;}
-
-.{{ns}}{{pullgut}}{{bp}} {margin-left:-{{base5}}px;width:{{base4}}px;}
-{{#pullguts}}
-.{{ns}}{{name}}{{bp}} {margin-left:-{{marginleft}}px;width:{{width}}px;}
-{{/pullguts}}
-
+/* Pull Gut Left */
+.{{ns}}{{pullgut}}{{bp}} {float:right;position:relative;margin-left:-100%;right:100%;clear:both;display:inline;margin-right:20px;}
 .{{ns}}{{pullgut}}-none{{bp}} {margin-left:0;width:auto;float:none;position:static;}
-
+/* IE 6 and 7 graceful degradation */
+.{{ns}}{{pullgut}}{{bp}} {*margin-left:0;*right:0;*float:left;}
 
 
 /* Pull Gut Right */
-{{#pullgutrights}}{{#isnotfirst}},
-{{/isnotfirst}}.{{ns}}{{name}}{{bp}}{{/pullgutrights}}
-{float:right;display:inline;clear:both;position:relative;}
-            
-.{{ns}}{{pullgutright}}{{bp}} {margin-right:-{{base5}}px;width:{{base4}}px;}
-{{#pullgutrights}}
-.{{ns}}{{name}}{{bp}} {margin-right:-{{marginright}}px;width:{{width}}px;right:-{{right}}px;}
-{{/pullgutrights}}
-
+.{{ns}}{{pullgutright}}{{bp}} {float:left;position:relative;margin-right:-100%;left:100%;clear:both;display:inline;margin-left:20px;}
 .{{ns}}{{pullgutright}}-none{{bp}} {margin-right:0;width:auto;float:none;position:static;}
+/* IE 6 and 7 graceful degradation */
+.{{ns}}{{pullgutright}}{{bp}} {*margin-right:0;*left:0;*float:right;}
 
 
 
@@ -203,42 +190,42 @@
 
 
 /* Guts */
-.guts{{bp}} > *,
-.guts-1x{{bp}} > *,
-.guts-2x{{bp}} > *,
-.guts-1o2x{{bp}} > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+.{{ns}}{{gut}}s{{bp}} > *,
+.{{ns}}{{gut}}s-1x{{bp}} > *,
+.{{ns}}{{gut}}s-2x{{bp}} > *,
+.{{ns}}{{gut}}s-1o2x{{bp}} > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.guts-1o2x{{bp}} {margin-left:-5px;margin-right:-5px;}
-.guts-1o2x{{bp}} > * {padding-left:5px;padding-right:5px;margin-bottom:10px;}
-.guts{{bp}} {margin-left:-10px;margin-right:-10px;}
-.guts{{bp}} > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
-.guts-1x{{bp}} {margin-left:-10px;margin-right:-10px;}
-.guts-1x{{bp}} > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
-.guts-2x{{bp}} {margin-left:-20px;margin-right:-20px;}
-.guts-2x{{bp}} > * {padding-left:20px;padding-right:20px;margin-bottom:40px;}
+.{{ns}}{{gut}}s-1o2x{{bp}} {margin-left:-5px;margin-right:-5px;}
+.{{ns}}{{gut}}s-1o2x{{bp}} > * {padding-left:5px;padding-right:5px;margin-bottom:10px;}
+.{{ns}}{{gut}}s{{bp}} {margin-left:-10px;margin-right:-10px;}
+.{{ns}}{{gut}}s{{bp}} > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.{{ns}}{{gut}}s-1x{{bp}} {margin-left:-10px;margin-right:-10px;}
+.{{ns}}{{gut}}s-1x{{bp}} > * {padding-left:10px;padding-right:10px;margin-bottom:20px;}
+.{{ns}}{{gut}}s-2x{{bp}} {margin-left:-20px;margin-right:-20px;}
+.{{ns}}{{gut}}s-2x{{bp}} > * {padding-left:20px;padding-right:20px;margin-bottom:40px;}
 
 {{#legacysupport}}
 /* IE 6 and 7 fixes because they don't support box-sizing */
-.guts-1o2x{{bp}},
-.guts{{bp}},
-.guts-1x{{bp}},
-.guts-2x{{bp}} {*margin-left:0;*margin-right:0;}
-.guts-1o2x{{bp}} > *,
-.guts{{bp}} > *,
-.guts-1x{{bp}} > *,
-.guts-2x{{bp}} > * {*padding-left:0;*padding-right:0;}
+.{{ns}}{{gut}}s-1o2x{{bp}},
+.{{ns}}{{gut}}s{{bp}},
+.{{ns}}{{gut}}s-1x{{bp}},
+.{{ns}}{{gut}}s-2x{{bp}} {*margin-left:0;*margin-right:0;}
+.{{ns}}{{gut}}s-1o2x{{bp}} > *,
+.{{ns}}{{gut}}s{{bp}} > *,
+.{{ns}}{{gut}}s-1x{{bp}} > *,
+.{{ns}}{{gut}}s-2x{{bp}} > * {*padding-left:0;*padding-right:0;}
 {{/legacysupport}}
 
 
 /* Guts Full-Width class a */
-.guts-fw-1o2x{{bp}} {margin-left:-10px;}
-.guts-fw-1o2x{{bp}} > * > * {margin-left:10px;margin-bottom:10px;}
-.guts-fw{{bp}} {margin-left:-20px;}
-.guts-fw{{bp}} > * > * {margin-left:20px;margin-bottom:20px;}
-.guts-fw-1x{{bp}} {margin-left:-20px;}
-.guts-fw-1x{{bp}} > * > * {margin-left:20px;margin-bottom:20px;}
-.guts-fw-2x{{bp}} {margin-left:-40px;}
-.guts-fw-2x{{bp}} > * > * {margin-left:40px;margin-bottom:40px;}
+.{{gutsfw}}-1o2x{{bp}} {margin-left:-10px;}
+.{{gutsfw}}-1o2x{{bp}} > * > * {margin-left:10px;margin-bottom:10px;}
+.{{gutsfw}}{{bp}} {margin-left:-20px;}
+.{{gutsfw}}{{bp}} > * > * {margin-left:20px;margin-bottom:20px;}
+.{{gutsfw}}-1x{{bp}} {margin-left:-20px;}
+.{{gutsfw}}-1x{{bp}} > * > * {margin-left:20px;margin-bottom:20px;}
+.{{gutsfw}}-2x{{bp}} {margin-left:-40px;}
+.{{gutsfw}}-2x{{bp}} > * > * {margin-left:40px;margin-bottom:40px;}
 
 
 
