@@ -21,6 +21,7 @@
                 ,gutterBasex: '.input-gutter-basex'
                 ,maxWidths: '.input-maxwidths'
                 ,maxWidthsBP: '.input-maxwidths-bp'
+                ,baseBasedBPs: '.input-base-based-bps'
                 ,classNamespace: '#input-classnamespace'
                 ,breakpointadd: '.input-breakpoint-add'
                 ,base: '#input-base'
@@ -32,6 +33,10 @@
                 
                 ,formbreakpoint: '.form-breakpoint'
                 ,formbreakpointremove: '.form-breakpoint-remove'
+                
+                ,scrollbardepth: '#input-scrollbardepth'
+                ,scrollbardepthadjust: '#input-scrollbardepthadjust'
+                
             }
             ,output: {
                 css: '.output-css'
@@ -119,6 +124,8 @@
                 ,layie6fix: 'lay-ie6fix'
                 ,layoutgutter: 'layout-gutter'
                 ,rizzlecssproperty: 'rizzlecssproperty'
+                
+                
             }
         }
         ,tid: {}
@@ -158,6 +165,9 @@
         input.maxWidthsBPLength = input.maxWidthsBP.length;
         input.base = $(db.sel.input.base).val();
         input.legacysupport = $(db.sel.input.legacysupport)[0].checked;
+        
+        input.scrollbardepth = $(db.sel.input.scrollbardepth).val() * 1;
+        input.scrollbardepthadjust = $(db.sel.input.scrollbardepthadjust).val() * 1;
         
         input.gutmultipliersmall = $(db.sel.input.gutmultipliersmall).val();
         input.gutmultipliermedium = $(db.sel.input.gutmultipliermedium).val();
@@ -206,13 +216,23 @@
         
         
         
+        // Alternative breakpoints based on base
+        var i
+        ,   baseBasedBPs = []
+        ;
+        for (i = 1; i < 8; i++) {
+            baseBasedBPs.push((input.base * ((i * 12) - 1)) + (input.scrollbardepth + input.scrollbardepthadjust));
+        }
+        db.baseBasedBPs = baseBasedBPs;
+        
         // Update MaxWidths
         var i
         ,   maxWidths = []
         ;
         for (i = 1; i < 8; i++) {
-            maxWidths.push(input.base * ((i * 12) - 1));
+            maxWidths.push((input.base * ((i * 12) - 1)));
         }
+        // + (input.scrollbardepth + input.scrollbardepthadjust)
         db.maxWidths = maxWidths;        
         db.maxWidthsLength = input.maxWidthsLength;
         
@@ -455,6 +475,9 @@
         
         $(db.sel.input.maxWidths).val(db.maxWidths);
         $(db.sel.input.maxWidthsBP).val(db.maxWidthsBP.slice(1));
+        
+        $(db.sel.input.baseBasedBPs).val(db.baseBasedBPs);
+        
         
         resizeOutput($(db.sel.output.css)[0]);
         resizeOutput($(db.sel.output.js)[0]);
@@ -721,6 +744,8 @@
                 || $t.is(db.sel.input.gutmultipliersmall)
                 || $t.is(db.sel.input.gutmultipliermedium)
                 || $t.is(db.sel.input.gutmultiplierlarge)
+                || $t.is(db.sel.input.scrollbardepth)
+                || $t.is(db.sel.input.scrollbardepthadjust)
             ) {
                 inputChange();
             }
