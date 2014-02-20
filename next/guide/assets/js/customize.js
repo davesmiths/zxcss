@@ -10,6 +10,7 @@
         ,db = {}
     ;
     
+    
     db = {
         sel: {
             input: {
@@ -34,7 +35,6 @@
                 ,formbreakpoint: '.form-breakpoint'
                 ,formbreakpointremove: '.form-breakpoint-remove'
                 
-                ,scrollbardepth: '#input-scrollbardepth'
                 ,scrollbardepthadjust: '#input-scrollbardepthadjust'
                 
             }
@@ -88,6 +88,7 @@
                 ,gutmediummultiplier: 9
                 ,gutlargemultiplier: 14
                 
+                ,gut: 'gut'
                 ,gutleft: 'gut-left'
                 ,gutsmall: 'gut-left-small'
                 ,gutmedium: 'gut-left-medium'
@@ -166,7 +167,6 @@
         input.base = $(db.sel.input.base).val();
         input.legacysupport = $(db.sel.input.legacysupport)[0].checked;
         
-        input.scrollbardepth = $(db.sel.input.scrollbardepth).val() * 1;
         input.scrollbardepthadjust = $(db.sel.input.scrollbardepthadjust).val() * 1;
         
         input.gutmultipliersmall = $(db.sel.input.gutmultipliersmall).val();
@@ -221,7 +221,7 @@
         ,   baseBasedBPs = []
         ;
         for (i = 1; i < 8; i++) {
-            baseBasedBPs.push((input.base * ((i * 12) - 1)) + (input.scrollbardepth + input.scrollbardepthadjust));
+            baseBasedBPs.push((input.base * ((i * 12) - 1)) + input.scrollbardepthadjust);
         }
         db.baseBasedBPs = baseBasedBPs;
         
@@ -232,7 +232,6 @@
         for (i = 1; i < 8; i++) {
             maxWidths.push((input.base * ((i * 12) - 1)));
         }
-        // + (input.scrollbardepth + input.scrollbardepthadjust)
         db.maxWidths = maxWidths;        
         db.maxWidthsLength = input.maxWidthsLength;
         
@@ -744,7 +743,6 @@
                 || $t.is(db.sel.input.gutmultipliersmall)
                 || $t.is(db.sel.input.gutmultipliermedium)
                 || $t.is(db.sel.input.gutmultiplierlarge)
-                || $t.is(db.sel.input.scrollbardepth)
                 || $t.is(db.sel.input.scrollbardepthadjust)
             ) {
                 inputChange();
@@ -777,6 +775,15 @@
                 rtn = false;
             };
 
+            return rtn;
+        })
+        .on('submit', function(e) {
+            var $t = $(e.target)
+                ,rtn = true;
+            ;
+            if ($t.not('input[type="submit"]')) {
+                rtn = false;
+            }
             return rtn;
         })
         .ready(init);
