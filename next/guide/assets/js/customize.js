@@ -1,5 +1,6 @@
 (function(context){
     
+        
     // Config
     var getInput 
         ,els = {
@@ -16,6 +17,8 @@
             input: {
                 decimalPlaces: '#input-decimalplaces'
                 ,positionClasses: '#input-positionclasses'
+                ,heightClasses: '#input-heightclasses'
+                ,heightClassesNum: '#input-heightclassesnum'
                 ,columns: '.input-columns'
                 ,at: '.input-at'
                 ,gutter: '.input-gutter'
@@ -43,11 +46,13 @@
                 ,js: '.output-js'
                 
             }
-            ,advanced: '.advanced'
+            ,layoutoptions: '.layoutoptions'
+            ,generaloptions: '.generaloptions'
             ,css: '.css'
         }
         ,outputToggles: [
             {title: 'Position Classes', name: 'input-positionclasses'}
+            ,{title: 'Height Classes', name: 'input-heightclasses'}
             ,{title: 'Width Classes', name: 'input-widthclasses'}
             ,{title: 'Gutter Classes', name: 'input-gutterclasses'}
             ,{title: 'Pull Gut Classes', name: 'input-pullgutclasses'}
@@ -159,6 +164,8 @@
         input.breakpointsLength = input.breakpoints.length;
         input.decimalPlaces = $(db.sel.input.decimalPlaces).val();
         input.positionClasses = $(db.sel.input.positionClasses)[0].checked;
+        input.heightClasses = $(db.sel.input.heightClasses)[0].checked;
+        input.heightClassesNum = $(db.sel.input.heightClassesNum).val() * 1;
         input.classNamespace = $(db.sel.input.classNamespace).val().replace(/\s+/g, '');
         input.maxWidths = $(db.sel.input.maxWidths).val().replace(/\s+/g, '').split(',');
         input.maxWidthsLength = input.maxWidths.length;
@@ -208,6 +215,7 @@
         db.decimalPlaces = input.decimalPlaces;
         db.minify = input.minify;
         db.positionClasses = input.positionClasses;
+        db.heightClasses = input.heightClasses;
         db.classNamespace = input.classNamespace;
         
         db.gutmultipliersmall = input.gutmultipliersmall;
@@ -314,6 +322,15 @@
             
             // poss
             tibi.poss = makePositionClasses({columns: db.columns});
+            if (db.heightClasses) {                
+                tibi.heights = [];
+                for (j = 0; j < 21; j++) {
+                    tibi.heights.push({
+                        height:db.breakpoints[i].gutter * j + 'px'
+                        ,i: j
+                    });
+                }
+            }
             
             // gutter
             tibi.gutter = db.breakpoints[i].gutter;
@@ -689,19 +706,37 @@
         elements();
         
         (function() {
-            var toggleText = ['Options woah bonza!', 'Hide my moomins']
+            var toggleText = ['Layout', 'Close Layout']
                 ,toggleTextLength = toggleText.length
-                ,togglePointer = (/#advanced/g.exec(window.location.href)) ? 1 : 0
+                ,togglePointer = (/#layoutoptions/g.exec(window.location.href)) ? 1 : 0
                 ,html = '<p><a href="">'+toggleText[togglePointer]+'</a></p>'
             ;
-//console.log(togglePointer);
             els.toggleHTML = $(html);
-            els.toggleHTML = $(db.sel.advanced).before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
+            els.toggleHTML = $(db.sel.layoutoptions).before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
             els.toggleHTML.on('click', 'a', function() {
                 var $this = $(this);
                 togglePointer = (togglePointer + 1) % toggleTextLength;
                 $this.text(toggleText[togglePointer]);
-                $(db.sel.advanced).toggleClass('inactive');
+                $(db.sel.layoutoptions).toggleClass('inactive');
+                resizeOutput($(db.sel.output.css)[0]);
+                resizeOutput($(db.sel.output.js)[0]);
+                return false;
+            });
+        }());
+        
+        (function() {
+            var toggleText = ['General', 'Close General']
+                ,toggleTextLength = toggleText.length
+                ,togglePointer = (/#generaloptions/g.exec(window.location.href)) ? 1 : 0
+                ,html = '<p><a href="">'+toggleText[togglePointer]+'</a></p>'
+            ;
+            els.toggleHTML = $(html);
+            els.toggleHTML = $(db.sel.generaloptions).before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
+            els.toggleHTML.on('click', 'a', function() {
+                var $this = $(this);
+                togglePointer = (togglePointer + 1) % toggleTextLength;
+                $this.text(toggleText[togglePointer]);
+                $(db.sel.generaloptions).toggleClass('inactive');
                 resizeOutput($(db.sel.output.css)[0]);
                 resizeOutput($(db.sel.output.js)[0]);
                 return false;
@@ -734,6 +769,7 @@
             if (
                 $t.is(db.sel.input.decimalPlaces)
                 || $t.is(db.sel.input.positionClasses)
+                || $t.is(db.sel.input.heightClasses)
                 || $t.is(db.sel.input.at)
                 || $t.is(db.sel.input.columns)
                 || $t.is(db.sel.input.maxWidths)

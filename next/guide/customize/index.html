@@ -7,7 +7,7 @@
 <title>Customize BaseUp</title>
 
 
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <link href="../../baseup.css" rel="stylesheet" />
 <script src="../../baseup.js"></script>
 
@@ -34,15 +34,13 @@
 <p>
     <label for="input-base">Base</label><br />
     <input name="input-base" id="input-base" type="number" value="20" /><br />
-    <em>The recommended base is your body copy line-height in pixels</em>
+    <em>The body copy line-height in pixels</em>
 </p>
 <p><input type="submit" value="Download" /><br />
 
 
 
-
-
-<div class="advanced">
+<div class="generaloptions">
     
     <h2>Legacy Browser Support</h2>
     <p>
@@ -52,6 +50,17 @@
     </p>
     
     
+    <h2>Namespacing</h2>
+    <p>
+        <label for="input-classnamespace">Class prepend/namespace</label><br />
+        <input name="input-classnamespace" id="input-classnamespace" />
+    </p>
+    
+    
+</div>
+
+<div class="layoutoptions">
+
     <h2>Columns</h2>
     <p>
     <label for="input-columns">Columns</label><br />
@@ -167,17 +176,27 @@
 
     <div class="placeholder-output-toggles"></div>
     
-    <h2>Namespacing</h2>
-    <p>
-        <label for="input-classnamespace">Class prepend/namespace</label><br />
-        <input name="input-classnamespace" id="input-classnamespace" />
-    </p>
+
 
     <h2>Output Toggling</h2>
     <p>
         <input name="input-positionclasses" id="input-positionclasses" type="checkbox" checked="checked" />
         <label for="input-positionclasses">Position classes</label>
     </p>
+    
+    
+    
+    <h2>Heights</h2>
+    <p>
+        <input name="input-heightclasses" id="input-heightclasses" type="checkbox" checked="checked" />
+        <label for="input-heightclasses">Height classes</label>
+    </p>
+    <p>
+        <input name="input-heightclassesnum" id="input-heightclassesnum" type="number" value="20" />
+        <label for="input-heightclassesnum">Height classes</label>
+    </p>
+
+
 
     <h2>Bits and Bobs</h2>    
     <p>
