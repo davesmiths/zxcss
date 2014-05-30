@@ -200,14 +200,14 @@
 .{{ns}}{{gut}}s-2x{{bp}} > *,
 .{{ns}}{{gut}}s-1o2x{{bp}} > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.{{ns}}{{gut}}s-1o2x{{bp}} {margin-left:-5px;margin-right:-5px;}
-.{{ns}}{{gut}}s-1o2x{{bp}} > * {padding-left:5px;padding-right:5px;}
-.{{ns}}{{gut}}s{{bp}} {margin-left:-10px;margin-right:-10px;}
-.{{ns}}{{gut}}s{{bp}} > * {padding-left:10px;padding-right:10px;}
-.{{ns}}{{gut}}s-1x{{bp}} {margin-left:-10px;margin-right:-10px;}
-.{{ns}}{{gut}}s-1x{{bp}} > * {padding-left:10px;padding-right:10px;}
-.{{ns}}{{gut}}s-2x{{bp}} {margin-left:-20px;margin-right:-20px;}
-.{{ns}}{{gut}}s-2x{{bp}} > * {padding-left:20px;padding-right:20px;}
+.{{ns}}{{gut}}s-1o2x{{bp}} {margin-left:-{{halfgutter1o2}}px;margin-right:-{{halfgutter1o2}}px;}
+.{{ns}}{{gut}}s-1o2x{{bp}} > * {padding-left:{{halfgutter1o2}}px;padding-right:{{halfgutter1o2}}px;}
+.{{ns}}{{gut}}s{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
+.{{ns}}{{gut}}s{{bp}} > * {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
+.{{ns}}{{gut}}s-1x{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
+.{{ns}}{{gut}}s-1x{{bp}} > * {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
+.{{ns}}{{gut}}s-2x{{bp}} {margin-left:-{{halfgutter2x}}px;margin-right:-{{halfgutter2x}}px;}
+.{{ns}}{{gut}}s-2x{{bp}} > * {padding-left:{{halfgutter2x}}px;padding-right:{{halfgutter2x}}px;}
 
 {{#legacysupport}}
 /* IE 6 and 7 fixes because they don't support box-sizing */
@@ -223,14 +223,14 @@
 
 
 /* Guts Full-Width class a */
-.{{gutsfw}}-1o2x{{bp}} {margin-left:-10px;}
-.{{gutsfw}}-1o2x{{bp}} > * > * {margin-left:10px;}
-.{{gutsfw}}{{bp}} {margin-left:-20px;}
-.{{gutsfw}}{{bp}} > * > * {margin-left:20px;}
-.{{gutsfw}}-1x{{bp}} {margin-left:-20px;}
-.{{gutsfw}}-1x{{bp}} > * > * {margin-left:20px;}
-.{{gutsfw}}-2x{{bp}} {margin-left:-40px;}
-.{{gutsfw}}-2x{{bp}} > * > * {margin-left:40px;}
+.{{gutsfw}}-1o2x{{bp}} {margin-left:-{{gutter1o2}}px;}
+.{{gutsfw}}-1o2x{{bp}} > * > * {margin-left:{{gutter1o2}}px;}
+.{{gutsfw}}{{bp}} {margin-left:-{{gutter}}px;}
+.{{gutsfw}}{{bp}} > * > * {margin-left:{{gutter}};}
+.{{gutsfw}}-1x{{bp}} {margin-left:-{{gutter}}px;}
+.{{gutsfw}}-1x{{bp}} > * > * {margin-left:{{gutter}}px;}
+.{{gutsfw}}-2x{{bp}} {margin-left:-{{gutter2x}}px;}
+.{{gutsfw}}-2x{{bp}} > * > * {margin-left:{{gutter2x}}px;}
 
 
 

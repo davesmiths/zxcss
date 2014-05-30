@@ -44,6 +44,9 @@
             ,output: {
                 css: '.output-css'
                 ,js: '.output-js'
+                ,headcss: '.output-headcss'
+                ,headjs: '.output-headjs'
+                ,demo: '.output-demo'
                 
             }
             ,layoutoptions: '.layoutoptions'
@@ -134,6 +137,7 @@
                 
             }
         }
+        ,output: {}
         ,tid: {}
     };
     
@@ -322,8 +326,14 @@
             
             // poss
             tibi.poss = makePositionClasses({columns: db.columns});
+            
+            // Height
             if (db.heightClasses) {                
                 tibi.heights = [];
+                tibi.heights.push({
+                    height:db.breakpoints[i].gutter / 2 + 'px'
+                    ,i: '1o2'
+                });
                 for (j = 0; j < 21; j++) {
                     tibi.heights.push({
                         height:db.breakpoints[i].gutter * j + 'px'
@@ -334,6 +344,7 @@
             
             // gutter
             tibi.gutter = db.breakpoints[i].gutter;
+            tibi.gutter2x = db.breakpoints[i].gutter * 2;
             tibi.gutter1o2 = round(db.breakpoints[i].gutter/2, db.decimalPlaces);
             tibi.gutters = [];
             for (j = 1; j < 13; j++) {
@@ -359,6 +370,7 @@
             
             // half gutters
             tibi.halfgutter = round(db.breakpoints[i].gutter/2, db.decimalPlaces);
+            tibi.halfgutter2x = round(db.breakpoints[i].gutter * 2 / 2, db.decimalPlaces);
             tibi.halfgutter1o2 = round(db.breakpoints[i].gutter/4, db.decimalPlaces);
             
             // Pullguts gutters
@@ -479,6 +491,17 @@
         
         db.templates.js.output = Mustache.render(db.templates.js.template, db.templates.input);
 
+        
+        // Demo
+        db.output.demo = '';
+        for (j = 1; j <= db.columns; j++) {
+            db.output.demo += '<div class="lay cols widths-1o'+j+' guts-fw-1x">';
+            for (k = 0; k < j; k++) {
+                db.output.demo += '<div><div class="height-1o2x gut-bottom-1o2x" title="width-1o'+j+'"></div></div>';
+            }
+            db.output.demo += '</div>';
+        }
+        
         return callback();
         
     };
@@ -489,6 +512,9 @@
         $(db.sel.output.css).val(trim(db.templates.css.output));
         $(db.sel.output.js).val(trim(db.templates.js.output));
         
+        $(db.sel.output.headcss).html(trim(db.templates.css.output));
+        $(db.sel.output.headjs).html(trim(db.templates.js.output));
+        
         $(db.sel.input.maxWidths).val(db.maxWidths);
         $(db.sel.input.maxWidthsBP).val(db.maxWidthsBP.slice(1));
         
@@ -497,6 +523,10 @@
         
         resizeOutput($(db.sel.output.css)[0]);
         resizeOutput($(db.sel.output.js)[0]);
+        
+        
+        
+        $(db.sel.output.demo).html(db.output.demo);
         
         //$(db.sel.output.labelSpan).html(' '+db.output.css.length);
     };
@@ -805,8 +835,8 @@
                 breakpointAdd();
                 rtn = false;
             }
-            else if ($t.is(db.sel.input.formbreakpointremove)) {
-                $t.parent().remove();
+            else if ($t.closest(db.sel.input.formbreakpointremove).length) {
+                $t.closest('tr').remove();
                 inputChange();
                 rtn = false;
             };
