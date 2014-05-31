@@ -495,9 +495,28 @@
         // Demo
         db.output.demo = '';
         for (j = 1; j <= db.columns; j++) {
-            db.output.demo += '<div class="lay cols widths-1o'+j+' guts-fw-1x">';
+        var isPrime = '';
+                if (j === 2
+                    || j === 3
+                    || j === 5
+                    || j === 7
+                    || j === 11
+                    || j === 13
+                    || j === 17
+                    || j === 19
+                    || j === 23
+                    || j === 29
+                    || j === 31
+                    || j === 37
+                    || j === 41
+                    || j === 43
+                    || j === 47
+                ) {
+                    isPrime = ' prime'
+                }
+            db.output.demo += '<div class="lay cols widths-1o'+j+' guts-fw-1x'+isPrime+'">';
             for (k = 0; k < j; k++) {
-                db.output.demo += '<div><div class="height-1o2x gut-bottom-1o2x" title="width-1o'+j+'"></div></div>';
+                db.output.demo += '<div><div class="height-1o2x gut-bottom-1o2xs" title="width-1o'+j+'"></div></div>';
             }
             db.output.demo += '</div>';
         }
