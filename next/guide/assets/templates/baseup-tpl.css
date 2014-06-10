@@ -1,12 +1,75 @@
 /*
 //  BaseUp CSS
 */
+{{#breakpoints}}
+{{#isgt0}}
 
+/* Breakpoint{{bp}} */
+@media all and (min-width:{{at}}px) {
+
+{{/isgt0}}
+{{#is0}}
+
+
+
+/* Copy */
+body {font-size:{{copyfontsize}}em;line-height:{{copylineheight}};}
+h1, h2, h3, h4, h5, h6 {margin:0;}
+p,form,ol,ul,dl {margin-top:0;margin-bottom:{{base}}px;}
+
+h1 {font-size:{{h1}}%;line-height:{{h1lineheight}};}
+h2 {font-size:{{h2}}%;line-height:{{h2lineheight}};}
+h3 {font-size:{{h3}}%;line-height:{{h3lineheight}};}
+h4 {font-size:{{h4}}%;line-height:{{h4lineheight}};}
+h5 {font-size:{{h5}}%;line-height:{{h5lineheight}};}
+h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
+
+
+
+
+/* Layout */
+.{{ns}}{{lay}} {list-style-type:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0;}
+
+.{{ns}}{{lay}}:after,
+.{{ns}}{{lay}}:before,
+.{{ns}}{{layleft}}:after,
+.{{ns}}{{layleft}}:before,
+.{{ns}}{{layright}}:after,
+.{{ns}}{{layright}}:before,
+.{{ns}}{{laycentered}}:after,
+.{{ns}}{{laycentered}}:before {content:"";display:table;}
+.{{ns}}{{lay}}:after,
+.{{ns}}{{layleft}}:after,
+.{{ns}}{{layright}}:after,
+.{{ns}}{{laycentered}}:after {clear:both;}
+
+{{#legacysupport}}
+/* Layout > Legacy Support > IE 6 and 7 fix to trigger hasLayout */
+.{{ns}}{{lay}},
+.{{ns}}{{layleft}},
+.{{ns}}{{layright}},
+.{{ns}}{{laycentered}} {display:inline-block;}
+.{{ns}}{{lay}},
+.{{ns}}{{layleft}},
+.{{ns}}{{layright}},
+.{{ns}}{{laycentered}} {display:block;}
+{{/legacysupport}}
+
+.{{ns}}{{layleft}} {margin-right:auto;}
+.{{ns}}{{layright}} {margin-left:auto;}
+.{{ns}}{{laycentered}} {margin-left:auto;margin-right:auto;}
+
+.{{ns}}{{clear}} {clear:both;}
+
+
+
+
+/* Layout > Columns */
 .{{ns}}{{col}} {float:left;width:100%;}
 .{{ns}}{{col}}s > * {float:left;width:100%;}
 
-
 {{#legacysupport}}
+/* Layout > Cols > Legacy Support */
 /*  IE 6 and 7 fix */
 .{{ns}}{{col}} {
     _display:inline; /* 1 */
@@ -34,141 +97,121 @@
 {{/legacysupport}}
 
 
+
+
+/* Layout > Positioned Columns */
+.{{ns}}{{pos}} {margin-right:-100%;}
+
+
+
+
+/* Layout > Pull Left and Right */
 .{{ns}}{{pullleft}} {float:left;width:100%;}
 .{{ns}}{{pullright}} {float:right;width:100%;}
-.{{ns}}{{pos}} {margin-right:-100%;}
-.{{ns}}{{lay}} {list-style-type:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0;}
-
-
-{{#breakpoints}}
+{{/is0}}
 {{#isgt0}}
-@media all and (min-width:{{at}}px) {
-
-    .{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
     
-{{#issecond}}
+    /* Layout > Columns */
+    .{{ns}}{{col}}{{bp}} {float:left;width:100%;}
+    .{{ns}}{{colnone}}{{bp}} {float:none;width:auto;}
+    .{{ns}}{{clear}}{{bp}} {clear:left;}
+    .{{ns}}{{clearnone}}{{bp}} {clear:none;}
+
+{{#is1}}
     .{{ns}}{{pullleft}},
     .{{ns}}{{pullright}} {width:auto;}
     
-{{/issecond}}
-}
+{{/is1}}
+
 {{/isgt0}}
 
-{{/breakpoints}}
-
-.{{ns}}{{lay}}:after,
-.{{ns}}{{lay}}:before,
-.{{ns}}{{layleft}}:after,
-.{{ns}}{{layleft}}:before,
-.{{ns}}{{layright}}:after,
-.{{ns}}{{layright}}:before,
-.{{ns}}{{laycentered}}:after,
-.{{ns}}{{laycentered}}:before {content:"";display:table;}
-.{{ns}}{{lay}}:after,
-.{{ns}}{{layleft}}:after,
-.{{ns}}{{layright}}:after,
-.{{ns}}{{laycentered}}:after {clear:both;}
-
-{{#legacysupport}}
-/* IE 6 and 7 fix to trigger hasLayout */
-.{{ns}}{{lay}},
-.{{ns}}{{layleft}},
-.{{ns}}{{layright}},
-.{{ns}}{{laycentered}} {display:inline-block;}
-.{{ns}}{{lay}},
-.{{ns}}{{layleft}},
-.{{ns}}{{layright}},
-.{{ns}}{{laycentered}} {display:block;}
-{{/legacysupport}}
-
-.{{ns}}{{layleft}} {margin-right:auto;}
-.{{ns}}{{layright}} {margin-left:auto;}
-.{{ns}}{{laycentered}} {margin-left:auto;margin-right:auto;}
-
-.{{ns}}{{clear}} {clear:both;}
-
-{{! This is where the action starts}}
-{{#breakpoints}}
-{{#bp}}
-
-@media all and (min-width:{{at}}px) {
-
-.{{ns}}{{col}}{{bp}} {float:left;width:100%;}
-.{{ns}}{{colnone}}{{bp}} {float:none;width:auto;}
-.{{ns}}{{clear}}{{bp}} {clear:left;}
-.{{ns}}{{clearnone}}{{bp}} {clear:none;}
-{{/bp}}
 
 
-/* Heights */
+
+/* Layout > Heights */
 {{#heights}}
-.{{ns}}height-{{i}}x{{bp}} {height:{{height}};}
+.{{ns}}height-{{i}}x{{bp}} {height:{{base}}px;}
 {{/heights}}
 
-/* Hide Gutter Left */
-.{{ns}}{{innguthide}}{{bp}} {margin-left:-{{gutter}}px;}
+
+
+/* Layout > Hide Gutter Left */
+{{#innguthides}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};}
+{{/innguthides}}
+
+
+
+.{{ns}}{{innguthide}}{{bp}} {margin-left:-{{base}}px;}
 {{#gutters}}
 {{#isforlay}}
-.{{ns}}{{innguthide}}-{{i}}x{{bp}} {margin-left:-{{gutter}}px;}
+.{{ns}}{{innguthide}}-{{i}}x{{bp}} {margin-left:-{{base}}px;}
 {{/isforlay}}
 {{/gutters}}
-.{{ns}}{{innguthide}}-1o2x{{bp}} {margin-left:-{{gutter1o2}}px;}
+.{{ns}}{{innguthide}}-1o2x{{bp}} {margin-left:-{{base1o2}}px;}
 .{{ns}}{{innguthide}}-none{{bp}} {margin-left:0;}
 
 
-/* Gut Left */
-.{{ns}}{{gutleft}}{{bp}} {margin-left:{{gutter}}px;}
-{{#gutters}}
-.{{ns}}{{gutleft}}-{{i}}x{{bp}} {margin-left:{{gutter}}px;}
-{{/gutters}}
-.{{ns}}{{gutleft}}-1o2x{{bp}} {margin-left:{{gutter1o2}}px;}
 
+/* Layout > Gut Left */
+.{{ns}}{{gutleft}}{{bp}} {margin-left:{{base}}px;}
+{{#gutters}}
+.{{ns}}{{gutleft}}-{{i}}x{{bp}} {margin-left:{{base}}px;}
+{{/gutters}}
+.{{ns}}{{gutleft}}-1o2x{{bp}} {margin-left:{{base1o2}}px;}
 .{{ns}}{{gutsmall}}{{bp}} {margin-left:{{gutsmallmargin}}px;}
 .{{ns}}{{gutmedium}}{{bp}} {margin-left:{{gutmediummargin}}px;}
 .{{ns}}{{gutlarge}}{{bp}} {margin-left:{{gutlargemargin}}px;}
 .{{ns}}{{gutleft}}-none{{bp}} {margin-left:0;}
 
 
-/* Gut Right */
-.{{ns}}{{gutright}}{{bp}} {margin-right:{{gutter}}px;}
-{{#gutters}}
-.{{ns}}{{gutright}}-{{i}}x{{bp}} {margin-right:{{gutter}}px;}
-{{/gutters}}
-.{{ns}}{{gutright}}-1o2x{{bp}} {margin-right:{{gutter1o2}}px;}
 
+/* Layout > Gut Right */
+.{{ns}}{{gutright}}{{bp}} {margin-right:{{base}}px;}
+{{#gutters}}
+.{{ns}}{{gutright}}-{{i}}x{{bp}} {margin-right:{{base}}px;}
+{{/gutters}}
+.{{ns}}{{gutright}}-1o2x{{bp}} {margin-right:{{base1o2}}px;}
 .{{ns}}{{gutrightsmall}}{{bp}} {margin-right:{{gutsmallmargin}}px;}
 .{{ns}}{{gutrightmedium}}{{bp}} {margin-right:{{gutmediummargin}}px;}
 .{{ns}}{{gutrightlarge}}{{bp}} {margin-right:{{gutlargemargin}}px;}
 .{{ns}}{{gutright}}-none{{bp}} {margin-right:0;}
 
 
-/* Gut Bottom */
-.{{ns}}{{gutbot}}{{bp}} {margin-bottom:{{gutter}}px;}
+
+/* Layout > Gut Bottom */
+.{{ns}}{{gutbot}}{{bp}} {margin-bottom:{{base}}px;}
 {{#gutters}}
 {{#isforlay}}
-.{{ns}}{{gutbot}}-{{i}}x{{bp}} {margin-bottom:{{gutter}}px;}
+.{{ns}}{{gutbot}}-{{i}}x{{bp}} {margin-bottom:{{base}}px;}
 {{/isforlay}}
 {{/gutters}}
-.{{ns}}{{gutbot}}-1o2x{{bp}} {margin-bottom:{{gutter1o2}}px;}
+.{{ns}}{{gutbot}}-1o2x{{bp}} {margin-bottom:{{base1o2}}px;}
 .{{ns}}{{gutbot}}-none{{bp}} {margin-bottom:0;}
 
 
-/* Pull Gut Left */
+
+/* Layout > Pull Gut Left */
 .{{ns}}{{pullgut}}{{bp}} {float:right;position:relative;margin-left:-100%;right:100%;clear:both;display:inline;margin-right:20px;}
 .{{ns}}{{pullgut}}-none{{bp}} {margin-left:0;width:auto;float:none;position:static;}
-/* IE 6 and 7 graceful degradation */
+/* Layout > Pull Gut Left > IE 6 and 7 graceful degradation */
 .{{ns}}{{pullgut}}{{bp}} {*margin-left:0;*right:0;*float:left;}
 
 
-/* Pull Gut Right */
+
+/* Layout > Pull Gut Right */
 .{{ns}}{{pullgutright}}{{bp}} {float:left;position:relative;margin-right:-100%;left:100%;clear:both;display:inline;margin-left:20px;}
 .{{ns}}{{pullgutright}}-none{{bp}} {margin-right:0;width:auto;float:none;position:static;}
-/* IE 6 and 7 graceful degradation */
+/* Layout > Pull Gut Right > IE 6 and 7 graceful degradation */
 .{{ns}}{{pullgutright}}{{bp}} {*margin-right:0;*left:0;*float:right;}
 
 
 
 /* Max Width */
+{{#isgt0}}
+.{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
+{{/isgt0}}
 {{#maxwidths}}
 .{{ns}}{{widthmax}}-{{dx}}dx{{bp}} {max-width:{{maxwidth}}px;}
 {{/maxwidths}}
@@ -200,14 +243,14 @@
 .{{ns}}{{gut}}s-2x{{bp}} > *,
 .{{ns}}{{gut}}s-1o2x{{bp}} > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.{{ns}}{{gut}}s-1o2x{{bp}} {margin-left:-{{halfgutter1o2}}px;margin-right:-{{halfgutter1o2}}px;}
-.{{ns}}{{gut}}s-1o2x{{bp}} > * {padding-left:{{halfgutter1o2}}px;padding-right:{{halfgutter1o2}}px;}
-.{{ns}}{{gut}}s{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
-.{{ns}}{{gut}}s{{bp}} > * {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
-.{{ns}}{{gut}}s-1x{{bp}} {margin-left:-{{halfgutter}}px;margin-right:-{{halfgutter}}px;}
-.{{ns}}{{gut}}s-1x{{bp}} > * {padding-left:{{halfgutter}}px;padding-right:{{halfgutter}}px;}
-.{{ns}}{{gut}}s-2x{{bp}} {margin-left:-{{halfgutter2x}}px;margin-right:-{{halfgutter2x}}px;}
-.{{ns}}{{gut}}s-2x{{bp}} > * {padding-left:{{halfgutter2x}}px;padding-right:{{halfgutter2x}}px;}
+.{{ns}}{{gut}}s-1o2x{{bp}} {margin-left:-{{halfbase1o2}}px;margin-right:-{{halfbase1o2}}px;}
+.{{ns}}{{gut}}s-1o2x{{bp}} > * {padding-left:{{halfbase1o2}}px;padding-right:{{halfbase1o2}}px;}
+.{{ns}}{{gut}}s{{bp}} {margin-left:-{{halfbase}}px;margin-right:-{{halfbase}}px;}
+.{{ns}}{{gut}}s{{bp}} > * {padding-left:{{halfbase}}px;padding-right:{{halfbase}}px;}
+.{{ns}}{{gut}}s-1x{{bp}} {margin-left:-{{halfbase}}px;margin-right:-{{halfbase}}px;}
+.{{ns}}{{gut}}s-1x{{bp}} > * {padding-left:{{halfbase}}px;padding-right:{{halfbase}}px;}
+.{{ns}}{{gut}}s-2x{{bp}} {margin-left:-{{halfbase2x}}px;margin-right:-{{halfbase2x}}px;}
+.{{ns}}{{gut}}s-2x{{bp}} > * {padding-left:{{halfbase2x}}px;padding-right:{{halfbase2x}}px;}
 
 {{#legacysupport}}
 /* IE 6 and 7 fixes because they don't support box-sizing */
@@ -223,14 +266,14 @@
 
 
 /* Guts Full-Width class a */
-.{{gutsfw}}-1o2x{{bp}} {margin-left:-{{gutter1o2}}px;}
-.{{gutsfw}}-1o2x{{bp}} > * > * {margin-left:{{gutter1o2}}px;}
-.{{gutsfw}}{{bp}} {margin-left:-{{gutter}}px;}
-.{{gutsfw}}{{bp}} > * > * {margin-left:{{gutter}};}
-.{{gutsfw}}-1x{{bp}} {margin-left:-{{gutter}}px;}
-.{{gutsfw}}-1x{{bp}} > * > * {margin-left:{{gutter}}px;}
-.{{gutsfw}}-2x{{bp}} {margin-left:-{{gutter2x}}px;}
-.{{gutsfw}}-2x{{bp}} > * > * {margin-left:{{gutter2x}}px;}
+.{{gutsfw}}-1o2x{{bp}} {margin-left:-{{base1o2}}px;}
+.{{gutsfw}}-1o2x{{bp}} > * > * {margin-left:{{base1o2}}px;}
+.{{gutsfw}}{{bp}} {margin-left:-{{base}}px;}
+.{{gutsfw}}{{bp}} > * > * {margin-left:{{base}};}
+.{{gutsfw}}-1x{{bp}} {margin-left:-{{base}}px;}
+.{{gutsfw}}-1x{{bp}} > * > * {margin-left:{{base}}px;}
+.{{gutsfw}}-2x{{bp}} {margin-left:-{{base2x}}px;}
+.{{gutsfw}}-2x{{bp}} > * > * {margin-left:{{base2x}}px;}
 
 
 

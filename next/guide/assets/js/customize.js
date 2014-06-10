@@ -1,377 +1,540 @@
-(function(context){
+(function() {
+
+    'use strict';
     
-        
-    // Config
-    var getInput 
-        ,els = {
-            input:{}
-            ,output:{}
-        }
-        ,input = {}
-        ,db = {}
+    var _selectors
+        ,_in = {templates:{}}
+        ,_out = {}
+        ,_payload = {}
+        ,_tid = {}
+        ,makeIn
+        ,makeInDone
+        ,makeOut
+        ,makePayload
+        ,trim
+        ,processRules
+        ,makeWidthClasses
+        ,makePositionClasses
+        ,resizeOutput
+        ,round
+        ,inputChange
+        ,inputBaseChange
+        ,inputBasesChange
+        ,inputBasesxChange
+        ,breakpointAdd
+        ,init
+        ,run
     ;
     
+    _selectors = {
     
-    db = {
-        sel: {
-            input: {
-                decimalPlaces: '#input-decimalplaces'
-                ,positionClasses: '#input-positionclasses'
-                ,heightClasses: '#input-heightclasses'
-                ,heightClassesNum: '#input-heightclassesnum'
-                ,columns: '.input-columns'
-                ,at: '.input-at'
-                ,gutter: '.input-gutter'
-                ,gutterBasex: '.input-gutter-basex'
-                ,maxWidths: '.input-maxwidths'
-                ,maxWidthsBP: '.input-maxwidths-bp'
-                ,baseBasedBPs: '.input-base-based-bps'
-                ,classNamespace: '#input-classnamespace'
-                ,breakpointadd: '.input-breakpoint-add'
-                ,base: '#input-base'
-                ,legacysupport: '.input-legacysupport'
-                
-                ,gutmultipliersmall: '#input-gutmultipliersmall'
-                ,gutmultipliermedium: '#input-gutmultipliermedium'
-                ,gutmultiplierlarge: '#input-gutmultiplierlarge'
-                
-                ,formbreakpoint: '.form-breakpoint'
-                ,formbreakpointremove: '.form-breakpoint-remove'
-                
-                ,scrollbardepthadjust: '#input-scrollbardepthadjust'
-                
-            }
-            ,output: {
-                css: '.output-css'
-                ,js: '.output-js'
-                ,headcss: '.output-headcss'
-                ,headjs: '.output-headjs'
-                ,demo: '.output-demo'
-                
-            }
-            ,layoutoptions: '.layoutoptions'
-            ,generaloptions: '.generaloptions'
-            ,css: '.css'
-        }
-        ,outputToggles: [
-            {title: 'Position Classes', name: 'input-positionclasses'}
-            ,{title: 'Height Classes', name: 'input-heightclasses'}
-            ,{title: 'Width Classes', name: 'input-widthclasses'}
-            ,{title: 'Gutter Classes', name: 'input-gutterclasses'}
-            ,{title: 'Pull Gut Classes', name: 'input-pullgutclasses'}
-        ]
-        ,templates: {
-            css: {
-                source: ''
-                ,output: ''
-            }
-            ,js: {
-                source: ''
-                ,output: ''
-            }
-            ,input: {
-                ns: ''
-                
-                ,isiecss: false
-                ,isiejs: false
-                ,legacysupport: true
-                
-                ,lay: 'lay'
-                ,laycentered: 'lay-centered'
-                ,layleft: 'lay-left'
-                ,layright: 'lay-right'
-                
-                ,col: 'col'
-                ,colgut: 'col-gut'
-                ,colguthide: 'hide-col-gut'
-                ,colnone: 'col-none'
-                
-                ,gutsfw: 'guts-fw'
-                
-                ,inngut: 'gut'
-                ,innguthide: 'hide-gut-left'
-                ,innnone: 'gut-none'
-                
-                ,gutsmallmultiplier: 4
-                ,gutmediummultiplier: 9
-                ,gutlargemultiplier: 14
-                
-                ,gut: 'gut'
-                ,gutleft: 'gut-left'
-                ,gutsmall: 'gut-left-small'
-                ,gutmedium: 'gut-left-medium'
-                ,gutlarge: 'gut-left-large'
-                
-                ,gutright: 'gut-right'
-                ,gutrightsmall: 'gut-right-small'
-                ,gutrightmedium: 'gut-right-medium'
-                ,gutrightlarge: 'gut-right-large'
-                
-                ,gutbot: 'gut-bottom'
-                
-                ,pullleft: 'pull-left'
-                ,pullright: 'pull-right'
-                
-                ,pullgut: 'pull-gut-left'
-                ,pullgutsmall: 'pull-gut-left-small'
-                ,pullgutmedium: 'pull-gut-left-medium'
-                ,pullgutlarge: 'pull-gut-left-large'
-                
-                ,pullgutright: 'pull-gut-right'
-                ,pullgutrightsmall: 'pull-gut-right-small'
-                ,pullgutrightmedium: 'pull-gut-right-medium'
-                ,pullgutrightlarge: 'pull-gut-right-large'
-                
-                ,clear: 'clear'
-                ,clearnone: 'clear-none'
-                ,width: 'width'
-                ,height: 'height'
-                ,widthmax: 'width-max'
-                ,pos: 'pos'
-                ,clearie6and7fixp1: 'clear-ie6and7fixp1'
-                ,clearie6and7fixp2: 'clear-ie6and7fixp2'
-                ,layie6fix: 'lay-ie6fix'
-                ,layoutgutter: 'layout-gutter'
-                ,rizzlecssproperty: 'rizzlecssproperty'
-                
-                
-            }
-        }
-        ,output: {}
-        ,tid: {}
-    };
-    
-    // Actions
-    elements = function() {
-    
+        // inputs
+        decimalPlaces: '#input-decimalplaces'
+        ,positionClasses: '#input-positionclasses'
+        ,heightClasses: '#input-heightclasses'
+        ,heightClassesNum: '#input-heightclassesnum'
+        ,columns: '.input-columns'
+        ,at: '.input-at'
+        ,bases: '.input-bases'
+        ,basesx: '.input-basesx'
+        ,maxWidths: '.input-maxwidths'
+        ,maxWidthsBP: '.input-maxwidths-bp'
+        ,baseBasedBPs: '.input-base-based-bps'
+        ,classNamespace: '#input-classnamespace'
+        ,breakpointadd: '.input-breakpoint-add'
+        ,base: '#input-base'
+        ,hbase: '#input-base'
+        ,basehbase: '#input-basehbase'
+        ,legacysupport: '.input-legacysupport'
+        ,copyFontSizeBaseRatio: '#input-copyfontsizebaseratio'
         
+        ,h1: '#input-h1'
+        ,h2: '#input-h2'
+        ,h3: '#input-h3'
+        ,h4: '#input-h4'
+        ,h5: '#input-h5'
+        ,h6: '#input-h6'
+        
+        ,gutmultipliersmall: '#input-gutmultipliersmall'
+        ,gutmultipliermedium: '#input-gutmultipliermedium'
+        ,gutmultiplierlarge: '#input-gutmultiplierlarge'
+        
+        ,formbreakpoint: '.form-breakpoint'
+        ,formbreakpointremove: '.form-breakpoint-remove'
+        
+        ,scrollbardepthadjust: '#input-scrollbardepthadjust'
+        
+        // outputs
+        ,css: '.output-css'
+        ,js: '.output-js'
+        ,headcss: '.output-headcss'
+        ,headjs: '.output-headjs'
+        ,demo: '.output-demo'
+        
+        
+        ,layoutoptions: '.layoutoptions'
+        ,generaloptions: '.generaloptions'
+        ,copyoptions: '.copyoptions'
         
     };
     
     
     
-    input = function(o) {
+    makeIn = function(o) {
     
         var callback = o.callback;
         
-        db.inputAjaxCalls = {callback: callback, expected: 2, count: 0};
+        _in.inputAjaxCalls = {callback: callback, expected: 3, count: 0};
         
-        input.breakpoints = [];
-        $(db.sel.input.formbreakpoint).each(function(i) {
-            input.breakpoints[i] = {
-                at: $(this).find('.input-at').val(),
-                gutter: $(this).find('.input-gutter').val(),
-                gutterBasex: $(this).find('.input-gutter-basex').val()
-            }
+        _in.breakpoints = [];
+        $(_selectors.formbreakpoint).each(function(i) {
+            _in.breakpoints[i] = {
+                at: $(this).find(_selectors.at).val() * 1,
+                base: $(this).find(_selectors.bases).val() * 1,
+                basex: $(this).find(_selectors.basesx).val() * 1
+            };
         });
-        input.columns = $(db.sel.input.columns).val();
-        input.breakpointsLength = input.breakpoints.length;
-        input.decimalPlaces = $(db.sel.input.decimalPlaces).val();
-        input.positionClasses = $(db.sel.input.positionClasses)[0].checked;
-        input.heightClasses = $(db.sel.input.heightClasses)[0].checked;
-        input.heightClassesNum = $(db.sel.input.heightClassesNum).val() * 1;
-        input.classNamespace = $(db.sel.input.classNamespace).val().replace(/\s+/g, '');
-        input.maxWidths = $(db.sel.input.maxWidths).val().replace(/\s+/g, '').split(',');
-        input.maxWidthsLength = input.maxWidths.length;
-        input.maxWidthsBP = $(db.sel.input.maxWidthsBP).val().replace(/\s+/g, '').split(',');
-        input.maxWidthsBPLength = input.maxWidthsBP.length;
-        input.base = $(db.sel.input.base).val();
-        input.legacysupport = $(db.sel.input.legacysupport)[0].checked;
+        _in.breakpointsLength = _in.breakpoints.length;
+        _in.columns = $(_selectors.columns).val();
+        _in.decimalPlaces = $(_selectors.decimalPlaces).val();
+        _in.positionClasses = $(_selectors.positionClasses)[0].checked;
+        _in.heightClasses = $(_selectors.heightClasses)[0].checked;
+        _in.heightClassesNum = $(_selectors.heightClassesNum).val() * 1;
+        _in.classNamespace = $(_selectors.classNamespace).val().replace(/\s+/g, '');
+        _in.maxWidths = $(_selectors.maxWidths).val().replace(/\s+/g, '').split(',');
+        _in.maxWidthsLength = _in.maxWidths.length;
+//        _in.maxWidthsBP = $(_selectors.maxWidthsBP).val().replace(/\s+/g, '').split(',');
+//        _in.maxWidthsBPLength = _in.maxWidthsBP.length;
+        _in.base = $(_selectors.base).val();
+        _in.hbase = $(_selectors.hbase).val();
+        _in.basehbase = $(_selectors.basehbase).val();
+        _in.legacysupport = $(_selectors.legacysupport)[0].checked;
         
-        input.scrollbardepthadjust = $(db.sel.input.scrollbardepthadjust).val() * 1;
+        _in.copyFontSizeBaseRatio = $(_selectors.copyFontSizeBaseRatio).val();
+        // Handle simple divisions like 2/3
+        if (_in.copyFontSizeBaseRatio.indexOf('/') !== -1) {
+            _in.copyFontSizeBaseRatio = _in.copyFontSizeBaseRatio.split('/');
+            _in.copyFontSizeBaseRatio = _in.copyFontSizeBaseRatio[0] * 1 / _in.copyFontSizeBaseRatio[1] * 1;
+        }
+        _in.copyFontSizeBaseRatio = _in.copyFontSizeBaseRatio * 1;
+
+        _in.h1 = $(_selectors.h1).val() * 1;
+        _in.h2 = $(_selectors.h2).val() * 1;
+        _in.h3 = $(_selectors.h3).val() * 1;
+        _in.h4 = $(_selectors.h4).val() * 1;
+        _in.h5 = $(_selectors.h5).val() * 1;
+        _in.h6 = $(_selectors.h6).val() * 1;
         
-        input.gutmultipliersmall = $(db.sel.input.gutmultipliersmall).val();
-        input.gutmultipliermedium = $(db.sel.input.gutmultipliermedium).val();
-        input.gutmultiplierlarge = $(db.sel.input.gutmultiplierlarge).val();
+        _in.scrollbardepthadjust = $(_selectors.scrollbardepthadjust).val() * 1;
         
+        _in.gutmultipliersmall = $(_selectors.gutmultipliersmall).val();
+        _in.gutmultipliermedium = $(_selectors.gutmultipliermedium).val();
+        _in.gutmultiplierlarge = $(_selectors.gutmultiplierlarge).val();
         
-        $.ajax('./../assets/templates/baseup-tpl.css',{dataType:'text',async:false}).done(function(text) {
-            db.templates.css.template = text;
-            inputDone();
-        });
+        if (typeof _in.templates.css === 'undefined') {
+            $.ajax('./../assets/templates/baseup-tpl.css',{dataType:'text',async:false}).done(function(text) {
+                _in.templates.css = text;
+                makeInDone();
+            });
+        }
+        else {
+            makeInDone();
+        }
         
-        $.ajax('./../assets/templates/baseup-tpl.js',{dataType:'text',async:false}).done(function(text) {
-            db.templates.js.template = text;
-            inputDone();
-        });
+        if (typeof _in.templates.js === 'undefined') {
+            $.ajax('./../assets/templates/baseup-tpl.js',{dataType:'text',async:false}).done(function(text) {
+                _in.templates.js = text;
+                makeInDone();
+            });
+        }
+        else {
+            makeInDone();
+        }
+        
+        if (typeof _in.templates.demo === 'undefined') {
+            $.ajax('./../assets/templates/baseup-demo-tpl.html',{dataType:'text',async:false}).done(function(text) {
+                _in.templates.demo = text;
+                makeInDone();
+            });
+        }
+        else {
+            makeInDone();
+        }
         
     };
-    inputDone = function() {
+    makeInDone = function() {
         
-        db.inputAjaxCalls.count++;
+        _in.inputAjaxCalls.count += 1;
         
-        if (db.inputAjaxCalls.count == db.inputAjaxCalls.expected) {
-            db.inputAjaxCalls.callback();
+        if (_in.inputAjaxCalls.count === _in.inputAjaxCalls.expected) {
+            _in.inputAjaxCalls.callback();
         }
         
     };
     
 
-    make = function(o) {
+
+
+    makeOut = function(o) {
     
-        var ti = db.templates.input
-            ,callback = o.callback
+        var callback = o.callback
+            ,rules = []
+            ,j
+            ,i
+            ,k
+            ,m
+            ,isgt0
+            ,is0
+            ,is1
+            ,_inbreakpointi
+            ,_outbreakpointi
+            ,currentBase
+            ,isnotfirst
+            ,isforlay
+            ,maxwidthbp = []
+            ,pullgutGutters
+            ,pullgutGuttersLength
+            ,pullgutNames
+            ,pullgutNamesLength
+            ,baseChanged
         ;
         
 
-        db.ns = input.classNamespace;
-        db.columns = input.columns;
-        db.decimalPlaces = input.decimalPlaces;
-        db.minify = input.minify;
-        db.positionClasses = input.positionClasses;
-        db.heightClasses = input.heightClasses;
-        db.classNamespace = input.classNamespace;
-        
-        db.gutmultipliersmall = input.gutmultipliersmall;
-        db.gutmultipliermedium = input.gutmultipliermedium;
-        db.gutmultiplierlarge = input.gutmultiplierlarge;
-        
-        
-        
+        // Outputs for the form
         // Alternative breakpoints based on base
-        var i
-        ,   baseBasedBPs = []
-        ;
-        for (i = 1; i < 8; i++) {
-            baseBasedBPs.push((input.base * ((i * 12) - 1)) + input.scrollbardepthadjust);
-        }
-        db.baseBasedBPs = baseBasedBPs;
-        
-        // Update MaxWidths
-        var i
-        ,   maxWidths = []
-        ;
-        for (i = 1; i < 8; i++) {
-            maxWidths.push((input.base * ((i * 12) - 1)));
-        }
-        db.maxWidths = maxWidths;        
-        db.maxWidthsLength = input.maxWidthsLength;
-        
-        // UpdateMaxWidthsBP
-        var i
-        ,   maxWidths = []
-        ;
-        for (i = 1; i < input.breakpointsLength; i++) {
-            maxWidths.push(input.breakpoints[i].at * 1);
-        }
-        db.maxWidthsBP = maxWidths;
-        db.maxWidthsBP.unshift(db.maxWidthsBP[0]);
-        db.maxWidthsBPLength = input.maxWidthsBPLength;
-        
-        db.base = input.base;
-        db.breakpointsLength = input.breakpointsLength;
-        db.ajaxCall = {};
-        
-        db.breakpoints = [];
-        for (i = 0; i < db.breakpointsLength; i++) {
-            db.breakpoints[i] = {
-                isGT0: (i > 0) ? true : false,
-                isFirst: (i === 0) ? true : false,
-                isSecond: (i === 1) ? true : false,
-                at: input.breakpoints[i].at,
-                gutter: input.breakpoints[i].gutter,
-                gutterBasex: input.breakpoints[i].gutterBasex
-            }
+        _out.baseBasedBPs = [];
+        for (i = 1; i < 8; i += 1) {
+            _out.baseBasedBPs.push((_in.base * ((i * 12) - 1)) + _in.scrollbardepthadjust);
         }
         
-        // Template Input
-        ti.ns = db.ns;
-        ti.breakpoints = [];
+        // MaxWidths
+        _out.maxWidths = [];
+        for (i = 1; i < 8; i += 1) {
+            _out.maxWidths.push((_in.base * ((i * 12) - 1)));
+        }
+        // Add maxwidths from breakpoints
+        for (i = 1; i < _in.breakpointsLength; i += 1) {
+            _out.maxWidths.push(_in.breakpoints[i].at * 1);
+        }
         
+        
+        
+
+        _out.ns = _in.classNamespace;
+        
+        _out.lay = 'lay';
+        _out.laycentered = 'lay-centered';
+        _out.layleft = 'lay-left';
+        _out.layright = 'lay-right';
+            
+        _out.col = 'col';
+        _out.colgut = 'col-gut';
+        _out.colguthide = 'hide-col-gut';
+        _out.colnone = 'col-none';
+            
+        _out.gutsfw = 'guts-fw';
+        
+        _out.inngut = 'gut';
+        _out.innguthide = 'hide-gut-left';
+        _out.innnone = 'gut-none';
+            
+        _out.gut = 'gut';
+        _out.gutleft = 'gut-left';
+        _out.gutsmall = 'gut-left-small';
+        _out.gutmedium = 'gut-left-medium';
+        _out.gutlarge = 'gut-left-large';
+            
+        _out.gutright = 'gut-right';
+        _out.gutrightsmall = 'gut-right-small';
+        _out.gutrightmedium = 'gut-right-medium';
+        _out.gutrightlarge = 'gut-right-large';
+            
+        _out.gutbot = 'gut-bottom';
+            
+        _out.pullleft = 'pull-left';
+        _out.pullright = 'pull-right';
+            
+        _out.pullgut = 'pull-gut-left';
+        _out.pullgutsmall = 'pull-gut-left-small';
+        _out.pullgutmedium = 'pull-gut-left-medium';
+        _out.pullgutlarge = 'pull-gut-left-large';
+            
+        _out.pullgutright = 'pull-gut-right';
+        _out.pullgutrightsmall = 'pull-gut-right-small';
+        _out.pullgutrightmedium = 'pull-gut-right-medium';
+        _out.pullgutrightlarge = 'pull-gut-right-large';
+            
+        _out.clear = 'clear';
+        _out.clearnone = 'clear-none';
+        _out.width = 'width';
+        _out.height = 'height';
+        _out.widthmax = 'width-max';
+        _out.pos = 'pos';
+        _out.clearie6and7fixp1 = 'clear-ie6and7fixp1';
+        _out.clearie6and7fixp2 = 'clear-ie6and7fixp2';
+        _out.layie6fix = 'lay-ie6fix';
+        _out.layoutgutter = 'layout-gutter';
+        _out.rizzlecssproperty = 'rizzlecssproperty';
+         
+        
+        // Breakpoints
+        _out.breakpoints = [];
+
+        // Copy
+        _out.copylineheight = 1/_in.copyFontSizeBaseRatio; // Or font-size adjust
+        _out.defaultcopyfontsize = 16; // The default untouched font-size cross-browser
+        
+        // Headings
+        _out.h1 = 100*_in.h1;
+        _out.h2 = 100*_in.h2;
+        _out.h3 = 100*_in.h3;
+        _out.h4 = 100*_in.h4;
+        _out.h5 = 100*_in.h5;
+        _out.h6 = 100*_in.h6;
+        
+        // I devised the algorithm to decrease the line-height the larger the font-size. Such that when the font-size is the same as copy, the line-height is also the same.
+        // Reasoning that the larger the font-size the less words per line and therefore the line-height can be less (as it's easier to scan across fewer words).
+        // Plus the results looked good ;)
+        _out.h1lineheight = 1 + ((_out.copylineheight - 1) / _in.h1);
+        _out.h2lineheight = 1 + ((_out.copylineheight - 1) / _in.h2);
+        _out.h3lineheight = 1 + ((_out.copylineheight - 1) / _in.h3);
+        _out.h4lineheight = 1 + ((_out.copylineheight - 1) / _in.h4);
+        _out.h5lineheight = 1 + ((_out.copylineheight - 1) / _in.h5);
+        _out.h6lineheight = 1 + ((_out.copylineheight - 1) / _in.h6);
+        
+
         // widths
-        ti.widthclasses = makeWidthClasses({columns: db.columns}); // returns {widths:, widthsall:}
+        _out.widthclasses = makeWidthClasses({columns: _in.columns}); // returns {widths:, widthsall:}
         
-        for (i = 0; i < db.breakpointsLength; i++) {
+        currentBase = _in.breakpoints[0].base;
         
-            var i0 = (i === 0) ? true : false
-                ,tibi = ti.breakpoints[i] = {}
-            ;
+        for (i = 0; i < _in.breakpointsLength; i += 1) {
+
+            _outbreakpointi = _out.breakpoints[i] = {};
+            _inbreakpointi = _in.breakpoints[i];
+            
+            baseChanged = false;
+        
+            if (currentBase !== _inbreakpointi.base) {
+                currentBase = _inbreakpointi.base;
+                // A change of base detected
+                // Therefore ensure all breakpoints[i].base reliant stuff is carried over
+                baseChanged = true;
+            }
+/*
+
+base
+    bp0 20
+    bp1 40
+    bp2 40
+    bp3 40
+
+.height-1x
+    bp0 20 * .height-1x needs to be in bp0
+    bp1 40 * .height-1x needs to be in bp1, but not needed in higher breakpoints
+    bp2 40
+    bp3 40
+
+.height-1x-1up
+    bp0  0
+    bp1 40 * .height-1x-1up needs to be in bp1, but not needed in higher breakpoints
+    bp2 40
+    bp3 40
+
+.height-1x-2up
+    bp0  0
+    bp1 40
+    bp2 40 * .height-1x-2up needs to be in bp2, but not needed in higher breakpoints
+    bp3 40
+
+
+
+base
+    bp0 20
+    bp1 40
+    bp2 60
+    bp3 60
+
+.height-1x
+    bp0 20 * .height-1x needs to be in bp0
+    bp1 40 * .height-1x needs to be in bp1
+    bp2 60 * .height-1x needs to be in bp2
+    bp3 60
+
+.height-1x-1up
+    bp0  0
+    bp1 40 * .height-1x-1up needs to be in bp1
+    bp2 60 * .height-1x-1up needs to be in bp2
+    bp3 60
+
+.height-1x-2up
+    bp0  0
+    bp1 40
+    bp2 60 * .height-1x-2up needs to be in bp2
+    bp3 60
+
+
+
+base
+    bp0 20
+    bp1 40
+    bp2 40
+    bp3 20
+
+.height-1x
+    bp0 20 * .height-1x needs to be in bp0
+    bp1 40 * .height-1x needs to be in bp1
+    bp2 40
+    bp3 20 * .height-1x needs to be in bp3
+
+.height-1x-1up
+    bp0  0
+    bp1 40 * .height-1x-1up needs to be in bp1
+    bp2 40
+    bp3 20 * .height-1x-1up needs to be in bp3
+
+.height-1x-2up
+    bp0  0
+    bp1 40
+    bp2 40 * .height-1x-2up needs to be in bp2
+    bp3 20 * .height-1x-2up needs to be in bp3
+
+So when the base changes, 
+
+*/
+            
+            isgt0 = (i > 0) ? true : false;
+            is0 = (i === 0) ? true : false;
+            is1 = (i === 1) ? true : false;
+            
+
+            _outbreakpointi.copyfontsize = round((_inbreakpointi.base/_out.defaultcopyfontsize)/_out.copylineheight, _in.decimalPlaces); // The default untouched font-size cross-browser
+            
+            _outbreakpointi.base = _inbreakpointi.base;
+            _outbreakpointi.base2x = _inbreakpointi.base * 2;
+            _outbreakpointi.base1o2 = round(_inbreakpointi.base/2, _in.decimalPlaces);
+            _outbreakpointi.halfbase = round(_inbreakpointi.base/2, _in.decimalPlaces);
+            _outbreakpointi.halfbase2x = round(_inbreakpointi.base * 2 / 2, _in.decimalPlaces);
+            _outbreakpointi.halfbase1o2 = round(_inbreakpointi.base/4, _in.decimalPlaces);
+            
+            // isFirst
+            _outbreakpointi.is0 = is0;
+            _outbreakpointi.is1 = is1;
+            _outbreakpointi.isgt0 = isgt0;
             
             // bp
-            if (i0) {
-                tibi.bp = '';
+            if (is0) {
+                _outbreakpointi.bp = '';
             }
             else {
-                tibi.bp = '-' + i + 'up';
+                _outbreakpointi.bp = '-' + i + 'up';
             }
             
             // at
-            tibi.at = db.breakpoints[i].at;
-            
-            // isFirst
-            tibi.isfirst = db.breakpoints[i].isFirst;
-            tibi.issecond = db.breakpoints[i].isSecond;
-            tibi.isgt0 = db.breakpoints[i].isGT0;
+            _outbreakpointi.at = _inbreakpointi.at;
             
             // maxwidth based on breakpoints
-            tibi.maxwidthbp = db.maxWidthsBP[i];
+            _outbreakpointi.maxwidthbp = (_inbreakpointi.base * 2) + _inbreakpointi.at;
+            maxwidthbp.push((_inbreakpointi.base * 2) + _inbreakpointi.at);
             
             // maxwidths based on base
-            tibi.maxwidths = [];
-            for (j = 0; j < db.maxWidthsLength; j++) {
-                tibi.maxwidths.push({maxwidth: db.maxWidths[j], dx:j+1});
+            _outbreakpointi.maxwidths = [];
+            for (j = 0; j < _in.maxWidthsLength; j += 1) {
+                _outbreakpointi.maxwidths.push({maxwidth: _in.maxWidths[j], dx:j+1});
             }
             
             // widths
-            tibi.widthclasses = makeWidthClasses({columns: db.columns});
+            _outbreakpointi.widthclasses = makeWidthClasses({columns: _in.columns});
             
             // cols
-            tibi.cols = [];
-            for (j = 0; j < db.columns; j++) {
-                tibi.cols.push({
+            _outbreakpointi.cols = [];
+            for (j = 0; j < _in.columns; j += 1) {
+                _outbreakpointi.cols.push({
                     num:j+1
-                    ,width:round(100/(j+1), db.decimalPlaces)
+                    ,width:round(100/(j+1), _in.decimalPlaces)
                 });
             } 
             
             // poss
-            tibi.poss = makePositionClasses({columns: db.columns});
+            _outbreakpointi.poss = makePositionClasses({columns: _in.columns});
             
             // Height
-            if (db.heightClasses) {                
-                tibi.heights = [];
-                tibi.heights.push({
-                    height:db.breakpoints[i].gutter / 2 + 'px'
+            if (_in.heightClasses) {                
+                _outbreakpointi.heights = [];
+                _outbreakpointi.heights.push({
+                    base:_inbreakpointi.base / 2
                     ,i: '1o2'
                 });
-                for (j = 0; j < 21; j++) {
-                    tibi.heights.push({
-                        height:db.breakpoints[i].gutter * j + 'px'
+                for (j = 0; j < 21; j += 1) {
+                    _outbreakpointi.heights.push({
+                        base:_inbreakpointi.base * j
                         ,i: j
                     });
                 }
             }
             
+            
+            // hide gut left
+            rules = [];
+            m = i;
+            if (baseChanged) {
+                m = i - 1;
+            }
+            for (m; m <= i; m++) {
+                
+                rules.push(
+                    {
+                        val: -_inbreakpointi.base + 'px'
+                        ,selector: '.' + _out.ns + _out.innguthide + _out.breakpoints[m].bp
+                    }
+                );
+                // xs
+                for (j = 1; j < 7; j += 1) {
+                    rules.push({
+                        val: -_inbreakpointi.base * j + 'px'
+                        ,selector: '.' + _out.ns + _out.innguthide + '-' + j + 'x' + _out.breakpoints[m].bp
+                    });
+                }
+                // fractions
+                for (j = 1; j < 5; j += 1) {
+                    for (k = 1; k < j; k++) {
+                        rules.push({
+                            val: round(-_inbreakpointi.base * k / j, _in.decimalPlaces) + 'px'
+                            ,selector: '.' + _out.ns + _out.innguthide + '-' + k + 'o' + j + 'x' + _out.breakpoints[m].bp
+                        });
+                    }
+                }
+                // none
+                rules.push(
+                    {
+                        val: '0'
+                        ,selector: '.' + _out.ns + _out.innguthide + '-none' + _out.breakpoints[m].bp
+                    }
+                );
+                
+            }
+            _outbreakpointi.innguthides = processRules(rules);
+            
+            
             // gutter
-            tibi.gutter = db.breakpoints[i].gutter;
-            tibi.gutter2x = db.breakpoints[i].gutter * 2;
-            tibi.gutter1o2 = round(db.breakpoints[i].gutter/2, db.decimalPlaces);
-            tibi.gutters = [];
-            for (j = 1; j < 13; j++) {
+            _outbreakpointi.gutters = [];
+            for (j = 1; j < 13; j += 1) {
                 isnotfirst = (j > 1) ? 1 : 0;
                 isforlay = (j < 7) ? 1 : 0;
-                tibi.gutters.push({
-                    gutter: db.breakpoints[i].gutter * j
-                    ,halfgutter: round(db.breakpoints[i].gutter * j / 2, db.decimalPlaces)
+                _outbreakpointi.gutters.push({
+                    base: _inbreakpointi.base * j
+                    ,halfbase: round(_inbreakpointi.base * j / 2, _in.decimalPlaces)
                     ,i: j
                     ,isnotfirst: isnotfirst
                     ,isforlay: isforlay
                 });
             }
-            
-            tibi.gutsmallmargin = db.breakpoints[i].gutter * db.gutmultipliersmall;
-            tibi.gutmediummargin = db.breakpoints[i].gutter * db.gutmultipliermedium;
-            tibi.gutlargemargin = db.breakpoints[i].gutter * db.gutmultiplierlarge;
-            
-            tibi.gutrightsmallmargin = db.breakpoints[i].gutter * db.gutmultipliersmall;
-            tibi.gutrightmediummargin = db.breakpoints[i].gutter * db.gutmultipliermedium;
-            tibi.gutrightlargemargin = db.breakpoints[i].gutter * db.gutmultiplierlarge;
-
-            
-            // half gutters
-            tibi.halfgutter = round(db.breakpoints[i].gutter/2, db.decimalPlaces);
-            tibi.halfgutter2x = round(db.breakpoints[i].gutter * 2 / 2, db.decimalPlaces);
-            tibi.halfgutter1o2 = round(db.breakpoints[i].gutter/4, db.decimalPlaces);
+            _outbreakpointi.gutsmallmargin = _inbreakpointi.base * _in.gutmultipliersmall;
+            _outbreakpointi.gutmediummargin = _inbreakpointi.base * _in.gutmultipliermedium;
+            _outbreakpointi.gutlargemargin = _inbreakpointi.base * _in.gutmultiplierlarge;
+            _outbreakpointi.gutrightsmallmargin = _inbreakpointi.base * _in.gutmultipliersmall;
+            _outbreakpointi.gutrightmediummargin = _inbreakpointi.base * _in.gutmultipliermedium;
+            _outbreakpointi.gutrightlargemargin = _inbreakpointi.base * _in.gutmultiplierlarge;
             
             // Pullguts gutters
             pullgutGutters = [
@@ -397,40 +560,40 @@
                 }
                 ,{
                     name: '-small'
-                    ,multiplier: db.gutmultipliersmall
+                    ,multiplier: _in.gutmultipliersmall
                 }
                 ,{
                     name: '-medium'
-                    ,multiplier: db.gutmultipliermedium
+                    ,multiplier: _in.gutmultipliermedium
                 }
                 ,{
                     name: '-large'
-                    ,multiplier: db.gutmultiplierlarge
+                    ,multiplier: _in.gutmultiplierlarge
                 }
             ];
             pullgutNamesLength = pullgutNames.length;
             
             // pullguts
-            tibi.pullguts = [];
+            _outbreakpointi.pullguts = [];
             isnotfirst = 0;
-            for (j = 1; j < 13; j++) {
-                for (m = 0; m < pullgutGuttersLength; m++) {
-                    tibi.pullguts.push({
-                        marginleft: db.breakpoints[i].gutter * j
-                        ,width: db.breakpoints[i].gutter * j - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
-                        ,name: db.templates.input.pullgut + '-' + j + 'x' + pullgutGutters[m].name
+            for (j = 1; j < 13; j += 1) {
+                for (m = 0; m < pullgutGuttersLength; m += 1) {
+                    _outbreakpointi.pullguts.push({
+                        marginleft: _inbreakpointi.base * j
+                        ,width: _inbreakpointi.base * j - (pullgutGutters[m].multiplier * _inbreakpointi.base)
+                        ,name: _out.pullgut + '-' + j + 'x' + pullgutGutters[m].name
                         ,isnotfirst: isnotfirst
                     });
                     isnotfirst = 1;
                 }
             }
             // Small medium large
-            for (j = 1; j < pullgutNamesLength; j++) {
-                for (m = 0; m < pullgutGuttersLength; m++) {
-                    tibi.pullguts.push({
-                        marginleft: db.breakpoints[i].gutter * pullgutNames[j].multiplier
-                        ,width: db.breakpoints[i].gutter * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
-                        ,name: db.templates.input.pullgut + pullgutNames[j].name + pullgutGutters[m].name
+            for (j = 1; j < pullgutNamesLength; j += 1) {
+                for (m = 0; m < pullgutGuttersLength; m += 1) {
+                    _outbreakpointi.pullguts.push({
+                        marginleft: _inbreakpointi.base * pullgutNames[j].multiplier
+                        ,width: _inbreakpointi.base * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * _inbreakpointi.base)
+                        ,name: _out.pullgut + pullgutNames[j].name + pullgutGutters[m].name
                         ,isnotfirst: isnotfirst
                     });
                     isnotfirst = 1;
@@ -439,115 +602,117 @@
             
             
             // pullgutrights
-            tibi.pullgutrights = [];
+            _outbreakpointi.pullgutrights = [];
             isnotfirst = 0;
-            for (j = 1; j < 13; j++) {
-                for (m = 0; m < pullgutGuttersLength; m++) {
-                    tibi.pullgutrights.push({
-                        marginright: db.breakpoints[i].gutter * j - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
-                        ,width: db.breakpoints[i].gutter * j - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
-                        ,right: db.breakpoints[i].gutter * pullgutGutters[m].multiplier
-                        ,name: db.templates.input.pullgutright + '-' + j + 'x' + pullgutGutters[m].name
-                        ,isnotfirst: isnotfirst
-                    });
-                    isnotfirst = 1;
-                }
-            }
-            // Small medium large
-            for (j = 1; j < pullgutNamesLength; j++) {
-                for (m = 0; m < pullgutGuttersLength; m++) {
-                    tibi.pullgutrights.push({
-                        marginright: db.breakpoints[i].gutter * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
-                        ,width: db.breakpoints[i].gutter * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * db.breakpoints[i].gutter)
-                        ,right: db.breakpoints[i].gutter * pullgutGutters[m].multiplier
-                        ,name: db.templates.input.pullgutright + pullgutNames[j].name + pullgutGutters[m].name
+            for (j = 1; j < 13; j += 1) {
+                for (m = 0; m < pullgutGuttersLength; m += 1) {
+                    _outbreakpointi.pullgutrights.push({
+                        marginright: _inbreakpointi.base * j - (pullgutGutters[m].multiplier * _inbreakpointi.base)
+                        ,width: _inbreakpointi.base * j - (pullgutGutters[m].multiplier * _inbreakpointi.base)
+                        ,right: _inbreakpointi.base * pullgutGutters[m].multiplier
+                        ,name: _out.pullgutright + '-' + j + 'x' + pullgutGutters[m].name
                         ,isnotfirst: isnotfirst
                     });
                     isnotfirst = 1;
                 }
             }
             
-            tibi.pullgutrightsmallmargin = db.breakpoints[i].gutter * (db.gutmultipliersmall - 1);
-            tibi.pullgutrightsmallwidth = db.breakpoints[i].gutter * (db.gutmultipliersmall - 1);
-            tibi.pullgutrightsmallright = db.breakpoints[i].gutter;
-            tibi.pullgutrightmediummargin = db.breakpoints[i].gutter * (db.gutmultipliermedium - 1);
-            tibi.pullgutrightmediumwidth = db.breakpoints[i].gutter * (db.gutmultipliermedium - 1);
-            tibi.pullgutrightmediumright = db.breakpoints[i].gutter;
-            tibi.pullgutrightlargemargin = db.breakpoints[i].gutter * (db.gutmultiplierlarge - 1);
-            tibi.pullgutrightlargewidth = db.breakpoints[i].gutter * (db.gutmultiplierlarge - 1);
-            tibi.pullgutrightlargeright = db.breakpoints[i].gutter;
+            // Small medium large
+            for (j = 1; j < pullgutNamesLength; j += 1) {
+                for (m = 0; m < pullgutGuttersLength; m += 1) {
+                    _outbreakpointi.pullgutrights.push({
+                        marginright: _inbreakpointi.base * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * _inbreakpointi.base)
+                        ,width: _inbreakpointi.base * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * _inbreakpointi.base)
+                        ,right: _inbreakpointi.base * pullgutGutters[m].multiplier
+                        ,name: _out.pullgutright + pullgutNames[j].name + pullgutGutters[m].name
+                        ,isnotfirst: isnotfirst
+                    });
+                    isnotfirst = 1;
+                }
+            }
+            
+            _outbreakpointi.pullgutrightsmallmargin = _inbreakpointi.base * (_in.gutmultipliersmall - 1);
+            _outbreakpointi.pullgutrightsmallwidth = _inbreakpointi.base * (_in.gutmultipliersmall - 1);
+            _outbreakpointi.pullgutrightsmallright = _inbreakpointi.base;
+            _outbreakpointi.pullgutrightmediummargin = _inbreakpointi.base * (_in.gutmultipliermedium - 1);
+            _outbreakpointi.pullgutrightmediumwidth = _inbreakpointi.base * (_in.gutmultipliermedium - 1);
+            _outbreakpointi.pullgutrightmediumright = _inbreakpointi.base;
+            _outbreakpointi.pullgutrightlargemargin = _inbreakpointi.base * (_in.gutmultiplierlarge - 1);
+            _outbreakpointi.pullgutrightlargewidth = _inbreakpointi.base * (_in.gutmultiplierlarge - 1);
+            _outbreakpointi.pullgutrightlargeright = _inbreakpointi.base;
             
             // basex
-            for (j = 1; j < 13; j++) {
-                tibi['base'+j] = db.breakpoints[i].gutter * j;
+            for (j = 1; j < 13; j += 1) {
+                _outbreakpointi['base'+j] = _inbreakpointi.base * j;
             }
             
             
         }
         
-        db.templates.input.legacysupport = input.legacysupport;
+        _out.maxwidthbp = maxwidthbp.join(',');
         
-        db.templates.css.output = Mustache.render(db.templates.css.template, db.templates.input);
+        _out.legacysupport = _in.legacysupport;
         
-        db.templates.js.output = Mustache.render(db.templates.js.template, db.templates.input);
-
         
         // Demo
-        db.output.demo = '';
-        for (j = 1; j <= db.columns; j++) {
-        var isPrime = '';
-                if (j === 2
-                    || j === 3
-                    || j === 5
-                    || j === 7
-                    || j === 11
-                    || j === 13
-                    || j === 17
-                    || j === 19
-                    || j === 23
-                    || j === 29
-                    || j === 31
-                    || j === 37
-                    || j === 41
-                    || j === 43
-                    || j === 47
-                ) {
-                    isPrime = ' prime'
-                }
-            db.output.demo += '<div class="lay cols widths-1o'+j+' guts-fw-1x'+isPrime+'">';
-            for (k = 0; k < j; k++) {
-                db.output.demo += '<div><div class="height-1o2x gut-bottom-1o2xs" title="width-1o'+j+'"></div></div>';
+        _out.demo = {lays:[]};
+        for (j = 1; j <= _in.columns; j += 1) {
+            _out.demo.lays.push({j:j,isPrime:false,columns:[]});
+            if (j === 2
+                || j === 3
+                || j === 5
+                || j === 7
+                || j === 11
+                || j === 13
+                || j === 17
+                || j === 19
+                || j === 23
+                || j === 29
+                || j === 31
+                || j === 37
+                || j === 41
+                || j === 43
+                || j === 47
+            ) {
+                _out.demo.lays[j-1].isPrime = true;
             }
-            db.output.demo += '</div>';
+            for (k = 0; k < j; k += 1) {
+                _out.demo.lays[j-1].columns.push({});
+            }
         }
+
         
         return callback();
         
     };
     
-    output = function() {
-            
+    makePayload = function() {
+        
+        var j
+            ,k
+            ,isPrime
+        ;
+        _payload.css = Mustache.render(_in.templates.css, _out);
+        _payload.js = Mustache.render(_in.templates.js, _out);
+        _payload.demo = Mustache.render(_in.templates.demo, _out.demo);
+
         // Put CSS
-        $(db.sel.output.css).val(trim(db.templates.css.output));
-        $(db.sel.output.js).val(trim(db.templates.js.output));
+        $(_selectors.css).val(trim(_payload.css));
+        $(_selectors.js).val(trim(_payload.js));
         
-        $(db.sel.output.headcss).html(trim(db.templates.css.output));
-        $(db.sel.output.headjs).html(trim(db.templates.js.output));
+        $(_selectors.headcss).html(trim(_payload.css));
+        $(_selectors.headjs).html(trim(_payload.js));
         
-        $(db.sel.input.maxWidths).val(db.maxWidths);
-        $(db.sel.input.maxWidthsBP).val(db.maxWidthsBP.slice(1));
+        $(_selectors.maxWidths).val(_out.maxWidths);
+        $(_selectors.maxWidthsBP).val(_out.maxwidthbp);
         
-        $(db.sel.input.baseBasedBPs).val(db.baseBasedBPs);
+        $(_selectors.baseBasedBPs).val(_out.baseBasedBPs);
         
+        resizeOutput($(_selectors.css)[0]);
+        resizeOutput($(_selectors.js)[0]);
         
-        resizeOutput($(db.sel.output.css)[0]);
-        resizeOutput($(db.sel.output.js)[0]);
+        $(_selectors.demo).html(_payload.demo);
         
-        
-        
-        $(db.sel.output.demo).html(db.output.demo);
-        
-        //$(db.sel.output.labelSpan).html(' '+db.output.css.length);
     };
     
     
@@ -555,27 +720,56 @@
     
         return str.replace(/^\s+/, '').replace(/\s+$/, '');
         
-    }
+    };
+    
+    processRules = function(rules) {
+    
+        var i
+            ,val
+            ,selector
+            ,a = {}
+            ,b = []
+        ;
+        
+        for (i in rules) {
+        
+            if (rules.hasOwnProperty(i)) {
+            
+                val = rules[i].val;
+                selector = rules[i].selector;
+                
+                if (a[val] === undefined) {
+                    a[val] = {val:val, selector:selector};
+                    b.push(a[val]);
+                }
+                else {
+                    a[val].selector += ',' + "\n" + selector;
+                }
+            }
+            
+        }
+        
+        return b;
+        
+    };
    
     
     makeWidthClasses = function(o) {
     
-        var css = ''
-            ,i = 1
+        var i = 1
             ,j
             ,width
             ,widths = {}
-            ,widthsAll = []
-            ,widthsi
             ,output = {widths:[], widthsall: []}
             ,columns = o.columns
+            ,fractions
         ;
         
         // Create an object where the properties are widths and the values are an array of objects with numerators and denominators
-        for (i; i <= columns; i++) {
+        for (i; i <= columns; i += 1) {
             j = 1;
-            for (j; j <= columns; j++) {
-                width = round(100*i/j, db.decimalPlaces);
+            for (j; j <= columns; j += 1) {
+                width = round(100*i/j, _in.decimalPlaces);
                 if (width <= 100) {
                     if (!widths[width]) {
                         widths[width] = [];
@@ -625,13 +819,14 @@
             ,output = []
             ,columns = o.columns
             ,isnotveryfirst = false
+            ,fractions
         ;
         
         // Create an object where the properties are widths and the values are an array of objects with numerators and denominators
-        for (i; i <= o.columns; i++) {
+        for (i; i <= o.columns; i += 1) {
             j = 1;
-            for (j; j <= columns; j++) {
-                position = round(100*(i-1)/j, db.decimalPlaces);
+            for (j; j <= columns; j += 1) {
+                position = round(100*(i-1)/j, _in.decimalPlaces);
                 if (position < 100) {
                     if (!positions[position]) {
                         positions[position] = [];
@@ -647,7 +842,7 @@
             }
         }    
         // Create the position classes
-        if (input.positionClasses) {
+        if (_in.positionClasses) {
             for (i in positions) {
                 if (positions.hasOwnProperty(i)) {
                     fractions = positions[i];
@@ -689,8 +884,8 @@
 //        ,   breakpoints = $('.form-breakpoint')
 //        ;
 //        
-//        for (i = 0; i < input.breakpointsLength; i++) {
-//            gutter = input.breakpoints[i].gutterBasex * input.base;
+//        for (i = 0; i < _in.breakpointsLength; i += 1) {
+//            gutter = _in.breakpoints[i].basex * _in.base;
 //            breakpoints.eq(i).find('.input-gutter').val(gutter);
 //        }
 //    };
@@ -699,76 +894,75 @@
     
     inputChange = function() {
                     
-        clearTimeout(db.tid.inputChange);
-        db.tid.inputChange = setTimeout(run, 400);
+        clearTimeout(_tid.inputChange);
+        _tid.inputChange = setTimeout(run, 400);
         
     };
     
     inputBaseChange = function() {
-        inputGutterBasexChange();
+        inputBasesxChange();
     };
-    inputGutterBasexChange = function() {
+    inputBasesxChange = function() {
     
         var multipliers = [];
         
-        clearTimeout(db.tid.inputGutterBasexChange);
+        clearTimeout(_tid.inputBasesxChange);
         
-        $(db.sel.input.gutterBasex).each(function() {
+        $(_selectors.basesx).each(function() {
             multipliers.push($(this).val());
         });
-        $(db.sel.input.gutter).each(function(i) {
+        $(_selectors.bases).each(function(i) {
             var $this = $(this);
-            $this.val(multipliers[i] * $(db.sel.input.base).val());
+            $this.val(multipliers[i] * $(_selectors.base).val());
         });
         
-        db.tid.inputGutterBasexChange = setTimeout(run, 400);
+        _tid.inputBasesxChange = setTimeout(run, 400);
         
     };
-    inputGutterChange = function() {
+    inputBasesChange = function() {
     
-        var gutters = [];
+        var bases = [];
         
-        clearTimeout(db.tid.inputGutterChange);
+        clearTimeout(_tid.inputBasesChange);
         
-        $(db.sel.input.gutter).each(function() {
-            gutters.push($(this).val());
+        $(_selectors.bases).each(function() {
+            bases.push($(this).val());
         });
-        $(db.sel.input.gutterBasex).each(function(i) {
+        $(_selectors.basesx).each(function(i) {
             var $this = $(this);
-            $this.val(gutters[i] / $(db.sel.input.base).val());
+            $this.val(bases[i] / $(_selectors.base).val());
         });
         
-        db.tid.inputGutterChange = setTimeout(run, 400);
+        _tid.inputBasesChange = setTimeout(run, 400);
         
     };
     
     breakpointAdd = function() {
-        var last = $(db.sel.input.formbreakpoint).last();
+        var last = $(_selectors.formbreakpoint).last();
         last.after(last.clone());
-        last.next().find('td:first').text(input.breakpointsLength);
+        last.next().find('td:first').text(_in.breakpointsLength);
         run();
         return false;
     };
     
     init = function() {
         
-        elements();
-        
         (function() {
             var toggleText = ['Layout', 'Close Layout']
                 ,toggleTextLength = toggleText.length
                 ,togglePointer = (/#layoutoptions/g.exec(window.location.href)) ? 1 : 0
                 ,html = '<p><a href="">'+toggleText[togglePointer]+'</a></p>'
+                ,toggleHTML
             ;
-            els.toggleHTML = $(html);
-            els.toggleHTML = $(db.sel.layoutoptions).before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
-            els.toggleHTML.on('click', 'a', function() {
+            toggleHTML = $(html);
+            toggleHTML = $(_selectors.layoutoptions).before(toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
+            toggleHTML.on('click', 'a', function() {
                 var $this = $(this);
                 togglePointer = (togglePointer + 1) % toggleTextLength;
                 $this.text(toggleText[togglePointer]);
-                $(db.sel.layoutoptions).toggleClass('inactive');
-                resizeOutput($(db.sel.output.css)[0]);
-                resizeOutput($(db.sel.output.js)[0]);
+                $(_selectors.layoutoptions).toggleClass('inactive');
+                resizeOutput($(_selectors.css)[0]);
+                resizeOutput($(_selectors.js)[0]);
                 return false;
             });
         }());
@@ -778,36 +972,51 @@
                 ,toggleTextLength = toggleText.length
                 ,togglePointer = (/#generaloptions/g.exec(window.location.href)) ? 1 : 0
                 ,html = '<p><a href="">'+toggleText[togglePointer]+'</a></p>'
+                ,toggleHTML
             ;
-            els.toggleHTML = $(html);
-            els.toggleHTML = $(db.sel.generaloptions).before(els.toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
-            els.toggleHTML.on('click', 'a', function() {
+            toggleHTML = $(html);
+            toggleHTML = $(_selectors.generaloptions).before(toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
+            toggleHTML.on('click', 'a', function() {
                 var $this = $(this);
                 togglePointer = (togglePointer + 1) % toggleTextLength;
                 $this.text(toggleText[togglePointer]);
-                $(db.sel.generaloptions).toggleClass('inactive');
-                resizeOutput($(db.sel.output.css)[0]);
-                resizeOutput($(db.sel.output.js)[0]);
+                $(_selectors.generaloptions).toggleClass('inactive');
                 return false;
             });
         }());
         
-        $(db.sel.input.formbreakpoint).slice(1).append('<td class="form-breakpoint-remove"><span tabindex="-1">x</span></td>').parent().find('tr:first').append('<th>Remove</th>');
+        (function() {
+            var toggleText = ['Copy', 'Close Copy']
+                ,toggleTextLength = toggleText.length
+                ,togglePointer = (/#copyoptions/g.exec(window.location.href)) ? 1 : 0
+                ,html = '<p><a href="">'+toggleText[togglePointer]+'</a></p>'
+                ,toggleHTML
+            ;
+            toggleHTML = $(html);
+            toggleHTML = $(_selectors.copyoptions).before(toggleHTML).addClass((togglePointer ? '' : 'inactive')).prev();
+            toggleHTML.on('click', 'a', function() {
+                var $this = $(this);
+                togglePointer = (togglePointer + 1) % toggleTextLength;
+                $this.text(toggleText[togglePointer]);
+                $(_selectors.copyoptions).toggleClass('inactive');
+                return false;
+            });
+        }());
+        
+        $(_selectors.formbreakpoint).slice(1).append('<td class="form-breakpoint-remove"><span tabindex="-1">x</span></td>').parent().find('tr:first').append('<th>Remove</th>');
         
         run();
         
     };
+    
     run = function() {
-        
-        elements();
-        
-        input({callback:function() {
-            make({callback:function() {
-                output();
+        makeIn({callback:function() {
+            makeOut({callback:function() {
+                makePayload();
             }});
         }});
-        
-    }
+    };
+    
     $(document)
         .on('change', function(e) {
             
@@ -816,31 +1025,32 @@
             
             // On change of various input
             if (
-                $t.is(db.sel.input.decimalPlaces)
-                || $t.is(db.sel.input.positionClasses)
-                || $t.is(db.sel.input.heightClasses)
-                || $t.is(db.sel.input.at)
-                || $t.is(db.sel.input.columns)
-                || $t.is(db.sel.input.maxWidths)
-                || $t.is(db.sel.input.maxWidthsBP)
-                || $t.is(db.sel.input.classNamespace)
-                || $t.is(db.sel.input.legacysupport)
-                || $t.is(db.sel.input.gutmultipliersmall)
-                || $t.is(db.sel.input.gutmultipliermedium)
-                || $t.is(db.sel.input.gutmultiplierlarge)
-                || $t.is(db.sel.input.scrollbardepthadjust)
+                $t.is(_selectors.decimalPlaces)
+                || $t.is(_selectors.positionClasses)
+                || $t.is(_selectors.heightClasses)
+                || $t.is(_selectors.at)
+                || $t.is(_selectors.columns)
+                || $t.is(_selectors.maxWidths)
+                || $t.is(_selectors.maxWidthsBP)
+                || $t.is(_selectors.classNamespace)
+                || $t.is(_selectors.legacysupport)
+                || $t.is(_selectors.gutmultipliersmall)
+                || $t.is(_selectors.gutmultipliermedium)
+                || $t.is(_selectors.gutmultiplierlarge)
+                || $t.is(_selectors.scrollbardepthadjust)
+                || $t.is(_selectors.copyFontSizeBaseRatio)
             ) {
                 inputChange();
             }
             
-            if ($t.is(db.sel.input.base)) {
+            if ($t.is(_selectors.base)) {
                 inputBaseChange();
             }
-            if ($t.is(db.sel.input.gutterBasex)) {
-                inputGutterBasexChange();
+            if ($t.is(_selectors.basesx)) {
+                inputBasesxChange();
             }
-            if ($t.is(db.sel.input.gutter)) {
-                inputGutterChange();
+            if ($t.is(_selectors.bases)) {
+                inputBasesChange();
             }
             
             
@@ -848,23 +1058,23 @@
         })
         .on('click', function(e) {
             var $t = $(e.target)
-                ,rtn = true;
+                ,rtn = true
             ;
-            if ($t.is(db.sel.input.breakpointadd)) {
+            if ($t.is(_selectors.breakpointadd)) {
                 breakpointAdd();
                 rtn = false;
             }
-            else if ($t.closest(db.sel.input.formbreakpointremove).length) {
+            else if ($t.closest(_selectors.formbreakpointremove).length) {
                 $t.closest('tr').remove();
                 inputChange();
                 rtn = false;
-            };
+            }
 
             return rtn;
         })
         .on('submit', function(e) {
             var $t = $(e.target)
-                ,rtn = true;
+                ,rtn = true
             ;
             if ($t.not('input[type="submit"]')) {
                 rtn = false;
@@ -875,8 +1085,3 @@
 
     
 }(this));
-
-
-
-
-
