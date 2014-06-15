@@ -178,11 +178,20 @@
     makeOut = function(o) {
     
         var callback = o.callback
-            ,rules = []
+            ,hidegutlefts
+            ,gutlefts
+            ,gutrights
+            ,guts
+            ,pullgutlefts
+            ,pullgutrights
+            ,gutbottoms
+            ,heights
+            ,maxwidths
             ,j
             ,i
             ,k
             ,m
+            ,bpi
             ,isgt0
             ,is0
             ,is1
@@ -191,7 +200,8 @@
             ,currentBase
             ,isnotfirst
             ,isforlay
-            ,maxwidthbp = []
+            ,maxwidthbps = []
+            ,maxwidthbp
             ,pullgutGutters
             ,pullgutGuttersLength
             ,pullgutNames
@@ -199,23 +209,6 @@
             ,baseChanged
         ;
         
-
-        // Outputs for the form
-        // Alternative breakpoints based on base
-        _out.baseBasedBPs = [];
-        for (i = 1; i < 8; i += 1) {
-            _out.baseBasedBPs.push((_in.base * ((i * 12) - 1)) + _in.scrollbardepthadjust);
-        }
-        
-        // MaxWidths
-        _out.maxWidths = [];
-        for (i = 1; i < 8; i += 1) {
-            _out.maxWidths.push((_in.base * ((i * 12) - 1)));
-        }
-        // Add maxwidths from breakpoints
-        for (i = 1; i < _in.breakpointsLength; i += 1) {
-            _out.maxWidths.push(_in.breakpoints[i].at * 1);
-        }
         
         
         
@@ -255,14 +248,7 @@
         _out.pullright = 'pull-right';
             
         _out.pullgut = 'pull-gut-left';
-        _out.pullgutsmall = 'pull-gut-left-small';
-        _out.pullgutmedium = 'pull-gut-left-medium';
-        _out.pullgutlarge = 'pull-gut-left-large';
-            
         _out.pullgutright = 'pull-gut-right';
-        _out.pullgutrightsmall = 'pull-gut-right-small';
-        _out.pullgutrightmedium = 'pull-gut-right-medium';
-        _out.pullgutrightlarge = 'pull-gut-right-large';
             
         _out.clear = 'clear';
         _out.clearnone = 'clear-none';
@@ -320,6 +306,10 @@
                 // A change of base detected
                 // Therefore ensure all breakpoints[i].base reliant stuff is carried over
                 baseChanged = true;
+            }
+            bpi = i;
+            if (baseChanged) {
+                bpi = i - 1;
             }
 /*
 
@@ -433,15 +423,13 @@ So when the base changes,
             // at
             _outbreakpointi.at = _inbreakpointi.at;
             
-            // maxwidth based on breakpoints
-            _outbreakpointi.maxwidthbp = (_inbreakpointi.base * 2) + _inbreakpointi.at;
-            maxwidthbp.push((_inbreakpointi.base * 2) + _inbreakpointi.at);
             
-            // maxwidths based on base
-            _outbreakpointi.maxwidths = [];
-            for (j = 0; j < _in.maxWidthsLength; j += 1) {
-                _outbreakpointi.maxwidths.push({maxwidth: _in.maxWidths[j], dx:j+1});
-            }
+                
+            // maxwidth based on breakpoints
+            maxwidthbp = (_inbreakpointi.base * 2) + _inbreakpointi.at;
+            _outbreakpointi.maxwidthbp = maxwidthbp;
+            maxwidthbps.push(maxwidthbp);
+            
             
             // widths
             _outbreakpointi.widthclasses = makeWidthClasses({columns: _in.columns});
@@ -453,67 +441,236 @@ So when the base changes,
                     num:j+1
                     ,width:round(100/(j+1), _in.decimalPlaces)
                 });
-            } 
+            }
             
             // poss
             _outbreakpointi.poss = makePositionClasses({columns: _in.columns});
+                        
             
-            // Height
-            if (_in.heightClasses) {                
-                _outbreakpointi.heights = [];
-                _outbreakpointi.heights.push({
-                    base:_inbreakpointi.base / 2
-                    ,i: '1o2'
-                });
-                for (j = 0; j < 21; j += 1) {
-                    _outbreakpointi.heights.push({
-                        base:_inbreakpointi.base * j
-                        ,i: j
+            
+            // Everything based on base
+            hidegutlefts = [];
+            gutlefts = [];
+            gutrights = [];
+            gutsmargin = [];
+            gutspadding = [];
+            pullgutlefts = [];
+            pullgutrights = [];
+            gutbottoms = [];
+            heights = [];
+            maxwidths = [];
+            
+            for (m = bpi; m <= i; m++) {
+            
+                
+                // maxwidths
+                for (j = 1; j < 8; j += 1) {
+                    maxwidths.push({
+                        selector: '.' + _out.ns + _out.widthmax + '-' + j + 'dx' + _out.breakpoints[m].bp
+                        ,val: (_inbreakpointi.base * ((j * 12) - 1)) + 'px',
                     });
                 }
-            }
-            
-            
-            // hide gut left
-            rules = [];
-            m = i;
-            if (baseChanged) {
-                m = i - 1;
-            }
-            for (m; m <= i; m++) {
                 
-                rules.push(
+                
+                // Heights
+                heights.push({
+                    val: round(_inbreakpointi.base / 2, _in.decimalPlaces) + 'px'
+                    ,selector: '.' + _out.ns + _out.height + '-1o2x' + _out.breakpoints[m].bp
+                });
+                for (j = 1; j < 21; j += 1) {
+                    heights.push({
+                        val: _inbreakpointi.base * j + 'px'
+                        ,selector: '.' + _out.ns + _out.height + '-' + j + 'x' + _out.breakpoints[m].bp
+                    });
+                }
+
+                // Guts Plain
+                hidegutlefts.push(
                     {
                         val: -_inbreakpointi.base + 'px'
                         ,selector: '.' + _out.ns + _out.innguthide + _out.breakpoints[m].bp
                     }
                 );
-                // xs
+                gutsmargin.push(
+                    {
+                        val: round(_inbreakpointi.base / 2, _in.decimalPlaces) + 'px'
+                        ,selector: '.' + _out.ns + _out.gut + 's' + _out.breakpoints[m].bp
+                    }
+                );
+                gutspadding.push(
+                    {
+                        val: round(_inbreakpointi.base / 2, _in.decimalPlaces) + 'px'
+                        ,selector: '.' + _out.ns + _out.gut + 's' + _out.breakpoints[m].bp + ' > *';
+                    }
+                );
+                gutlefts.push(
+                    {
+                        val: _inbreakpointi.base + 'px'
+                        ,selector: '.' + _out.ns + _out.gutleft + _out.breakpoints[m].bp
+                    }
+                );
+                gutrights.push(
+                    {
+                        val: _inbreakpointi.base + 'px'
+                        ,selector: '.' + _out.ns + _out.gutright + _out.breakpoints[m].bp
+                    }
+                );
+                gutbottoms.push(
+                    {
+                        val: _inbreakpointi.base + 'px'
+                        ,selector: '.' + _out.ns + _out.gutbot + _out.breakpoints[m].bp
+                    }
+                );
+                pullgutlefts.push(
+                    {
+                        val: _inbreakpointi.base + 'px'
+                        ,selector: '.' + _out.ns + _out.pullgut + _out.breakpoints[m].bp
+                    }
+                );
+                pullgutrights.push(
+                    {
+                        val: _inbreakpointi.base + 'px'
+                        ,selector: '.' + _out.ns + _out.pullgutright + _out.breakpoints[m].bp
+                    }
+                );
+                
+                // Guts multiples of base
                 for (j = 1; j < 7; j += 1) {
-                    rules.push({
+                    hidegutlefts.push({
                         val: -_inbreakpointi.base * j + 'px'
                         ,selector: '.' + _out.ns + _out.innguthide + '-' + j + 'x' + _out.breakpoints[m].bp
                     });
+                    gutlefts.push({
+                        val: _inbreakpointi.base * j + 'px'
+                        ,selector: '.' + _out.ns + _out.gutleft + '-' + j + 'x' + _out.breakpoints[m].bp
+                    });
+                    gutrights.push({
+                        val: _inbreakpointi.base * j + 'px'
+                        ,selector: '.' + _out.ns + _out.gutright + '-' + j + 'x' + _out.breakpoints[m].bp
+                    });
+                    gutbottoms.push({
+                        val: _inbreakpointi.base * j + 'px'
+                        ,selector: '.' + _out.ns + _out.gutbot + '-' + j + 'x' + _out.breakpoints[m].bp
+                    });
                 }
-                // fractions
+                
+                // Guts fractions of base
                 for (j = 1; j < 5; j += 1) {
                     for (k = 1; k < j; k++) {
-                        rules.push({
+                        hidegutlefts.push({
                             val: round(-_inbreakpointi.base * k / j, _in.decimalPlaces) + 'px'
                             ,selector: '.' + _out.ns + _out.innguthide + '-' + k + 'o' + j + 'x' + _out.breakpoints[m].bp
                         });
+                        gutlefts.push({
+                            val: round(_inbreakpointi.base * k / j, _in.decimalPlaces) + 'px'
+                            ,selector: '.' + _out.ns + _out.gutleft + '-' + k + 'o' + j + 'x' + _out.breakpoints[m].bp
+                        });
+                        gutrights.push({
+                            val: round(_inbreakpointi.base * k / j, _in.decimalPlaces) + 'px'
+                            ,selector: '.' + _out.ns + _out.gutright + '-' + k + 'o' + j + 'x' + _out.breakpoints[m].bp
+                        });
+                        gutbottoms.push({
+                            val: round(_inbreakpointi.base * k / j, _in.decimalPlaces) + 'px'
+                            ,selector: '.' + _out.ns + _out.gutbot + '-' + k + 'o' + j + 'x' + _out.breakpoints[m].bp
+                        });
                     }
                 }
-                // none
-                rules.push(
+                
+                // Guts customs
+                hidegutlefts.push(
                     {
                         val: '0'
                         ,selector: '.' + _out.ns + _out.innguthide + '-none' + _out.breakpoints[m].bp
                     }
                 );
+                gutlefts.push(
+                    {
+                        val: '0'
+                        ,selector: '.' + _out.ns + _out.gutleft + '-none' + _out.breakpoints[m].bp
+                    }
+                    ,{
+                        val: _inbreakpointi.base * _in.gutmultipliersmall + 'px'
+                        ,selector: '.' + _out.ns + _out.gutsmall + _out.breakpoints[m].bp
+                    }
+                    ,{
+                        val: _inbreakpointi.base * _in.gutmultipliermedium + 'px'
+                        ,selector: '.' + _out.ns + _out.gutmedium + _out.breakpoints[m].bp
+                    }
+                    ,{
+                        val: _inbreakpointi.base * _in.gutmultiplierlarge + 'px'
+                        ,selector: '.' + _out.ns + _out.gutlarge + _out.breakpoints[m].bp
+                    }
+                );
+                gutrights.push(
+                    {
+                        val: '0'
+                        ,selector: '.' + _out.ns + _out.gutright + '-none' + _out.breakpoints[m].bp
+                    }
+                    ,{
+                        val: _inbreakpointi.base * _in.gutmultipliersmall + 'px'
+                        ,selector: '.' + _out.ns + _out.gutrightsmall + _out.breakpoints[m].bp
+                    }
+                    ,{
+                        val: _inbreakpointi.base * _in.gutmultipliermedium + 'px'
+                        ,selector: '.' + _out.ns + _out.gutrightmedium + _out.breakpoints[m].bp
+                    }
+                    ,{
+                        val: _inbreakpointi.base * _in.gutmultiplierlarge + 'px'
+                        ,selector: '.' + _out.ns + _out.gutrightlarge + _out.breakpoints[m].bp
+                    }
+                );
+                gutbottoms.push(
+                    {
+                        val: '0'
+                        ,selector: '.' + _out.ns + _out.gutbot + '-none' + _out.breakpoints[m].bp
+                    }
+                );
                 
             }
-            _outbreakpointi.innguthides = processRules(rules);
+            // Prcess the base dependent rules
+            hidegutlefts = processRules(hidegutlefts);
+            gutlefts = processRules(gutlefts);
+            gutrights = processRules(gutrights);
+            pullgutlefts = {more:processRules(pullgutlefts), core:[]};
+            pullgutrights = {more:processRules(pullgutrights), core: []};
+            gutbottoms = processRules(gutbottoms);
+            maxwidths = processRules(maxwidths);
+            heights = processRules(heights);
+            
+            
+            
+            // Not dependent on base
+            pullgutlefts.main = {
+                selector: '.' + _out.ns + _out.pullgut + _outbreakpointi.bp
+            };
+            pullgutlefts.none = {
+                selector: '.' + _out.ns + _out.pullgut + '-none' + _outbreakpointi.bp
+            };
+            pullgutlefts.legacy = {
+                selector: '.' + _out.ns + _out.pullgut + _outbreakpointi.bp
+            };
+            pullgutrights.main = {
+                selector: '.' + _out.ns + _out.pullgutright + _outbreakpointi.bp
+            };
+            pullgutrights.none = {
+                selector: '.' + _out.ns + _out.pullgutright + '-none' + _outbreakpointi.bp
+            };
+            pullgutrights.legacy = {
+                selector: '.' + _out.ns + _out.pullgutright + _outbreakpointi.bp
+            };
+            guts.main = {
+                selector: '.' + _out.ns + _out.guts + _outbreakpointi.bp
+            };
+            _outbreakpointi.innguthides = hidegutlefts;
+            _outbreakpointi.gutlefts = gutlefts;
+            _outbreakpointi.gutrights = gutrights;
+            _outbreakpointi.pullgutlefts = pullgutlefts;
+            _outbreakpointi.pullgutrights = pullgutrights;
+            _outbreakpointi.gutbottoms = gutbottoms;
+            _outbreakpointi.maxwidths = maxwidths;
+            if (_in.heightClasses) {
+                _outbreakpointi.heights = heights;
+            }
             
             
             // gutter
@@ -529,117 +686,8 @@ So when the base changes,
                     ,isforlay: isforlay
                 });
             }
-            _outbreakpointi.gutsmallmargin = _inbreakpointi.base * _in.gutmultipliersmall;
-            _outbreakpointi.gutmediummargin = _inbreakpointi.base * _in.gutmultipliermedium;
-            _outbreakpointi.gutlargemargin = _inbreakpointi.base * _in.gutmultiplierlarge;
-            _outbreakpointi.gutrightsmallmargin = _inbreakpointi.base * _in.gutmultipliersmall;
-            _outbreakpointi.gutrightmediummargin = _inbreakpointi.base * _in.gutmultipliermedium;
-            _outbreakpointi.gutrightlargemargin = _inbreakpointi.base * _in.gutmultiplierlarge;
-            
-            // Pullguts gutters
-            pullgutGutters = [
-                {
-                    'name': ''
-                    ,'multiplier': 0
-                }
-                ,{
-                    'name': '-gut-1o2x'
-                    ,'multiplier': 1/2
-                }
-                ,{
-                    'name': '-gut-1x'
-                    ,'multiplier': 1
-                }
-            ];
-            pullgutGuttersLength = pullgutGutters.length;
-            
-            pullgutNames = [
-                {
-                    name: ''
-                    ,multiplier: 3
-                }
-                ,{
-                    name: '-small'
-                    ,multiplier: _in.gutmultipliersmall
-                }
-                ,{
-                    name: '-medium'
-                    ,multiplier: _in.gutmultipliermedium
-                }
-                ,{
-                    name: '-large'
-                    ,multiplier: _in.gutmultiplierlarge
-                }
-            ];
-            pullgutNamesLength = pullgutNames.length;
-            
-            // pullguts
-            _outbreakpointi.pullguts = [];
-            isnotfirst = 0;
-            for (j = 1; j < 13; j += 1) {
-                for (m = 0; m < pullgutGuttersLength; m += 1) {
-                    _outbreakpointi.pullguts.push({
-                        marginleft: _inbreakpointi.base * j
-                        ,width: _inbreakpointi.base * j - (pullgutGutters[m].multiplier * _inbreakpointi.base)
-                        ,name: _out.pullgut + '-' + j + 'x' + pullgutGutters[m].name
-                        ,isnotfirst: isnotfirst
-                    });
-                    isnotfirst = 1;
-                }
-            }
-            // Small medium large
-            for (j = 1; j < pullgutNamesLength; j += 1) {
-                for (m = 0; m < pullgutGuttersLength; m += 1) {
-                    _outbreakpointi.pullguts.push({
-                        marginleft: _inbreakpointi.base * pullgutNames[j].multiplier
-                        ,width: _inbreakpointi.base * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * _inbreakpointi.base)
-                        ,name: _out.pullgut + pullgutNames[j].name + pullgutGutters[m].name
-                        ,isnotfirst: isnotfirst
-                    });
-                    isnotfirst = 1;
-                }
-            }
             
             
-            // pullgutrights
-            _outbreakpointi.pullgutrights = [];
-            isnotfirst = 0;
-            for (j = 1; j < 13; j += 1) {
-                for (m = 0; m < pullgutGuttersLength; m += 1) {
-                    _outbreakpointi.pullgutrights.push({
-                        marginright: _inbreakpointi.base * j - (pullgutGutters[m].multiplier * _inbreakpointi.base)
-                        ,width: _inbreakpointi.base * j - (pullgutGutters[m].multiplier * _inbreakpointi.base)
-                        ,right: _inbreakpointi.base * pullgutGutters[m].multiplier
-                        ,name: _out.pullgutright + '-' + j + 'x' + pullgutGutters[m].name
-                        ,isnotfirst: isnotfirst
-                    });
-                    isnotfirst = 1;
-                }
-            }
-            
-            // Small medium large
-            for (j = 1; j < pullgutNamesLength; j += 1) {
-                for (m = 0; m < pullgutGuttersLength; m += 1) {
-                    _outbreakpointi.pullgutrights.push({
-                        marginright: _inbreakpointi.base * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * _inbreakpointi.base)
-                        ,width: _inbreakpointi.base * pullgutNames[j].multiplier - (pullgutGutters[m].multiplier * _inbreakpointi.base)
-                        ,right: _inbreakpointi.base * pullgutGutters[m].multiplier
-                        ,name: _out.pullgutright + pullgutNames[j].name + pullgutGutters[m].name
-                        ,isnotfirst: isnotfirst
-                    });
-                    isnotfirst = 1;
-                }
-            }
-            
-            _outbreakpointi.pullgutrightsmallmargin = _inbreakpointi.base * (_in.gutmultipliersmall - 1);
-            _outbreakpointi.pullgutrightsmallwidth = _inbreakpointi.base * (_in.gutmultipliersmall - 1);
-            _outbreakpointi.pullgutrightsmallright = _inbreakpointi.base;
-            _outbreakpointi.pullgutrightmediummargin = _inbreakpointi.base * (_in.gutmultipliermedium - 1);
-            _outbreakpointi.pullgutrightmediumwidth = _inbreakpointi.base * (_in.gutmultipliermedium - 1);
-            _outbreakpointi.pullgutrightmediumright = _inbreakpointi.base;
-            _outbreakpointi.pullgutrightlargemargin = _inbreakpointi.base * (_in.gutmultiplierlarge - 1);
-            _outbreakpointi.pullgutrightlargewidth = _inbreakpointi.base * (_in.gutmultiplierlarge - 1);
-            _outbreakpointi.pullgutrightlargeright = _inbreakpointi.base;
             
             // basex
             for (j = 1; j < 13; j += 1) {
@@ -649,9 +697,27 @@ So when the base changes,
             
         }
         
-        _out.maxwidthbp = maxwidthbp.join(',');
-        
         _out.legacysupport = _in.legacysupport;
+        
+        
+        
+
+        // Form outputs
+        // Alternative breakpoints based on base
+        _out.formBaseBasedBPs = [];
+        for (i = 1; i < 8; i += 1) {
+            _out.formBaseBasedBPs.push((_in.base * ((i * 12) - 1)) + _in.scrollbardepthadjust);
+        }
+        // MaxWidths
+        _out.formMaxWidths = [];
+        for (i = 1; i < 8; i += 1) {
+            _out.formMaxWidths.push((_in.base * ((i * 12) - 1)));
+        }
+        // Add maxwidths from breakpoints
+        for (i = 1; i < _in.breakpointsLength; i += 1) {
+            _out.formMaxWidths.push(_in.breakpoints[i].at * 1);
+        }
+        _out.formMaxWidthBP = maxwidthbps.join(',');
         
         
         // Demo
@@ -688,29 +754,27 @@ So when the base changes,
     
     makePayload = function() {
         
-        var j
-            ,k
-            ,isPrime
-        ;
+        // Render outputs
         _payload.css = Mustache.render(_in.templates.css, _out);
         _payload.js = Mustache.render(_in.templates.js, _out);
         _payload.demo = Mustache.render(_in.templates.demo, _out.demo);
 
-        // Put CSS
+        // Textarea outputs
         $(_selectors.css).val(trim(_payload.css));
         $(_selectors.js).val(trim(_payload.js));
-        
-        $(_selectors.headcss).html(trim(_payload.css));
-        $(_selectors.headjs).html(trim(_payload.js));
-        
-        $(_selectors.maxWidths).val(_out.maxWidths);
-        $(_selectors.maxWidthsBP).val(_out.maxwidthbp);
-        
-        $(_selectors.baseBasedBPs).val(_out.baseBasedBPs);
-        
         resizeOutput($(_selectors.css)[0]);
         resizeOutput($(_selectors.js)[0]);
         
+        // Head element outputs
+        $(_selectors.headcss).html(trim(_payload.css));
+        $(_selectors.headjs).html(trim(_payload.js));
+        
+        // Form
+        $(_selectors.maxWidths).val(_out.formMaxWidths);
+        $(_selectors.maxWidthsBP).val(_out.formMaxWidthBP);
+        $(_selectors.baseBasedBPs).val(_out.formBaseBasedBPs);
+        
+        // Demo
         $(_selectors.demo).html(_payload.demo);
         
     };

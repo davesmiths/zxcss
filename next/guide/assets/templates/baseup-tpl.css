@@ -130,7 +130,8 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 
 /* Layout > Heights */
 {{#heights}}
-.{{ns}}height-{{i}}x{{bp}} {height:{{base}}px;}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {height:{{val}};}
 {{/heights}}
 
 
@@ -143,68 +144,77 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 
 
 
-.{{ns}}{{innguthide}}{{bp}} {margin-left:-{{base}}px;}
-{{#gutters}}
-{{#isforlay}}
-.{{ns}}{{innguthide}}-{{i}}x{{bp}} {margin-left:-{{base}}px;}
-{{/isforlay}}
-{{/gutters}}
-.{{ns}}{{innguthide}}-1o2x{{bp}} {margin-left:-{{base1o2}}px;}
-.{{ns}}{{innguthide}}-none{{bp}} {margin-left:0;}
-
-
-
 /* Layout > Gut Left */
-.{{ns}}{{gutleft}}{{bp}} {margin-left:{{base}}px;}
-{{#gutters}}
-.{{ns}}{{gutleft}}-{{i}}x{{bp}} {margin-left:{{base}}px;}
-{{/gutters}}
-.{{ns}}{{gutleft}}-1o2x{{bp}} {margin-left:{{base1o2}}px;}
-.{{ns}}{{gutsmall}}{{bp}} {margin-left:{{gutsmallmargin}}px;}
-.{{ns}}{{gutmedium}}{{bp}} {margin-left:{{gutmediummargin}}px;}
-.{{ns}}{{gutlarge}}{{bp}} {margin-left:{{gutlargemargin}}px;}
-.{{ns}}{{gutleft}}-none{{bp}} {margin-left:0;}
+{{#gutlefts}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};}
+{{/gutlefts}}
 
 
 
 /* Layout > Gut Right */
-.{{ns}}{{gutright}}{{bp}} {margin-right:{{base}}px;}
-{{#gutters}}
-.{{ns}}{{gutright}}-{{i}}x{{bp}} {margin-right:{{base}}px;}
-{{/gutters}}
-.{{ns}}{{gutright}}-1o2x{{bp}} {margin-right:{{base1o2}}px;}
-.{{ns}}{{gutrightsmall}}{{bp}} {margin-right:{{gutsmallmargin}}px;}
-.{{ns}}{{gutrightmedium}}{{bp}} {margin-right:{{gutmediummargin}}px;}
-.{{ns}}{{gutrightlarge}}{{bp}} {margin-right:{{gutlargemargin}}px;}
-.{{ns}}{{gutright}}-none{{bp}} {margin-right:0;}
+{{#gutrights}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};}
+{{/gutrights}}
 
 
 
 /* Layout > Gut Bottom */
-.{{ns}}{{gutbot}}{{bp}} {margin-bottom:{{base}}px;}
-{{#gutters}}
-{{#isforlay}}
-.{{ns}}{{gutbot}}-{{i}}x{{bp}} {margin-bottom:{{base}}px;}
-{{/isforlay}}
-{{/gutters}}
-.{{ns}}{{gutbot}}-1o2x{{bp}} {margin-bottom:{{base1o2}}px;}
-.{{ns}}{{gutbot}}-none{{bp}} {margin-bottom:0;}
+{{#gutbottoms}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};}
+{{/gutbottoms}}
 
 
 
 /* Layout > Pull Gut Left */
-.{{ns}}{{pullgut}}{{bp}} {float:right;position:relative;margin-left:-100%;right:100%;clear:both;display:inline;margin-right:20px;}
-.{{ns}}{{pullgut}}-none{{bp}} {margin-left:0;width:auto;float:none;position:static;}
-/* Layout > Pull Gut Left > IE 6 and 7 graceful degradation */
-.{{ns}}{{pullgut}}{{bp}} {*margin-left:0;*right:0;*float:left;}
+{{#pullgutlefts}}
+{{#main}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {float:right;position:relative;margin-left:-100%;right:100%;clear:both;display:inline;}
+{{/main}}
+{{#legacysupport}}
+{{#legacy}}
+/* Legacy Support > Layout > Pull Gut Left > IE 6 and 7 graceful degradation */
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {*margin-left:0;*right:0;*float:left;}
+{{/legacy}}
+{{/legacysupport}}
+{{#none}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:0;width:auto;float:none;position:static;}
+{{/none}}
+{{#more}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-right:{{val}};}
+{{/more}}
+{{/pullgutlefts}}
 
 
 
 /* Layout > Pull Gut Right */
-.{{ns}}{{pullgutright}}{{bp}} {float:left;position:relative;margin-right:-100%;left:100%;clear:both;display:inline;margin-left:20px;}
-.{{ns}}{{pullgutright}}-none{{bp}} {margin-right:0;width:auto;float:none;position:static;}
-/* Layout > Pull Gut Right > IE 6 and 7 graceful degradation */
-.{{ns}}{{pullgutright}}{{bp}} {*margin-right:0;*left:0;*float:right;}
+{{#pullgutrights}}
+{{#main}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {float:left;position:relative;margin-right:-100%;left:100%;clear:both;display:inline;}
+{{/main}}
+{{#legacysupport}}
+{{#legacy}}
+/* Legacy Support > Layout > Pull Gut Left > IE 6 and 7 graceful degradation */
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {*margin-right:0;*left:0;*float:right;}
+{{/legacy}}
+{{/legacysupport}}
+{{#none}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-right:0;width:auto;float:none;position:static;}
+{{/none}}
+{{#more}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};}
+{{/more}}
+{{/pullgutrights}}
 
 
 
@@ -213,7 +223,8 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 .{{ns}}{{widthmax}} {max-width:{{maxwidthbp}}px;}
 {{/isgt0}}
 {{#maxwidths}}
-.{{ns}}{{widthmax}}-{{dx}}dx{{bp}} {max-width:{{maxwidth}}px;}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {max-width:{{val}};}
 {{/maxwidths}}
 
 
@@ -238,6 +249,16 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 
 
 /* Guts */
+{{#guts}}
+{{main}}   
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};}
+{{/main}}
+{{#more}}
+{{/more}}
+{{/guts}}
+
+/**/
 .{{ns}}{{gut}}s{{bp}} > *,
 .{{ns}}{{gut}}s-1x{{bp}} > *,
 .{{ns}}{{gut}}s-2x{{bp}} > *,
@@ -269,7 +290,7 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 .{{gutsfw}}-1o2x{{bp}} {margin-left:-{{base1o2}}px;}
 .{{gutsfw}}-1o2x{{bp}} > * > * {margin-left:{{base1o2}}px;}
 .{{gutsfw}}{{bp}} {margin-left:-{{base}}px;}
-.{{gutsfw}}{{bp}} > * > * {margin-left:{{base}};}
+.{{gutsfw}}{{bp}} > * > * {margin-left:{{base}}px;}
 .{{gutsfw}}-1x{{bp}} {margin-left:-{{base}}px;}
 .{{gutsfw}}-1x{{bp}} > * > * {margin-left:{{base}}px;}
 .{{gutsfw}}-2x{{bp}} {margin-left:-{{base2x}}px;}
