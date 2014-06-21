@@ -8,23 +8,26 @@
 @media all and (min-width:{{at}}px) {
 
 {{/isgt0}}
-{{#is0}}
-
 
 
 /* Copy */
-body {font-size:{{copyfontsize}}em;line-height:{{copylineheight}};}
+{{#is0}}
 h1, h2, h3, h4, h5, h6 {margin:0;}
-p,form,ol,ul,dl {margin-top:0;margin-bottom:{{base}}px;}
+p,form,ol,ul,dl {margin-top:0;}
+{{/is0}}
 
+{{#basechanged}}
+body {font-size:{{copyfontsize}}em;line-height:{{copylineheight}};}
+p,form,ol,ul,dl {margin-bottom:{{base}}px;}
 h1 {font-size:{{h1}}%;line-height:{{h1lineheight}};}
 h2 {font-size:{{h2}}%;line-height:{{h2lineheight}};}
 h3 {font-size:{{h3}}%;line-height:{{h3lineheight}};}
 h4 {font-size:{{h4}}%;line-height:{{h4lineheight}};}
 h5 {font-size:{{h5}}%;line-height:{{h5lineheight}};}
 h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
+{{/basechanged}}
 
-
+{{#is0}}
 
 
 /* Layout */
@@ -248,54 +251,47 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 
 
 
-/* Guts */
-{{#guts}}
-{{main}}   
+/* Widths px */
+{{#widthspx}}
 {{selector}}{{#isnotlast}},
-{{/isnotlast}} {margin-left:{{val}};}
-{{/main}}
-{{#more}}
-{{/more}}
-{{/guts}}
+{{/isnotlast}} {width:{{val}};}
+{{/widthspx}}
 
-/**/
-.{{ns}}{{gut}}s{{bp}} > *,
-.{{ns}}{{gut}}s-1x{{bp}} > *,
-.{{ns}}{{gut}}s-2x{{bp}} > *,
-.{{ns}}{{gut}}s-1o2x{{bp}} > * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 
-.{{ns}}{{gut}}s-1o2x{{bp}} {margin-left:-{{halfbase1o2}}px;margin-right:-{{halfbase1o2}}px;}
-.{{ns}}{{gut}}s-1o2x{{bp}} > * {padding-left:{{halfbase1o2}}px;padding-right:{{halfbase1o2}}px;}
-.{{ns}}{{gut}}s{{bp}} {margin-left:-{{halfbase}}px;margin-right:-{{halfbase}}px;}
-.{{ns}}{{gut}}s{{bp}} > * {padding-left:{{halfbase}}px;padding-right:{{halfbase}}px;}
-.{{ns}}{{gut}}s-1x{{bp}} {margin-left:-{{halfbase}}px;margin-right:-{{halfbase}}px;}
-.{{ns}}{{gut}}s-1x{{bp}} > * {padding-left:{{halfbase}}px;padding-right:{{halfbase}}px;}
-.{{ns}}{{gut}}s-2x{{bp}} {margin-left:-{{halfbase2x}}px;margin-right:-{{halfbase2x}}px;}
-.{{ns}}{{gut}}s-2x{{bp}} > * {padding-left:{{halfbase2x}}px;padding-right:{{halfbase2x}}px;}
 
+/* Guts */
+{{#gutsmargin}}
+{{selector}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};margin-right:{{val}}}
+{{/gutsmargin}}
+{{#gutspaddingall}}
+{{{selector}}}{{#isnotlast}},
+{{/isnotlast}} {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+{{/gutspaddingall}}
+{{#gutspadding}}
+{{{selector}}}{{#isnotlast}},
+{{/isnotlast}} {padding-left:{{val}};padding-right:{{val}}}
+{{/gutspadding}}
 {{#legacysupport}}
+
 /* IE 6 and 7 fixes because they don't support box-sizing */
-.{{ns}}{{gut}}s-1o2x{{bp}},
-.{{ns}}{{gut}}s{{bp}},
-.{{ns}}{{gut}}s-1x{{bp}},
-.{{ns}}{{gut}}s-2x{{bp}} {*margin-left:0;*margin-right:0;}
-.{{ns}}{{gut}}s-1o2x{{bp}} > *,
-.{{ns}}{{gut}}s{{bp}} > *,
-.{{ns}}{{gut}}s-1x{{bp}} > *,
-.{{ns}}{{gut}}s-2x{{bp}} > * {*padding-left:0;*padding-right:0;}
+{{#gutsmarginall}}
+{{{selector}}}{{#isnotlast}},
+{{/isnotlast}} {*margin-left:0;*margin-right:0;}
+{{/gutsmarginall}}
+{{#gutspaddingall}}
+{{{selector}}}{{#isnotlast}},
+{{/isnotlast}} {*padding-left:0;*padding-right:0;}
+{{/gutspaddingall}}
 {{/legacysupport}}
 
 
-/* Guts Full-Width class a */
-.{{gutsfw}}-1o2x{{bp}} {margin-left:-{{base1o2}}px;}
-.{{gutsfw}}-1o2x{{bp}} > * > * {margin-left:{{base1o2}}px;}
-.{{gutsfw}}{{bp}} {margin-left:-{{base}}px;}
-.{{gutsfw}}{{bp}} > * > * {margin-left:{{base}}px;}
-.{{gutsfw}}-1x{{bp}} {margin-left:-{{base}}px;}
-.{{gutsfw}}-1x{{bp}} > * > * {margin-left:{{base}}px;}
-.{{gutsfw}}-2x{{bp}} {margin-left:-{{base2x}}px;}
-.{{gutsfw}}-2x{{bp}} > * > * {margin-left:{{base2x}}px;}
 
+/* Guts Full-Width classes */
+{{#gutsfws}}
+{{{selector}}}{{#isnotlast}},
+{{/isnotlast}} {margin-left:{{val}};}
+{{/gutsfws}}
 
 
 /* Pos */
