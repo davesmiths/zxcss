@@ -125,6 +125,9 @@
         _in.h5 = $(_selectors.h5).val() * 1;
         _in.h6 = $(_selectors.h6).val() * 1;
         
+        _in.headingmarginbottomadjust = 0.5; // x base
+        _in.headingmargintopminimum = 1; // x base
+        
         _in.scrollbardepthadjust = $(_selectors.scrollbardepthadjust).val() * 1;
         
         _in.gutmultipliersmall = $(_selectors.gutmultipliersmall).val();
@@ -214,6 +217,24 @@
             ,pullgutNamesLength
             ,baseChanged
             ,val
+            ,h1lineheight
+            ,h2lineheight
+            ,h3lineheight
+            ,h4lineheight
+            ,h5lineheight
+            ,h6lineheight
+            ,h1margintop
+            ,h2margintop
+            ,h3margintop
+            ,h4margintop
+            ,h5margintop
+            ,h6margintop
+            ,h1marginbottom
+            ,h2marginbottom
+            ,h3marginbottom
+            ,h4marginbottom
+            ,h5marginbottom
+            ,h6marginbottom
         ;
         
         
@@ -288,12 +309,19 @@
         // I devised the algorithm to decrease the line-height the larger the font-size. Such that when the font-size is the same as copy, the line-height is also the same.
         // Reasoning that the larger the font-size the less words per line and therefore the line-height can be less (as it's easier to scan across fewer words).
         // Plus the results looked good ;)
-        _out.h1lineheight = round(1 + ((_out.copylineheight - 1) / _in.h1), _in.decimalPlaces);
-        _out.h2lineheight = round(1 + ((_out.copylineheight - 1) / _in.h2), _in.decimalPlaces);
-        _out.h3lineheight = round(1 + ((_out.copylineheight - 1) / _in.h3), _in.decimalPlaces);
-        _out.h4lineheight = round(1 + ((_out.copylineheight - 1) / _in.h4), _in.decimalPlaces);
-        _out.h5lineheight = round(1 + ((_out.copylineheight - 1) / _in.h5), _in.decimalPlaces);
-        _out.h6lineheight = round(1 + ((_out.copylineheight - 1) / _in.h6), _in.decimalPlaces);
+        h1lineheight = 1 + ((_out.copylineheight - 1) / _in.h1);
+        h2lineheight = 1 + ((_out.copylineheight - 1) / _in.h2);
+        h3lineheight = 1 + ((_out.copylineheight - 1) / _in.h3);
+        h4lineheight = 1 + ((_out.copylineheight - 1) / _in.h4);
+        h5lineheight = 1 + ((_out.copylineheight - 1) / _in.h5);
+        h6lineheight = 1 + ((_out.copylineheight - 1) / _in.h6);
+        
+        _out.h1lineheight = round(h1lineheight, _in.decimalPlaces);
+        _out.h2lineheight = round(h2lineheight, _in.decimalPlaces);
+        _out.h3lineheight = round(h3lineheight, _in.decimalPlaces);
+        _out.h4lineheight = round(h4lineheight, _in.decimalPlaces);
+        _out.h5lineheight = round(h5lineheight, _in.decimalPlaces);
+        _out.h6lineheight = round(h6lineheight, _in.decimalPlaces);
         
 
         // widths
@@ -328,6 +356,65 @@
             
 
             _outbreakpointi.copyfontsize = round((_inbreakpointi.base/_out.defaultcopyfontsize)/_out.copylineheight, _in.decimalPlaces); // The default untouched font-size cross-browser
+            
+            
+            // Heading Margins
+            
+            
+            h1marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
+            h2marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
+            h3marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
+            h4marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
+            h5marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
+            h6marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
+        
+            h1margintop = (h1lineheight * _inbreakpointi.base) % _inbreakpointi.base;
+            if (h1margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
+                h1margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            }
+            h1margintop -= h1marginbottom;
+            h2margintop = (h2lineheight * _inbreakpointi.base) % _inbreakpointi.base;
+            if (h2margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
+                h2margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            }
+            h2margintop -= h2marginbottom;
+            h3margintop = (h3lineheight * _inbreakpointi.base) % _inbreakpointi.base;
+            if (h3margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
+                h3margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            }
+            h3margintop -= h3marginbottom;
+            h4margintop = (h4lineheight * _inbreakpointi.base) % _inbreakpointi.base;
+            if (h4margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
+                h4margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            }
+            h4margintop -= h4marginbottom;
+            h5margintop = (h5lineheight * _inbreakpointi.base) % _inbreakpointi.base;
+            if (h5margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
+                h5margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            }
+            h5margintop -= h5marginbottom;
+            h6margintop = (h6lineheight * _inbreakpointi.base) % _inbreakpointi.base;
+            if (h6margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
+                h6margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            }
+            h6margintop -= h6marginbottom;
+        
+            _outbreakpointi.h1marginbottomval = h1marginbottom + 'px';
+            _outbreakpointi.h2marginbottomval = h2marginbottom + 'px';
+            _outbreakpointi.h3marginbottomval = h3marginbottom + 'px';
+            _outbreakpointi.h4marginbottomval = h4marginbottom + 'px';
+            _outbreakpointi.h5marginbottomval = h5marginbottom + 'px';
+            _outbreakpointi.h6marginbottomval = h6marginbottom + 'px';
+            _outbreakpointi.h1margintopval = h1margintop + 'px';
+            _outbreakpointi.h2margintopval = h2margintop + 'px';
+            _outbreakpointi.h3margintopval = h3margintop + 'px';
+            _outbreakpointi.h4margintopval = h4margintop + 'px';
+            _outbreakpointi.h5margintopval = h5margintop + 'px';
+            _outbreakpointi.h6margintopval = h6margintop + 'px';
+            
+
+console.log('font-size:', _in.h1 * _inbreakpointi.base);
+
             
             _outbreakpointi.base = _inbreakpointi.base;
             _outbreakpointi.base2x = _inbreakpointi.base * 2;

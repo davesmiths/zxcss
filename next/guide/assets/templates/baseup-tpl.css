@@ -19,12 +19,12 @@ p,form,ol,ul,dl {margin-top:0;}
 {{#basechanged}}
 body {font-size:{{copyfontsize}}em;line-height:{{copylineheight}};}
 p,form,ol,ul,dl {margin-bottom:{{base}}px;}
-h1 {font-size:{{h1}}%;line-height:{{h1lineheight}};}
-h2 {font-size:{{h2}}%;line-height:{{h2lineheight}};}
-h3 {font-size:{{h3}}%;line-height:{{h3lineheight}};}
-h4 {font-size:{{h4}}%;line-height:{{h4lineheight}};}
-h5 {font-size:{{h5}}%;line-height:{{h5lineheight}};}
-h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
+h1 {font-size:{{h1}}%;line-height:{{h1lineheight}};margin-top:{{h1margintopval}};margin-bottom:{{h1marginbottomval}};}
+h2 {font-size:{{h2}}%;line-height:{{h2lineheight}};margin-top:{{h2margintopval}};margin-bottom:{{h2marginbottomval}};}
+h3 {font-size:{{h3}}%;line-height:{{h3lineheight}};margin-top:{{h3margintopval}};margin-bottom:{{h3marginbottomval}};}
+h4 {font-size:{{h4}}%;line-height:{{h4lineheight}};margin-top:{{h4margintopval}};margin-bottom:{{h4marginbottomval}};}
+h5 {font-size:{{h5}}%;line-height:{{h5lineheight}};margin-top:{{h5margintopval}};margin-bottom:{{h5marginbottomval}};}
+h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};margin-top:{{h6margintopval}};margin-bottom:{{h6marginbottomval}};}
 {{/basechanged}}
 
 {{#is0}}
@@ -114,15 +114,15 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 {{/is0}}
 {{#isgt0}}
     
-    /* Layout > Columns */
-    .{{ns}}{{col}}{{bp}} {float:left;width:100%;}
-    .{{ns}}{{colnone}}{{bp}} {float:none;width:auto;}
-    .{{ns}}{{clear}}{{bp}} {clear:left;}
-    .{{ns}}{{clearnone}}{{bp}} {clear:none;}
+/* Layout > Columns */
+.{{ns}}{{col}}{{bp}} {float:left;width:100%;}
+.{{ns}}{{colnone}}{{bp}} {float:none;width:auto;}
+.{{ns}}{{clear}}{{bp}} {clear:left;}
+.{{ns}}{{clearnone}}{{bp}} {clear:none;}
 
 {{#is1}}
-    .{{ns}}{{pullleft}},
-    .{{ns}}{{pullright}} {width:auto;}
+.{{ns}}{{pullleft}},
+.{{ns}}{{pullright}} {width:auto;}
     
 {{/is1}}
 
@@ -233,12 +233,12 @@ h6 {font-size:{{h6}}%;line-height:{{h6lineheight}};}
 
 
 /* Widths */
-.{{ns}}{{width}}s-auto{{bp}} > * {width:auto;}
 {{#widthclasses}}{{#widths}}
 {{#fractions}}{{#isnotfirst}},
 {{/isnotfirst}}.{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} .col-cols,
 .{{ns}}{{width}}s-{{numerator}}o{{denominator}}{{bp}} > *{{/fractions}} {width:{{value}}%;}
 {{/widths}}{{/widthclasses}}
+.{{ns}}{{width}}s-auto{{bp}} > * {width:auto;}
 
 
 
