@@ -229,12 +229,20 @@
             ,h4margintop
             ,h5margintop
             ,h6margintop
+            ,h1margintopremainder
+            ,h2margintopremainder
+            ,h3margintopremainder
+            ,h4margintopremainder
+            ,h5margintopremainder
+            ,h6margintopremainder
             ,h1marginbottom
             ,h2marginbottom
             ,h3marginbottom
             ,h4marginbottom
             ,h5marginbottom
             ,h6marginbottom
+            ,copyfontsizeem
+            ,copyfontsizepx
         ;
         
         
@@ -354,12 +362,15 @@
             is0 = (i === 0) ? true : false;
             is1 = (i === 1) ? true : false;
             
-
-            _outbreakpointi.copyfontsize = round((_inbreakpointi.base/_out.defaultcopyfontsize)/_out.copylineheight, _in.decimalPlaces); // The default untouched font-size cross-browser
+            copyfontsizepx = _inbreakpointi.base/_out.copylineheight
+            copyfontsizeem = copyfontsizepx/_out.defaultcopyfontsize;
+            _outbreakpointi.copyfontsize = round(copyfontsizeem, _in.decimalPlaces); // The default untouched font-size cross-browser
             
             
             // Heading Margins
             
+            _in.headingmarginbottomadjust = 0.25;
+            _in.headingmargintopminimum = -1;
             
             h1marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
             h2marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
@@ -368,36 +379,40 @@
             h5marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
             h6marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
         
-            h1margintop = (h1lineheight * _inbreakpointi.base) % _inbreakpointi.base;
-            if (h1margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
-                h1margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            h1margintop = (copyfontsizepx * _in.h1 * h1lineheight) + h1marginbottom;
+            h1margintopremainder = h1margintop % _inbreakpointi.base;
+            if (_in.headingmargintopminimum > -1) {
+                h1margintop = _inbreakpointi.base - h1margintopremainder + (_in.headingmargintopminimum * _inbreakpointi.base);
             }
-            h1margintop -= h1marginbottom;
-            h2margintop = (h2lineheight * _inbreakpointi.base) % _inbreakpointi.base;
-            if (h2margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
-                h2margintop += _in.headingmargintopminimum * _inbreakpointi.base;
+            else {
+                if (h1margintopremainder - (_inbreakpointi.base / 2) > 0) {
+                    h1margintop = _inbreakpointi.base - h1margintopremainder + (_in.headingmargintopminimum * _inbreakpointi.base);
+                }
+                else {
+                }
             }
-            h2margintop -= h2marginbottom;
-            h3margintop = (h3lineheight * _inbreakpointi.base) % _inbreakpointi.base;
-            if (h3margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
-                h3margintop += _in.headingmargintopminimum * _inbreakpointi.base;
-            }
-            h3margintop -= h3marginbottom;
-            h4margintop = (h4lineheight * _inbreakpointi.base) % _inbreakpointi.base;
-            if (h4margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
-                h4margintop += _in.headingmargintopminimum * _inbreakpointi.base;
-            }
-            h4margintop -= h4marginbottom;
-            h5margintop = (h5lineheight * _inbreakpointi.base) % _inbreakpointi.base;
-            if (h5margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
-                h5margintop += _in.headingmargintopminimum * _inbreakpointi.base;
-            }
-            h5margintop -= h5marginbottom;
-            h6margintop = (h6lineheight * _inbreakpointi.base) % _inbreakpointi.base;
-            if (h6margintop < (_in.headingmargintopminimum * _inbreakpointi.base)) {
-                h6margintop += _in.headingmargintopminimum * _inbreakpointi.base;
-            }
-            h6margintop -= h6marginbottom;
+            
+            h2margintop = (copyfontsizepx * _in.h2 * h2lineheight) + h2marginbottom;
+            h2margintopremainder = h2margintop % _inbreakpointi.base;
+            console.log(h2margintop, h2margintopremainder);
+            h2margintop = _inbreakpointi.base - h2margintopremainder + (_in.headingmargintopminimum * _inbreakpointi.base);
+            
+            h3margintop = (copyfontsizepx * _in.h3 * h3lineheight) + h3marginbottom;
+            h3margintopremainder = h3margintop % _inbreakpointi.base;
+            h3margintop = _inbreakpointi.base - h3margintopremainder + (_in.headingmargintopminimum * _inbreakpointi.base);
+            
+            h4margintop = (copyfontsizepx * _in.h4 * h4lineheight) + h4marginbottom;
+            h4margintopremainder = h4margintop % _inbreakpointi.base;
+            h4margintop = _inbreakpointi.base - h4margintopremainder + (_in.headingmargintopminimum * _inbreakpointi.base);
+            
+            h5margintop = (copyfontsizepx * _in.h5 * h5lineheight) + h5marginbottom;
+            h5margintopremainder = h5margintop % _inbreakpointi.base;
+            h5margintop = _inbreakpointi.base - h5margintopremainder + (_in.headingmargintopminimum * _inbreakpointi.base);
+            
+            h6margintop = (copyfontsizepx * _in.h6 * h6lineheight) + h6marginbottom;
+            h6margintopremainder = h6margintop % _inbreakpointi.base;
+            h6margintop = _inbreakpointi.base - h6margintopremainder + (_in.headingmargintopminimum * _inbreakpointi.base);
+            
         
             _outbreakpointi.h1marginbottomval = h1marginbottom + 'px';
             _outbreakpointi.h2marginbottomval = h2marginbottom + 'px';
@@ -413,7 +428,6 @@
             _outbreakpointi.h6margintopval = h6margintop + 'px';
             
 
-console.log('font-size:', _in.h1 * _inbreakpointi.base);
 
             
             _outbreakpointi.base = _inbreakpointi.base;
