@@ -11,6 +11,7 @@
         ,makeInDone
         ,makeOut
         ,makePayload
+        ,makeHeadingMargins
         ,trim
         ,processRules
         ,makeWidthClasses
@@ -217,38 +218,15 @@
             ,pullgutNamesLength
             ,baseChanged
             ,val
-            ,h1lineheight
-            ,h2lineheight
-            ,h3lineheight
-            ,h4lineheight
-            ,h5lineheight
-            ,h6lineheight
-            ,h1margintop
-            ,h2margintop
-            ,h3margintop
-            ,h4margintop
-            ,h5margintop
-            ,h6margintop
-            ,h1margintopwhole
-            ,h2margintopwhole
-            ,h3margintopwhole
-            ,h4margintopwhole
-            ,h5margintopwhole
-            ,h6margintopwhole
-            ,h1margintopremainder
-            ,h2margintopremainder
-            ,h3margintopremainder
-            ,h4margintopremainder
-            ,h5margintopremainder
-            ,h6margintopremainder
-            ,h1marginbottom
-            ,h2marginbottom
-            ,h3marginbottom
-            ,h4marginbottom
-            ,h5marginbottom
-            ,h6marginbottom
+            ,headingMargins
+            ,headingLineHeights
             ,copyfontsizeem
             ,copyfontsizepx
+            ,hheight
+            ,hheightbase
+            ,hheightbaseremainder
+            
+
         ;
         
         
@@ -323,19 +301,21 @@
         // I devised the algorithm to decrease the line-height the larger the font-size. Such that when the font-size is the same as copy, the line-height is also the same.
         // Reasoning that the larger the font-size the less words per line and therefore the line-height can be less (as it's easier to scan across fewer words).
         // Plus the results looked good ;)
-        h1lineheight = 1 + ((_out.copylineheight - 1) / _in.h1);
-        h2lineheight = 1 + ((_out.copylineheight - 1) / _in.h2);
-        h3lineheight = 1 + ((_out.copylineheight - 1) / _in.h3);
-        h4lineheight = 1 + ((_out.copylineheight - 1) / _in.h4);
-        h5lineheight = 1 + ((_out.copylineheight - 1) / _in.h5);
-        h6lineheight = 1 + ((_out.copylineheight - 1) / _in.h6);
+        headingLineHeights = {
+            'h1': 1 + ((_out.copylineheight - 1) / _in.h1)
+            ,'h2': 1 + ((_out.copylineheight - 1) / _in.h2)
+            ,'h3': 1 + ((_out.copylineheight - 1) / _in.h3)
+            ,'h4': 1 + ((_out.copylineheight - 1) / _in.h4)
+            ,'h5': 1 + ((_out.copylineheight - 1) / _in.h5)
+            ,'h6': 1 + ((_out.copylineheight - 1) / _in.h6)
+        };
         
-        _out.h1lineheight = round(h1lineheight, _in.decimalPlaces);
-        _out.h2lineheight = round(h2lineheight, _in.decimalPlaces);
-        _out.h3lineheight = round(h3lineheight, _in.decimalPlaces);
-        _out.h4lineheight = round(h4lineheight, _in.decimalPlaces);
-        _out.h5lineheight = round(h5lineheight, _in.decimalPlaces);
-        _out.h6lineheight = round(h6lineheight, _in.decimalPlaces);
+        _out.h1lineheight = round(headingLineHeights.h1, _in.decimalPlaces);
+        _out.h2lineheight = round(headingLineHeights.h2, _in.decimalPlaces);
+        _out.h3lineheight = round(headingLineHeights.h3, _in.decimalPlaces);
+        _out.h4lineheight = round(headingLineHeights.h4, _in.decimalPlaces);
+        _out.h5lineheight = round(headingLineHeights.h5, _in.decimalPlaces);
+        _out.h6lineheight = round(headingLineHeights.h6, _in.decimalPlaces);
         
 
         // widths
@@ -375,74 +355,24 @@
             
             // Heading Margins
             
-            _in.headingspaceminimum = 0;
-            _in.headingmarginbottomadjust = 0.1;
+            _in.headingspaceminimum = 2;
+            _in.headingmarginbottomadjust = 0;
             
-            h1marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
-            h2marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
-            h3marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
-            h4marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
-            h5marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
-            h6marginbottom = _in.headingmarginbottomadjust * _inbreakpointi.base;
-        
-            h1margintop = (copyfontsizepx * _in.h1 * h1lineheight) + h1marginbottom;
-            h1margintopremainder = h1margintop % _inbreakpointi.base;
-            h1margintop = _inbreakpointi.base - h1margintopremainder + (_in.headingspaceminimum * _inbreakpointi.base);
+            headingMargins = makeHeadingMargins(_inbreakpointi.base, headingLineHeights, copyfontsizepx);
+
+            _outbreakpointi.h1marginbottomval = headingMargins.h1.marginBottom + 'px';
+            _outbreakpointi.h2marginbottomval = headingMargins.h2.marginBottom + 'px';
+            _outbreakpointi.h3marginbottomval = headingMargins.h3.marginBottom + 'px';
+            _outbreakpointi.h4marginbottomval = headingMargins.h4.marginBottom + 'px';
+            _outbreakpointi.h5marginbottomval = headingMargins.h5.marginBottom + 'px';
+            _outbreakpointi.h6marginbottomval = headingMargins.h6.marginBottom + 'px';
             
-            
-            
-            var h2height = (copyfontsizepx * _in.h2 * h2lineheight) + h2marginbottom;
-            var h2heightobasewhole = Math.floor(h2height / _inbreakpointi.base);
-            var h2heightobaseremainder = h2height % _inbreakpointi.base;
-            
-            if (h2heightobaseremainder > _inbreakpointi.base / 2) {
-                // push it on
-                h2margintop = _inbreakpointi.base - h2heightobaseremainder + _inbreakpointi.base + (_in.headingspaceminimum * _inbreakpointi.base);
-            }
-            else {
-                // Pull it up
-                if (_in.headingspaceminimum) {
-                    h2margintop = _inbreakpointi.base - h2heightobaseremainder + (_in.headingspaceminimum * _inbreakpointi.base);
-                }
-                else {
-                    h2margintop = -h2heightobaseremainder;
-                }
-            }
-//            36.4 + 30 = 66.4 > -6.4
-            console.log(h2margintop, h2margintopwhole, h2margintopremainder);
-            
-            
-            
-            
-            h3margintop = (copyfontsizepx * _in.h3 * h3lineheight) + h3marginbottom;
-            h3margintopremainder = h3margintop % _inbreakpointi.base;
-            h3margintop = _inbreakpointi.base - h3margintopremainder + (_in.headingspaceminimum * _inbreakpointi.base);
-            
-            h4margintop = (copyfontsizepx * _in.h4 * h4lineheight) + h4marginbottom;
-            h4margintopremainder = h4margintop % _inbreakpointi.base;
-            h4margintop = _inbreakpointi.base - h4margintopremainder + (_in.headingspaceminimum * _inbreakpointi.base);
-            
-            h5margintop = (copyfontsizepx * _in.h5 * h5lineheight) + h5marginbottom;
-            h5margintopremainder = h5margintop % _inbreakpointi.base;
-            h5margintop = _inbreakpointi.base - h5margintopremainder + (_in.headingspaceminimum * _inbreakpointi.base);
-            
-            h6margintop = (copyfontsizepx * _in.h6 * h6lineheight) + h6marginbottom;
-            h6margintopremainder = h6margintop % _inbreakpointi.base;
-            h6margintop = _inbreakpointi.base - h6margintopremainder + (_in.headingspaceminimum * _inbreakpointi.base);
-            
-        
-            _outbreakpointi.h1marginbottomval = h1marginbottom + 'px';
-            _outbreakpointi.h2marginbottomval = h2marginbottom + 'px';
-            _outbreakpointi.h3marginbottomval = h3marginbottom + 'px';
-            _outbreakpointi.h4marginbottomval = h4marginbottom + 'px';
-            _outbreakpointi.h5marginbottomval = h5marginbottom + 'px';
-            _outbreakpointi.h6marginbottomval = h6marginbottom + 'px';
-            _outbreakpointi.h1margintopval = h1margintop + 'px';
-            _outbreakpointi.h2margintopval = h2margintop + 'px';
-            _outbreakpointi.h3margintopval = h3margintop + 'px';
-            _outbreakpointi.h4margintopval = h4margintop + 'px';
-            _outbreakpointi.h5margintopval = h5margintop + 'px';
-            _outbreakpointi.h6margintopval = h6margintop + 'px';
+            _outbreakpointi.h1margintopval = headingMargins.h1.marginTop + 'px';
+            _outbreakpointi.h2margintopval = headingMargins.h2.marginTop + 'px';
+            _outbreakpointi.h3margintopval = headingMargins.h3.marginTop + 'px';
+            _outbreakpointi.h4margintopval = headingMargins.h4.marginTop + 'px';
+            _outbreakpointi.h5margintopval = headingMargins.h5.marginTop + 'px';
+            _outbreakpointi.h6margintopval = headingMargins.h6.marginTop + 'px';
             
 
 
@@ -1147,6 +1077,69 @@
         
     };
     
+    
+    makeHeadingMargins = function(base, lineHeights, copyfontsizepx) {
+        /*
+        
+        ----------------------------
+        text
+        ----------------------------
+                                    
+        -------------------------   hmargintop
+        Heading                     hheight
+        -------------------------   hmarginbottom
+        ----------------------------
+        text
+        ----------------------------
+        
+        hheightbase = Math.floor((hheight + hmarginbottom) / base);
+        hheightbaseremainder = (hheight + hmarginbottom) / %;
+        
+        if (hheightbase < _in.headingspaceminimum) {
+            hheightbase = _in.headingspaceminimum; // 2 min
+        }
+        */
+        
+        var out = {}
+            ,hheight
+            ,hheightbase
+            ,hheightbaseremainder
+            ,h
+            ,i
+        ;
+        
+        for (i = 1; i < 7; i++) {
+            
+            h = 'h' + i;
+            
+            out[h] = {
+                marginBottom:_in.headingmarginbottomadjust * base
+                ,marginTop: 0
+            };
+            
+            hheight = (copyfontsizepx * _in[h] * lineHeights[h]) + out[h].marginBottom;
+            hheightbase = Math.floor(hheight / base);
+            hheightbaseremainder = hheight % base;
+            
+            if (hheightbase < _in.headingspaceminimum) {
+                hheightbase = _in.headingspaceminimum;
+            }
+            if (h === 'h1') {
+                out[h].marginTop = base - hheightbaseremainder + ((hheightbase - 2) * base);
+            }
+            else if (hheightbaseremainder > base / 2) {
+                // push it on
+                out[h].marginTop = base - hheightbaseremainder + ((hheightbase - 1) * base);
+            }
+            else {
+                // Pull it up
+                out[h].marginTop = -hheightbaseremainder;
+            }
+        }
+        
+        return out;
+
+    };
     
     resizeOutput = function(el) {
     
