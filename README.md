@@ -2,8 +2,4 @@ ZXCSS
 -----
 A CSS grid framework to create fluid layouts
 
-__Status: Good to use__
-
-Get your hands dirty with demo.html.
-
-Comments, questions and corrections welcomed :)
+Please note this repo is no longer maintained. Its successor is [baseup](http://github.com/davesmiths/baseup)
