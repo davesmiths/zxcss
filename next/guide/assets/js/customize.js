@@ -55,6 +55,7 @@
         ,h4: '#input-h4'
         ,h5: '#input-h5'
         ,h6: '#input-h6'
+        ,hMarginBottomAdjust: '#input-hmarginbottomadjust'
         
         ,gutmultipliersmall: '#input-gutmultipliersmall'
         ,gutmultipliermedium: '#input-gutmultipliermedium'
@@ -125,8 +126,8 @@
         _in.h4 = $(_selectors.h4).val() * 1;
         _in.h5 = $(_selectors.h5).val() * 1;
         _in.h6 = $(_selectors.h6).val() * 1;
+        _in.headingmarginbottomadjust = $(_selectors.hMarginBottomAdjust).val() * 1;
         
-        _in.headingmarginbottomadjust = 0.5; // x base
         _in.headingspaceminimum = 1; // x base
         
         _in.scrollbardepthadjust = $(_selectors.scrollbardepthadjust).val() * 1;
@@ -222,10 +223,6 @@
             ,headingLineHeights
             ,copyfontsizeem
             ,copyfontsizepx
-            ,hheight
-            ,hheightbase
-            ,hheightbaseremainder
-            
 
         ;
         
@@ -356,7 +353,6 @@
             // Heading Margins
             
             _in.headingspaceminimum = 2;
-            _in.headingmarginbottomadjust = 0;
             
             headingMargins = makeHeadingMargins(_inbreakpointi.base, headingLineHeights, copyfontsizepx);
 
@@ -1101,9 +1097,9 @@
         */
         
         var out = {}
-            ,hheight
-            ,hheightbase
-            ,hheightbaseremainder
+            ,hheightandmarginbottom
+            ,hheightandmarginbottombase
+            ,hheightandmarginbottombaseremainder
             ,h
             ,i
         ;
@@ -1117,23 +1113,26 @@
                 ,marginTop: 0
             };
             
-            hheight = (copyfontsizepx * _in[h] * lineHeights[h]) + out[h].marginBottom;
-            hheightbase = Math.floor(hheight / base);
-            hheightbaseremainder = hheight % base;
+            hheightandmarginbottom = (copyfontsizepx * _in[h] * lineHeights[h]) + out[h].marginBottom;
+            hheightandmarginbottombase = Math.floor(hheightandmarginbottom / base);
+            hheightandmarginbottombaseremainder = hheightandmarginbottom % base;
             
-            if (hheightbase < _in.headingspaceminimum) {
-                hheightbase = _in.headingspaceminimum;
+            if (hheightandmarginbottombase < _in.headingspaceminimum) {
+                hheightandmarginbottombase = _in.headingspaceminimum;
             }
             if (h === 'h1') {
-                out[h].marginTop = base - hheightbaseremainder + ((hheightbase - 2) * base);
+                out[h].marginTop = base - hheightandmarginbottombaseremainder + ((hheightandmarginbottombase - 2) * base);
             }
-            else if (hheightbaseremainder > base / 2) {
+            else if (hheightandmarginbottombaseremainder > base / 2) {
                 // push it on
-                out[h].marginTop = base - hheightbaseremainder + ((hheightbase - 1) * base);
+                out[h].marginTop = base - hheightandmarginbottombaseremainder + ((hheightandmarginbottombase - 1) * base);
             }
             else {
                 // Pull it up
-                out[h].marginTop = -hheightbaseremainder;
+                out[h].marginTop = -hheightandmarginbottombaseremainder;
+            }
+            while (out[h].marginTop < out[h].marginBottom) {
+                out[h].marginTop += base;
             }
         }
         
@@ -1320,6 +1319,13 @@
                 || $t.is(_selectors.gutmultiplierlarge)
                 || $t.is(_selectors.scrollbardepthadjust)
                 || $t.is(_selectors.copyFontSizeBaseRatio)
+                || $t.is(_selectors.h1)
+                || $t.is(_selectors.h2)
+                || $t.is(_selectors.h3)
+                || $t.is(_selectors.h4)
+                || $t.is(_selectors.h5)
+                || $t.is(_selectors.h6)
+                || $t.is(_selectors.hMarginBottomAdjust)
             ) {
                 inputChange();
             }
